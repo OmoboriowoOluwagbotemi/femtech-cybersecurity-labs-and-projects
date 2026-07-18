@@ -1,0 +1,54 @@
+# Local Codex/agent state
+.agents/
+.codex/
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+wazuh-install-files.tar
+wazuh-passwords.txt
+
+# Terraform/OpenTofu state and plans
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+
+# Security evidence that must not be committed
+evidence/originals/
+*.pcap
+*.pcapng
+*.evtx
+*.raw
+*.mem
+*.dmp
+*.dd
+*.E01
+*.ad1
+*.vmdk
+*.vdi
+*.ova
+*.ovf
+*.iso
+
+# Generated reports that may contain sensitive data
+gitleaks-*.json
+trivy-*.json
+*.sarif
+
+# Operating system/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.tmp
+~$*
