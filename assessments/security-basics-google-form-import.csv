@@ -1,0 +1,31 @@
+Question,Option A,Option B,Option C,Option D,Correct Answer,Points
+"Which part of the CIA Triad protects information from unauthorized access or disclosure?","Availability","Confidentiality","Integrity","Recovery","B",1
+"A hospital cannot access its electronic health record system during patient care. Which CIA principle is most affected?","Availability","Confidentiality","Integrity","Non-repudiation","A",1
+"A bank transaction record is changed without approval. Which CIA principle is most affected?","Availability","Confidentiality","Integrity","Deterrence","C",1
+"What is a threat?","A safeguard that reduces risk","Anything that can cause harm to an asset, system, user, or organization","A confirmed security incident only","A patch installed on a server","B",1
+"What is a vulnerability?","A weakness that can be exploited by a threat","A backup copy of important data","A security policy approved by management","A successful recovery test","A",1
+"Which example best represents risk?","A firewall rule","The possibility that phishing exploits lack of MFA and causes account takeover","A security awareness poster","A locked server-room door","B",1
+"Which item is a security control category by nature?","Directive","Detective","Technical","Corrective","C",1
+"Which item is a security control function?","Operational","Managerial","Physical","Directive","D",1
+"Which control category is implemented through hardware, software, or automated technology?","Technical","Managerial","Physical","Operational","A",1
+"Which control category is mainly based on day-to-day people-driven procedures?","Technical","Operational","Physical","Cryptographic","B",1
+"Which control function identifies events that may have occurred?","Preventive","Detective","Compensating","Directive","B",1
+"Which is the best example of a directive control?","SIEM alert","Firewall rule","Acceptable use policy","Disk encryption","C",1
+"What is defense in depth?","Using only one strong security product","Using multiple layers of controls so one failure does not expose the whole environment","Removing all monitoring tools","Allowing administrators to bypass security controls","B",1
+"What is attack surface?","Only systems already infected with malware","The total set of points where an attacker could enter, interact with, or exploit an environment","Only the firewall rule list","Only physical doors and windows","B",1
+"Which is the best example of reducing attack surface?","Exposing SSH to the whole internet","Disabling unused services and closing unnecessary ports","Giving all users administrator access","Removing log collection","B",1
+"What is malware?","Software designed to protect passwords","Malicious software designed to harm systems, steal data, disrupt operations, or support unauthorized access","A normal operating system update","A written security policy","B",1
+"Which malware type encrypts or denies access to data and usually demands payment?","Ransomware","Spyware","Keylogger","Cryptominer","A",1
+"Which malware type disguises itself as legitimate or useful software?","Worm","Trojan","Rootkit","Wiper","B",1
+"Which malware type can self-replicate across networks without direct user action?","Worm","Logic bomb","Trojan","Spyware","A",1
+"What is social engineering?","Manipulation intended to make a person reveal information or perform an unsafe action","Encrypting a hard drive","Installing a Linux package","Running a vulnerability scan","A",1
+"What best describes phishing?","A deceptive message that tries to trick users into clicking, opening, paying, or sharing credentials","A firewall configuration standard","A backup validation process","A Linux permission mode","A",1
+"What best distinguishes spear phishing from general phishing?","Spear phishing is always sent by SMS","Spear phishing is tailored to a selected person, role, or organization","Spear phishing never uses links","Spear phishing cannot bypass email authentication","B",1
+"What is business email compromise commonly used to do?","Improve patch management","Divert payments, change payroll details, or request sensitive business data","Encrypt all network traffic","Validate SSH syntax","B",1
+"After credential phishing and suspected session theft, what should defenders do?","Reset the password only","Revoke sessions and investigate account, mailbox, and endpoint activity","Ignore the report if MFA was enabled","Delete all logs","B",1
+"What is SSH mainly used for?","Securely connecting to a remote server","Creating a spreadsheet","Printing documents","Charging a laptop","A",1
+"Which SSH setting should usually be disabled for better security?","Direct root login","Strong passwords","Logging","Encryption","A",1
+"Before changing SSH settings, what should an administrator do?","Test that another safe login method works","Delete all users","Turn off the firewall","Remove all logs","A",1
+"What is UFW used for on Linux?","Managing host firewall rules","Editing pictures","Creating user passwords only","Reading email","A",1
+"In Linux file permissions, what does read permission allow on a file?","Viewing the file contents","Deleting the operating system","Changing the file owner automatically","Blocking all network traffic","A",1
+"Why is chmod 777 usually unsafe?","It encrypts the file","It grants broad read, write, and execute permissions to owner, group, and others","It disables the Linux kernel","It validates SSH configuration","B",1
