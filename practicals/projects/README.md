@@ -15,6 +15,10 @@ The ten projects are not long labs. Students receive an outcome, incomplete info
 9. [Perform DFIR after a Linux web compromise](project-09-linux-dfir.md)
 10. [Defend Northstar Manufacturing](project-10-northstar-capstone.md)
 
+## Additional Class Project
+
+- [Enterprise Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md) — an outcome-based pfSense and Suricata challenge containing tasks, evidence requirements, incident injects, and assessment criteria without procedural solution steps.
+
 ## Mandatory Team Roles
 
 Rotate roles between projects:
