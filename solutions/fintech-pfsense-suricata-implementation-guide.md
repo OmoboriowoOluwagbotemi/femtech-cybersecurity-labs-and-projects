@@ -4,8 +4,11 @@
 
 **Companion challenge:** [Student task brief](../practicals/projects/pfsense-ids-ips-student-task-brief.md)
 
-**Environment:** Isolated educational lab only  
-**Core tools:** pfSense Community Edition, Suricata, Kali Linux, Ubuntu Server, OpenSSH, Nginx, tcpdump, Wireshark, Nmap, curl, OpenSSL  
+**Environment:** Isolated educational lab only
+
+**Core tools:** pfSense Community Edition, Suricata, Kali Linux, Ubuntu Server, OpenSSH, Nginx, tcpdump, Wireshark, Nmap, curl, OpenSSL
+
+**Solution revision:** 2.0 — audited against all 17 work packages and 20 acceptance tests
 
 > This guide explains one defensible implementation. It is not the only correct design. A professional engineer must understand the packet path, business requirement, security effect, evidence, failure modes, and rollback—not merely reproduce interface clicks.
 
@@ -32,6 +35,80 @@ Stop condition: traffic leaves scope, resource exhaustion, or service instabilit
 
 The purpose of this boundary is both ethical and technical. A tool such as Nmap cannot determine whether you are authorised. The operator is responsible for scope.
 
+## 1.1 Completed reference scope
+
+| Item | Authorised use | Prohibited use |
+|---|---|---|
+| pfSense | Configuration, logging, capture, IDS/IPS | WAN exposure or use against external targets |
+| Kali `10.10.10.10` | Administration and controlled validation | Testing beyond the two lab networks |
+| `user02` `10.10.10.50` | Unauthorised-source acceptance testing | Administration of the payment server |
+| Ubuntu `10.10.20.20` | Simulated payment service and evidence source | Real customer/payment data |
+| WAN | Package updates and ordinary web validation | Scanning or exploit testing |
+
+Reference roles:
+
+| Role | Responsibility |
+|---|---|
+| Engagement lead | Scope, approval, stop decisions, stakeholder updates |
+| Network engineer | Interfaces, routes, firewall, rollback |
+| Detection engineer | Suricata health, alerts, tuning, IPS |
+| Incident analyst | Timeline, evidence, impact, containment |
+| Reviewer | Challenge broad permissions and unsupported conclusions |
+
+For an individual project, the student performs every role but records each decision from the relevant professional perspective.
+
+## 1.2 Required change record
+
+Before each material change, record:
+
+```text
+Change ID:
+Business reason:
+Component:
+Current state:
+Proposed state:
+Security risk:
+Availability risk:
+Validation:
+Rollback:
+Approver:
+Start/end time and timezone:
+Result:
+```
+
+This prevents configuration from becoming a sequence of unexplained clicks.
+
+## 1.3 Baseline before implementation
+
+Collect the baseline before changing endpoints or firewall rules.
+
+On each Linux system:
+
+```bash
+date --iso-8601=seconds
+hostnamectl
+ip -br link
+ip -br address
+ip route
+resolvectl status
+sudo ss -lntup
+sudo systemctl --failed
+```
+
+On pfSense, export or capture:
+
+- interface assignments, MAC addresses, and link status;
+- addresses and gateways;
+- existing LAN/USERS, SERVERS, floating, and group rules;
+- DHCP status;
+- outbound NAT mode;
+- DNS Resolver listening interfaces;
+- state-table summary;
+- package inventory;
+- current time and timezone.
+
+Create a baseline connectivity matrix with source, destination, service, expected business need, observed result, and evidence ID. This exposes the inherited LAN-to-any rule before it is mistaken for a secure design.
+
 # 2. What You Are Building
 
 ## 2.1 Reference topology
@@ -46,9 +123,11 @@ The purpose of this boundary is both ethical and technical. A tool such as Nmap 
           USERS interface              SERVERS interface
            10.10.10.1/24                 10.10.20.1/24
                  |                           |
-          Kali Linux                    Ubuntu Server
-          10.10.10.10                   10.10.20.20
-      finance workstation        payment operations application
+        +--------+--------+              Ubuntu Server
+        |                 |              10.10.20.20
+   Kali Linux       Ubuntu Client   payment operations application
+   10.10.10.10      10.10.10.50
+ authorised admin   unauthorised test user
 ```
 
 ## 2.2 Reference traffic policy
@@ -58,9 +137,13 @@ The purpose of this boundary is both ethical and technical. A tool such as Nmap 
 | Kali `10.10.10.10` | Ubuntu `10.10.20.20` | TCP 22 | Allow and log | Authorised administration |
 | USERS network | Ubuntu `10.10.20.20` | TCP 8443 | Allow and log | Payment operations portal |
 | USERS network | SERVERS network | Any other | Block and log | Prevent lateral movement |
-| USERS network | Internet | Required web/DNS traffic | Allow | Updates and approved external access |
+| USERS network | pfSense USERS address | TCP/UDP 53 | Allow | Use the controlled DNS resolver |
+| USERS network | Internet | TCP 80/443 | Allow | Approved web access and updates |
+| USERS network | Any other destination/service | Any | Block and log | Enforce controlled egress |
 | SERVERS network | USERS network | Any new connection | Block and log | Server must not initiate workstation access |
-| Ubuntu | Approved external services | DNS, NTP, HTTP/HTTPS | Allow and log as required | Updates and time synchronisation |
+| Ubuntu | pfSense SERVERS address | DNS/NTP | Allow | Controlled resolution and time |
+| Ubuntu | Internet | TCP 80/443 | Allow | Controlled software updates |
+| Ubuntu | Any other destination/service | Any | Block and log | Enforce server egress policy |
 
 ## 2.3 Why the design matters
 
@@ -78,6 +161,7 @@ pfSense is stateful. When the first packet of an approved session matches an all
 |---|---:|---:|---:|
 | pfSense | 2 | 2 GB | 20 GB |
 | Kali Linux | 2 | 4 GB | 40 GB |
+| Ubuntu test client | 1–2 | 2 GB | 20 GB |
 | Ubuntu Server | 2 | 2–4 GB | 30 GB |
 
 These are lab recommendations, not production sizing. Suricata inspection, rule loading, logging, and packet capture consume memory and CPU. Under-resourcing can look like a network fault when it is actually resource exhaustion.
@@ -102,6 +186,7 @@ Reference adapter assignment:
 | pfSense | Adapter 2 | `NOVAPAY-USERS` |
 | pfSense | Adapter 3 | `NOVAPAY-SERVERS` |
 | Kali | Adapter 1 | `NOVAPAY-USERS` |
+| Ubuntu test client | Adapter 1 | `NOVAPAY-USERS` |
 | Ubuntu | Adapter 1 | `NOVAPAY-SERVERS` |
 
 Record each virtual adapter MAC address. pfSense often displays interfaces by driver name such as `em0`, `em1`, `vtnet0`, or `hn0`. MAC addresses provide a reliable mapping when names differ.
@@ -141,6 +226,73 @@ Reference addresses:
 | SERVERS | `10.10.20.1/24` |
 
 Do not configure an upstream gateway on USERS or SERVERS. A gateway is the next router used to reach a non-local destination. These interfaces are directly connected networks, and pfSense itself is their router.
+
+### Configure the WAN when the hypervisor uses private NAT
+
+VirtualBox and VMware commonly assign a private RFC1918 address to the pfSense WAN. In that case:
+
+1. navigate to `Interfaces > WAN`;
+2. retain DHCP;
+3. clear **Block private networks and loopback addresses**;
+4. retain bogon blocking unless the lab platform requires otherwise;
+5. save and apply.
+
+The private-network option is appropriate when a real WAN should never receive private source addresses. It conflicts with a lab where the upstream NAT network itself uses a private address. This exception is for the isolated hypervisor lab, not a production internet edge.
+
+### Configure USERS
+
+Navigate to `Interfaces > USERS`:
+
+1. enable the interface;
+2. set IPv4 Configuration Type to `Static IPv4`;
+3. set address `10.10.10.1/24`;
+4. leave IPv4 Upstream Gateway unset;
+5. clear **Block private networks** and **Block bogon networks**;
+6. save and apply.
+
+An internal interface intentionally carries private addresses. Enabling private-network blocking there would contradict the design.
+
+### Configure SERVERS
+
+Navigate to `Interfaces > SERVERS`:
+
+1. check **Enable interface**;
+2. set IPv4 Configuration Type to `Static IPv4`;
+3. set address `10.10.20.1/24`;
+4. leave IPv4 Upstream Gateway unset;
+5. clear **Block private networks** and **Block bogon networks**;
+6. save and apply.
+
+An assigned OPT interface does not become operational merely because it appears in the assignment table. It must be enabled and addressed.
+
+### Control DHCP deliberately
+
+This reference solution uses static endpoint addresses. Under `Services > DHCP Server`:
+
+- disable DHCP on USERS unless the instructor intentionally wants additional dynamic clients;
+- leave DHCP disabled on SERVERS;
+- verify that no other DHCP server is attached to either isolated network.
+
+If DHCP is retained for general USERS endpoints, exclude or reserve `10.10.10.10` and `10.10.10.50` so they cannot be leased to another device.
+
+### Configure controlled DNS and time
+
+Under `Services > DNS Resolver`:
+
+1. enable the resolver;
+2. listen on localhost, USERS, and SERVERS;
+3. use WAN for approved outbound resolution;
+4. save and apply;
+5. confirm the service is running.
+
+Under `Services > NTP`:
+
+1. enable the NTP service if it is not already active;
+2. listen on the internal interfaces required by the design;
+3. use approved upstream time sources;
+4. confirm the correct `Africa/Lagos`/WAT timezone presentation while retaining UTC-aware evidence.
+
+Clients use pfSense for DNS and time so the endpoint rulebase does not need broad direct access to arbitrary DNS or NTP servers. Accurate time is essential for incident correlation.
 
 ## 4.2 Verify interface identity
 
@@ -182,7 +334,28 @@ Do not expose the web interface on WAN. Restrict administration to the trusted l
 
 pfSense may create an anti-lockout rule on its LAN interface so an administrator does not accidentally lose GUI access. Once a tested explicit management rule exists, review whether anti-lockout still grants broader access than intended. Do not disable it until console access and rollback are confirmed.
 
-## 4.4 Verify outbound NAT
+## 4.4 Remove inherited broad LAN permissions safely
+
+A new pfSense LAN normally contains default IPv4 and IPv6 “LAN to any” rules. Renaming LAN to USERS does not remove them. Leaving either rule active would permit broad traffic before the restrictive rules are evaluated.
+
+Use this safe sequence:
+
+1. confirm direct console access to pfSense;
+2. create an explicit USERS rule allowing `ADMIN_KALI` to **This Firewall** on TCP 443;
+3. create only the DNS and diagnostic access required by the design;
+4. apply the explicit management rules;
+5. open a second browser session and prove management still works;
+6. disable the inherited default LAN-to-any IPv4 and IPv6 rules;
+7. apply changes and retest management;
+8. delete the disabled defaults after the rollback window;
+9. disable the webConfigurator anti-lockout rule only after the explicit rule and console recovery are proven;
+10. verify that `user02` cannot reach the pfSense GUI while Kali still can.
+
+Do not delete the broad rule first and hope the replacement works. Safe firewall engineering establishes and validates the replacement path before removing the old one.
+
+The final reference state must not retain either a LAN-to-any rule or a broad anti-lockout path from all USERS. Capture a screenshot or configuration record proving this.
+
+## 4.5 Verify outbound NAT
 
 pfSense normally uses automatic outbound NAT. Confirm under:
 
@@ -231,6 +404,15 @@ sudo nano /etc/netplan/50-cloud-init.yaml
 ```
 
 If the discovered filename is different, edit that file instead. Do not leave two files that configure the same interface with conflicting addresses or gateways; Netplan reads and combines all YAML files in the directory.
+
+If the file header states that cloud-init may regenerate the configuration, create `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` containing:
+
+```yaml
+network:
+  config: disabled
+```
+
+This tells cloud-init to stop regenerating network configuration. It does not configure the interface by itself; the Netplan file remains the authoritative configuration. Record this change because disabling cloud-init networking may be inappropriate for cloud-hosted production instances.
 
 Reference configuration, replacing `ens33` with the discovered interface:
 
@@ -357,6 +539,65 @@ Expected:
 - default route through `10.10.10.1`;
 - working local gateway reachability.
 
+## 6.4 Configure the unauthorised USERS test client
+
+Create a small Ubuntu client VM attached only to `NOVAPAY-USERS`. It represents a normal finance user who may access the payment portal but is not authorised for server administration.
+
+Use:
+
+| Setting | Value |
+|---|---|
+| Hostname | `user02` |
+| Address | `10.10.10.50/24` |
+| Gateway | `10.10.10.1` |
+| DNS | `10.10.10.1` |
+
+On an Ubuntu Server-style client, identify the interface and active Netplan file:
+
+```bash
+ip -br link
+ls -la /etc/netplan
+sudo sed -n '1,220p' /etc/netplan/*.yaml
+```
+
+Configure the discovered interface using the same safe `netplan generate`, `netplan try`, and `netplan apply` process described for the protected server. Reference values:
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    ens33:
+      dhcp4: false
+      addresses:
+        - 10.10.10.50/24
+      routes:
+        - to: default
+          via: 10.10.10.1
+      nameservers:
+        addresses:
+          - 10.10.10.1
+```
+
+Replace `ens33` with the actual interface.
+
+Install only the client tools needed for acceptance testing:
+
+```bash
+sudo apt update
+sudo apt install curl openssh-client netcat-openbsd
+```
+
+Verify:
+
+```bash
+hostname
+ip -br address
+ip route
+ping -c 4 10.10.10.1
+```
+
+This second host is essential. Changing Kali’s address and claiming it represents an unauthorised system provides weaker evidence because identity, states, and previous permissions may remain ambiguous.
+
 # 7. Phase Four — Build the Simulated Payment Service
 
 ## 7.1 Update Ubuntu safely
@@ -371,7 +612,8 @@ sudo apt upgrade
 ## 7.2 Install required services
 
 ```bash
-sudo apt install openssh-server nginx openssl ufw curl
+sudo apt install openssh-server nginx openssl ufw curl sqlite3 \
+  python3-venv python3-pip apache2-utils
 ```
 
 Purpose:
@@ -380,7 +622,10 @@ Purpose:
 - Nginx represents the internal payment operations web application;
 - OpenSSL creates a lab TLS certificate;
 - UFW provides host-level defence in depth;
-- curl validates HTTP/TLS behaviour.
+- curl validates HTTP/TLS behaviour;
+- SQLite stores simulated transaction and application-audit records;
+- Python, Flask, and Gunicorn provide a small read-only API;
+- `apache2-utils` supplies `htpasswd` for lab application authentication.
 
 Check service state:
 
@@ -392,43 +637,176 @@ sudo ss -lntup
 
 `systemctl status` reports whether the service is active and recent errors. `ss -lntup` lists listening TCP/UDP sockets and owning processes. Listening on `0.0.0.0` means all IPv4 interfaces; it does not mean a firewall permits remote access.
 
-## 7.3 Create non-sensitive simulated content
+## 7.3 Create the simulated transaction database
 
-Create the document root:
-
-```bash
-sudo install -d -o root -g www-data -m 0750 /var/www/novapay
-```
-
-`install -d` creates the directory while explicitly setting owner, group, and permissions. This is more deliberate than creating a directory and forgetting to restrict it.
-
-Create `/var/www/novapay/index.html`:
-
-```html
-<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><title>NovaPay Operations</title></head>
-<body>
-  <h1>NovaPay Payment Operations Lab</h1>
-  <p>Environment: authorised training simulation</p>
-  <p>Transaction reference: LAB-TXN-0001</p>
-  <p>Status: REVIEW</p>
-</body>
-</html>
-```
-
-Do not use real customer names, account details, card numbers, credentials, or production records.
-
-Apply safe file ownership:
+Create a dedicated non-login service account and protected directories:
 
 ```bash
-sudo chown root:www-data /var/www/novapay/index.html
-sudo chmod 0640 /var/www/novapay/index.html
+sudo adduser --system --group --home /opt/novapay \
+  --shell /usr/sbin/nologin novapay-app
+sudo install -d -o novapay-app -g novapay-app -m 0750 /opt/novapay
+sudo install -d -o root -g novapay-app -m 0750 /var/lib/novapay
 ```
 
-Root controls modification; the Nginx group can read the content.
+The application account can run the service but cannot log in interactively. Application code and data are separated so their permissions and backup policies can differ.
 
-## 7.4 Create a lab TLS certificate
+Create the database:
+
+```bash
+sudo sqlite3 /var/lib/novapay/transactions.db
+```
+
+At the SQLite prompt, enter:
+
+```sql
+CREATE TABLE transactions (
+  reference TEXT PRIMARY KEY,
+  amount_minor INTEGER NOT NULL,
+  currency TEXT NOT NULL,
+  status TEXT NOT NULL,
+  last_updated TEXT NOT NULL
+);
+
+CREATE TABLE audit_log (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  event_time TEXT NOT NULL,
+  actor TEXT NOT NULL,
+  action TEXT NOT NULL,
+  object_ref TEXT NOT NULL,
+  old_value TEXT,
+  new_value TEXT
+);
+
+INSERT INTO transactions
+VALUES ('LAB-TXN-0001', 250000, 'NGN', 'REVIEW', datetime('now'));
+
+INSERT INTO audit_log
+  (event_time, actor, action, object_ref, old_value, new_value)
+VALUES
+  (datetime('now'), 'system-bootstrap', 'CREATE',
+   'LAB-TXN-0001', NULL, 'status=REVIEW;amount_minor=250000');
+
+.quit
+```
+
+`amount_minor` stores the amount in the currency’s minor unit rather than a floating-point value. Financial systems avoid binary floating-point for money because rounding behaviour can create incorrect values.
+
+Protect the database:
+
+```bash
+sudo chown root:novapay-app /var/lib/novapay/transactions.db
+sudo chmod 0640 /var/lib/novapay/transactions.db
+```
+
+The service receives read-only group access. Transaction changes for instructor injects must use an authorised administrative process and create an audit record.
+
+Do not use real customers, account identifiers, card numbers, credentials, or production transactions.
+
+## 7.4 Build the read-only transaction API
+
+Create the Python environment:
+
+```bash
+sudo -u novapay-app python3 -m venv /opt/novapay/venv
+sudo -u novapay-app /opt/novapay/venv/bin/pip install --upgrade pip
+sudo -u novapay-app /opt/novapay/venv/bin/pip install flask gunicorn
+```
+
+The virtual environment isolates application packages from Ubuntu’s system Python packages. Record installed versions:
+
+```bash
+sudo -u novapay-app /opt/novapay/venv/bin/pip freeze
+```
+
+Create `/opt/novapay/app.py`:
+
+```python
+from flask import Flask, abort, jsonify
+import sqlite3
+
+app = Flask(__name__)
+DB_URI = "file:/var/lib/novapay/transactions.db?mode=ro"
+
+
+def open_database():
+    connection = sqlite3.connect(DB_URI, uri=True)
+    connection.row_factory = sqlite3.Row
+    return connection
+
+
+@app.get("/")
+def health():
+    return jsonify(
+        service="NovaPay payment operations lab",
+        environment="authorised simulation",
+        status="available",
+    )
+
+
+@app.get("/api/transactions/<reference>")
+def transaction(reference):
+    with open_database() as connection:
+        row = connection.execute(
+            """
+            SELECT reference, amount_minor, currency, status, last_updated
+            FROM transactions
+            WHERE reference = ?
+            """,
+            (reference,),
+        ).fetchone()
+    if row is None:
+        abort(404)
+    return jsonify(dict(row))
+```
+
+The parameterised query treats the reference as data rather than executable SQL. The database URI requests read-only mode, preventing the web process from changing transactions.
+
+Apply ownership and syntax-check the application:
+
+```bash
+sudo chown novapay-app:novapay-app /opt/novapay/app.py
+sudo chmod 0640 /opt/novapay/app.py
+sudo -u novapay-app /opt/novapay/venv/bin/python \
+  -m py_compile /opt/novapay/app.py
+```
+
+Create `/etc/systemd/system/novapay.service`:
+
+```ini
+[Unit]
+Description=NovaPay read-only payment operations API
+After=network.target
+
+[Service]
+Type=simple
+User=novapay-app
+Group=novapay-app
+WorkingDirectory=/opt/novapay
+ExecStart=/opt/novapay/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:5000 app:app
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/var/lib/novapay
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and inspect it:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now novapay
+sudo systemctl status novapay --no-pager
+curl http://127.0.0.1:5000/api/transactions/LAB-TXN-0001
+```
+
+Gunicorn listens only on loopback. Remote clients cannot bypass Nginx, TLS, and application authentication by connecting directly to TCP 5000.
+
+## 7.5 Create a lab TLS certificate
 
 ```bash
 sudo install -d -m 0750 /etc/nginx/tls
@@ -451,7 +829,17 @@ Explanation:
 
 A self-signed certificate is appropriate for an isolated lab, not a public production service. Production should use trusted certificate management and formal key lifecycle controls.
 
-## 7.5 Configure Nginx on TCP 8443
+## 7.6 Configure authenticated Nginx access on TCP 8443
+
+Create a lab application user:
+
+```bash
+sudo htpasswd -c /etc/nginx/.novapay-users financeops
+sudo chown root:www-data /etc/nginx/.novapay-users
+sudo chmod 0640 /etc/nginx/.novapay-users
+```
+
+`htpasswd` prompts for the password so it is not exposed in shell history or this repository. This is a lab control. A real fintech application should use central identity, multifactor authentication, role-based authorisation, session controls, and auditable account lifecycle management.
 
 Create `/etc/nginx/sites-available/novapay`:
 
@@ -464,14 +852,18 @@ server {
     ssl_certificate_key /etc/nginx/tls/novapay.key;
     ssl_protocols       TLSv1.2 TLSv1.3;
 
-    root /var/www/novapay;
-    index index.html;
-
     access_log /var/log/nginx/novapay_access.log;
     error_log  /var/log/nginx/novapay_error.log warn;
 
     location / {
-        try_files $uri $uri/ =404;
+        auth_basic "NovaPay Payment Operations";
+        auth_basic_user_file /etc/nginx/.novapay-users;
+
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
     }
 }
 ```
@@ -491,12 +883,14 @@ Validate locally:
 
 ```bash
 curl -kI https://127.0.0.1:8443/
-sudo ss -lntp | grep -E ':(22|8443)\b'
+curl -k -u financeops \
+  https://127.0.0.1:8443/api/transactions/LAB-TXN-0001
+sudo ss -lntp | grep -E ':(22|5000|8443)\b'
 ```
 
-`-I` requests response headers. `-k` accepts the self-signed lab certificate. A production client should validate certificate trust rather than use `-k`.
+The first request should receive `401 Unauthorized`, proving authentication is enforced. The second prompts for the `financeops` password and should return the simulated JSON transaction. `-k` accepts the self-signed lab certificate. A production client should validate certificate trust rather than use `-k`.
 
-## 7.6 Apply Ubuntu host firewall policy
+## 7.7 Apply Ubuntu host firewall policy
 
 ```bash
 sudo ufw default deny incoming
@@ -529,33 +923,48 @@ Under `Firewall > Aliases`, create:
 | `PAYMENT_SERVER` | Host | `10.10.20.20` |
 | `PAYMENT_APP_PORT` | Port | `8443` |
 | `ADMIN_SSH_PORT` | Port | `22` |
+| `WEB_EGRESS_PORTS` | Port | `80`, `443` |
+| `DNS_PORT` | Port | `53` |
+| `NTP_PORT` | Port | `123` |
+| `PRIVATE_NETWORKS` | Network(s) | `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` |
 
 Aliases turn raw values into policy objects. A rule using `PAYMENT_SERVER` explains intent and is easier to update and audit than a rule containing an unexplained address.
 
 ## 8.2 USERS rules
 
-Create rules on `Firewall > Rules > USERS` in this order:
+Remove or disable the inherited default LAN-to-any rules as described earlier. Then create IPv4 rules on `Firewall > Rules > USERS` in this order:
 
-1. **Allow and log** `ADMIN_KALI` to `PAYMENT_SERVER`, TCP destination `ADMIN_SSH_PORT`.
-2. **Allow and log** `USERS net` to `PAYMENT_SERVER`, TCP destination `PAYMENT_APP_PORT`.
-3. **Block and log** `USERS net` to `SERVERS net`, any protocol.
-4. **Allow** `USERS net` to required external destinations and services.
+1. **Allow and log** `ADMIN_KALI` to **This Firewall**, TCP 443 — firewall administration.
+2. **Allow** `USERS net` to **This Firewall**, TCP/UDP `DNS_PORT` — controlled DNS.
+3. **Allow** `USERS net` to **This Firewall**, ICMP echo request — bounded gateway diagnostics.
+4. **Allow and log** `ADMIN_KALI` to `PAYMENT_SERVER`, TCP `ADMIN_SSH_PORT` — server administration.
+5. **Allow and log** `USERS net` to `PAYMENT_SERVER`, TCP `PAYMENT_APP_PORT` — payment operations.
+6. **Block and log** `USERS net` to `PRIVATE_NETWORKS`, any protocol — stop access to other private networks.
+7. **Allow** `USERS net` to any destination, TCP `WEB_EGRESS_PORTS` — documented web/update egress.
+8. **Block and log** `USERS net` to any destination, any remaining service — explicit final denial.
 
-For a simple isolated lab, the final outbound rule may temporarily allow USERS to `any`, but document that it is a lab convenience and not a production egress policy. A mature design limits DNS to approved resolvers and web traffic through approved controls.
+The private-network block must appear after the two approved payment-server rules. Otherwise it would block those specific exceptions because `10.10.20.20` is inside `10.0.0.0/8`.
 
-Rule order matters because pfSense uses first match on interface rules. The specific allows must appear before the general USERS-to-SERVERS block.
+The web-egress rule still permits many internet destinations, but it restricts service to TCP 80/443 and is explicit about its business purpose. A production fintech would normally add a secure web proxy, reputation controls, and approved-destination policy.
+
+Rule order matters because pfSense uses first match on interface rules. The specific allows must appear before the general private-network block.
 
 ## 8.3 SERVERS rules
 
-Create rules on `Firewall > Rules > SERVERS`:
+Create IPv4 rules on `Firewall > Rules > SERVERS`:
 
-1. allow Ubuntu to pfSense for required DNS if pfSense is the resolver;
-2. allow Ubuntu to approved NTP;
-3. allow Ubuntu outbound HTTP/HTTPS for controlled updates;
-4. block and log `SERVERS net` to `USERS net`;
-5. block other unapproved traffic.
+1. **Allow** `PAYMENT_SERVER` to **This Firewall**, TCP/UDP `DNS_PORT`.
+2. **Allow** `PAYMENT_SERVER` to **This Firewall**, UDP `NTP_PORT`.
+3. **Allow** `PAYMENT_SERVER` to **This Firewall**, ICMP echo request.
+4. **Block and log** `SERVERS net` to `PRIVATE_NETWORKS`, any protocol.
+5. **Allow** `PAYMENT_SERVER` to any destination, TCP `WEB_EGRESS_PORTS`.
+6. **Block and log** `SERVERS net` to any destination, any remaining service.
+
+The first two rules permit only controlled infrastructure services before the private-network block. The server cannot initiate a new connection to USERS.
 
 Do not add a reverse allow for established Kali-to-Ubuntu sessions. pfSense state already permits the response. A reverse allow would permit new server-initiated connections, changing the risk.
+
+If IPv6 is outside the lab scope, set IPv6 Configuration Type to `None` on USERS and SERVERS and confirm the endpoints have no unintended globally routable IPv6 path. Do not leave a default IPv6 allow rule active while testing only IPv4 policy.
 
 ## 8.4 Apply and inspect
 
@@ -598,7 +1007,8 @@ These commands identify when, where, and under which network state a test occurr
 From Kali:
 
 ```bash
-curl -vkI https://10.10.20.20:8443/
+curl -vk -u financeops \
+  https://10.10.20.20:8443/api/transactions/LAB-TXN-0001
 ```
 
 Expected:
@@ -623,7 +1033,51 @@ The first host-key prompt establishes server identity for future comparisons. `-
 
 Use the actual Ubuntu account in place of `<ubuntu-user>`. Prefer SSH keys over passwords for a production design.
 
-## 9.3 Unapproved service tests
+## 9.3 Unauthorised-source administration test
+
+From `user02` at `10.10.10.50`:
+
+```bash
+date --iso-8601=seconds
+nc -zvw3 10.10.20.20 22
+ssh -v <ubuntu-user>@10.10.20.20
+```
+
+Expected:
+
+- the connection does not reach SSH authentication;
+- the USERS firewall log shows the source `10.10.10.50` matching the private-network deny rule;
+- a SERVERS-side capture does not show a completed forwarded connection;
+- Ubuntu has no matching SSH authentication event.
+
+This proves source-based authorisation. Running the test from Kali would not satisfy AT-04 because Kali is the approved administrator.
+
+Also confirm management-plane restriction.
+
+From Kali:
+
+```bash
+curl -kI https://10.10.10.1/
+```
+
+From `user02`:
+
+```bash
+curl -kI --connect-timeout 3 https://10.10.10.1/
+```
+
+Kali should receive an HTTPS response. `user02` should be denied by the final USERS policy. If both succeed, the anti-lockout rule or another broad management rule is still active.
+
+From the same unauthorised client, verify that the ordinary payment portal remains available:
+
+```bash
+curl -vk -u financeops \
+  https://10.10.20.20:8443/api/transactions/LAB-TXN-0001
+```
+
+Different services can have different authorised populations. Denying SSH does not require denying the finance application.
+
+## 9.4 Unapproved service tests
 
 From Kali:
 
@@ -639,9 +1093,9 @@ Options:
 - `-v` provides detail;
 - `-w3` limits waiting to three seconds.
 
-Expected: the general USERS-to-SERVERS deny policy blocks these ports. A timeout commonly indicates silent filtering. “Connection refused” means the packet reached the host but no process accepted the port; that is not proof of firewall enforcement.
+Expected: the general USERS-to-private-networks deny policy blocks these ports. A timeout commonly indicates silent filtering. “Connection refused” means the packet reached the host but no process accepted the port; that is not proof of firewall enforcement.
 
-## 9.4 Controlled service discovery
+## 9.5 Controlled service discovery
 
 Run only against the authorised target:
 
@@ -662,6 +1116,31 @@ Expected:
 - firewall and Suricata evidence can be correlated after IDS is enabled.
 
 Do not substitute a public address.
+
+## 9.6 Validate controlled egress
+
+From Kali:
+
+```bash
+dig @10.10.10.1 example.com
+curl -I https://example.com/
+nc -zvw3 198.51.100.10 25
+```
+
+Install `dnsutils` if `dig` is unavailable:
+
+```bash
+sudo apt install dnsutils
+```
+
+Interpretation:
+
+- DNS should succeed only through the pfSense resolver;
+- HTTPS should succeed through the documented TCP 443 rule;
+- TCP 25 to `198.51.100.10` should match the final egress denial;
+- `198.51.100.0/24` is reserved for documentation and should not identify a real public target.
+
+Correlate the denied TCP 25 attempt with the USERS firewall log. This provides a negative egress test without scanning or contacting an unrelated live service.
 
 # 10. Phase Seven — Capture and Interpret Packets
 
@@ -750,7 +1229,16 @@ Package names and labels can vary slightly by pfSense release. Confirm the insta
 
 ## 11.3 Configure rule sources
 
-Enable the Emerging Threats Open rules or another approved free rule source. Update and verify that the rules download successfully.
+In `Services > Suricata > Global Settings`:
+
+1. enable Emerging Threats Open rules;
+2. choose a controlled update interval;
+3. save the global configuration;
+4. open the Updates tab;
+5. run a manual update;
+6. inspect the update log for download, extraction, and rule-processing errors.
+
+Do not enable a subscription source that requires a paid licence unless the organisation owns one. Emerging Threats Open is the free reference source for this lab.
 
 Record:
 
@@ -773,11 +1261,19 @@ Enabling every available rule is not automatically stronger security. More rules
 
 ## 11.4 Add the USERS inspection interface
 
-Add Suricata to USERS first.
+In `Services > Suricata > Interfaces`:
+
+1. add an interface;
+2. select `USERS`;
+3. enable the interface;
+4. set a description such as `NOVAPAY_USERS_IDS`;
+5. keep offender blocking disabled;
+6. keep the interface in IDS/alert-only operation;
+7. save without starting prevention.
 
 Reason: suspicious traffic originates from the finance workstation and enters pfSense on USERS. Inspecting at the source-zone boundary provides clear attribution and sees attempts even if the firewall later denies them.
 
-Set HOME_NET to include:
+In the interface network/variables settings, set HOME_NET to include:
 
 ```text
 10.10.10.0/24,10.10.20.0/24
@@ -794,9 +1290,13 @@ Enable:
 
 Begin in IDS/alert-only mode.
 
+In the interface Categories/Rules area, enable a focused selection from the downloaded rules. Save, apply, and start the interface.
+
+The exact tab labels can change between package versions. Capture screenshots of the installed version and selected settings rather than assuming another release has an identical layout.
+
 ## 11.5 Confirm sensor health
 
-Verify:
+Check the Suricata interfaces/status page and the log viewer. Verify:
 
 - the interface shows running;
 - rules loaded without fatal errors;
@@ -806,6 +1306,30 @@ Verify:
 
 Sensor process status alone does not prove useful inspection. Detection validation is required.
 
+If startup fails:
+
+1. inspect `suricata.log` for the first fatal error;
+2. confirm that HOME_NET and custom rules parse;
+3. confirm the interface is not already assigned incompatibly;
+4. confirm sufficient memory and disk space;
+5. remove only the last unvalidated change;
+6. restart and recheck health before generating traffic.
+
+## 11.6 Confirm inline compatibility before planning IPS
+
+Inline IPS depends on NETMAP support in the selected virtual NIC and pfSense/Suricata package combination.
+
+Before promising IPS:
+
+- record the pfSense version;
+- record the Suricata package version;
+- record the virtual NIC driver/model;
+- confirm the USERS interface offers inline IPS mode;
+- review interface and Suricata logs for NETMAP errors;
+- retain console access.
+
+If inline mode is unavailable or unstable, change to a supported lab NIC model and repeat IDS validation. Do not label legacy reactive blocking or ordinary firewall denial as successful inline IPS.
+
 # 12. Phase Nine — Validate IDS Detection
 
 ## 12.1 Establish a normal baseline
@@ -813,7 +1337,8 @@ Sensor process status alone does not prove useful inspection. Detection validati
 From Kali:
 
 ```bash
-curl -skI https://10.10.20.20:8443/
+curl -sk -u financeops \
+  https://10.10.20.20:8443/api/transactions/LAB-TXN-0001
 ssh <ubuntu-user>@10.10.20.20
 ```
 
@@ -837,7 +1362,15 @@ date --iso-8601=seconds
 
 ## 12.3 Add a deterministic local alert rule
 
-If community rules do not reliably alert in the small lab, add a local Suricata rule:
+If community rules do not reliably alert in the small lab:
+
+1. edit the Suricata USERS interface;
+2. open its Rules tab;
+3. select the custom/local rules category or custom-rules text area provided by the installed package;
+4. add the rule below as a single line;
+5. save and apply;
+6. restart only the USERS Suricata instance;
+7. inspect `suricata.log` and confirm the interface returns to running before testing.
 
 ```text
 alert tcp 10.10.10.10 any -> 10.10.20.20 any (msg:"NOVAPAY LAB repeated connection attempts from finance workstation"; flags:S; threshold: type both, track by_src, count 8, seconds 30; classtype:network-scan; sid:1000001; rev:1;)
@@ -853,7 +1386,7 @@ Rule anatomy:
 - `sid:1000001` is a locally managed unique signature ID;
 - `rev:1` is the first rule revision.
 
-Validate the Suricata configuration before restarting the interface. A syntax error can prevent the sensor from starting.
+A syntax error can prevent the sensor from starting. Successful service restart, the expected loaded-rule count, and absence of fatal parse errors are the configuration-validation evidence.
 
 Generate the condition:
 
@@ -937,9 +1470,18 @@ Before enabling blocking, confirm:
 
 ## 14.2 Enable inline/blocking mode
 
-In the Suricata USERS interface settings, select the supported inline IPS or blocking mode for the platform. pfSense/Suricata versions may label this as inline IPS using netmap or as a legacy blocking mode.
+Stop the USERS Suricata instance before changing its capture mode. Edit the interface:
+
+1. select the supported **Inline IPS Mode**/NETMAP option;
+2. enable the package control required to block offenders in that mode;
+3. retain the USERS interface and reviewed HOME_NET;
+4. save and apply;
+5. start the USERS instance;
+6. confirm it remains running without NETMAP or rule-loading errors.
 
 Prefer true inline mode where supported because Suricata can decide on the packet before it is forwarded. Legacy blocking may react after seeing traffic and can allow initial packets before a firewall table is updated.
+
+If only legacy mode is available, document it as a different implementation and do not use the inline `drop` proof below as though the modes were equivalent.
 
 ## 14.3 Create a dedicated IPS test flow
 
@@ -949,7 +1491,7 @@ On Ubuntu, start a temporary lab-only web service in a dedicated terminal:
 
 ```bash
 sudo ufw allow from 10.10.10.10 to 10.10.20.20 port 9001 proto tcp comment 'Temporary IPS validation'
-python3 -m http.server 9001 --bind 10.10.20.20 --directory /var/www/novapay
+python3 -m http.server 9001 --bind 10.10.20.20 --directory /usr/share/nginx/html
 ```
 
 The Python service stays in the foreground so the operator can see requests and stop it with `Ctrl+C`. It is bound only to the server’s lab address.
@@ -982,7 +1524,7 @@ This rule cannot block SSH or the payment application because the header matches
 
 Do not add a threshold to delay the drop. In Suricata IPS mode, `drop` is applied to every matching packet even when an alert threshold controls how often alerts are emitted. Thresholding is alert-rate control, not a safe way to postpone enforcement.
 
-Validate the Suricata configuration and activate inline/blocking mode during the approved window.
+Add it to the same USERS custom-rules location used for SID `1000001`. Save, restart the USERS instance, and verify that SID `1000002` loads without a fatal parse error before sending the test. Activate inline/blocking mode only during the approved window.
 
 ## 14.5 Prove prevention
 
@@ -1006,7 +1548,8 @@ Retest legitimate services:
 
 ```bash
 nc -zvw3 10.10.20.20 22
-curl -skI https://10.10.20.20:8443/
+curl -sk -u financeops \
+  https://10.10.20.20:8443/api/transactions/LAB-TXN-0001
 ```
 
 A timeout alone is not proof. The conclusion requires the unchanged allow rules, Suricata drop evidence, matching timestamps, and absence of a completed request on the temporary server.
@@ -1077,9 +1620,31 @@ hostname
 ip -br address
 sudo ss -lntup
 sudo journalctl -u ssh --since "-30 minutes" --no-pager
+sudo journalctl -u novapay --since "-30 minutes" --no-pager
 sudo tail -n 100 /var/log/nginx/novapay_access.log
 sudo ufw status verbose
 ```
+
+Review the simulated transaction and audit trail without changing them:
+
+```bash
+sudo sqlite3 -readonly -header -column \
+  /var/lib/novapay/transactions.db \
+  "SELECT * FROM transactions WHERE reference='LAB-TXN-0001';"
+sudo sqlite3 -readonly -header -column \
+  /var/lib/novapay/transactions.db \
+  "SELECT * FROM audit_log WHERE object_ref='LAB-TXN-0001' ORDER BY id;"
+```
+
+For a stable database evidence copy, use SQLite’s backup function and hash the copy:
+
+```bash
+sudo sqlite3 /var/lib/novapay/transactions.db \
+  ".backup '/tmp/novapay-incident.db'"
+sudo sha256sum /tmp/novapay-incident.db
+```
+
+Restrict and transfer the evidence copy using the approved evidence process. `/tmp` is temporary storage, not the final evidence repository.
 
 Why:
 
@@ -1088,6 +1653,7 @@ Why:
 - sockets show current or recent connections;
 - processes provide endpoint context;
 - SSH and Nginx logs show whether access reached an application;
+- Gunicorn and SQLite evidence show application availability and recorded transaction history;
 - UFW state confirms the host control.
 
 Exact authentication log location varies by Ubuntu release. `journalctl` is preferred when systemd owns the service log.
@@ -1222,25 +1788,43 @@ Then inspect:
 
 This sequence follows the packet and identifies the layer where expected evidence disappears.
 
-# 18. Expected Acceptance Results
+# 18. Requirements and Evidence Traceability
 
-| Test | Expected reference result |
-|---|---|
-| Kali identity | `10.10.10.10/24`, gateway `10.10.10.1` |
-| Ubuntu identity | `10.10.20.20/24`, gateway `10.10.20.1` |
-| Bypass test | No direct Layer 2 path between USERS and SERVERS |
-| Payment portal | HTTPS 8443 succeeds from authorised USERS policy |
-| SSH administration | TCP 22 succeeds only from `ADMIN_KALI` |
-| Unapproved ports | Blocked by USERS-to-SERVERS deny policy |
-| Stateful response | Return traffic succeeds without a reverse broad allow |
-| Rule-change test | Existing and new sessions behave according to state |
-| IDS health | Interface running, rules loaded, current events present |
-| Reconnaissance detection | SID/community rule alert correlates with test time |
-| Tuning regression | Normal 8443 traffic remains quiet; off-policy probing alerts |
-| IPS validation | Narrow drop rule produces Suricata prevention evidence |
-| Continuity | 8443 and approved SSH still work after IPS activation |
-| Incident correlation | Firewall, IDS/IPS, endpoint, and test records align |
-| Recovery | Restored system passes critical firewall and sensor tests |
+Replace the example evidence IDs with the student’s actual files. A test is not passed until its evidence has been reviewed.
+
+| ID | Expected reference result | Minimum evidence | Reference section |
+|---|---|---|---|
+| AT-01 | Kali is `10.10.10.10/24`; `user02` is `10.10.10.50/24`; Ubuntu is `10.10.20.20/24`; gateways are correct | `EV-AT01` address/route output from all endpoints | Phases Two and Three |
+| AT-02 | No endpoint has an adapter or Layer 2 path that bypasses pfSense | `EV-AT02` hypervisor adapter/MAC map and dual-interface capture | Phase Zero and Phase Seven |
+| AT-03 | Kali reaches SSH 22 and produces firewall and SSH evidence | `EV-AT03` client output, pass log, SSH journal | Phase Six |
+| AT-04 | `user02` cannot reach SSH 22; attempt is denied before authentication | `EV-AT04` client timeout, deny log, absence from SSH journal | Phase Six |
+| AT-05 | Finance clients authenticate to HTTPS 8443 and retrieve the simulated transaction | `EV-AT05` curl/TLS output, Nginx remote-user log, API result | Phases Four and Six |
+| AT-06 | Ports 80, 443, and 3306 do not pass to Ubuntu from USERS | `EV-AT06` client results, firewall logs, two-interface capture | Phase Six |
+| AT-07 | Replies for approved SSH/HTTPS sessions return through state | `EV-AT07` state-table entry and successful session | Phase Five |
+| AT-08 | Existing and new sessions show the documented stateful-rule-change behaviour | `EV-AT08` before/change/after record and state evidence | Phase Five |
+| AT-09 | DNS and web egress succeed; non-approved TCP 25 is denied | `EV-AT09` DNS/HTTPS output and final-rule deny log | Phase Six |
+| AT-10 | Suricata runs on USERS, loads rules, and observes the intended traffic | `EV-AT10` version, interface health, rule count, current log | Phase Eight |
+| AT-11 | Controlled probing produces a correlated alert | `EV-AT11` SID, test timestamp, firewall and packet evidence | Phase Nine |
+| AT-12 | Normal authenticated API access is classified separately from suspicious probing | `EV-AT12` baseline and completed triage worksheet | Phase Nine |
+| AT-13 | Revised rule ignores normal 8443 repetition but detects off-policy probing | `EV-AT13` before/after alert counts and regression result | Phase Ten |
+| AT-14 | Suricata drops the permitted temporary TCP 9001 test flow | `EV-AT14` before success, after failure, SID 1000002 drop, server evidence | Phase Eleven |
+| AT-15 | Authenticated API 8443 and authorised SSH 22 remain available after IPS | `EV-AT15` post-change application and administration tests | Phase Eleven |
+| AT-16 | An injected fault is isolated through ranked hypotheses and minimally corrected | `EV-AT16` troubleshooting journal, root cause, regression | Phase Seventeen and Inject solutions |
+| AT-17 | At least three sources produce a consistent timezone-normalised timeline | `EV-AT17` timeline with firewall, Suricata, and endpoint/application references | Phase Twelve |
+| AT-18 | Transaction/customer impact is bounded using database, audit, identity, and network evidence | `EV-AT18` impact worksheet and qualified conclusion | Phase Twelve and Inject J |
+| AT-19 | Restored pfSense passes critical identity, policy, IDS, IPS, and continuity tests | `EV-AT19` backup hash, restore log, retest evidence | Phase Thirteen |
+| AT-20 | All 15 security requirements and 20 acceptance tests have status, owner, and evidence | `EV-AT20` signed traceability matrix and go/no-go decision | Final handover |
+
+## 18.1 Completed reference decision
+
+The reference environment is suitable for lab acceptance only when all rows above pass. It is not a production-ready fintech platform because it lacks high availability, central identity, central log storage, managed certificates, database replication, secrets management, endpoint detection, and formal compliance validation.
+
+The correct reference recommendation is:
+
+```text
+GO for isolated training and controlled security validation.
+NO-GO for production payment processing.
+```
 
 # 19. Instructor Solutions for Scenario Injects
 
@@ -1250,7 +1834,7 @@ These are expected investigation paths and defensible conclusions. Instructors c
 
 ### Reference fault
 
-Move the SSH allow rule below the general USERS-to-SERVERS block or leave a stale blocked state after correcting policy.
+Move the SSH allow rule below the general USERS-to-private-networks block or leave a stale blocked state after correcting policy.
 
 ### Expected response
 
@@ -1316,7 +1900,7 @@ Do not disable the entire firewall or all IDS/IPS inspection.
 
 ### Reference fault
 
-Disable logging on the USERS-to-SERVERS deny rule or stop the Suricata USERS interface.
+Disable logging on the USERS-to-private-networks deny rule or stop the Suricata USERS interface.
 
 ### Expected response
 
@@ -1356,7 +1940,29 @@ An unusual time is a risk indicator, not proof of compromise.
 
 ### Reference condition
 
-Change the text in the simulated transaction page through an instructor-approved local server action and provide an expected-value record.
+Through an instructor-approved local server action, change the simulated transaction status and create a corresponding application audit record. For example, open the database locally:
+
+```bash
+sudo sqlite3 /var/lib/novapay/transactions.db
+```
+
+Then execute a controlled transaction:
+
+```sql
+BEGIN;
+INSERT INTO audit_log
+  (event_time, actor, action, object_ref, old_value, new_value)
+VALUES
+  (datetime('now'), 'instructor-inject', 'STATUS_CHANGE',
+   'LAB-TXN-0001', 'status=REVIEW', 'status=APPROVED');
+UPDATE transactions
+SET status = 'APPROVED', last_updated = datetime('now')
+WHERE reference = 'LAB-TXN-0001';
+COMMIT;
+.quit
+```
+
+Provide the expected baseline record separately. Do not tell the student whether the discrepancy is authorised.
 
 ### Expected response
 
@@ -1410,6 +2016,62 @@ Never upload:
 - real customer or payment data;
 - unredacted secrets.
 
+## 20.1 Final handover package
+
+The instructor solution is not complete until it contains:
+
+1. **Executive summary:** original risk, delivered controls, proven outcome, major incident findings, residual risk, and recommendation.
+2. **Architecture pack:** final topology, trust boundaries, data flows, interface/MAC map, addressing, and service dependencies.
+3. **Policy pack:** aliases, ordered firewall matrix, inherited-rule removal evidence, UFW policy, and rule owner/review dates.
+4. **Detection pack:** Suricata version, rule sources, HOME_NET, enabled categories, local rules, tuning decisions, and health checks.
+5. **Test pack:** all AT-01 through AT-20 results with expected/actual outcome and evidence.
+6. **Incident pack:** incident ticket, evidence register, timeline, impact assessment, containment, and Fraud Operations decision.
+7. **Recovery pack:** protected backup register, hashes, dependency versions, restore record, and post-restore tests.
+8. **Risk register:** likelihood, impact, current control, residual risk, owner, treatment, and date.
+9. **Operations guide:** daily/weekly checks, alert ownership, escalation, change process, backup cadence, and emergency access.
+10. **Go/no-go decision:** explicit training suitability and explicit production limitations.
+
+## 20.2 Executive summary reference answer
+
+```text
+NovaPay’s original lab design allowed excessive trust between finance endpoints
+and payment infrastructure. The reference implementation established separate
+USERS and SERVERS zones, removed inherited broad firewall permissions, allowed
+only authorised SSH and authenticated payment-application access, restricted
+egress, and added host-level controls.
+
+Suricata detection was validated against controlled internal reconnaissance.
+A narrowly scoped inline rule prevented a dedicated validation flow while
+authorised SSH and payment operations remained available. Firewall, IDS/IPS,
+endpoint, application, and database evidence were correlated during the
+incident exercise.
+
+The environment is approved for isolated training. It is not approved for
+production payment processing. Priority production improvements are central
+identity and MFA, high availability, central immutable logging, managed TLS,
+database audit/replication, endpoint detection, and formal compliance review.
+```
+
+## 20.3 Operations handover
+
+| Frequency | Owner | Required review |
+|---|---|---|
+| Daily | SOC | Sensor health, failed updates, high-severity alerts, disk use |
+| Daily | Fraud Operations | Events linked to transaction/account anomalies |
+| Weekly | Network Security | Firewall denies, rule hits, unexpected states, temporary rules |
+| Weekly | Platform team | Ubuntu patches, service health, authentication failures |
+| Monthly | Control owner | Access list, aliases, rule necessity, evidence retention |
+| After every change | Implementer and reviewer | Positive, negative, monitoring, and rollback tests |
+| After recovery | Incident/change lead | AT-01 through critical security and continuity tests |
+
+Escalate immediately when:
+
+- payment data may have changed without an authorised audit record;
+- a privileged login cannot be linked to an approved person/change;
+- IDS/IPS or firewall telemetry is unavailable during suspicious activity;
+- a security control disrupts payment operations;
+- activity crosses the authorised lab boundary.
+
 # 21. Professional Understanding Check
 
 A student has mastered the project when they can explain:
@@ -1433,6 +2095,8 @@ Use the documentation matching the installed software release:
 
 - [pfSense firewall fundamentals](https://docs.netgate.com/pfsense/en/latest/firewall/fundamentals.html)
 - [pfSense rule methodology](https://docs.netgate.com/pfsense/en/latest/firewall/rule-methodology.html)
+- [pfSense default LAN rules and anti-lockout](https://docs.netgate.com/pfsense/en/latest/firewall/rule-list-intro.html)
+- [pfSense additional LAN/OPT interface configuration](https://docs.netgate.com/pfsense/en/latest/solutions/netgate-2100/opt-lan.html)
 - [pfSense firewall-state inspection](https://docs.netgate.com/pfsense/en/latest/monitoring/status/firewall-states-gui.html)
 - [pfSense firewall troubleshooting](https://docs.netgate.com/pfsense/en/latest/troubleshooting/firewall.html)
 - [pfSense IDS/IPS packages](https://docs.netgate.com/pfsense/en/latest/packages/snort/index.html)
