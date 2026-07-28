@@ -10,6 +10,7 @@ A complete practical cybersecurity training repository containing 40 lessons, 15
 - [Complete tool-mastery guide](practicals/TOOL_MASTERY_GUIDE.md)
 - [15 guided labs](practicals/labs/README.md)
 - [10 professional projects](practicals/projects/README.md)
+- [Separate instructor solution guides](solutions/README.md)
 - [Evidence and reporting templates](practicals/templates/README.md)
 - [Assessments](assessments/)
 
