@@ -17,7 +17,7 @@ The ten projects are not long labs. Students receive an outcome, incomplete info
 
 ## Additional Class Project
 
-- [Enterprise Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md) — an outcome-based pfSense and Suricata challenge containing tasks, evidence requirements, incident injects, and assessment criteria without procedural solution steps.
+- [Fintech Payment Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md) — an outcome-based pfSense and Suricata challenge in which students protect payment operations, investigate suspected lateral movement, assess fraud and customer-data risk, and preserve service availability without receiving procedural solution steps.
 
 ## Mandatory Team Roles
 
