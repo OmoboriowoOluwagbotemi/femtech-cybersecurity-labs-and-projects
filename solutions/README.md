@@ -7,4 +7,4 @@ Solutions contain reference implementations, explanations, expected evidence, tr
 ## Available Solutions
 
 - [Fintech Payment Network Segmentation and IDS/IPS Defence](fintech-pfsense-suricata-implementation-guide.md)
-
+- [Aviation Cybersecurity Incident Response and pfSense Segmentation](aviation-pfsense-emergency-security-meeting-solution.md)
