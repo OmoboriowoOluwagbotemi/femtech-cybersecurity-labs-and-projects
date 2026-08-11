@@ -1,6 +1,6 @@
 # Professional Project Operating Guide
 
-The ten projects are not long labs. Students receive an outcome, incomplete information, business constraints, and scheduled injects. The team must make and defend decisions.
+The eleven projects are not long labs. Students receive an outcome, incomplete information, business constraints, and scheduled injects. The team must make and defend decisions.
 
 ## Project Index
 
@@ -14,6 +14,7 @@ The ten projects are not long labs. Students receive an outcome, incomplete info
 8. [Conduct a threat-hunting sprint](project-08-threat-hunting-sprint.md)
 9. [Perform DFIR after a Linux web compromise](project-09-linux-dfir.md)
 10. [Defend Northstar Manufacturing](project-10-northstar-capstone.md)
+11. [Recover the asset truth at MeridianPay](project-11-asset-discovery-consulting-engagement.md)
 
 ## Additional Class Project
 

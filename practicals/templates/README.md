@@ -1,5 +1,10 @@
 # Reusable Practical Templates
 
+Ready-to-use CSV files:
+
+- [Asset inventory template](asset-inventory-template.csv)
+- [Asset reconciliation template](asset-reconciliation-template.csv)
+
 ## Scope and Authorisation
 
 ```text
