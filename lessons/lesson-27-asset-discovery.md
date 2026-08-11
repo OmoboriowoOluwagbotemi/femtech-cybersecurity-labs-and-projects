@@ -578,6 +578,8 @@ Network scanners, EDR inventory, and cloud inventory APIs are technical controls
 
 ## 31. Classroom Hands-On Practical
 
+Use [Lab 05 - Discover, Classify, and Baseline Assets](../practicals/labs/lab-05-asset-discovery.md) for the full two-session range exercise. It includes VM sizing, instructor preparation, multi-source reconciliation, evidence standards, business reporting, and a 100-point rubric.
+
 ### Practical Title
 
 Discover and Reconcile an Authorized Lab
@@ -620,6 +622,8 @@ Design enterprise asset discovery containing:
 - Shadow IT response.
 - Lifecycle and metrics.
 - Ten data-quality tests.
+
+For a realistic team engagement, assign [Project 11 - Recover the Asset Truth at MeridianPay](../practicals/projects/project-11-asset-discovery-consulting-engagement.md). Students receive conflicting enterprise records and business injects, then deliver a canonical inventory and sustainable 90-day operating model. Keep the separate instructor solution private until debrief.
 
 ## 33. Assessment Questions
 

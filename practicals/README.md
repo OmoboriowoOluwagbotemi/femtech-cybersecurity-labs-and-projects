@@ -1,6 +1,6 @@
 # FEMTECH Cybersecurity Practical Programme
 
-## 15 Guided Labs and 10 Professional Projects
+## 15 Guided Labs and 11 Professional Projects
 
 This practical programme consolidates the 40-lesson Enterprise Cybersecurity Course. It is designed to move a student through four levels of performance:
 
@@ -34,7 +34,7 @@ The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optio
 | Lab 02 | Linux administration and least privilege | 11-13, 15 | 4 hours |
 | Lab 03 | Harden and audit an Ubuntu server | 13-16, 21 | 5 hours |
 | Lab 04 | Build a private PKI and secure a web service | 4-6 | 4-5 hours |
-| Lab 05 | Discover, classify, and baseline assets | 8, 16, 27 | 4 hours |
+| Lab 05 | Discover, classify, and baseline assets | 8, 16, 27 | 6-8 hours |
 | Lab 06 | Segment an enterprise with pfSense | 22-25 | 6 hours |
 | Lab 07 | Build Active Directory and role-based access | 17-20 | 6-8 hours |
 | Lab 08 | Harden and monitor a Windows endpoint | 17, 21, 30-32 | 5 hours |
@@ -55,6 +55,7 @@ The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optio
 | Project 08 | Conduct a threat-hunting sprint | 2, 25, 30-35, 38 | 1-2 weeks |
 | Project 09 | Perform DFIR after a Linux web compromise | 9, 13-16, 29, 33-35 | 2 weeks |
 | Project 10 | Defend Northstar Manufacturing | All 40 lessons | 3-4 weeks |
+| Project 11 | Recover the asset truth at MeridianPay | 16, 24, 26-29, 36, 38 | 5 class days or 2 weeks part-time |
 
 ## Required Rules of Engagement
 
@@ -326,7 +327,7 @@ Professional projects deliberately contain ambiguity. A high-scoring team docume
 
 ## Delivery Sequence
 
-Run Labs 01-05 after Lessons 1-16, Labs 06-09 after Lessons 17-29, and Labs 10-15 after Lessons 30-38. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Project 10 is the final capstone after Lessons 39-40.
+Run Labs 01-04 after Lessons 1-16, Lab 05 immediately after Lesson 27, Labs 06-09 after Lessons 17-29, and Labs 10-15 after Lessons 30-38. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
 
 ## Practical Files
 

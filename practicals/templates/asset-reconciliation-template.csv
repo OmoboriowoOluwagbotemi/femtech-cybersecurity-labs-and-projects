@@ -1,0 +1,2 @@
+reconciliation_id,canonical_asset_id,source_a,source_record_a,source_b,source_record_b,conflicting_or_matching_fields,match_keys,decision,rationale,confidence,validation_owner,target_date,status,evidence
+REC-EXAMPLE-001,AST-EXAMPLE-001,cmdb,CI-001,dhcp,LEASE-001,ip_address,hostname;mac,retain_both_as_time_bound_observations,Addresses were observed at different timestamps,medium,network-team,YYYY-MM-DD,open,evidence-path
