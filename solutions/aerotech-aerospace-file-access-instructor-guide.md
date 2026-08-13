@@ -1,898 +1,625 @@
 # AeroTech Aerospace Secure File Access
 
-## Instructor Solution and Teaching Guide
+## Basic Step-by-Step Instructor Solution
 
 **Companion problem:** [AeroTech student project](../practicals/projects/aerotech-aerospace-file-access-project.md)
 
-**Platform:** Ubuntu Server
+**Platform:** Ubuntu Server 22.04 or later
 
-**Scope:** Isolated educational lab
+**Lab account:** An administrator with `sudo` permission
+**Scope:** An isolated educational lab using fictional information only
 
-> This reference implementation teaches why each control works, how to prove it, and how it fails. Never use real aerospace data, production credentials, or external systems.
+This guide deliberately uses manual commands. Students should type each command, inspect its result, and explain why it worked before continuing. There are no provisioning loops or large validation scripts.
 
-## 1. Reference Architecture
+## What students are building
 
-The reference design uses:
+AeroTech needs six private department folders. A user may work inside their own department but must be denied access to every other department.
 
-- one unique fictional account per employee;
-- one supplementary group per department;
-- `root` as administrative owner;
-- each department group as its directory group owner;
-- mode `0711` on `/srv/aerotech`;
-- mode `2770` on each department directory;
-- SGID for group inheritance;
-- default ACLs for predictable collaboration;
-- no access for `other`;
-- auditd for write and attribute-change evidence;
-- metadata-aware backup and isolated recovery;
-- tests executed as ordinary users, not as root.
+The design uses four Linux controls:
 
-This is Linux group-based discretionary access control. Groups represent business roles, but this is not mandatory access control.
+1. A unique account identifies each employee.
+2. A group represents each department.
+3. Normal permissions prevent access by users outside the department.
+4. SGID and a default ACL make new content inherit safe collaborative permissions.
 
-## 2. Technical Mental Model
+## Before starting
 
-### 2.1 Process identity
+Use an Ubuntu Server virtual machine created only for this course. Take a VM snapshot first. Do not run the commands on a production server.
 
-A process carries a UID, primary GID, and supplementary GIDs. The kernel evaluates numeric IDs; account and group names are mappings.
+Log in with the administrator account and confirm the system:
 
 ```bash
-id eng1
-getent passwd eng1
-getent group engineering
-```
-
-Existing sessions retain their original supplementary groups after membership changes. Start a new session or terminate stale sessions when revoking access.
-
-### 2.2 Permission selection
-
-Traditional permissions select one class: owner when UID matches, group when a process group matches, otherwise `other`. Linux does not combine the most generous bits from all classes.
-
-ACLs add named users and groups. The ACL mask caps the effective permissions of the group class.
-
-### 2.3 Files and directories
-
-| Permission | Regular file | Directory |
-|---|---|---|
-| `r` | Read contents | List entry names |
-| `w` | Modify contents | Create, delete, or rename entries when traversal is allowed |
-| `x` | Execute program | Traverse and access a known name |
-
-Deleting a file depends mainly on the parent directory, not on the file's write bit.
-
-### 2.4 SGID, default ACL, and `umask`
-
-SGID on a directory assigns its group to new children. It does not guarantee group write.
-
-A default ACL supplies inherited access entries. It solves the collaboration problem that SGID alone does not solve.
-
-Programs normally request `0666` for files and `0777` for directories. `umask` removes requested bits in a non-ACL design. With a default ACL, Linux derives inherited access while still respecting the mode requested by the creating program.
-
-### 2.5 Privilege boundary
-
-Root and sufficiently capable processes can bypass ordinary DAC. Limit and audit sudo. Do not claim that departmental permissions stop an unrestricted administrator.
-
-## 3. Reference Design Tables
-
-| Department | Group | Directory | Representative |
-|---|---|---|---|
-| Engineering | `engineering` | `/srv/aerotech/engineering` | `eng1` |
-| Flight Operations | `flightops` | `/srv/aerotech/flight_operations` | `flight1` |
-| Quality Assurance | `qualityassurance` | `/srv/aerotech/quality_assurance` | `qa1` |
-| Research and Development | `research` | `/srv/aerotech/research_development` | `rd1` |
-| Maintenance | `maintenance` | `/srv/aerotech/maintenance` | `maint1` |
-| Information Technology | `it` | `/srv/aerotech/it` | `it1` |
-
-| Path | Owner | Group | Mode | Purpose |
-|---|---|---|---:|---|
-| `/srv/aerotech` | `root` | `root` | `0711` | Traverse a known path without listing all departments |
-| Department directory | `root` | Department | `2770` | Group collaboration, SGID, no world access |
-| New file | Creator | Department | Effective `0660` | Creator and department collaboration |
-| New subdirectory | Creator | Department | Effective `2770` | Continued inheritance and collaboration |
-
-The design does not protect against compromised root, unrestricted sudo, offline disk access, insecure backups, or an authorised insider copying data elsewhere.
-
-## 4. Baseline the Lab
-
-Record authorisation, hostname, path, fictional identities, evidence location, stop conditions, and rollback before changing state.
-
-```bash
-date --iso-8601=seconds
-hostnamectl
+whoami
+hostname
 cat /etc/os-release
-uname -r
-timedatectl
-findmnt -T /srv
+date
 ```
 
-These commands anchor evidence and confirm the filesystem backing `/srv`. Stop if this is not the authorised host.
+`whoami` should show your administrator account. The other commands identify the machine and give the evidence a date and time.
 
-```bash
-getent passwd | cut -d: -f1,3,4 | sort
-getent group | cut -d: -f1,3,4 | sort
-sudo find /srv -maxdepth 2 -printf '%M %u %g %p\n' 2>/dev/null
-sudo getfacl -p /srv 2>/dev/null
-sudo systemctl --failed
-```
-
-Check duplicate numeric identities:
-
-```bash
-getent passwd | cut -d: -f3 | sort | uniq -d
-getent group | cut -d: -f3 | sort | uniq -d
-```
-
-Empty output is expected. Duplicate IDs can make two names equivalent to the kernel.
-
-Install free dependencies:
+## Step 1 - Install the required free tools
 
 ```bash
 sudo apt update
-sudo apt install acl auditd audispd-plugins
+sudo apt install acl auditd -y
+```
+
+- `apt update` refreshes Ubuntu's package list.
+- `acl` provides `setfacl` and `getfacl`.
+- `auditd` records security-relevant filesystem activity.
+- `-y` accepts the package installation prompt.
+
+Confirm installation:
+
+```bash
 getfacl --version
 sudo systemctl status auditd --no-pager
 ```
 
-## 5. Create Department Groups
+Press `q` if a status screen remains open. Auditd should be active.
+
+## Step 2 - Create the six department groups
+
+Run each command separately:
 
 ```bash
-for group in engineering flightops qualityassurance research maintenance it; do if getent group "$group" >/dev/null; then printf 'EXISTS: %s\n' "$group"; else sudo groupadd "$group" && printf 'CREATED: %s\n' "$group"; fi; done
+sudo groupadd engineering
+sudo groupadd flightops
+sudo groupadd qualityassurance
+sudo groupadd research
+sudo groupadd maintenance
+sudo groupadd it
 ```
 
-This is idempotent: it checks current state instead of blindly failing or duplicating work.
+`groupadd engineering`, for example, creates a Linux group named `engineering`. The group will later receive access to the Engineering folder.
+
+Confirm all six groups:
 
 ```bash
-for group in engineering flightops qualityassurance research maintenance it; do getent group "$group"; done
+getent group engineering
+getent group flightops
+getent group qualityassurance
+getent group research
+getent group maintenance
+getent group it
 ```
 
-## 6. Create Employee Accounts
+Each command should print one group entry. A message saying a group already exists means the lab has previously been configured; inspect that group before continuing.
 
-Ubuntu `adduser` normally creates a private primary group. Keeping the department supplementary separates identity from role and visibly demonstrates SGID inheritance.
+## Step 3 - Create the 18 employee accounts
+
+Run the commands one at a time:
 
 ```bash
-users='eng1 eng2 eng3 flight1 flight2 flight3 qa1 qa2 qa3 rd1 rd2 rd3 maint1 maint2 maint3 it1 it2 it3'
-for user in $users; do if id "$user" >/dev/null 2>&1; then printf 'EXISTS: %s\n' "$user"; else sudo adduser --disabled-password --gecos 'AeroTech training account' "$user" && printf 'CREATED: %s\n' "$user"; fi; done
+sudo adduser --disabled-password --gecos "" eng1
+sudo adduser --disabled-password --gecos "" eng2
+sudo adduser --disabled-password --gecos "" eng3
+
+sudo adduser --disabled-password --gecos "" flight1
+sudo adduser --disabled-password --gecos "" flight2
+sudo adduser --disabled-password --gecos "" flight3
+
+sudo adduser --disabled-password --gecos "" qa1
+sudo adduser --disabled-password --gecos "" qa2
+sudo adduser --disabled-password --gecos "" qa3
+
+sudo adduser --disabled-password --gecos "" rd1
+sudo adduser --disabled-password --gecos "" rd2
+sudo adduser --disabled-password --gecos "" rd3
+
+sudo adduser --disabled-password --gecos "" maint1
+sudo adduser --disabled-password --gecos "" maint2
+sudo adduser --disabled-password --gecos "" maint3
+
+sudo adduser --disabled-password --gecos "" it1
+sudo adduser --disabled-password --gecos "" it2
+sudo adduser --disabled-password --gecos "" it3
 ```
 
-`--disabled-password` avoids embedding credentials. If interactive login is required, use `sudo passwd USER` and enter the password privately. Never store plaintext passwords in scripts, screenshots, or GitHub.
+`adduser` creates the account and home directory. `--disabled-password` prevents direct password login, which is appropriate because the administrator will use `sudo -u USER` for lab tests. `--gecos ""` skips the optional full-name questions.
 
-`--disabled-password` disables password authentication, not every possible login method. SSH keys or another PAM method may still permit access. Use `--disabled-login`, a non-login shell, or the organisation's identity control when complete login denial is required.
-
-Assign roles:
+Check a few accounts:
 
 ```bash
-for user in eng1 eng2 eng3; do sudo usermod -aG engineering "$user"; done
-for user in flight1 flight2 flight3; do sudo usermod -aG flightops "$user"; done
-for user in qa1 qa2 qa3; do sudo usermod -aG qualityassurance "$user"; done
-for user in rd1 rd2 rd3; do sudo usermod -aG research "$user"; done
-for user in maint1 maint2 maint3; do sudo usermod -aG maintenance "$user"; done
-for user in it1 it2 it3; do sudo usermod -aG it "$user"; done
+id eng1
+id qa1
+id it1
 ```
 
-`-a` is critical. `usermod -G` without `-a` replaces the supplementary group list.
+At this point the accounts exist, but they are not yet department members.
 
-Verify exact identity:
+## Step 4 - Put every employee in the correct group
+
+### Engineering
 
 ```bash
-for user in $users; do id "$user"; done
-for group in engineering flightops qualityassurance research maintenance it; do getent group "$group"; done
+sudo usermod -aG engineering eng1
+sudo usermod -aG engineering eng2
+sudo usermod -aG engineering eng3
 ```
 
-Review every department-group occurrence for unexplained cross-membership.
-
-## 7. Create the Secure Hierarchy
+### Flight Operations
 
 ```bash
-sudo install -d -o root -g root -m 0711 /srv/aerotech
-sudo install -d -o root -g engineering      -m 2770 /srv/aerotech/engineering
-sudo install -d -o root -g flightops        -m 2770 /srv/aerotech/flight_operations
-sudo install -d -o root -g qualityassurance -m 2770 /srv/aerotech/quality_assurance
-sudo install -d -o root -g research         -m 2770 /srv/aerotech/research_development
-sudo install -d -o root -g maintenance      -m 2770 /srv/aerotech/maintenance
-sudo install -d -o root -g it               -m 2770 /srv/aerotech/it
+sudo usermod -aG flightops flight1
+sudo usermod -aG flightops flight2
+sudo usermod -aG flightops flight3
 ```
 
-`0711` lets ordinary users traverse a known authorised path but prevents listing all department names. `2770` means SGID, full owner/group access, and no `other` access.
-
-Because department members have write and execute on the shared directory, they can normally rename or delete colleague-created entries. That is the chosen collaborative policy. A sticky bit would restrict deletion/rename mainly to the entry owner, directory owner, or root, but would change the business behaviour and must not be added without a requirement.
-
-Apply explicit access and default ACLs:
+### Quality Assurance
 
 ```bash
-dirs='/srv/aerotech/engineering /srv/aerotech/flight_operations /srv/aerotech/quality_assurance /srv/aerotech/research_development /srv/aerotech/maintenance /srv/aerotech/it'
-for dir in $dirs; do sudo setfacl -m u::rwx,g::rwx,m::rwx,o::--- "$dir"; sudo setfacl -m d:u::rwx,d:g::rwx,d:m::rwx,d:o::--- "$dir"; done
+sudo usermod -aG qualityassurance qa1
+sudo usermod -aG qualityassurance qa2
+sudo usermod -aG qualityassurance qa3
 ```
 
-`m::rwx` is the ACL mask. It caps effective group-class permissions. Entries beginning `d:` are inherited by new children.
-
-Verify the complete path:
+### Research and Development
 
 ```bash
-namei -l /srv/aerotech/engineering
-sudo find /srv/aerotech -maxdepth 1 -printf '%M %u %g %p\n'
-sudo getfacl -p /srv/aerotech/engineering
+sudo usermod -aG research rd1
+sudo usermod -aG research rd2
+sudo usermod -aG research rd3
 ```
 
-Expected departmental mode begins `drwxrws---`; the group-position `s` shows SGID with execute.
-
-## 8. Create the Twelve Fictional Records
-
-Create records as ordinary employees so owner and SGID evidence is genuine.
+### Maintenance
 
 ```bash
-sudo -u eng1 -- bash -c "printf '%s\n' 'Engineering Department - Aircraft design documentation is confidential.' > /srv/aerotech/engineering/aircraft_design.txt"
-sudo -u eng2 -- bash -c "printf '%s\n' 'Engineering Department - Component specifications are restricted to engineering staff.' > /srv/aerotech/engineering/component_specs.txt"
-sudo -u flight1 -- bash -c "printf '%s\n' 'Flight Operations Department - Flight schedules are confidential operational information.' > /srv/aerotech/flight_operations/flight_schedule.txt"
-sudo -u flight2 -- bash -c "printf '%s\n' 'Flight Operations Department - Mission records are restricted to authorised personnel.' > /srv/aerotech/flight_operations/mission_log.txt"
-sudo -u qa1 -- bash -c "printf '%s\n' 'Quality Assurance Department - Inspection reports contain controlled information.' > /srv/aerotech/quality_assurance/inspection_report.txt"
-sudo -u qa2 -- bash -c "printf '%s\n' 'Quality Assurance Department - Compliance verification records are confidential.' > /srv/aerotech/quality_assurance/compliance_checklist.txt"
-sudo -u rd1 -- bash -c "printf '%s\n' 'Research Department - Prototype development notes are confidential.' > /srv/aerotech/research_development/prototype_notes.txt"
-sudo -u rd2 -- bash -c "printf '%s\n' 'Research Department - Aerospace innovation documentation is restricted.' > /srv/aerotech/research_development/aerospace_innovation.txt"
-sudo -u maint1 -- bash -c "printf '%s\n' 'Maintenance Department - Maintenance activities are recorded for authorised staff only.' > /srv/aerotech/maintenance/maintenance_log.txt"
-sudo -u maint2 -- bash -c "printf '%s\n' 'Maintenance Department - Repair records contain sensitive technical information.' > /srv/aerotech/maintenance/repair_records.txt"
-sudo -u it1 -- bash -c "printf '%s\n' 'IT Department - Network inventory information is restricted.' > /srv/aerotech/it/network_inventory.txt"
-sudo -u it2 -- bash -c "printf '%s\n' 'IT Department - Server backup records are confidential.' > /srv/aerotech/it/server_backup.txt"
+sudo usermod -aG maintenance maint1
+sudo usermod -aG maintenance maint2
+sudo usermod -aG maintenance maint3
 ```
 
-Inspect:
+### Information Technology
 
 ```bash
-sudo find /srv/aerotech -type f -printf '%M %u %g %p\n' | sort
-sudo getfacl -p /srv/aerotech/engineering/aircraft_design.txt
+sudo usermod -aG it it1
+sudo usermod -aG it it2
+sudo usermod -aG it it3
 ```
 
-Expected: creator owner, inherited department group, effective group collaboration, and no `other` access.
+In `usermod -aG engineering eng1`:
 
-## 9. Positive Access and Collaboration Tests
+- `-G engineering` selects the supplementary group.
+- `-a` appends the group without deleting existing memberships.
+- `eng1` is the account being changed.
 
-Run tests as ordinary users. Root success does not prove ordinary-user access.
+Never omit `-a` unless you intend to replace all supplementary groups.
+
+Verify every department:
 
 ```bash
-sudo -u eng1 -- ls -la /srv/aerotech/engineering
-sudo -u eng1 -- cat /srv/aerotech/engineering/aircraft_design.txt
-sudo -u eng1 -- touch /srv/aerotech/engineering/eng1_validation.txt
-sudo -u eng1 -- bash -c "printf '%s\n' 'eng1 validation entry' >> /srv/aerotech/engineering/eng1_validation.txt"
+getent group engineering
+getent group flightops
+getent group qualityassurance
+getent group research
+getent group maintenance
+getent group it
 ```
 
-Repeat representative reads:
+The correct three usernames should appear at the end of each line. Also run:
 
 ```bash
-sudo -u flight1 -- cat /srv/aerotech/flight_operations/flight_schedule.txt
-sudo -u qa1 -- cat /srv/aerotech/quality_assurance/inspection_report.txt
-sudo -u rd1 -- cat /srv/aerotech/research_development/prototype_notes.txt
-sudo -u maint1 -- cat /srv/aerotech/maintenance/maintenance_log.txt
-sudo -u it1 -- cat /srv/aerotech/it/network_inventory.txt
+id eng1
+id flight1
+id qa1
+id rd1
+id maint1
+id it1
 ```
 
-Prove peer collaboration. `eng1` created the design file; `eng2` must append:
+## Step 5 - Create the AeroTech directory structure
 
 ```bash
-sudo -u eng2 -- bash -c "printf '%s\n' 'Engineering peer review completed.' >> /srv/aerotech/engineering/aircraft_design.txt"
-sudo -u eng1 -- tail -n 2 /srv/aerotech/engineering/aircraft_design.txt
+sudo mkdir -p /srv/aerotech
+sudo mkdir /srv/aerotech/engineering
+sudo mkdir /srv/aerotech/flight_operations
+sudo mkdir /srv/aerotech/quality_assurance
+sudo mkdir /srv/aerotech/research_development
+sudo mkdir /srv/aerotech/maintenance
+sudo mkdir /srv/aerotech/it
 ```
 
-Prove subdirectory inheritance:
+`mkdir -p /srv/aerotech` creates the company folder and does not fail if `/srv` already exists. The remaining commands create one folder per department.
+
+Inspect the result:
 
 ```bash
-sudo -u eng3 -- mkdir /srv/aerotech/engineering/review_workspace
-stat -c '%A %a %U %G %n' /srv/aerotech/engineering/review_workspace
-getfacl -p /srv/aerotech/engineering/review_workspace
+sudo find /srv/aerotech -maxdepth 1 -type d -ls
 ```
 
-Expected: group `engineering`, SGID retained, default ACL present, and no `other` access.
-
-## 10. Negative Security Tests
-
-Capture the non-zero exit status. An expected denial is a passing security result.
+## Step 6 - Set the parent folder securely
 
 ```bash
-if sudo -u eng1 -- cat /srv/aerotech/research_development/prototype_notes.txt; then
-  echo 'FAIL: eng1 read Research data'
-else
-  rc=$?
-  echo "PASS: eng1 denied Research read; exit=$rc"
-fi
+sudo chown root:root /srv/aerotech
+sudo chmod 0711 /srv/aerotech
+ls -ld /srv/aerotech
 ```
 
-Test listing:
+`root:root` means the owner and group are both `root`. Mode `0711` means:
+
+- owner `root` has read, write, and traverse;
+- other users may traverse a known path;
+- ordinary users cannot list all department names.
+
+For a directory, execute permission means **traverse**, not “run.” Test the no-listing control:
 
 ```bash
-sudo -u eng1 -- ls /srv/aerotech/flight_operations
-sudo -u eng1 -- ls /srv/aerotech/quality_assurance
-sudo -u eng1 -- ls /srv/aerotech/research_development
-sudo -u eng1 -- ls /srv/aerotech/maintenance
-sudo -u eng1 -- ls /srv/aerotech/it
+sudo -u eng1 ls /srv/aerotech
 ```
 
-All must fail.
+Expected result: `Permission denied`. This is correct.
 
-Test multiple operations against Maintenance:
+## Step 7 - Give each directory its correct owner and group
 
 ```bash
-sudo -u eng1 -- cat /srv/aerotech/maintenance/maintenance_log.txt
-sudo -u eng1 -- touch /srv/aerotech/maintenance/unauthorised.txt
-sudo -u eng1 -- bash -c "printf 'tamper\n' >> /srv/aerotech/maintenance/maintenance_log.txt"
-sudo -u eng1 -- mv /srv/aerotech/maintenance/maintenance_log.txt /srv/aerotech/maintenance/changed.txt
-sudo -u eng1 -- rm /srv/aerotech/maintenance/maintenance_log.txt
+sudo chown root:engineering /srv/aerotech/engineering
+sudo chown root:flightops /srv/aerotech/flight_operations
+sudo chown root:qualityassurance /srv/aerotech/quality_assurance
+sudo chown root:research /srv/aerotech/research_development
+sudo chown root:maintenance /srv/aerotech/maintenance
+sudo chown root:it /srv/aerotech/it
 ```
 
-Verify the original file still exists and its content is unchanged. Repeat both directions across all six departments; one protected direction does not prove the reverse.
+The owner remains `root`, so an ordinary employee cannot take administrative ownership. The group identifies the authorised department.
 
-Parent behaviour:
+Check the result. Use `sudo find` because the administrator's shell cannot expand `*` inside a parent directory that ordinary users are not allowed to list:
 
 ```bash
-sudo -u eng1 -- ls /srv/aerotech
-sudo -u eng1 -- stat /srv/aerotech/engineering
+sudo find /srv/aerotech -mindepth 1 -maxdepth 1 -type d -printf '%M %u %g %p\n'
 ```
 
-With `0711`, listing the parent fails while reaching the known authorised path succeeds.
+## Step 8 - Apply private collaborative permissions
 
-## 11. SGID, ACL, and `umask` Experiments
-
-Prove SGID:
+Run each command:
 
 ```bash
-sudo -u eng1 -- touch /srv/aerotech/engineering/sgid_test.txt
-stat -c '%U %G %A %a %n' /srv/aerotech/engineering/sgid_test.txt
+sudo chmod 2770 /srv/aerotech/engineering
+sudo chmod 2770 /srv/aerotech/flight_operations
+sudo chmod 2770 /srv/aerotech/quality_assurance
+sudo chmod 2770 /srv/aerotech/research_development
+sudo chmod 2770 /srv/aerotech/maintenance
+sudo chmod 2770 /srv/aerotech/it
 ```
 
-The group is `engineering` even though the user's primary group is private.
+Mode `2770` means:
 
-Test restrictive `umask`:
+- `2` enables SGID on the directory;
+- owner has `rwx`;
+- department group has `rwx`;
+- everyone else has no access.
+
+SGID makes newly created content inherit the directory's department group. Confirm that the permission display begins with `drwxrws---`:
 
 ```bash
-sudo -u eng1 -- bash -c "umask 0077; touch /srv/aerotech/engineering/umask_0077.txt"
-stat -c '%A %a %U %G %n' /srv/aerotech/engineering/umask_0077.txt
-getfacl -p /srv/aerotech/engineering/umask_0077.txt
-sudo -u eng2 -- bash -c "printf '%s\n' 'eng2 collaboration test' >> /srv/aerotech/engineering/umask_0077.txt"
+sudo find /srv/aerotech -mindepth 1 -maxdepth 1 -type d -printf '%M %u %g %p\n'
 ```
 
-The peer append should succeed through the inherited ACL.
+The `s` in the group-execute position proves SGID is active.
 
-Demonstrate SGID alone in a disposable path:
+## Step 9 - Add default ACLs for reliable teamwork
+
+### Engineering example
 
 ```bash
-sudo install -d -o root -g engineering -m 2770 /tmp/sgid-only-demo
-sudo -u eng1 -- bash -c 'umask 0022; touch /tmp/sgid-only-demo/file.txt'
-stat -c '%A %a %U %G %n' /tmp/sgid-only-demo/file.txt
-sudo -u eng2 -- bash -c "printf 'peer update\n' >> /tmp/sgid-only-demo/file.txt"
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/engineering
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/engineering
+sudo getfacl /srv/aerotech/engineering
 ```
 
-The group inherits, but the peer write normally fails. Group identity inheritance and permission inheritance are separate.
+The first command defines current access. The second defines what new files and subdirectories inherit. `o::---` denies users outside the department.
 
-After verifying the exact literal path, remove this disposable directory:
+Apply the same rule to the other five folders:
 
 ```bash
-sudo rm -rf -- /tmp/sgid-only-demo
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/flight_operations
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/flight_operations
+
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/quality_assurance
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/quality_assurance
+
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/research_development
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/research_development
+
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/maintenance
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/maintenance
+
+sudo setfacl -m u::rwx,g::rwx,o::--- /srv/aerotech/it
+sudo setfacl -m d:u::rwx,d:g::rwx,d:o::--- /srv/aerotech/it
 ```
 
-Demonstrate the ACL mask on a disposable file:
+Check each folder manually:
 
 ```bash
-sudo cp --preserve=all /srv/aerotech/engineering/aircraft_design.txt /srv/aerotech/engineering/acl_mask_demo.txt
-sudo setfacl -m m::r-- /srv/aerotech/engineering/acl_mask_demo.txt
-getfacl -p /srv/aerotech/engineering/acl_mask_demo.txt
-sudo -u eng2 -- bash -c "printf 'update\n' >> /srv/aerotech/engineering/acl_mask_demo.txt"
+sudo getfacl /srv/aerotech/engineering
+sudo getfacl /srv/aerotech/flight_operations
+sudo getfacl /srv/aerotech/quality_assurance
+sudo getfacl /srv/aerotech/research_development
+sudo getfacl /srv/aerotech/maintenance
+sudo getfacl /srv/aerotech/it
 ```
 
-The group entry may show write, but the mask reduces effective access. Restore only the demo:
+Each output should contain `default:user::rwx`, `default:group::rwx`, and `default:other::---`.
+
+## Step 10 - Create the 12 fictional files as normal employees
+
+Do not create all files as `root`. Using employee accounts proves the access design works.
+
+### Engineering
 
 ```bash
-sudo setfacl -m m::rw- /srv/aerotech/engineering/acl_mask_demo.txt
+sudo -u eng1 sh -c 'echo "Aircraft design documentation is confidential." > /srv/aerotech/engineering/aircraft_design.txt'
+sudo -u eng2 sh -c 'echo "Component specifications are restricted to engineering staff." > /srv/aerotech/engineering/component_specs.txt'
 ```
 
-Teach that some `chmod` operations recalculate the ACL mask and can unexpectedly change effective ACL rights.
-
-## 12. Repeatable Validation Script
-
-The following reference script checks the foundation. Students should expand it to all 20 acceptance tests.
+### Flight Operations
 
 ```bash
-#!/usr/bin/env bash
-set -Eeuo pipefail
-failures=0
-pass() { printf 'PASS | %s\n' "$1"; }
-fail() { printf 'FAIL | %s\n' "$1"; failures=$((failures + 1)); }
-
-for group in engineering flightops qualityassurance research maintenance it; do
-  getent group "$group" >/dev/null && pass "group $group" || fail "missing group $group"
-done
-
-for user in eng1 eng2 eng3 flight1 flight2 flight3 qa1 qa2 qa3 rd1 rd2 rd3 maint1 maint2 maint3 it1 it2 it3; do
-  id "$user" >/dev/null 2>&1 && pass "user $user" || fail "missing user $user"
-done
-
-check_dir() {
-  path=$1
-  expected_group=$2
-  test -d "$path" || { fail "$path missing"; return; }
-  test "$(stat -c '%U' "$path")" = root && pass "$path owner" || fail "$path owner"
-  test "$(stat -c '%G' "$path")" = "$expected_group" && pass "$path group" || fail "$path group"
-  test "$(stat -c '%a' "$path")" = 2770 && pass "$path mode" || fail "$path mode"
-  getfacl -cp "$path" | grep -qx 'default:other::---' && pass "$path default ACL" || fail "$path default ACL"
-}
-
-check_dir /srv/aerotech/engineering engineering
-check_dir /srv/aerotech/flight_operations flightops
-check_dir /srv/aerotech/quality_assurance qualityassurance
-check_dir /srv/aerotech/research_development research
-check_dir /srv/aerotech/maintenance maintenance
-check_dir /srv/aerotech/it it
-
-sudo -u eng1 -- test -r /srv/aerotech/engineering/aircraft_design.txt && pass 'eng1 authorised read' || fail 'eng1 authorised read'
-if sudo -u eng1 -- test -r /srv/aerotech/research_development/prototype_notes.txt; then fail 'eng1 Research denial'; else pass 'eng1 Research denial'; fi
-
-printf 'SUMMARY | failures=%d\n' "$failures"
-exit "$failures"
+sudo -u flight1 sh -c 'echo "Flight schedules are confidential operational information." > /srv/aerotech/flight_operations/flight_schedule.txt'
+sudo -u flight2 sh -c 'echo "Mission records are restricted to authorised personnel." > /srv/aerotech/flight_operations/mission_log.txt'
 ```
 
-Key lessons:
-
-- expected denials must be handled deliberately with `set -e`;
-- a failed control must produce a non-zero script exit;
-- use `stat`, `id`, and `getent` rather than parsing presentation-oriented `ls` output.
-
-## 13. Audit Security-Relevant Activity
-
-Create `/etc/audit/rules.d/aerotech.rules` with:
-
-```text
--w /srv/aerotech -p wa -k aerotech_file_activity
-```
-
-Meaning:
-
-- `-w` watches the path;
-- `w` records writes;
-- `a` records attribute changes;
-- `-k` assigns a searchable key.
-
-Load and verify:
+### Quality Assurance
 
 ```bash
-sudo augenrules --load
-sudo auditctl -l | grep aerotech
-sudo systemctl status auditd --no-pager
+sudo -u qa1 sh -c 'echo "Inspection reports contain controlled information." > /srv/aerotech/quality_assurance/inspection_report.txt'
+sudo -u qa2 sh -c 'echo "Compliance verification records are confidential." > /srv/aerotech/quality_assurance/compliance_checklist.txt'
 ```
 
-Generate an authorised event:
+### Research and Development
 
 ```bash
-sudo -u eng1 -- touch /srv/aerotech/engineering/audit_authorised.txt
-sudo ausearch -k aerotech_file_activity -ts recent -i
+sudo -u rd1 sh -c 'echo "Prototype development notes are confidential." > /srv/aerotech/research_development/prototype_notes.txt'
+sudo -u rd2 sh -c 'echo "Aerospace innovation documentation is restricted." > /srv/aerotech/research_development/aerospace_innovation.txt'
 ```
 
-Generate a denied attempt:
+### Maintenance
 
 ```bash
-sudo -u eng1 -- touch /srv/aerotech/research_development/audit_denied.txt
-sudo ausearch -k aerotech_file_activity -ts recent -i
+sudo -u maint1 sh -c 'echo "Maintenance activity records are limited to authorised staff." > /srv/aerotech/maintenance/maintenance_log.txt'
+sudo -u maint2 sh -c 'echo "Repair records contain sensitive technical information." > /srv/aerotech/maintenance/repair_records.txt'
 ```
 
-Path watches do not necessarily answer every failed-access question. A denial can occur before the watched inode operation produces the evidence expected. Validate telemetry against the intended investigation rather than assuming “audit enabled” means complete visibility.
-
-Review time, executable, audit user, effective user, path, syscall result, and key. Production environments should forward logs to a protected central collector because a compromised local root can alter local evidence.
-
-Export from an approved evidence directory:
+### Information Technology
 
 ```bash
-sudo ausearch -k aerotech_file_activity -ts today --raw > aerotech-audit-export.log
-sha256sum aerotech-audit-export.log
+sudo -u it1 sh -c 'echo "Network inventory information is restricted." > /srv/aerotech/it/network_inventory.txt'
+sudo -u it2 sh -c 'echo "Backup records are confidential." > /srv/aerotech/it/server_backup.txt'
 ```
 
-Review exports for sensitive data before publication.
-
-## 14. Joiner, Mover, and Leaver
-
-### 14.1 Joiner
+The shell is required because output redirection (`>`) must also run as the employee. Confirm the files:
 
 ```bash
-sudo adduser --disabled-password --gecos 'Temporary AeroTech trainee' engtemp
-sudo usermod -aG engineering engtemp
-id engtemp
-sudo -u engtemp -- test -r /srv/aerotech/engineering/aircraft_design.txt
+sudo find /srv/aerotech -type f -printf '%M %u %g %p\n'
 ```
 
-For a temporary account, set an instructor-approved future expiry:
+Expected: each file has its creator as owner, the correct department as group, and no permissions for `other`.
+
+## Step 11 - Prove authorised access works
+
+Test Engineering first:
 
 ```bash
-sudo chage -E 2026-12-31 engtemp
-sudo chage -l engtemp
+sudo -u eng1 ls -l /srv/aerotech/engineering
+sudo -u eng1 cat /srv/aerotech/engineering/aircraft_design.txt
+sudo -u eng1 sh -c 'echo "Reviewed by eng1." >> /srv/aerotech/engineering/component_specs.txt'
+sudo -u eng1 mkdir /srv/aerotech/engineering/design_reviews
 ```
 
-Do not copy the example date after it has passed.
+All four commands should succeed. The third is important: `eng1` updates a file created by `eng2`, proving department collaboration.
 
-### 14.2 Mover
+Check inherited security metadata:
 
 ```bash
-sudo gpasswd -d engtemp engineering
-sudo usermod -aG qualityassurance engtemp
-id engtemp
+sudo ls -l /srv/aerotech/engineering
+sudo ls -ld /srv/aerotech/engineering/design_reviews
+sudo getfacl /srv/aerotech/engineering/component_specs.txt
 ```
 
-Test in a new process context:
+The group should be `engineering`; the new subdirectory should retain SGID; `other` should have no permissions.
+
+Repeat a simple read test for the remaining departments:
 
 ```bash
-sudo -u engtemp -- test -r /srv/aerotech/engineering/aircraft_design.txt
-echo "Engineering exit: $?"
-sudo -u engtemp -- test -r /srv/aerotech/quality_assurance/inspection_report.txt
-echo "QA exit: $?"
+sudo -u flight1 cat /srv/aerotech/flight_operations/flight_schedule.txt
+sudo -u qa1 cat /srv/aerotech/quality_assurance/inspection_report.txt
+sudo -u rd1 cat /srv/aerotech/research_development/prototype_notes.txt
+sudo -u maint1 cat /srv/aerotech/maintenance/maintenance_log.txt
+sudo -u it1 cat /srv/aerotech/it/network_inventory.txt
 ```
 
-Engineering must be denied; QA must succeed.
+Every command should display the file content.
 
-### 14.3 Leaver
+## Step 12 - Prove unauthorised access is denied
+
+An access-control test is incomplete if it checks only successful access.
+
+Try to list another department:
 
 ```bash
-sudo usermod -L engtemp
-sudo chage -E 0 engtemp
-sudo passwd -S engtemp
+sudo -u eng1 ls /srv/aerotech/quality_assurance
 ```
 
-Locking affects new password authentication. It does not terminate an existing shell or rewrite a running process's groups.
+Try to read another department's file:
 
 ```bash
-pgrep -a -u engtemp
-loginctl list-sessions
+sudo -u eng1 cat /srv/aerotech/quality_assurance/inspection_report.txt
 ```
 
-After approval and evidence preservation:
+Try to create a file in another department:
 
 ```bash
-sudo loginctl terminate-user engtemp
+sudo -u eng1 touch /srv/aerotech/quality_assurance/unauthorised.txt
 ```
 
-Do not immediately delete an account that owns files. Unmapped numeric ownership harms accountability. Archive, reassign, or retain identity history according to policy.
-
-## 15. Metadata-Aware Backup and Recovery
-
-A simplistic copy can lose UID/GID ownership, modes, SGID, ACLs, extended attributes, timestamps, and hard links.
-
-Create protected backup storage:
+Try to delete another department's file:
 
 ```bash
-sudo install -d -o root -g root -m 0700 /var/backups/aerotech
-stamp=$(date -u +'%Y%m%dT%H%M%SZ')
-sudo tar --acls --xattrs --numeric-owner -cpf "/var/backups/aerotech/aerotech-$stamp.tar" -C /srv aerotech
-sudo sha256sum "/var/backups/aerotech/aerotech-$stamp.tar"
-sudo tar -tvf "/var/backups/aerotech/aerotech-$stamp.tar" | head
+sudo -u eng1 rm /srv/aerotech/quality_assurance/inspection_report.txt
 ```
 
-Export ACLs for human review:
+Expected result for all four commands: `Permission denied`. Confirm that the protected file still exists:
 
 ```bash
-sudo getfacl -R -p /srv/aerotech > "/var/backups/aerotech/aerotech-$stamp.acl"
-sudo sha256sum "/var/backups/aerotech/aerotech-$stamp.acl"
+sudo -u qa1 cat /srv/aerotech/quality_assurance/inspection_report.txt
 ```
 
-Restore outside the live path:
+Then perform at least one cross-department denial test for every representative:
 
 ```bash
-sudo install -d -o root -g root -m 0711 /srv/aerotech-recovery
-sudo tar --acls --xattrs --numeric-owner -xpf "/var/backups/aerotech/aerotech-$stamp.tar" -C /srv/aerotech-recovery
+sudo -u flight1 ls /srv/aerotech/engineering
+sudo -u qa1 ls /srv/aerotech/research_development
+sudo -u rd1 ls /srv/aerotech/maintenance
+sudo -u maint1 ls /srv/aerotech/it
+sudo -u it1 ls /srv/aerotech/flight_operations
 ```
 
-The restored tree is `/srv/aerotech-recovery/aerotech` because the archive contains the top-level `aerotech` directory. Mode `0711` on the recovery parent permits ordinary-user known-path testing without exposing its listing. Mode `0700` would make every ordinary-user recovery test fail at the parent, regardless of the restored department permissions.
+All should fail. A failed command is a **successful security test** when denial was expected.
 
-Compare metadata:
+## Step 13 - Check for dangerous permissions
 
 ```bash
-sudo find /srv/aerotech -printf '%P|%m|%u|%g|%y\n' | sort > /tmp/aerotech-live-metadata.txt
-sudo find /srv/aerotech-recovery/aerotech -printf '%P|%m|%u|%g|%y\n' | sort > /tmp/aerotech-restored-metadata.txt
-diff -u /tmp/aerotech-live-metadata.txt /tmp/aerotech-restored-metadata.txt
-sudo getfacl -p /srv/aerotech-recovery/aerotech/engineering
+sudo find /srv/aerotech -perm -0002 -ls
+sudo find /srv/aerotech -type d ! -perm -2000 -ls
 ```
 
-Test restored access:
+- The first command finds world-writable content. Expected output: nothing.
+- The second finds directories without SGID. `/srv/aerotech` itself may appear because SGID is required only on department directories. No department folder should appear.
+
+Do not use `chmod 777`. It would allow unrelated users to access or change sensitive records.
+
+## Step 14 - Add basic auditing
+
+Create one audit rule for the AeroTech tree:
 
 ```bash
-sudo -u eng1 -- cat /srv/aerotech-recovery/aerotech/engineering/aircraft_design.txt
-if sudo -u eng1 -- cat /srv/aerotech-recovery/aerotech/research_development/prototype_notes.txt; then echo 'FAIL: restored Research exposed'; else echo 'PASS: restored Research denied'; fi
+sudo auditctl -w /srv/aerotech -p rwxa -k aerotech_files
+sudo auditctl -l
 ```
 
-Recovery passes only when authorised availability and unauthorised denial are both preserved.
+- `-w` watches the path.
+- `-p rwxa` watches reads, writes, execution/traversal-related access, and attribute changes.
+- `-k aerotech_files` adds a searchable label.
 
-## 16. Incident Response Method
-
-Preserve facts before repair:
+Generate one authorised and one denied event:
 
 ```bash
-date --iso-8601=seconds
-hostname
-sudo find /srv/aerotech -maxdepth 2 -printf '%m %u %g %p\n' | sort
-sudo getfacl -R -p /srv/aerotech > aerotech-incident-acl.txt
-sudo ausearch -k aerotech_file_activity -ts today -i > aerotech-incident-audit.txt
-sha256sum aerotech-incident-acl.txt aerotech-incident-audit.txt
+sudo -u eng1 cat /srv/aerotech/engineering/aircraft_design.txt
+sudo -u eng1 cat /srv/aerotech/it/network_inventory.txt
 ```
 
-Ask:
-
-1. Which identity or group obtained access?
-2. Was access caused by membership, mode, ACL, mask, path, ownership, or privilege?
-3. When did metadata change?
-4. Which files were readable, writable, renamed, or deleted?
-5. Did a stale session retain old groups?
-6. Did copy or recovery strip metadata?
-7. Which facts are supported by evidence?
-8. What cannot be concluded?
-
-Contain with the smallest safe action: suspend an actively misused identity, remove the specific membership, terminate stale sessions after preservation, correct the specific metadata fault, restore affected data, and run regression tests.
-
-Never begin with `chmod -R 777`, indiscriminate recursive ownership changes, log deletion, or premature account deletion.
-
-## 17. Instructor Inject Solutions
-
-### Inject A - Accidental cross-membership
-
-Reference setup:
+Search the log:
 
 ```bash
-sudo usermod -aG research eng1
+sudo ausearch -k aerotech_files -i | tail -n 40
 ```
 
-Expected response: detect with `id` and `getent`, evaluate the exposure window, remove only the unauthorised role using `sudo gpasswd -d eng1 research`, handle stale sessions, and retest Engineering success plus Research denial. Membership proves potential access, not that every file was read.
+Look for the username, path, operation, and success result. The temporary `auditctl` rule disappears after reboot, which is acceptable for this basic lab. Persistent audit configuration is an advanced follow-up topic.
 
-### Inject B - Group inheritance failure
+## Step 15 - Make and test a basic metadata-aware backup
 
-Reference setup:
+Create a protected backup directory and archive:
 
 ```bash
-sudo chmod g-s /srv/aerotech/maintenance
-sudo -u maint1 -- touch /srv/aerotech/maintenance/inheritance_fault.txt
+sudo mkdir -p /var/backups/aerotech
+sudo chmod 0700 /var/backups/aerotech
+sudo tar --acls --xattrs --numeric-owner -czpf /var/backups/aerotech/aerotech-backup.tar.gz /srv/aerotech
+sudo tar -tzf /var/backups/aerotech/aerotech-backup.tar.gz | head
 ```
 
-Expected response: inspect the exact parent, distinguish SGID from ACL, restore SGID, correct the affected file group through change control, and create a new file to prove inheritance. Moving and copying can behave differently from creation.
+`--acls`, `--xattrs`, and `--numeric-owner` preserve important security metadata. `-p` preserves permissions during extraction by root. Listing the archive proves it is readable, but a restore test gives stronger evidence.
 
-### Inject C - Collaboration failure
+Restore into an isolated test location:
 
 ```bash
-sudo setfacl -m m::r-- /srv/aerotech/engineering/component_specs.txt
+sudo mkdir -p /srv/aerotech_restore_test
+sudo chmod 0711 /srv/aerotech_restore_test
+sudo tar --acls --xattrs --numeric-owner -xzpf /var/backups/aerotech/aerotech-backup.tar.gz -C /srv/aerotech_restore_test
+sudo ls -ld /srv/aerotech_restore_test/srv/aerotech/engineering
+sudo getfacl /srv/aerotech_restore_test/srv/aerotech/engineering
 ```
 
-Expected response: `getfacl` reveals the restrictive mask and effective rights. Restore the intended mask on the specific file, identify why it changed, test peer append, and retain cross-department denial.
-
-### Inject D - Excessive permission
+Test the restored permissions:
 
 ```bash
-sudo chmod 2777 /srv/aerotech/flight_operations
+sudo -u eng1 cat /srv/aerotech_restore_test/srv/aerotech/engineering/aircraft_design.txt
+sudo -u qa1 cat /srv/aerotech_restore_test/srv/aerotech/engineering/aircraft_design.txt
 ```
 
-Expected response: preserve evidence, determine exposure, restore `2770` plus approved ACLs, and rerun both positive and negative tests.
+Expected: `eng1` succeeds and `qa1` receives `Permission denied`.
 
-### Inject E - ACL mask change
+## Step 16 - Perform a simple leaver test
 
-Use the Phase Eleven demo. The student must explain why `group::rw-` can be effectively read-only when `mask::r--` is present.
-
-### Inject F - Leaver still has access
-
-Begin a session before revocation. The correct conclusion is that process credentials are established at session creation. Account locking controls new authentication, not existing processes.
-
-### Inject G - Incomplete recovery
-
-Create a copy without ACL preservation. Students compare `stat` and `getfacl`, reject the incomplete recovery, use a metadata-aware archive, and rerun access tests.
-
-### Inject H - Privileged access concern
-
-Students must recognise root bypass, preserve sudo/audit evidence, validate authorisation, and recommend separate admin identities, MFA, least-privilege sudo, central logs, approvals, and reviews. Mode bits cannot stop unrestricted root.
-
-## 18. Troubleshooting Decision Guide
-
-| Symptom | Questions | Evidence |
-|---|---|---|
-| User cannot reach authorised path | Does every parent allow traversal? Is the group active in this session? | `namei -l`, `id`, `stat` |
-| Correct group but peer cannot write | What are mode, ACL, and mask? | `stat`, `getfacl` |
-| New file has private group | Is SGID set on the exact parent? Was the file moved or copied? | `namei -l`, `stat` |
-| ACL looks correct but access fails | Does the mask reduce effective rights? | `getfacl` |
-| Removed user still has access | Is an old session or process running? | `id`, `pgrep -u`, `loginctl` |
-| Negative test succeeds | Cross-membership, named ACL, `other`, sudo, or wrong identity? | `id`, `getfacl`, `sudo -l` |
-| Restored data is exposed | Did restore preserve owner, mode, SGID, and ACL? | `tar -tvf`, `stat`, `getfacl` |
-| Audit search is empty | Was the rule loaded before the event? Is time/key correct? | `auditctl -l`, `ausearch`, service status |
-
-Follow the kernel decision path: process identity, every path component, inode owner/group, mode/ACL, mask, and privilege. Do not troubleshoot by random `chmod` commands.
-
-## 19. Acceptance Test Reference
-
-| ID | Required proof |
-|---|---|
-| AT-01 | Six groups exist; duplicate-GID query is empty |
-| AT-02 | Eighteen users exist; duplicate-UID query is empty |
-| AT-03 | `id -nG` matches the approved matrix |
-| AT-04 | All six paths exist under `/srv/aerotech` |
-| AT-05 | Known authorised traversal works; parent listing and unauthorised paths fail |
-| AT-06 | Department paths show `root` plus matching group |
-| AT-07 | No department content grants `other` access |
-| AT-08 | Department directories and new subdirectories retain SGID |
-| AT-09 | Ordinary-user files inherit department group |
-| AT-10 | A colleague modifies a peer-created file |
-| AT-11 | `umask 0077` experiment retains approved collaboration |
-| AT-12 | Representative list/read tests pass for six departments |
-| AT-13 | Representative create/update/subdirectory tests pass |
-| AT-14 | Every cross-department read test fails |
-| AT-15 | Cross-department create/modify/rename/delete tests fail |
-| AT-16 | Twelve-file inventory matches content, owner, group, mode, and ACL |
-| AT-17 | Audit rule is loaded and a test event is interpreted |
-| AT-18 | Mover loses old access; leaver cannot authenticate anew |
-| AT-19 | Restore preserves data, IDs, modes, SGID, ACLs, success, and denial |
-| AT-20 | Final traceability links requirements to evidence and residual risk |
-
-## 20. Misconfiguration Scans
-
-Find world-readable or world-writable content:
+Lock `eng3` to represent an employee leaving AeroTech:
 
 ```bash
-sudo find /srv/aerotech -mindepth 1 \( -perm -0004 -o -perm -0002 \) -printf '%M %u %g %p\n'
+sudo usermod -L eng3
+sudo gpasswd -d eng3 engineering
+sudo pkill -KILL -u eng3
+id eng3
 ```
 
-Expected: no output. Assess the parent `/srv/aerotech` separately because its deliberate `other` execute bit permits known-path traversal.
+- `-L` locks password authentication.
+- `gpasswd -d` removes department membership.
+- `pkill -KILL -u` ends existing processes that might still carry old group membership.
+- `id eng3` confirms the current groups.
 
-Find wrong groups:
+Test access through a fresh process:
 
 ```bash
-sudo find /srv/aerotech/engineering ! -group engineering -printf '%p %u %g\n'
-sudo find /srv/aerotech/flight_operations ! -group flightops -printf '%p %u %g\n'
-sudo find /srv/aerotech/quality_assurance ! -group qualityassurance -printf '%p %u %g\n'
-sudo find /srv/aerotech/research_development ! -group research -printf '%p %u %g\n'
-sudo find /srv/aerotech/maintenance ! -group maintenance -printf '%p %u %g\n'
-sudo find /srv/aerotech/it ! -group it -printf '%p %u %g\n'
+sudo -u eng3 ls /srv/aerotech/engineering
 ```
 
-Find missing SGID:
+Expected: `Permission denied`. Locking a password alone does not remove filesystem permissions from an already running session, which is why membership and active sessions also matter.
+
+## Step 17 - Final verification checklist
+
+Students should prove each statement with command output:
+
+- Six department groups exist.
+- Eighteen unique accounts exist.
+- Every user belongs to only the authorised department group.
+- `/srv/aerotech` is owned by `root:root` with mode `0711`.
+- Every department directory has the correct group and mode `2770`.
+- Every department directory has a default ACL.
+- All 12 fictional files exist with the correct department group.
+- A department member can list, read, create, and collaborate.
+- A non-member cannot list, read, create, change, or delete.
+- No content is world-writable.
+- Audit events can be retrieved.
+- Backup and restored permissions have been tested.
+- The leaver no longer has department access.
+
+Useful final commands:
 
 ```bash
-sudo find /srv/aerotech -mindepth 1 -type d ! -perm -2000 -printf 'MISSING SGID: %p\n'
+sudo find /srv/aerotech -maxdepth 1 -type d -printf '%M %u %g %p\n'
+sudo find /srv/aerotech -type f -printf '%M %u %g %p\n'
+sudo getfacl /srv/aerotech/engineering
+sudo find /srv/aerotech -perm -0002 -ls
+sudo ausearch -k aerotech_files -i | tail -n 20
 ```
 
-## 21. Evidence Package
+## Questions students must be able to answer
 
-Every record should contain:
+1. Why does a directory need execute permission for a user to open a file inside it?
+2. Why does mode `2770` begin with `2`?
+3. What does SGID inherit, and what does it not guarantee?
+4. Why is a default ACL needed for reliable group collaboration?
+5. Why must the test plan include expected failures?
+6. Why is testing as `root` insufficient?
+7. Why is `chmod 777` unacceptable?
+8. Why must a backup preserve ACLs, owners, groups, and modes?
+9. Why can terminating old sessions matter after group membership is removed?
 
-```text
-Evidence ID: AERO-AT10-001
-Collector: student or team
-Host: authorised lab hostname
-Time: ISO 8601 with timezone
-Purpose: prove peer write to a colleague-created file
-Command: exact command
-Expected: result and exit status
-Actual: output and exit status
-Interpretation: what it proves and what it does not prove
-Integrity: evidence path and SHA-256 where appropriate
-```
+## Instructor notes and common errors
 
-Terminal recording can help:
+- If an authorised user receives `Permission denied`, check `id USER`, every parent directory with `namei -l PATH`, and the ACL with `getfacl PATH`.
+- If a new file has the wrong group, check for the SGID `s` on the department directory.
+- If colleagues cannot edit a new file, inspect its ACL and the ACL mask with `getfacl FILE`.
+- If an unauthorised user succeeds, stop the lab and inspect group membership, directory mode, and ACL entries before continuing.
+- A `+` after permissions in `ls -l` means an ACL exists; it is not an error.
+- `root` can bypass ordinary Linux discretionary access controls. Limit and audit administrator access.
+- Permissions control access but do not encrypt data. Disk encryption and secure transport are separate controls.
 
-```bash
-script --log-out aerotech-test-session.txt
-date --iso-8601=seconds
-sha256sum aerotech-test-session.txt
-```
-
-`script` can capture secrets. Never type passwords or sensitive data while recording.
-
-## 22. Common Wrong Solutions
-
-### `chmod 777`
-
-It destroys isolation by granting every local user access.
-
-### Only `chgrp`
-
-Correct group ownership does not grant access when mode or ACL denies it.
-
-### Only SGID
-
-SGID assigns the group; it does not guarantee collaborative write.
-
-### Only a permissive `umask`
-
-Relying on every shell setting is fragile and does not express policy at the shared directory.
-
-### Testing only as root
-
-Root success says nothing useful about ordinary-user isolation.
-
-### Testing only successful reads
-
-Professional assurance requires negative read/write tests, peer collaboration, lifecycle tests, audit validation, and recovery.
-
-### Recursive repair before investigation
-
-Broad `chmod -R` or `chown -R` can destroy special modes, ACL masks, intended exceptions, and evidence.
-
-### Calling permissions encryption
-
-Modes and ACLs are access-control metadata. They do not encrypt file contents at rest.
-
-## 23. Production Hardening Discussion
-
-A real aerospace environment would additionally require evaluation of:
-
-- central identity such as LDAP or Active Directory integration;
-- MFA and separate privileged accounts;
-- least-privilege sudo policy;
-- encrypted storage and controlled keys;
-- protected central audit collection;
-- tested off-host backup and recovery objectives;
-- endpoint detection, data-loss prevention, and egress controls;
-- AppArmor or SELinux where justified;
-- file-integrity monitoring;
-- periodic access certification;
-- dedicated cross-department project groups;
-- applicable legal, contractual, and regulatory requirements.
-
-This lab does not prove production compliance.
-
-## 24. Six-Day Teaching Sequence
-
-### Day 1 - Identity and threat model
-
-Teach UID/GID, primary/supplementary groups, scope, classification, and baseline. Students design the matrix before provisioning.
-
-### Day 2 - Permission mechanics
-
-Demonstrate file versus directory `rwx`, parent traversal, owner/group/other selection, and why `777` is dangerous.
-
-### Day 3 - SGID, ACLs, and collaboration
-
-Build the hierarchy. Compare SGID-only with SGID plus default ACL. Demonstrate `umask` and ACL masks.
-
-### Day 4 - Positive and negative validation
-
-Students capture exit codes, automate tests, and diagnose membership or ACL faults.
-
-### Day 5 - Audit and identity lifecycle
-
-Configure auditd, discuss telemetry limits, and run joiner/mover/leaver exercises including stale sessions.
-
-### Day 6 - Recovery and incident defence
-
-Restore outside the live path, compare metadata, respond to an inject, deliver the executive summary, and defend decisions.
-
-## 25. Reference Executive Summary
-
-```text
-AeroTech's lab file service was redesigned around unique identities and six
-department groups. Each department uses a root-managed directory with
-group-restricted access, SGID group inheritance, and default ACLs for
-predictable collaboration. Ordinary users were tested for authorised read and
-write access and for denial of cross-department listing, reading, creation,
-modification, rename, and deletion.
-
-Security-relevant changes are auditable in the lab, identity lifecycle changes
-were tested, and a metadata-aware backup was restored outside the live path.
-The restore retained ownership, modes, SGID, ACLs, authorised access, and
-unauthorised denial.
-
-The solution is approved for isolated training. It is not approved for a
-production aerospace environment without central identity, MFA, encryption,
-protected central logging, privileged-access governance, resilient backups,
-and formal assurance.
-```
-
-## 26. Authoritative Technical References
-
-- [Linux ACL access algorithm and default ACL creation](https://man7.org/linux/man-pages/man5/acl.5.html)
-- [Linux `umask` interaction with default ACLs](https://man7.org/linux/man-pages/man2/umask.2.html)
-- [Ubuntu `adduser` account options](https://manpages.ubuntu.com/manpages/noble/man8/addgroup.8.html)
-- [Ubuntu `auditctl` watches and permission filters](https://manpages.ubuntu.com/manpages/jammy/man8/auditctl.8.html)
-- [GNU tar ACL and extended-attribute preservation](https://www.gnu.org/software/tar/manual/tar.html)
-
-Always use documentation matching the installed Ubuntu, adduser, audit, ACL, and GNU tar versions.
-
-## 27. Cleanup and Final Checks
-
-1. Stop terminal recording.
-2. Preserve and hash required evidence.
-3. Remove only approved disposable demo files.
-4. Retain the final tree if required for assessment.
-5. Review audit and backup retention.
-6. Lock temporary accounts.
-7. Run the complete acceptance suite.
-
-```bash
-sudo find /srv/aerotech -maxdepth 2 -printf '%M %u %g %p\n' | sort
-sudo auditctl -l | grep aerotech
-sudo systemctl --failed
-sudo find /srv/aerotech -mindepth 1 \( -perm -0004 -o -perm -0002 \) -print
-```
-
-The goal is not memorising `chmod`. Students must predict the kernel's decision, design inheritance deliberately, verify success and denial, preserve evidence, and recover without weakening security.
+This basic solution is complete when students can run each test, predict the result before pressing Enter, explain the Linux control responsible for the result, and repair a deliberately introduced mistake without copying an automation script.
