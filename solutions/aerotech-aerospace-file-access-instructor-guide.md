@@ -91,32 +91,36 @@ Each command should print one group entry. A message saying a group already exis
 Run the commands one at a time:
 
 ```bash
-sudo adduser --disabled-password --gecos "" eng1
-sudo adduser --disabled-password --gecos "" eng2
-sudo adduser --disabled-password --gecos "" eng3
+sudo adduser eng1
+sudo adduser eng2
+sudo adduser eng3
 
-sudo adduser --disabled-password --gecos "" flight1
-sudo adduser --disabled-password --gecos "" flight2
-sudo adduser --disabled-password --gecos "" flight3
+sudo adduser flight1
+sudo adduser flight2
+sudo adduser flight3
 
-sudo adduser --disabled-password --gecos "" qa1
-sudo adduser --disabled-password --gecos "" qa2
-sudo adduser --disabled-password --gecos "" qa3
+sudo adduser qa1
+sudo adduser qa2
+sudo adduser qa3
 
-sudo adduser --disabled-password --gecos "" rd1
-sudo adduser --disabled-password --gecos "" rd2
-sudo adduser --disabled-password --gecos "" rd3
+sudo adduser rd1
+sudo adduser rd2
+sudo adduser rd3
 
-sudo adduser --disabled-password --gecos "" maint1
-sudo adduser --disabled-password --gecos "" maint2
-sudo adduser --disabled-password --gecos "" maint3
+sudo adduser maint1
+sudo adduser maint2
+sudo adduser maint3
 
-sudo adduser --disabled-password --gecos "" it1
-sudo adduser --disabled-password --gecos "" it2
-sudo adduser --disabled-password --gecos "" it3
+sudo adduser it1
+sudo adduser it2
+sudo adduser it3
 ```
 
-`adduser` creates the account and home directory. `--disabled-password` prevents direct password login, which is appropriate because the administrator will use `sudo -u USER` for lab tests. `--gecos ""` skips the optional full-name questions.
+`adduser` creates the account and its home directory. It then asks for a password. Type the password and press Enter; Linux deliberately displays no characters while a password is being typed. Enter it again when prompted.
+
+The command next asks for optional information such as full name and room number. Press Enter to leave each optional field blank, then type `Y` to confirm that the information is correct.
+
+Use unique classroom passwords that contain uppercase letters, lowercase letters, numbers, and symbols. Do not publish the passwords in GitHub or include them in screenshots and reports. These are lab accounts; never reuse a personal or production password.
 
 Check a few accounts:
 
