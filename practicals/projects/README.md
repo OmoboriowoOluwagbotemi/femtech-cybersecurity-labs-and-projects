@@ -19,6 +19,7 @@ The eleven projects are not long labs. Students receive an outcome, incomplete i
 ## Additional Class Project
 
 - [Fintech Payment Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md) — an outcome-based pfSense and Suricata challenge in which students protect payment operations, investigate suspected lateral movement, assess fraud and customer-data risk, and preserve service availability without receiving procedural solution steps.
+- [AeroTech Aerospace Secure Department File Access](aerotech-aerospace-file-access-project.md) - an outcome-based Ubuntu identity, permissions, SGID, ACL, audit, lifecycle, and recovery challenge for six aerospace departments.
 
 ## Mandatory Team Roles
 
