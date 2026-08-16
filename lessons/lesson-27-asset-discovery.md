@@ -2,752 +2,717 @@
 
 ## Lesson Overview
 
-Security teams cannot protect assets they do not know exist. Asset discovery identifies hardware, software, services, cloud resources, identities, and externally exposed systems. Asset inventory adds ownership, business context, lifecycle, and security state.
+Asset discovery means finding the computers, servers, phones, printers, network devices, cloud systems, applications, services, and accounts that belong to an organization.
 
-This lesson covers Nmap, Netdiscover, asset inventory, attack-surface mapping, and asset management.
+The main idea is simple:
+
+> A security team cannot protect what it does not know exists.
+
+If a company has an unknown server, that server may not be patched, monitored, backed up, hardened, or protected by endpoint security. Attackers often look for these forgotten systems because they are easier to compromise.
+
+This lesson explains asset discovery in a beginner-friendly way while still connecting it to real cybersecurity work.
 
 ## Learning Objectives
 
-Students will be able to:
+By the end of this lesson, students should be able to:
 
-- Distinguish discovery, inventory, scanning, enumeration, and asset management.
-- Compare active, passive, authenticated, and API-based discovery.
-- Use Nmap safely in an authorized lab.
-- Explain Netdiscover and local ARP discovery limitations.
-- Build an enterprise asset inventory.
-- Map external and internal attack surfaces.
-- Reconcile conflicting asset sources.
-- Identify shadow IT, stale, rogue, and ephemeral assets.
+- Explain what an asset is.
+- Explain what asset discovery means.
+- Describe why asset discovery is important for cybersecurity.
+- Use basic Nmap commands in a safe lab.
+- Explain what Netdiscover does.
+- Create a simple asset inventory.
+- Identify unknown, rogue, stale, and shadow IT assets.
+- Explain how asset discovery supports vulnerability management, SOC monitoring, and incident response.
 
-## Prerequisite Knowledge
-
-Students should understand attack surface, reconnaissance, scanning, network interfaces, VLANs, cloud resources, identity, and authorization boundaries from Lessons 1, 8, 16, 24, and 26.
-
-## Enterprise Relevance
-
-Unknown assets may be:
-
-- Unpatched.
-- Publicly exposed.
-- Missing EDR.
-- Outside backup.
-- Using default credentials.
-- Owned by departed teams.
-- Running unsupported software.
-- Unmonitored.
-
-Discovery is therefore a continuous security function, not a one-time project.
-
-## 1. Asset Discovery
+## 1. What Is an Asset?
 
 ### What
 
-Asset discovery identifies technology resources and observable properties.
+An asset is anything valuable to an organization that must be protected.
+
+In cybersecurity, assets include:
+
+- Desktop computers.
+- Laptops.
+- Servers.
+- Mobile phones.
+- Printers.
+- Routers.
+- Switches.
+- Firewalls.
+- Wireless access points.
+- Cloud virtual machines.
+- Websites.
+- Databases.
+- Applications.
+- User accounts.
+- Service accounts.
+- Documents and business data.
 
 ### Why
 
-Security controls, patching, vulnerability scanning, logging, and incident response depend on complete scope.
+Assets matter because they support business operations. If an important asset is attacked, the organization may lose money, data, trust, or service availability.
 
 ### How
 
-Discovery uses:
+Security teams protect assets by:
 
-- Network probes.
-- Passive traffic.
-- DHCP and DNS.
-- Directory and device management.
-- EDR.
-- Cloud APIs.
-- Procurement and CMDB data.
+- Identifying them.
+- Recording them in an inventory.
+- Assigning ownership.
+- Applying patches.
+- Monitoring logs.
+- Limiting access.
+- Removing unused systems.
+
+### Where
+
+Assets may exist in:
+
+- Small business offices.
+- Corporate data centers.
+- Schools and universities.
+- Hospitals.
+- Banks.
+- Government networks.
+- Cloud platforms such as Azure and AWS.
+- Hybrid environments that combine local and cloud systems.
+
+## 2. What Is Asset Discovery?
+
+### What
+
+Asset discovery is the process of finding assets on a network, in the cloud, or inside an organization.
+
+### Why
+
+Asset discovery helps answer important security questions:
+
+- What devices are connected to the network?
+- What systems are running?
+- Which services are open?
+- Who owns each system?
+- Which systems are exposed to the Internet?
+- Which assets are missing security tools?
+- Which systems should be scanned for vulnerabilities?
+
+### How
+
+Asset discovery can be done by using:
+
+- Network scanning tools such as Nmap.
+- Local network discovery tools such as Netdiscover.
+- DHCP records.
+- DNS records.
+- Active Directory.
+- Endpoint security consoles.
+- Cloud dashboards.
+- Firewall logs.
+- SIEM logs.
 - Vulnerability scanners.
+- Manual interviews with IT teams.
 
 ### Where
 
-Discovery covers data centers, branches, campuses, remote users, cloud, SaaS, containers, mobile devices, IoT, and Internet-facing assets.
+Asset discovery is used by:
 
-## 2. Asset Types
+- Security Operations Center analysts.
+- System administrators.
+- Network administrators.
+- Vulnerability management teams.
+- Incident responders.
+- Auditors.
+- Cloud security teams.
 
-Assets include:
+## 3. Discovery, Inventory, and Asset Management
 
-- Physical and virtual servers.
-- Endpoints and mobile devices.
-- Network and security devices.
-- Cloud compute, storage, databases, and functions.
-- Containers and clusters.
-- Applications and APIs.
-- Domains, certificates, and public IPs.
-- Identities and service accounts.
-- Data stores.
-- SaaS tenants and integrations.
+These three terms are related, but they do not mean the same thing.
 
-An IP address is an observation, not a complete asset identity. Addresses can change or be shared.
+| Term | Simple Meaning | Example |
+|---|---|---|
+| Asset discovery | Finding assets | Nmap finds a server at `192.168.56.10` |
+| Asset inventory | Recording asset details | The server is added to a spreadsheet or CMDB |
+| Asset management | Managing the asset through its life | The server is patched, monitored, reviewed, and retired when no longer needed |
 
-## 3. Discovery Versus Inventory
+Discovery is the starting point. Inventory gives the organization a record. Asset management keeps that record useful over time.
 
-| Function | Question |
+## 4. Why Asset Discovery Is Important
+
+Asset discovery supports many security activities.
+
+| Security Activity | Why Asset Discovery Helps |
 |---|---|
-| Discovery | What is observable? |
-| Identification | What asset is it? |
-| Inventory | What attributes and owner describe it? |
-| Asset management | How is it governed through lifecycle? |
-| Attack-surface mapping | How can it be reached or abused? |
+| Vulnerability management | You need to know what to scan |
+| Patch management | You need to know what systems require updates |
+| Incident response | You need to know what system is affected |
+| Firewall review | You need to know what traffic should be allowed |
+| SOC monitoring | You need to know which logs should be collected |
+| Risk assessment | You need to know what business systems are exposed |
+| Compliance | You need evidence of controlled assets |
 
-A scan result without owner and business purpose is incomplete.
+Example: If a hospital does not know that an old Windows machine is still connected to the network, that machine may miss patches and become a ransomware entry point.
 
-## 4. Active Discovery
+## 5. Types of Asset Discovery
 
-### What
+### Active Discovery
 
-Active discovery sends probes or queries directly or through management APIs.
+Active discovery sends network traffic to find assets.
 
-### Why
-
-It can confirm live systems, open ports, services, and selected properties.
-
-### How
-
-Tools send ICMP, ARP, TCP, UDP, application, authenticated, or API requests.
-
-### Where
-
-Use on explicitly authorized ranges, accounts, tenants, and time windows.
-
-### Risks
-
-- Service disruption.
-- IDS alerts.
-- Account lockout.
-- Rate limiting.
-- Cloud API cost.
-- Legal or contractual violation.
-- Incomplete results through firewalls.
-
-## 5. Passive Discovery
-
-### What
-
-Passive discovery observes existing traffic and logs without directly probing assets.
-
-### Why
-
-It can identify fragile devices and normal communication with low direct impact.
-
-### How
-
-Sources include:
-
-- Network taps.
-- Zeek.
-- DHCP.
-- DNS.
-- Flow logs.
-- Wireless controllers.
-- Switch tables.
-- Cloud logs.
-
-### Where
-
-Use at network boundaries, internal segments, cloud, and managed infrastructure.
-
-### Limitations
-
-Assets that do not communicate during the observation period may remain invisible.
-
-## 6. Authenticated Discovery
-
-Authenticated methods query systems with approved credentials or agents.
-
-Benefits:
-
-- Installed software.
-- Patch state.
-- Configuration.
-- Local users.
-- Hardware details.
-
-Risks:
-
-- Credential exposure.
-- Excessive privilege.
-- Performance impact.
-- Changes caused by tooling.
-
-Use dedicated, least-privileged credentials, secure vaulting, source restriction, and logging.
-
-## 7. Nmap
-
-### What
-
-Nmap is a network discovery and service-identification tool.
-
-### Why
-
-It identifies reachable hosts, ports, protocols, and selected service details.
-
-### How
-
-Nmap sends probes and interprets responses.
-
-### Where
-
-Use only on authorized lab or enterprise scope.
-
-## 8. Nmap Host Discovery
-
-Lab examples:
+Example:
 
 ```bash
 nmap -sn 192.168.56.0/24
-nmap -sn -PR 192.168.56.0/24
 ```
 
-- `-sn` performs host discovery without a port scan.
-- `-PR` requests ARP discovery on a local Ethernet network.
+This asks Nmap to look for live hosts in the `192.168.56.0/24` network.
 
-Firewalls may block probes, while ARP can still identify local neighbors. "Down" may mean no response, not no asset.
+Active discovery is useful, but it must be authorized. Scanning networks without permission can disrupt systems and may violate policy or law.
 
-## 9. Nmap Port and Service Discovery
+### Passive Discovery
+
+Passive discovery observes existing activity instead of sending probes.
+
+Examples:
+
+- Reviewing firewall logs.
+- Reviewing DHCP leases.
+- Reviewing DNS queries.
+- Reviewing switch or router logs.
+- Watching network traffic in Wireshark.
+
+Passive discovery is safer for sensitive systems because it does not directly touch the target.
+
+### Authenticated Discovery
+
+Authenticated discovery uses approved credentials or agents to collect more accurate information.
+
+Examples:
+
+- A vulnerability scanner logs into a Linux server to check installed packages.
+- Microsoft Defender reports endpoint details.
+- Active Directory shows joined computers.
+- A cloud console lists running virtual machines.
+
+Authenticated discovery usually gives better detail than unauthenticated scanning.
+
+## 6. Nmap
+
+### What
+
+Nmap is a network scanning tool. It can help identify live hosts, open ports, and running services.
+
+### Why
+
+Security teams use Nmap to understand what is reachable on a network.
+
+### How
+
+Nmap sends network packets and reads the responses.
+
+### Where
+
+Nmap is useful in:
+
+- Lab environments.
+- Internal network reviews.
+- Vulnerability assessment preparation.
+- Troubleshooting.
+- Authorized security assessments.
+
+## 7. Basic Nmap Host Discovery
+
+Host discovery checks which systems appear to be online.
+
+Example:
 
 ```bash
-nmap -sT -sV 192.168.56.10
+nmap -sn 192.168.56.0/24
 ```
 
-- `-sT`: TCP connect scan.
-- `-sV`: service-version detection.
+Simple interpretation:
 
-Targeted ports:
+- If Nmap reports a host is up, the system responded to discovery traffic.
+- If Nmap does not report a host, the system may be offline, blocked by a firewall, or not responding to the probe type.
+
+Important: "Not found" does not always mean "not there."
+
+## 8. Basic Nmap Port Discovery
+
+A port is a numbered communication point used by a service.
+
+Common examples:
+
+| Port | Common Service | Meaning |
+|---|---|---|
+| 22 | SSH | Remote Linux administration |
+| 53 | DNS | Name resolution |
+| 80 | HTTP | Web traffic without encryption |
+| 443 | HTTPS | Encrypted web traffic |
+| 3389 | RDP | Remote Windows administration |
+
+Example:
 
 ```bash
 nmap -sT -p 22,80,443 192.168.56.10
 ```
 
-Broad scans increase traffic and time. Use the minimum scope required.
+This checks whether ports `22`, `80`, and `443` are open on one host.
 
-## 10. Nmap Output
+## 9. Basic Nmap Service Discovery
 
-Save structured and human-readable results:
+Service discovery tries to identify what software is running behind an open port.
+
+Example:
 
 ```bash
-nmap -sT -sV -oA case-001 192.168.56.10
+nmap -sT -sV 192.168.56.10
 ```
 
-`-oA` writes multiple output formats using a base name.
+Simple interpretation:
 
-Record:
-
-- Authorization.
-- Scanner.
-- Time.
-- Target.
-- Options.
-- Nmap version.
-- Network location.
-- Packet loss or constraints.
-
-Results are time-specific observations.
-
-## 11. Nmap Interpretation
-
-Port states may include:
-
-- Open.
-- Closed.
-- Filtered.
-- Unfiltered.
-- Open or filtered.
-- Closed or filtered.
-
-Service detection is an estimate based on responses. Validate ownership and configuration before treating it as authoritative.
-
-## 12. Nmap Scripting Engine
-
-NSE scripts automate discovery, checks, and selected testing.
-
-Risks:
-
-- Some scripts are intrusive.
-- Credentials may be required.
-- Requests may alter state.
-- Vulnerable services may crash.
-
-Review exact script code, category, arguments, and authorization. Do not use broad script categories blindly.
-
-## 13. Netdiscover
-
-### What
-
-Netdiscover identifies IPv4 hosts on a local network using ARP requests and observations.
-
-### Why
-
-ARP is effective within a local broadcast domain even when IP probes are filtered.
-
-### How
-
-It sends or listens for ARP activity and records address-to-MAC observations.
-
-### Where
-
-Use on authorized local Ethernet segments.
-
-## 14. Netdiscover Limitations
-
-- ARP does not cross routers.
-- IPv6 uses Neighbor Discovery, not ARP.
-- One MAC may represent a gateway, proxy, cluster, or virtual system.
-- MAC addresses can be spoofed.
-- Sleeping devices may not answer.
-- Wireless isolation may hide peers.
-
-Netdiscover complements rather than replaces Nmap, switch, DHCP, and endpoint inventory.
-
-## 15. Enterprise Data Sources
-
-| Source | Strength |
+| Finding | Possible Meaning |
 |---|---|
-| DHCP | Recently leased clients |
-| DNS | Named services and addresses |
-| Active Directory | Domain identities and computers |
-| EDR | Managed active endpoints |
-| MDM | Mobile and enrolled devices |
-| Vulnerability scanner | Reachable assessed assets |
-| Switch or wireless controller | Connected devices |
-| Cloud API | Provider resources and configuration |
-| Procurement | Purchased equipment |
-| CMDB | Ownership and business context |
-| Certificate inventory | TLS and public services |
+| Port 22 open | SSH may be running |
+| Port 80 open | A web server may be running |
+| Port 443 open | A secure website may be running |
+| Service version shown | The tool estimated the software or version |
 
-Every source has gaps.
+Service detection is helpful, but students must remember that tools can be wrong. Always validate important findings.
 
-## 16. Cloud Asset Discovery
+## 10. Saving Nmap Results
 
-Cloud discovery should use provider APIs and organization-level inventory where possible.
+Security work requires evidence. Save scan results so they can be reviewed later.
 
-Discover:
+Example:
 
-- Accounts, subscriptions, and projects.
-- VMs and containers.
-- Storage.
-- Databases.
-- Serverless functions.
-- Public IPs.
-- Load balancers.
-- Security groups.
-- IAM roles and keys.
-- SaaS integrations.
+```bash
+nmap -sT -sV -oA asset-scan-01 192.168.56.10
+```
 
-Network scanning alone misses managed and control-plane resources.
+The `-oA` option saves output in multiple formats using the name `asset-scan-01`.
 
-## 17. Ephemeral Assets
+Good scan notes should include:
 
-Autoscaling instances, containers, and functions may exist briefly.
+- Date and time.
+- Authorized scope.
+- Tool used.
+- Command used.
+- Target network or host.
+- Main findings.
+- Analyst name.
 
-Inventory should record:
-
-- Stable workload identity.
-- Image or template.
-- Deployment.
-- Owner.
-- Labels or tags.
-- Creation and termination time.
-- Public exposure.
-
-Automated event-driven inventory is more effective than periodic scans alone.
-
-## 18. Asset Inventory
-
-Minimum fields:
-
-- Unique asset identifier.
-- Hostname and addresses.
-- Asset type.
-- Owner and custodian.
-- Business service.
-- Location or cloud scope.
-- Operating system and software.
-- Data classification.
-- Criticality.
-- Exposure.
-- Lifecycle status.
-- Security-control coverage.
-- Last seen.
-
-## 19. Inventory Quality
-
-An inventory must be:
-
-- Complete enough for purpose.
-- Accurate.
-- Current.
-- Owned.
-- Reconciled.
-- Protected.
-- Auditable.
-
-Sensitive inventory can help attackers identify high-value systems. Apply access control and monitoring.
-
-## 20. Reconciliation
-
-Reconciliation matches records from multiple sources.
-
-Challenges:
-
-- Hostname changes.
-- Dynamic IPs.
-- Duplicate serial numbers.
-- Cloned VMs.
-- NAT.
-- Missing agents.
-- Reused cloud names.
-
-Use stable identifiers such as device ID, cloud resource ID, serial number, directory object ID, or cryptographic device identity where appropriate.
-
-## 21. Asset Ownership
-
-### Business Owner
-
-Accountable for business use, risk, and access.
-
-### Technical Custodian
-
-Maintains technology and controls.
-
-### Data Owner
-
-Defines data classification and use.
-
-An asset without an owner should be escalated, restricted, or retired through an approved process.
-
-## 22. Attack-Surface Mapping
+## 11. Netdiscover
 
 ### What
 
-Attack-surface mapping identifies reachable assets, identities, services, trust relationships, and entry paths.
+Netdiscover is a local network discovery tool. It is commonly used to find devices on the same local IPv4 network.
 
 ### Why
 
-An asset can be known internally but exposed unexpectedly through DNS, cloud gateways, vendor links, or credentials.
+It is useful in labs because it can quickly show devices that respond to ARP traffic.
 
 ### How
 
-Map:
+Netdiscover uses ARP, which is used on local networks to map IP addresses to MAC addresses.
 
-- Domains and subdomains.
-- Public IPs.
-- Ports and services.
-- Certificates.
-- APIs.
-- Remote access.
-- SaaS sharing.
-- Trusts.
-- Third parties.
-- Leaked secrets.
+Example:
+
+```bash
+sudo netdiscover -r 192.168.56.0/24
+```
 
 ### Where
 
-Map external and internal surfaces separately.
+Netdiscover works best on a local lab network, such as a VirtualBox host-only network.
 
-## 23. External Attack Surface
+## 12. Netdiscover Limitations
 
-Sources:
+Netdiscover is helpful, but limited.
 
-- DNS.
-- Certificate transparency data.
-- Cloud inventory.
-- Internet scanning by authorized providers.
-- Domain registration.
-- Public repositories.
-- Vendor records.
+| Limitation | Explanation |
+|---|---|
+| Local network only | ARP does not travel across routers |
+| IPv4 focused | It is not a full IPv6 discovery solution |
+| Limited detail | It may show IP and MAC address, but not full software details |
+| Not an inventory system | It finds devices but does not manage them |
 
-Validate ownership before testing. Similar names do not prove organizational ownership.
+## 13. Asset Inventory
 
-## 24. Internal Attack Surface
+An asset inventory is a structured list of assets and their important details.
 
-Includes:
+A basic inventory should include:
 
-- Flat network reachability.
-- Legacy protocols.
-- Shared local administrators.
-- Unmanaged devices.
-- Excessive trusts.
-- Open management interfaces.
-- Internal applications.
-- Service accounts.
+| Field | Example |
+|---|---|
+| Asset name | `WEB-SRV-01` |
+| IP address | `192.168.56.10` |
+| MAC address | `08:00:27:AA:BB:CC` |
+| Asset type | Linux web server |
+| Operating system | Ubuntu Server |
+| Owner | Web team |
+| Location | Data center or cloud |
+| Criticality | High |
+| Open services | SSH, HTTPS |
+| Security tools | Wazuh agent installed |
+| Patch status | Current or overdue |
+| Notes | Public-facing test server |
 
-Internal does not mean trusted.
+The inventory should be protected because it can reveal sensitive details about the organization.
 
-## 25. Shadow IT and Rogue Assets
+## 14. Good and Bad Inventory Records
 
-### Shadow IT
+| Poor Record | Better Record |
+|---|---|
+| `Server` | `WEB-SRV-01, Ubuntu, 192.168.56.10, Web Team, High criticality` |
+| `Laptop` | `HR-LAP-044, Windows 11, assigned to HR, Defender enabled` |
+| `Unknown device` | `Unknown device, 192.168.56.22, MAC address recorded, investigation opened` |
 
-Technology used without approved governance, such as personal SaaS storage.
+A good inventory helps people make decisions. A poor inventory creates confusion during incidents.
 
-### Rogue Asset
+## 15. Unknown Assets
 
-Unauthorized or malicious device or service.
+An unknown asset is a system found on the network that is not yet identified in the official inventory.
 
-Response:
+When an unknown asset is found, the security team should:
 
-1. Validate identity and owner.
-2. Determine business function.
-3. Assess exposure and data.
-4. Contain if necessary.
-5. Preserve evidence.
-6. Onboard, remediate, or retire.
-7. Correct governance gaps.
+1. Confirm the finding.
+2. Record IP address, MAC address, hostname, and open ports.
+3. Check DHCP, DNS, Active Directory, endpoint security, and firewall logs.
+4. Identify the owner.
+5. Determine whether it is approved.
+6. Add it to inventory or remove it from the network.
+7. Document the action taken.
 
-## 26. Asset Lifecycle
+## 16. Rogue, Stale, and Shadow IT Assets
 
-Stages:
+| Asset Type | Meaning | Example |
+|---|---|---|
+| Rogue asset | Unauthorized or suspicious asset | A personal router connected to the office network |
+| Stale asset | Old asset still listed or connected | A retired server still online |
+| Shadow IT asset | Technology used without approval | A department creates an unsanctioned cloud file-sharing account |
 
-1. Request.
-2. Procurement or creation.
-3. Enrollment and baseline.
-4. Operation.
-5. Maintenance.
-6. Transfer.
-7. Retirement.
-8. Sanitization and record closure.
+These assets increase risk because they may not follow security policy.
 
-Inventory should reflect status. A decommissioned record does not prove the system is actually offline or data is sanitized.
+## 17. Attack Surface Mapping
 
-## 27. Discovery Governance
+### What
 
-Define:
+Attack surface mapping identifies the systems, services, accounts, and entry points that attackers could target.
 
-- Authorization.
-- Scope.
-- Schedule.
-- Scanner source.
-- Rate.
-- Credentials.
-- Sensitive networks.
-- Notification.
-- Evidence handling.
-- Escalation.
+### Why
 
-Healthcare, industrial, and legacy devices may require passive methods or vendor-approved testing.
+The more exposed entry points an organization has, the more opportunities attackers may have.
 
-## 28. Enterprise Scenarios
+### How
+
+Security teams map:
+
+- Public IP addresses.
+- Domains and subdomains.
+- Web applications.
+- VPN portals.
+- Remote access services.
+- Cloud resources.
+- Open ports.
+- User accounts.
+- Third-party connections.
+
+### Where
+
+Attack surface mapping applies to internal networks, Internet-facing systems, cloud platforms, and hybrid environments.
+
+## 18. External and Internal Attack Surface
+
+| Type | Meaning | Example |
+|---|---|---|
+| External attack surface | What is reachable from the Internet | Public website, VPN portal, cloud storage bucket |
+| Internal attack surface | What is reachable inside the network | File server, domain controller, printer, database |
+
+Both matter. External exposure may allow initial access. Internal exposure may allow movement after compromise.
+
+## 19. Cloud Asset Discovery
+
+Cloud assets may not always appear in normal network scans.
+
+Examples of cloud assets:
+
+- Virtual machines.
+- Storage buckets.
+- Databases.
+- Load balancers.
+- Serverless functions.
+- IAM users and roles.
+- Security groups.
+- Public IP addresses.
+
+Cloud discovery often uses cloud consoles and APIs. An API is a structured way for tools to ask a platform for information.
+
+Example: In Azure, a security team may review virtual machines, public IP addresses, Microsoft Entra ID users, storage accounts, and Microsoft Defender for Cloud recommendations.
+
+## 20. Asset Discovery in Enterprise Environments
+
+In real organizations, one tool is not enough. Teams compare several sources.
+
+| Source | What It May Show |
+|---|---|
+| DHCP | Devices that requested IP addresses |
+| DNS | Hostnames and name lookups |
+| Active Directory | Windows domain-joined computers |
+| Microsoft Defender | Protected Windows endpoints |
+| Wazuh | Agents reporting security data |
+| Firewall logs | Systems sending or receiving traffic |
+| Cloud console | Cloud resources |
+| Vulnerability scanner | Hosts and services found during scans |
+| CMDB | Official ownership and business information |
+
+CMDB means Configuration Management Database. It is a system used to record assets, owners, and configuration information.
+
+## 21. Reconciliation
+
+Reconciliation means comparing asset records from different sources and fixing conflicts.
+
+Example:
+
+- Nmap finds `192.168.56.20`.
+- DHCP shows the same IP belongs to a device called `FIN-LAP-020`.
+- Microsoft Defender does not show the device.
+- The inventory does not list the device.
+
+Possible conclusion:
+
+The laptop may be real, but it may be missing endpoint protection and inventory registration.
+
+The team should investigate, confirm ownership, install required security tools, and update the inventory.
+
+## 22. Enterprise Scenarios
 
 ### Small Business
 
-Nmap identifies an unknown NAS exposing SMB. The business finds no owner, isolates it, checks data and logs, and either enrolls or retires it.
+A small company scans its office network and finds an old computer still connected. It is running unsupported software. The IT administrator removes it from the network and updates the asset list.
 
 ### Financial Institution
 
-Cloud API inventory finds a public load balancer absent from the CMDB. The bank traces IaC deployment, owner, certificates, and back-end exposure.
+A bank discovers a public cloud server that is not listed in the official inventory. The security team checks ownership, firewall rules, logs, and whether customer data is present.
 
 ### Healthcare Organization
 
-Active scanning could disrupt a legacy clinical device. Passive monitoring, switch data, vendor documentation, and controlled windows provide inventory.
+A hospital avoids aggressive scanning against medical devices. Instead, it uses passive discovery, vendor documentation, switch records, and maintenance windows.
 
 ### Educational Institution
 
-Netdiscover identifies many student devices on a lab VLAN but cannot see devices across routed campus segments. Wireless and DHCP records complete the view.
+A school discovers many student-owned devices on Wi-Fi. The network team separates student devices from staff systems using VLANs and access controls.
 
 ### Government Agency
 
-Certificate inventory reveals an Internet service nearing expiration that no team owns. The agency assigns ownership and reviews whether service should remain.
+A government office finds an unknown remote access service exposed to the Internet. The service is reviewed, restricted, and documented.
 
 ### Hybrid Enterprise
 
-An autoscaled cloud workload exists for minutes and evades weekly scans. Cloud events and deployment metadata create real-time inventory.
+A company uses both on-premises servers and Azure. The security team combines Nmap, Active Directory, Defender, firewall logs, and Azure inventory to build a complete asset view.
 
-## 29. Discovery Findings
-
-Classify:
-
-- Known and managed.
-- Known but noncompliant.
-- Unknown.
-- Stale.
-- Duplicate.
-- Publicly exposed.
-- Unsupported.
-- Missing owner.
-- Missing security controls.
-
-Discovery is not remediation. Findings require workflows and accountability.
-
-## 30. Security+ SY0-701 Alignment
-
-This lesson supports asset management, discovery, scanning, attack surface, cloud inventory, unauthorized assets, vulnerability management, and monitoring.
-
-Network scanners, EDR inventory, and cloud inventory APIs are technical controls. Reconciliation, ownership assignment, and lifecycle review are operational controls. Discovery authorization and asset policy are managerial controls and directive in function.
-
-## 31. Classroom Hands-On Practical
-
-Use [Lab 05 - Discover, Classify, and Baseline Assets](../practicals/labs/lab-05-asset-discovery.md) for the full two-session range exercise. It includes VM sizing, instructor preparation, multi-source reconciliation, evidence standards, business reporting, and a 100-point rubric.
+## 23. Classroom Hands-On Practical
 
 ### Practical Title
 
-Discover and Reconcile an Authorized Lab
+Basic Asset Discovery with Nmap and Netdiscover
 
-### Safety
+### Lab Safety
 
-Use only an instructor-provided host-only subnet. Confirm no bridged adapter. Do not use intrusive NSE scripts.
+Use only the instructor-approved lab network. Do not scan public networks, school networks, company networks, or home networks without permission.
 
 ### Tasks
 
-1. Record authorization, subnet, scanner, and time.
-2. Use Netdiscover or ARP-based discovery.
-3. Run Nmap host discovery.
-4. Run targeted TCP service discovery against approved hosts.
-5. Save output with `-oA`.
-6. Compare results with DHCP and provided inventory.
-7. Identify unknown, missing, and conflicting records.
-8. Assign hypothetical owners and criticality.
-9. Build an attack-surface map.
-10. Recommend remediation.
+1. Start the approved virtual machines.
+2. Confirm that all machines are on a host-only or isolated lab network.
+3. Run host discovery:
 
-### Inventory Table
+```bash
+nmap -sn 192.168.56.0/24
+```
 
-| Asset ID | Address | Hostname | Service | Source | Owner | Criticality | Status |
-|---|---|---|---|---|---|---|---|
-|  |  |  |  |  |  |  |  |
+4. Select one discovered host.
+5. Run a simple port scan:
 
-## 32. Take-Home Practical
+```bash
+nmap -sT -p 22,80,443 192.168.56.10
+```
 
-Design enterprise asset discovery containing:
+6. Run service detection:
 
-- Asset types.
-- Active and passive methods.
-- Authenticated discovery.
-- Cloud and SaaS APIs.
-- Nmap scope and safety.
-- Inventory schema.
-- Reconciliation.
-- Attack-surface mapping.
-- Shadow IT response.
-- Lifecycle and metrics.
-- Ten data-quality tests.
+```bash
+nmap -sT -sV 192.168.56.10
+```
 
-For a realistic team engagement, assign [Project 11 - Recover the Asset Truth at MeridianPay](../practicals/projects/project-11-asset-discovery-consulting-engagement.md). Students receive conflicting enterprise records and business injects, then deliver a canonical inventory and sustainable 90-day operating model. Keep the separate instructor solution private until debrief.
+7. Run Netdiscover:
 
-## 33. Assessment Questions
+```bash
+sudo netdiscover -r 192.168.56.0/24
+```
+
+8. Create a small asset inventory table.
+9. Identify any unknown systems.
+10. Write a short recommendation.
+
+### Student Inventory Table
+
+| IP Address | Hostname | MAC Address | Open Ports | Possible Role | Owner | Action Needed |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+## 24. Take-Home Practical
+
+Create a simple asset inventory for a small office or lab environment.
+
+Do not scan any network without permission. If scanning is not allowed, create a paper-based inventory from observation and interviews.
+
+Include:
+
+- Asset name.
+- Asset type.
+- Owner.
+- Location.
+- Operating system.
+- Security tools.
+- Criticality.
+- Notes.
+
+Then answer:
+
+1. Which assets are most important?
+2. Which assets are unknown or poorly documented?
+3. Which assets need better security controls?
+4. What would you recommend first?
+
+## 25. Assessment Questions
 
 ### Multiple Choice
 
-1. What does asset discovery answer?
-   A. What is observable
-   B. Who approved every patch
-   C. How to encrypt disks
-   D. How to write GPO
+1. What is asset discovery?
+   A. Finding technology resources that exist in an environment
+   B. Deleting old files
+   C. Encrypting all data
+   D. Blocking every port
 
-2. What is passive discovery?
-   A. Observing existing traffic and logs without direct probes
-   B. Full port scan
-   C. Password reset
-   D. Firewall change
+2. Why is asset discovery important?
+   A. Unknown assets may be unprotected
+   B. It replaces passwords
+   C. It stops all malware automatically
+   D. It removes the need for firewalls
 
-3. What does `nmap -sn` request?
-   A. Host discovery without port scan
-   B. Full exploit
-   C. Password cracking
-   D. Disk imaging
+3. Which tool is commonly used for network scanning?
+   A. Nmap
+   B. Notepad
+   C. Calculator
+   D. Paint
 
-4. Why can "host down" be misleading?
-   A. Probes may be filtered or ignored
-   B. Nmap proves absence
-   C. DNS deletes the host
-   D. ARP crosses all routers
+4. What does `nmap -sn` mainly perform?
+   A. Host discovery
+   B. Password cracking
+   C. File encryption
+   D. Log deletion
 
-5. Where does Netdiscover primarily operate?
-   A. Local IPv4 broadcast domain
-   B. Every cloud API
-   C. Active Directory forest
-   D. Public certificate store
+5. What does Netdiscover commonly use for local discovery?
+   A. ARP
+   B. SMTP
+   C. HTTPS certificates only
+   D. SQL queries
 
-6. Why use cloud APIs for inventory?
-   A. Managed resources may not appear in network scans
-   B. APIs remove IAM
-   C. APIs always scan ports
-   D. Cloud has no assets
+6. What is a rogue asset?
+   A. An unauthorized or suspicious asset
+   B. A fully approved server
+   C. A backed-up document
+   D. A user training video
 
-7. What helps reconcile a dynamic IP?
-   A. Stable device or cloud resource identifier
-   B. IP address alone
-   C. Display name only
-   D. Open port only
+7. What is shadow IT?
+   A. Technology used without approved governance
+   B. A firewall rule
+   C. A secure password vault
+   D. A backup schedule
 
-8. What is shadow IT?
-   A. Technology used outside approved governance
-   B. Approved backup
-   C. Firewall state
-   D. Signed software
+8. Which inventory field helps identify who is responsible for an asset?
+   A. Owner
+   B. Font size
+   C. Wallpaper
+   D. Mouse speed
 
-9. Why protect inventory?
-   A. It reveals high-value systems and security details
-   B. It has no sensitive content
-   C. It disables logging
-   D. It replaces access control
+9. What should a team do after finding an unknown asset?
+   A. Investigate and document it
+   B. Ignore it
+   C. Assume it is safe
+   D. Delete all logs
 
-10. Which is an operational control?
-    A. Monthly inventory reconciliation
-    B. Nmap probe
-    C. EDR agent
-    D. Cloud API
+10. Why should an asset inventory be protected?
+    A. It contains sensitive information about systems
+    B. It has no value
+    C. It is always public
+    D. It prevents scanning
 
 ### Short Answer
 
-1. Distinguish discovery, inventory, and asset management.
-2. Compare active, passive, and authenticated discovery.
-3. Explain Nmap host and service discovery.
-4. Describe Netdiscover limitations.
-5. List fifteen inventory fields.
-6. Explain reconciliation.
-7. Describe attack-surface mapping.
-8. Explain shadow IT response.
+1. Define an asset in cybersecurity.
+2. Explain the difference between asset discovery and asset inventory.
+3. Give two examples of active discovery.
+4. Give two examples of passive discovery.
+5. Why must scanning be authorized?
+6. What information should be included in a basic asset inventory?
+7. What is attack surface mapping?
+8. Why might cloud assets be missed by normal network scans?
 
 ### Scenario Questions
 
-1. Nmap finds an unknown SSH server. Describe response.
-2. EDR and CMDB inventories disagree. Describe reconciliation.
-3. A cloud resource appears and disappears between scans. Improve discovery.
-4. Active scanning could affect a clinical device. Design a safe method.
-5. An unowned public certificate is discovered. Describe investigation.
+1. You scan a lab network and find an unknown device with port 22 open. What should you do next?
+2. A hospital has sensitive medical devices that may fail during aggressive scans. What safer discovery methods should be considered?
+3. A company discovers a cloud server that nobody claims to own. What risks could this create?
+4. A school allows student devices on Wi-Fi. Why should those devices be separated from staff systems?
 
 ### Answer Key
 
-1. **A.** Discovery identifies what can be observed through selected sources.
-2. **A.** Passive methods consume existing communications or records rather than probing targets.
-3. **A.** `-sn` performs host discovery without the normal port-scan phase.
-4. **A.** A live system may ignore or filter the selected discovery probes.
-5. **A.** ARP-based Netdiscover visibility is limited to the local IPv4 broadcast domain.
-6. **A.** PaaS, serverless, IAM, and other managed assets may have no scan-visible host.
-7. **A.** Stable identifiers remain useful when addresses and names change.
-8. **A.** Shadow IT operates outside approved ownership, risk, and control processes.
-9. **A.** Inventory can reveal topology, criticality, software, owners, and defensive gaps.
-10. **A.** Reconciliation is a people- and process-driven operational activity.
+1. **A.** Asset discovery finds technology resources in an environment.
+2. **A.** Unknown assets may not be patched, monitored, or protected.
+3. **A.** Nmap is a common network scanning tool.
+4. **A.** `nmap -sn` is mainly used for host discovery.
+5. **A.** Netdiscover commonly uses ARP on local IPv4 networks.
+6. **A.** A rogue asset is unauthorized or suspicious.
+7. **A.** Shadow IT is technology used outside approved governance.
+8. **A.** The owner field identifies responsibility.
+9. **A.** Unknown assets should be investigated and documented.
+10. **A.** Inventory can reveal systems, owners, exposure, and security gaps.
 
-## 34. Glossary
+## 26. Glossary
 
-| Term | Definition |
+| Term | Meaning |
 |---|---|
-| Active Discovery | Discovery that sends probes or queries to assets or platforms. |
-| Asset Inventory | Structured record of assets, context, ownership, and state. |
-| Asset Management | Governance of assets through their lifecycle. |
-| Attack-Surface Mapping | Identification of reachable systems, identities, services, and entry paths. |
-| Ephemeral Asset | Resource existing for a short or dynamic period. |
-| Netdiscover | Local IPv4 ARP-based discovery tool. |
-| Passive Discovery | Identification through existing traffic and records. |
-| Reconciliation | Matching and resolving records from multiple inventory sources. |
-| Rogue Asset | Unauthorized or malicious device or service. |
-| Shadow IT | Technology used outside approved governance. |
+| Asset | Anything valuable that an organization must protect |
+| Asset Discovery | The process of finding assets |
+| Asset Inventory | A structured record of assets and their details |
+| Asset Management | Managing assets through their lifecycle |
+| Active Discovery | Discovery that sends traffic or queries to find assets |
+| Passive Discovery | Discovery that observes existing records or traffic |
+| Authenticated Discovery | Discovery using approved credentials or agents |
+| Nmap | A tool used for network discovery and scanning |
+| Netdiscover | A local IPv4 ARP discovery tool |
+| Rogue Asset | An unauthorized or suspicious asset |
+| Shadow IT | Technology used without approved governance |
+| Stale Asset | An old or outdated asset that still exists in records or on the network |
+| Attack Surface | The systems, services, accounts, and paths attackers could target |
+| CMDB | A database used to track assets and configuration details |
 
-## 35. Lesson Review Checklist
+## 27. Lesson Review Checklist
 
-- I can distinguish discovery, inventory, and management.
-- I can select active, passive, authenticated, and API methods.
-- I can use Nmap safely in an authorized lab.
-- I can explain Netdiscover limits.
-- I can reconcile inventory sources.
-- I can map external and internal attack surfaces.
-- I can respond to unknown and ephemeral assets.
+Students should now be able to:
 
-## 36. Continuity With Future Lessons
+- Explain asset discovery in simple language.
+- Identify common asset types.
+- Explain why unknown assets create risk.
+- Use basic Nmap commands in a lab.
+- Explain what Netdiscover does.
+- Build a simple inventory table.
+- Describe rogue, stale, and shadow IT assets.
+- Connect asset discovery to vulnerability management and incident response.
 
-Lesson 28 applies the asset inventory to Nessus, OpenVAS, CVEs, CVSS, risk ranking, and scan interpretation.
+## 28. Continuity With Future Lessons
 
-Students should retain that vulnerability results are only as complete as the assets and services included in scope.
+Lesson 28 uses asset discovery as the foundation for vulnerability assessment.
+
+Before scanning for vulnerabilities, a security team must know what assets exist and which systems are approved for scanning.
