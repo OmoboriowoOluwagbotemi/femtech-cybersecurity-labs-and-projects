@@ -45,7 +45,7 @@ The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optio
 | Lab 13 | Engineer and tune a detection | 2, 30-32, 34 | 5 hours |
 | Lab 14 | Triage and contain a simulated incident | 2, 7, 33-34 | 5 hours |
 | Lab 15 | Preserve evidence and build a forensic timeline | 33, 35, 38 | 5 hours |
-| Lab 16 | Perform a professional vulnerability assessment with Nmap and OpenVAS | 27-29, 36-37 | 6-8 hours |
+| Lab 16 | Perform a professional vulnerability assessment with Greenbone/OpenVAS | 27-29, 36-37 | 6-8 hours |
 | Project 01 | Secure a community health clinic | 1-25, 36-39 | 2-3 weeks |
 | Project 02 | Make a school ransomware-ready | 1-2, 14, 19-25, 33-37 | 2 weeks |
 | Project 03 | Build a SOC for a fintech startup | 25, 30-34, 38 | 2-3 weeks |
