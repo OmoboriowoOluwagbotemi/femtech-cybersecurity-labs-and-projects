@@ -1,6 +1,6 @@
 # FEMTECH Cybersecurity Practical Programme
 
-## 15 Guided Labs and 11 Professional Projects
+## 16 Guided Labs and 11 Professional Projects
 
 This practical programme consolidates the 40-lesson Enterprise Cybersecurity Course. It is designed to move a student through four levels of performance:
 
@@ -45,6 +45,7 @@ The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optio
 | Lab 13 | Engineer and tune a detection | 2, 30-32, 34 | 5 hours |
 | Lab 14 | Triage and contain a simulated incident | 2, 7, 33-34 | 5 hours |
 | Lab 15 | Preserve evidence and build a forensic timeline | 33, 35, 38 | 5 hours |
+| Lab 16 | Perform a professional vulnerability assessment with Nmap and OpenVAS | 27-29, 36-37 | 6-8 hours |
 | Project 01 | Secure a community health clinic | 1-25, 36-39 | 2-3 weeks |
 | Project 02 | Make a school ransomware-ready | 1-2, 14, 19-25, 33-37 | 2 weeks |
 | Project 03 | Build a SOC for a fintech startup | 25, 30-34, 38 | 2-3 weeks |
@@ -327,7 +328,7 @@ Professional projects deliberately contain ambiguity. A high-scoring team docume
 
 ## Delivery Sequence
 
-Run Labs 01-04 after Lessons 1-16, Lab 05 immediately after Lesson 27, Labs 06-09 after Lessons 17-29, and Labs 10-15 after Lessons 30-38. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
+Run Labs 01-04 after Lessons 1-16, Lab 05 immediately after Lesson 27, Labs 06-09 after Lessons 17-29, Labs 10-15 after Lessons 30-38, and Lab 16 after Lessons 27-29 as a detailed vulnerability-assessment and remediation exercise. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
 
 ## Practical Files
 

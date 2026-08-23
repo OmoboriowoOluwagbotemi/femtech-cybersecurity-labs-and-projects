@@ -673,19 +673,6 @@ Design network detection for one organization. Include:
 4. No alerts appear after a sensor update. Describe health validation.
 5. An exploit alert targets an unpatched web server. Explain attempted versus successful compromise analysis.
 
-### Answer Key
-
-1. **A.** IPS sits inline or otherwise enforces preventive actions in addition to detection.
-2. **A.** SPAN mirrors selected switch traffic to a monitoring interface.
-3. **A.** Zeek produces rich structured protocol and connection evidence.
-4. **A.** Signatures match predefined patterns, fields, or behaviors.
-5. **A.** Anomaly detection compares observations with expected behavior.
-6. **A.** A false negative is malicious activity missed by detection.
-7. **A.** Alert mode allows testing and tuning before an uncertain rule can interrupt service.
-8. **A.** Encryption commonly hides application content while leaving selected metadata visible.
-9. **A.** Packets not received or processed cannot be inspected.
-10. **A.** Triage is performed through a people-driven operational process.
-
 ## 34. Glossary
 
 | Term | Definition |

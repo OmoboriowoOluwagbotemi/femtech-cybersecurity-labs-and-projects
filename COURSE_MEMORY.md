@@ -8,8 +8,8 @@ The 40 lessons are consolidated by the completed programme in `practicals/`:
 
 - `practicals/README.md`: common isolated range, free-tool inventory, evidence standard, safety, troubleshooting, and assessment.
 - `practicals/TOOL_MASTERY_GUIDE.md`: mandatory/optional coverage matrix and detailed command packs for network tools, Sysmon, osquery, BloodHound CE, YARA, Chainsaw, Sleuth Kit/Autopsy, Velociraptor, MISP, password auditing, Git/Gitleaks, Trivy, OpenTofu, and Ansible.
-- `practicals/labs/`: 15 detailed guided labs with commands, explanations, validation, rollback, troubleshooting, deliverables, and professional decision questions.
-- `practicals/projects/`: 10 multi-stage scenario projects with business constraints, injects, technical checkpoints, acceptance gates, and reporting requirements.
+- `practicals/labs/`: 16 detailed guided labs with commands, explanations, validation, rollback, troubleshooting, deliverables, and professional decision questions.
+- `practicals/projects/`: 11 numbered multi-stage scenario projects with business constraints, injects, technical checkpoints, acceptance gates, and reporting requirements, plus additional class challenge briefs.
 - `practicals/templates/README.md`: scope, change, finding, risk, incident, test, executive update, and evidence forms.
 
 Windows Server and Windows 11 are used only as official time-limited evaluation software. Vulnerable systems remain isolated, and all identities/data are synthetic.

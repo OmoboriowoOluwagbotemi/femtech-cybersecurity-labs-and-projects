@@ -688,16 +688,6 @@ The report must use professional language and avoid unsupported claims. Students
 2. A workstation alerts for suspicious PowerShell followed by outbound connections to an unknown domain. Map the activity to likely Kill Chain stages.
 3. A university detects unusual downloads from a research file share. Describe possible threat actors and immediate response steps.
 
-### Answer Key
-
-1. **B.** Ransomware commonly denies access through encryption and may also support data-theft extortion.
-2. **B.** A nation-state actor is typically associated with strategic espionage, influence, or disruption objectives.
-3. **B.** Persistence and long-term targeted access distinguish an advanced persistent operation from ordinary opportunistic activity.
-4. **B.** Delivery is the stage in which a weaponized capability reaches the target.
-5. **C.** An ATT&CK technique describes how an adversary achieves a tactical objective.
-
-Short answer and scenario responses should use evidence-based reasoning, connect threats to risk, and recommend practical controls.
-
 ## 13. Glossary
 
 | Term | Definition |

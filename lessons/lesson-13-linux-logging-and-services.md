@@ -678,19 +678,6 @@ Create a Linux logging and service-monitoring plan containing:
 3. A cron job runs a script from a world-writable directory. Assess and remediate.
 4. A critical service fails because `/var` is full. Describe response and prevention.
 
-### Answer Key
-
-1. **A.** Severity 0 represents an emergency condition; lower numbers are more urgent in syslog.
-2. **A.** Debian-family systems commonly write authentication events to `/var/log/auth.log`.
-3. **A.** `journalctl -u` filters journal records by systemd unit.
-4. **A.** Enablement normally configures whether a unit participates in startup targets.
-5. **A.** Disabling startup does not necessarily stop an already running service.
-6. **A.** `systemctl list-timers` lists systemd timer units and their schedules.
-7. **A.** Cron's limited environment can resolve commands differently, so absolute paths reduce ambiguity.
-8. **A.** Rotation manages local growth through archival, compression, and retention.
-9. **A.** Central storage supports cross-host correlation and can preserve records after local loss or tampering.
-10. **A.** Daily alert review is a people-driven operational procedure.
-
 ## 28. Glossary
 
 | Term | Definition |

@@ -765,19 +765,6 @@ Create a forensic-readiness and examination plan containing:
 4. A cloud instance will auto-terminate. Preserve evidence.
 5. A transferred drive lacks chain documentation. Assess evidentiary risk.
 
-### Answer Key
-
-1. **A.** Acquisition creates a controlled evidence collection for preservation and analysis.
-2. **A.** Power loss and system activity rapidly alter volatile memory.
-3. **A.** Write protection reduces analyst-caused changes to source media.
-4. **A.** Matching hashes support that compared content has not changed.
-5. **A.** Volatility reconstructs operating-system artifacts from memory captures.
-6. **A.** `pstree` organizes processes by parent-child relationship.
-7. **A.** Suspicious memory characteristics can occur in legitimate applications and require context.
-8. **A.** Chain records every evidence transfer and handling action.
-9. **A.** Original representation is necessary to verify normalization and uncertainty.
-10. **A.** Acquisition is a people-driven operational process.
-
 ## 37. Glossary
 
 | Term | Definition |

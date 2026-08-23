@@ -656,19 +656,6 @@ Create a threat-intelligence operating procedure containing:
 4. OTX contains duplicate old indicators. Describe quality controls.
 5. A MISP event contains personal data. Describe handling.
 
-### Answer Key
-
-1. **A.** Intelligence combines evaluated evidence and context to support a decision.
-2. **A.** Strategic intelligence informs leadership about business threat and risk.
-3. **A.** Hash-first lookup can obtain existing context without disclosing file content.
-4. **A.** New, targeted, or evasive malware may have no detections.
-5. **A.** Shared, dynamic, and reassigned addresses weaken attribution and blocking confidence.
-6. **A.** A sighting records that an indicator was observed.
-7. **A.** Indicator meaning and infrastructure ownership change over time.
-8. **A.** Provenance and time are necessary to judge current reliability.
-9. **A.** One low-context source can cause false blocks and business disruption.
-10. **A.** Review and expiration are people-driven operational activities.
-
 ## 35. Glossary
 
 | Term | Definition |

@@ -894,16 +894,6 @@ Create a one-page career plan that includes:
 2. A vulnerability scan identifies a critical flaw on an internet-facing server. What should a vulnerability analyst do next?
 3. A junior analyst sees suspicious login activity but is unsure whether it is malicious. What professional steps should the analyst take?
 
-### Answer Key
-
-1. **A.** A SOC analyst commonly monitors, triages, documents, and escalates security alerts.
-2. **B.** A vulnerability analyst identifies, prioritizes, tracks, and validates remediation of weaknesses.
-3. **A.** Security+ is positioned as a broad foundational certification for core security competencies.
-4. **A.** CISSP is experience-oriented and aligned with broad security leadership and professional practice.
-5. **B.** Continuous learning combines laboratories, reading, documentation, community engagement, and reflective practice.
-
-Short answer responses should connect role responsibilities to practical enterprise work and use evidence-based reasoning.
-
 ## 21. Glossary
 
 | Term | Definition |

@@ -769,16 +769,6 @@ Students may submit a written report or a table-based assessment. The report sho
 2. A public web server is missing critical patches. Explain how this affects attack surface and risk.
 3. A school uses one Wi-Fi network for students, staff, and administrative systems. Explain the security concern and recommend controls.
 
-### Answer Key
-
-1. **C.** Unauthorized reading directly violates confidentiality.
-2. **A.** A vulnerability is a weakness that a threat may exploit.
-3. **B.** A SIEM alert identifies activity and therefore performs a detective function.
-4. **C.** Layering reduces reliance on any one control and limits single-control failure.
-5. **C.** Attack surface includes exposed technology, identities, services, cloud resources, and human interaction points.
-
-Short answer responses should demonstrate correct use of lesson terminology and connect security issues to business impact.
-
 ## 14. Glossary
 
 | Term | Definition |

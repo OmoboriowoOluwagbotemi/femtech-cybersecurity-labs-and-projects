@@ -1,6 +1,6 @@
 # FEMTECH Cybersecurity Labs and Projects
 
-A complete practical cybersecurity training repository containing 40 lessons, 15 detailed guided labs, and 11 scenario-based professional projects.
+A complete practical cybersecurity training repository containing 40 lessons, 16 detailed guided labs, and 11 scenario-based professional projects.
 
 ## Start Here
 
@@ -8,7 +8,7 @@ A complete practical cybersecurity training repository containing 40 lessons, 15
 - [Course continuity and concept memory](COURSE_MEMORY.md)
 - [Practical programme guide](practicals/README.md)
 - [Complete tool-mastery guide](practicals/TOOL_MASTERY_GUIDE.md)
-- [15 guided labs](practicals/labs/README.md)
+- [16 guided labs](practicals/labs/README.md)
 - [11 professional projects](practicals/projects/README.md)
 - [Separate instructor solution guides](solutions/README.md)
 - [Evidence and reporting templates](practicals/templates/README.md)
