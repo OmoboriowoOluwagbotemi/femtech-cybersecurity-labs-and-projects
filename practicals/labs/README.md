@@ -15,6 +15,6 @@
 13. [Engineer and tune a detection](lab-13-detection-engineering.md)
 14. [Triage and contain a simulated incident](lab-14-incident-response.md)
 15. [Preserve evidence and build a forensic timeline](lab-15-forensic-timeline.md)
-16. [Perform a professional vulnerability assessment with Greenbone/OpenVAS](lab-16-professional-vulnerability-assessment.md)
+16. [Perform a professional vulnerability assessment with Nmap](lab-16-professional-vulnerability-assessment.md)
 
 Read the [programme guide](../README.md) before Lab 01. Its rules of engagement, evidence standard, topology, troubleshooting method, and scoring model apply to every lab.
