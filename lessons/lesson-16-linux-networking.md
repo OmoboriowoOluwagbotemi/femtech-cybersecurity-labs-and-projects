@@ -50,8 +50,6 @@ Linux networking is the set of kernel, interface, routing, name-resolution, sock
 
 Applications depend on correct and secure connectivity. A failure may result from configuration, routing, DNS, firewall, authentication, encryption, application state, or a security incident.
 
-### How
-
 Data is processed through layers:
 
 1. Application constructs data.
@@ -59,8 +57,6 @@ Data is processed through layers:
 3. IP selects source, destination, and route.
 4. Link layer delivers frames on the local network.
 5. The receiving system reverses the process.
-
-### Where
 
 Networking operates across physical interfaces, virtual adapters, bridges, VLANs, VPNs, containers, cloud virtual networks, and loopback.
 
@@ -70,11 +66,7 @@ A network interface is a software representation of a physical or virtual commun
 
 Interfaces hold addresses and link state and connect the host to a network.
 
-### How
-
 The kernel and network-management services configure interface state, addresses, routes, DNS, and link properties.
-
-### Where
 
 Examples include:
 
@@ -152,11 +144,7 @@ Routing selects the next hop and outgoing interface for a destination.
 
 A correctly addressed interface still cannot reach remote networks without a suitable route.
 
-### How
-
 Linux generally chooses the most specific matching route, then applies metrics and policy rules where relevant.
-
-### Where
 
 Routes may be connected, static, learned, default, VPN-provided, container-created, or cloud-configured.
 
@@ -185,11 +173,7 @@ A socket is a kernel communication endpoint associated with protocol, addresses,
 
 Socket inspection shows which services are exposed and which remote systems have active communication.
 
-### How
-
 Applications request sockets from the kernel, bind local addresses and ports, listen for connections, or connect outward.
-
-### Where
 
 Sockets include TCP, UDP, raw, Unix-domain, and other families.
 
@@ -198,8 +182,6 @@ Sockets include TCP, UDP, raw, Unix-domain, and other families.
 `netstat` is a legacy tool for displaying network connections, listeners, routes, interfaces, and statistics.
 
 It remains common in older procedures and systems.
-
-### How
 
 Typical command:
 
@@ -215,8 +197,6 @@ Common options:
 - `-p`: process information, subject to privilege.
 - `-n`: numeric addresses and ports.
 
-### Where
-
 `netstat` is provided by older or optional network-tools packages. Modern Linux administration generally prefers `ss`.
 
 ## 9. ss
@@ -224,8 +204,6 @@ Common options:
 `ss` is a modern socket-inspection tool in the `iproute2` suite.
 
 It provides efficient, detailed visibility into socket state and filtering.
-
-### How
 
 ```bash
 ss -tulpn
@@ -243,8 +221,6 @@ ss -ltn 'sport = :22'
 | `-a` | All relevant sockets |
 | `-n` | Numeric output |
 | `-p` | Process details |
-
-### Where
 
 Use `ss` for service exposure review, troubleshooting, incident response, and baseline comparison.
 
@@ -290,11 +266,7 @@ DNS maps names to records such as addresses, mail exchangers, name servers, alia
 
 Applications depend on names, but resolution failure and malicious changes can redirect or interrupt communication.
 
-### How
-
 A client commonly uses a stub resolver, configured recursive resolver, cache, and authoritative DNS hierarchy.
-
-### Where
 
 Linux DNS configuration may involve `/etc/resolv.conf`, NetworkManager, `systemd-resolved`, DHCP, VPN software, containers, and local caching services.
 
@@ -303,8 +275,6 @@ Linux DNS configuration may involve `/etc/resolv.conf`, NetworkManager, `systemd
 `dig` is a DNS query and troubleshooting tool.
 
 It exposes response codes, record data, TTL, flags, authority, and responding server.
-
-### How
 
 ```bash
 dig example.org A
@@ -316,8 +286,6 @@ dig +short example.org
 dig +trace example.org
 dig -x 192.0.2.10
 ```
-
-### Where
 
 Use `dig` to compare resolvers, inspect records, investigate email authentication, and troubleshoot name resolution.
 
@@ -346,8 +314,6 @@ DNS data does not authenticate an HTTPS service by itself. TLS hostname and trus
 
 It supports repeatable testing of status, headers, redirects, certificates, APIs, and service behavior.
 
-### How
-
 ```bash
 curl https://example.org/
 curl -I https://example.org/
@@ -355,8 +321,6 @@ curl -v https://example.org/
 curl -L https://example.org/
 curl --fail --show-error https://example.org/health
 ```
-
-### Where
 
 Use `curl` for application troubleshooting, health checks, API testing, certificate investigation, and automation.
 
@@ -393,11 +357,7 @@ SSH tunneling forwards selected network connections through an encrypted SSH ses
 
 It can protect otherwise exposed paths, reach controlled management services, and support secure administration.
 
-### How
-
 SSH listens on an endpoint, carries traffic through the SSH connection, and connects to a destination from one side of the tunnel.
-
-### Where
 
 Tunnels are used for administration, database access, temporary troubleshooting, bastion hosts, and controlled port forwarding.
 
@@ -462,11 +422,7 @@ File sharing exposes files through a network protocol while applying identity, a
 
 Organizations need controlled collaboration and application access.
 
-### How
-
 A file-sharing service authenticates a client, evaluates share and filesystem permissions, and performs file operations.
-
-### Where
 
 Linux may share files through SMB/Samba, NFS, SFTP, HTTPS applications, or cloud storage.
 
@@ -476,16 +432,12 @@ Samba implements SMB-related services on Unix-like systems and can interoperate 
 
 It allows Linux systems to provide or consume enterprise file and printer services.
 
-### How
-
 Common components include:
 
 - `smbd`: file and print service functions.
 - `nmbd`: legacy NetBIOS name functions in some deployments.
 - `winbindd`: identity and authentication integration functions.
 - Configuration, commonly `/etc/samba/smb.conf`.
-
-### Where
 
 Samba is used for departmental shares, application data, user directories, and hybrid Windows-Linux environments.
 

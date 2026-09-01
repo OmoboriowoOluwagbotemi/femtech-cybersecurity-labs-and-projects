@@ -61,8 +61,6 @@ Cryptographic designs fail when organizations:
 - Configure policies incorrectly.
 - Encrypt data but leave plaintext copies exposed.
 
-### How
-
 Organizations combine approved cryptography with:
 
 - Asset and certificate inventories.
@@ -73,8 +71,6 @@ Organizations combine approved cryptography with:
 - Change management.
 - Recovery and revocation procedures.
 - Periodic validation.
-
-### Where
 
 Applied cryptography protects email, websites, APIs, VPNs, cloud workloads, databases, backups, applications, endpoints, and administrative connections.
 
@@ -94,11 +90,7 @@ These identities may legitimately differ. Attackers exploit that complexity to d
 
 Email was not originally designed with strong sender authentication. Attackers use impersonation for phishing, invoice fraud, credential theft, malware delivery, and business email compromise.
 
-### How
-
 Domain owners publish DNS records that receiving mail systems evaluate. SPF, DKIM, and DMARC work together, but each solves a different problem.
-
-### Where
 
 These controls are used by public and private organizations operating email through Microsoft 365, Google Workspace, cloud email services, marketing platforms, ticketing systems, and on-premises gateways.
 
@@ -107,8 +99,6 @@ These controls are used by public and private organizations operating email thro
 Sender Policy Framework (SPF) allows a domain owner to publish which mail systems are authorized to send email for the domain used in the SMTP envelope sender identity.
 
 Without SPF, receiving servers have less evidence for determining whether a sending IP address is authorized by the envelope domain.
-
-### How
 
 The domain publishes a TXT record beginning with `v=spf1`. A receiving server:
 
@@ -130,8 +120,6 @@ example.org. TXT "v=spf1 ip4:192.0.2.10 include:_spf.mailprovider.example -all"
 | `include:` | Evaluates another domain's SPF policy |
 | `-all` | Hard fail for sources not otherwise authorized |
 
-### Where
-
 SPF records are published in the sending domain's DNS and evaluated by receiving mail infrastructure.
 
 ### SPF Limitations
@@ -148,8 +136,6 @@ SPF records are published in the sending domain's DNS and evaluated by receiving
 DomainKeys Identified Mail (DKIM) applies a cryptographic signature to selected message headers and a body representation. The signature identifies a signing domain.
 
 DKIM gives receivers evidence that signed content has not been modified in a way that invalidates the signature and that a domain controlling the private key signed it.
-
-### How
 
 1. The sending system selects a DKIM selector.
 2. It calculates hashes over selected headers and the message body.
@@ -170,8 +156,6 @@ Illustrative record:
 selector1._domainkey.example.org. TXT "v=DKIM1; k=rsa; p=PUBLIC_KEY_MATERIAL"
 ```
 
-### Where
-
 DKIM is implemented by authorized outbound mail systems. Public verification keys are published in DNS, while private signing keys remain protected by the sender.
 
 ### DKIM Limitations
@@ -189,8 +173,6 @@ Selectors support key rotation and allow multiple services to use separate keys.
 DMARC is an email authentication policy and reporting mechanism. It evaluates whether SPF or DKIM passes with a domain aligned to the visible `From` domain.
 
 Users primarily see the visible `From` address. DMARC connects that identity to SPF and DKIM results, tells receivers how the domain owner wants failures handled, and supplies reports for monitoring.
-
-### How
 
 DMARC passes when at least one aligned mechanism passes:
 
@@ -218,8 +200,6 @@ _dmarc.example.org. TXT "v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@exampl
 | `pct=` | Percentage of applicable messages subject to policy |
 | `adkim=` | DKIM alignment mode |
 | `aspf=` | SPF alignment mode |
-
-### Where
 
 DMARC policy is published at `_dmarc.domain`. Receiving systems evaluate it, while domain owners analyze aggregate reports and, where supported and appropriate, failure information.
 
@@ -283,8 +263,6 @@ HTTPS is HTTP carried over TLS. It protects web communications between a client 
 
 HTTPS helps prevent network observers from reading or modifying traffic and allows the client to authenticate the server name through a trusted certificate.
 
-### How
-
 The client and server perform a TLS handshake, establish session keys, and then exchange HTTP data through authenticated encryption.
 
 The client should validate:
@@ -295,8 +273,6 @@ The client should validate:
 - Certificate purpose.
 - Signature and key requirements.
 - Revocation information according to platform behavior and policy.
-
-### Where
 
 HTTPS protects public websites, internal portals, APIs, cloud consoles, management interfaces, mobile back ends, and service-to-service communications.
 
@@ -422,11 +398,7 @@ An encryption failure occurs when cryptographic protection does not provide its 
 
 Failures can expose data, permit tampering, interrupt services, undermine legal compliance, and damage trust.
 
-### How
-
 Failures arise through weak design, flawed implementation, poor key management, incorrect configuration, human error, unsupported legacy systems, or inadequate recovery planning.
-
-### Where
 
 They affect endpoints, databases, backups, cloud storage, applications, email, APIs, VPNs, and identity systems.
 

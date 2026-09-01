@@ -45,8 +45,6 @@ Risk is the possibility that uncertainty or a threat will affect organizational 
 
 Organizations cannot eliminate all risk and must allocate limited resources.
 
-### How
-
 Assess:
 
 - Asset or objective.
@@ -56,8 +54,6 @@ Assess:
 - Impact.
 - Existing controls.
 - Uncertainty.
-
-### Where
 
 Risk applies to technology, people, process, suppliers, facilities, cloud, data, and strategy.
 
@@ -268,8 +264,6 @@ Threat modeling systematically identifies security threats and design controls b
 
 Design flaws are cheaper and safer to address before production.
 
-### How
-
 1. Define scope and objectives.
 2. Diagram system and data flows.
 3. Identify trust boundaries.
@@ -277,8 +271,6 @@ Design flaws are cheaper and safer to address before production.
 5. Prioritize.
 6. Select controls.
 7. Validate.
-
-### Where
 
 Use for applications, APIs, cloud, networks, identity, devices, and business processes.
 
@@ -362,11 +354,7 @@ A risk register records identified risks, analysis, ownership, treatment, and st
 
 Risk decisions require traceability and follow-through.
 
-### How
-
 Maintain one governed source with review dates and evidence.
-
-### Where
 
 Registers can exist at enterprise, business-unit, project, supplier, or system level.
 

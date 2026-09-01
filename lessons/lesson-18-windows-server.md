@@ -45,11 +45,7 @@ Windows Server is Microsoft's server operating-system family for infrastructure,
 
 Enterprises need centrally managed, resilient services that support many users and systems.
 
-### How
-
 Administrators install roles and features, configure them through graphical or PowerShell tools, apply policy, monitor events, and maintain them through controlled change.
-
-### Where
 
 Windows Server runs on physical systems, VMs, private clouds, public cloud IaaS, branch offices, data centers, and hybrid environments.
 
@@ -59,11 +55,7 @@ A server role is a major business or infrastructure function. A feature is a sup
 
 Role-based installation allows administrators to deploy only required capabilities.
 
-### How
-
 Server Manager and PowerShell discover, install, configure, and remove roles and features.
-
-### Where
 
 Examples include:
 
@@ -123,11 +115,7 @@ DNS translates names into records and supports service discovery and infrastruct
 
 Users and applications rely on names. Active Directory also depends heavily on DNS service records.
 
-### How
-
 Windows DNS Server can host zones, answer authoritative queries, perform recursion, forward requests, cache answers, and integrate zone data with Active Directory.
-
-### Where
 
 DNS supports internal domains, public services, cloud networks, domain controllers, applications, email, and hybrid connectivity.
 
@@ -250,8 +238,6 @@ DHCP automatically supplies IP configuration to clients.
 
 Manual addressing does not scale and creates inconsistency.
 
-### How
-
 A common IPv4 sequence is:
 
 1. Discover.
@@ -260,8 +246,6 @@ A common IPv4 sequence is:
 4. Acknowledge.
 
 This is often called DORA.
-
-### Where
 
 DHCP operates on enterprise LANs, branch networks, wireless networks, lab networks, and selected cloud or virtual environments.
 
@@ -358,11 +342,7 @@ Event Viewer is a graphical management console for Windows Event Logs, subscript
 
 Server troubleshooting requires correlating role, service, system, and security events.
 
-### How
-
 Administrators can filter by time, level, provider, Event ID, keyword, user, and computer.
-
-### Where
 
 Use Event Viewer locally, through approved remote management, or with exported `.evtx` files.
 
@@ -412,8 +392,6 @@ Server hardening applies secure configuration based on the server's role, risk, 
 
 Servers concentrate critical data and services and may be continuously reachable.
 
-### How
-
 1. Build from an approved image.
 2. Install required roles only.
 3. Patch.
@@ -423,8 +401,6 @@ Servers concentrate critical data and services and may be continuously reachable
 7. Enable protection and logging.
 8. Test business service and recovery.
 9. Monitor drift.
-
-### Where
 
 Hardening applies to physical, virtual, cloud, branch, and data-center servers.
 

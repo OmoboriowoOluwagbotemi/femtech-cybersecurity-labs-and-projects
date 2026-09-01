@@ -47,11 +47,7 @@ AD DS is a directory service that stores objects and provides identity, authenti
 
 Enterprises need consistent identity and access decisions across many systems.
 
-### How
-
 Domain controllers store replicated directory data, authenticate principals, issue Kerberos tickets, process LDAP requests, publish services through DNS, and apply directory security.
-
-### Where
 
 AD DS operates in on-premises and hybrid environments and may integrate with Microsoft Entra ID, SaaS services, PKI, VPNs, applications, and Linux systems.
 
@@ -85,11 +81,7 @@ A domain is an administrative, replication, authentication, and policy boundary 
 
 It groups directory objects under a DNS namespace and common domain policies.
 
-### How
-
 Domain controllers replicate the domain partition and authenticate domain principals.
-
-### Where
 
 A forest may contain one or multiple domains. Modern designs often prefer fewer domains unless legal, administrative, namespace, or technical requirements justify more.
 
@@ -108,11 +100,7 @@ A forest is the top-level AD DS structure sharing:
 
 It creates a common directory and trust architecture.
 
-### How
-
 The first domain is the forest root. Additional domains share forest-wide structures and automatic transitive trusts.
-
-### Where
 
 Organizations may use one forest or multiple forests based on security isolation, mergers, legal boundaries, and operational requirements.
 
@@ -134,11 +122,7 @@ A domain controller hosts AD DS and provides directory and authentication servic
 
 Clients require trusted systems to validate identity and retrieve directory information.
 
-### How
-
 Domain controllers replicate changes through multi-master replication, subject to role-specific exceptions. They depend on DNS and accurate time.
-
-### Where
 
 Deploy based on site, availability, recovery, security, and network requirements.
 
@@ -171,11 +155,7 @@ A trust allows authentication from one domain or forest to be recognized for pot
 
 Organizations need controlled access across domains, forests, mergers, partners, or legacy environments.
 
-### How
-
 The trusting side accepts authentication from the trusted side. Authorization is still required on the target resource.
-
-### Where
 
 Trusts can exist within a forest or between domains and forests.
 
@@ -239,11 +219,7 @@ Groups assign permissions, roles, communication, and policy to collections of pr
 
 Group-based authorization scales better than direct user permissions.
 
-### How
-
 Security groups appear in access tokens and can receive permissions. Distribution groups are intended for communication and are not security principals for ACL authorization.
-
-### Where
 
 Groups control files, applications, servers, delegation, remote access, and administrative privilege.
 
@@ -277,11 +253,7 @@ An organizational unit (OU) is a directory container used to organize objects, d
 
 OUs allow policy and delegated management aligned with technical administration.
 
-### How
-
 Objects are placed in OUs, permissions are delegated through ACLs, and GPOs are linked.
-
-### Where
 
 OU design may reflect device types, administrative teams, security tiers, locations, or management requirements.
 
@@ -319,8 +291,6 @@ A password-reset right over a privileged user is privileged access even if the d
 Kerberos is the preferred AD DS authentication protocol for supported domain scenarios. It uses tickets and symmetric cryptography.
 
 It enables centralized authentication without sending the user's password to every service.
-
-### How
 
 Key components:
 
@@ -388,11 +358,7 @@ NTLM is a challenge-response authentication family retained for compatibility.
 
 Legacy systems and scenarios without suitable Kerberos conditions may depend on it.
 
-### How
-
 The client proves knowledge of password-derived material through a challenge-response process. The password itself is not sent in plaintext, but captured challenge-response material may be relayed or attacked offline in some conditions.
-
-### Where
 
 NTLM can appear with local accounts, IP-address access, legacy applications, workgroups, broken SPNs, and fallback scenarios.
 
@@ -435,8 +401,6 @@ Lightweight Directory Access Protocol (LDAP) is used to query and modify directo
 
 Applications and administrators need structured directory access.
 
-### How
-
 LDAP operations include:
 
 - Bind.
@@ -445,8 +409,6 @@ LDAP operations include:
 - Modify.
 - Delete.
 - Compare.
-
-### Where
 
 LDAP is used by management tools, applications, identity integrations, Linux clients, and security tools.
 
@@ -494,11 +456,7 @@ Group Policy centrally configures users and computers through Group Policy Objec
 
 Enterprises need repeatable settings for security, software, scripts, firewall, auditing, and operating-system behavior.
 
-### How
-
 GPOs are linked to sites, domains, or OUs. Clients process applicable policy based on location, inheritance, security filtering, WMI filtering where used, and policy rules.
-
-### Where
 
 Group Policy applies to domain-joined Windows systems and users.
 

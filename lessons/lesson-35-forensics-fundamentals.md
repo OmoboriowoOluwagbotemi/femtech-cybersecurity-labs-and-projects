@@ -45,8 +45,6 @@ Digital forensics is the disciplined handling and analysis of digital evidence.
 
 Organizations need trustworthy answers about what happened, how, when, by whom, and with what impact.
 
-### How
-
 A common process:
 
 1. Identify.
@@ -55,8 +53,6 @@ A common process:
 4. Examine.
 5. Analyze.
 6. Report.
-
-### Where
 
 Evidence comes from endpoints, servers, mobile devices, network systems, cloud, SaaS, email, applications, memory, and storage.
 
@@ -148,8 +144,6 @@ Acquisition creates a controlled copy or collection of evidence.
 
 Analysis should preserve originals where feasible.
 
-### How
-
 Methods:
 
 - Bit-for-bit disk image.
@@ -159,8 +153,6 @@ Methods:
 - API export.
 - Log export.
 - Packet capture.
-
-### Where
 
 Method depends on system, authority, encryption, business impact, and evidence need.
 
@@ -214,11 +206,7 @@ Timeline analysis orders events from multiple evidence sources.
 
 Attacks unfold across identity, endpoint, network, cloud, and business systems.
 
-### How
-
 Normalize events while retaining original timestamps and provenance.
-
-### Where
 
 Sources:
 
@@ -304,11 +292,7 @@ Memory may contain:
 - Decrypted data.
 - Credentials or keys.
 
-### How
-
 Acquire memory with an approved tool, hash it, preserve it, and analyze a copy.
-
-### Where
 
 Memory analysis is useful for malware, credential theft, rootkits, fileless activity, and active sessions.
 
@@ -332,11 +316,7 @@ Volatility is an open-source memory-forensics framework. Modern training commonl
 
 It reconstructs operating-system and process artifacts from memory images.
 
-### How
-
 Volatility plugins interpret kernel structures using symbols and framework logic.
-
-### Where
 
 Use on acquired memory images, not directly as a substitute for collection.
 

@@ -35,16 +35,12 @@ A Linux identity is represented primarily by a numeric user identifier (UID). Gr
 
 The kernel makes access decisions using numeric identities and permissions. Usernames and group names provide human-readable mappings.
 
-### How
-
 Local identity information is commonly represented through:
 
 - `/etc/passwd`: account identity and basic account fields.
 - `/etc/shadow`: protected password-hash and aging information.
 - `/etc/group`: group definitions and memberships.
 - `/etc/gshadow`: protected group administration data.
-
-### Where
 
 Identities may be local or supplied through centralized services such as LDAP, Active Directory integration, or other identity sources.
 
@@ -92,8 +88,6 @@ User management controls account creation, attributes, authentication status, gr
 
 Accounts must match an approved identity and business need throughout their lifecycle.
 
-### How
-
 Common tools include:
 
 ```bash
@@ -106,8 +100,6 @@ sudo userdel analyst1
 ```
 
 Some distributions provide higher-level tools such as `adduser`.
-
-### Where
 
 Local users are appropriate for limited standalone needs. Enterprises often centralize workforce identity while retaining controlled local emergency or service accounts.
 
@@ -159,8 +151,6 @@ A group is a collection of identities used to assign access.
 
 Group-based access is more scalable and auditable than assigning permissions separately to every user.
 
-### How
-
 Each user has a primary group and may have supplementary groups.
 
 ```bash
@@ -173,8 +163,6 @@ sudo gpasswd -d analyst1 security
 
 The `-aG` combination appends supplementary groups. Using `-G` without `-a` can replace existing supplementary memberships.
 
-### Where
-
 Groups control access to files, devices, logs, administrative commands, containers, and application resources.
 
 Group changes may not affect an existing session until the user signs in again or starts a session with updated credentials.
@@ -185,16 +173,12 @@ Linux filesystem objects normally have an owning user and owning group.
 
 Ownership determines which user and group permission sets apply.
 
-### How
-
 ```bash
 ls -l report.txt
 sudo chown analyst1 report.txt
 sudo chown analyst1:security report.txt
 sudo chgrp security report.txt
 ```
-
-### Where
 
 Ownership applies to regular files, directories, links, devices, sockets, and other objects.
 
@@ -212,8 +196,6 @@ Recursive ownership changes can damage services or expose data. Verify the exact
 
 It controls read, write, and execute access for owner, group, and others.
 
-### How
-
 Symbolic examples:
 
 ```bash
@@ -230,8 +212,6 @@ chmod 600 private.key
 chmod 640 report.txt
 chmod 750 scripts
 ```
-
-### Where
 
 Use `chmod` on files and directories that the administrator is authorized to manage.
 
@@ -282,8 +262,6 @@ World-writable directories without appropriate protections create significant ri
 
 Secure defaults reduce accidental exposure.
 
-### How
-
 ```bash
 umask
 umask 027
@@ -296,8 +274,6 @@ Common starting maximums are `666` for files and `777` for directories. With uma
 
 The exact result also depends on the creating application and filesystem.
 
-### Where
-
 Umask can be configured in shells, service definitions, application settings, and system policy.
 
 ## 11. Access Control Lists
@@ -305,8 +281,6 @@ Umask can be configured in shells, service definitions, application settings, an
 POSIX ACLs provide permissions for additional named users and groups beyond the traditional owner, group, and other entries.
 
 ACLs support exceptions without changing primary ownership or creating excessive groups.
-
-### How
 
 ```bash
 getfacl report.txt
@@ -320,8 +294,6 @@ Default ACL on a directory:
 ```bash
 setfacl -m d:g:security:rwx teamshare
 ```
-
-### Where
 
 ACLs are useful for project directories, shared reports, applications, and temporary access exceptions.
 
@@ -370,8 +342,6 @@ A `+` after permission characters in some `ls -l` output indicates extended ACL 
 
 It supports controlled privilege elevation, accountability, and separation between routine and administrative work.
 
-### How
-
 Rules are defined in `/etc/sudoers` and included files, commonly under `/etc/sudoers.d/`.
 
 Always validate edits with:
@@ -388,8 +358,6 @@ Example concept:
 ```
 
 This permits members of `webops` to run the specified command. Exact command paths and arguments must be designed carefully.
-
-### Where
 
 `sudo` is used for server administration, support operations, automation, and controlled emergency access.
 

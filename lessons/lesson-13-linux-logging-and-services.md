@@ -50,8 +50,6 @@ Logs help answer:
 - Did an action succeed or fail?
 - What occurred before and after it?
 
-### How
-
 Applications may write to:
 
 - The systemd journal.
@@ -60,8 +58,6 @@ Applications may write to:
 - Application databases.
 - Standard output captured by a service manager.
 - Remote log collectors.
-
-### Where
 
 Common locations include `/var/log`, the journal store, application directories, audit logs, cloud logging services, and central SIEM platforms.
 
@@ -86,11 +82,7 @@ Syslog is a logging model and protocol family used to send event messages from a
 
 It provides common routing by message source and severity.
 
-### How
-
 A process submits a message with a facility and severity. A syslog implementation such as `rsyslog` or `syslog-ng` applies rules and writes, forwards, or discards the message.
-
-### Where
 
 Syslog is used by Linux servers, network devices, firewalls, appliances, and security tools.
 
@@ -205,11 +197,7 @@ The systemd journal is a structured logging service managed by `systemd-journald
 
 It captures metadata and supports filtering by service, boot, process, priority, and time.
 
-### How
-
 `journalctl` queries journal records.
-
-### Where
 
 Journal data may be volatile or persistent depending on configuration.
 
@@ -267,11 +255,7 @@ A service is a background function managed by the operating system, commonly thr
 
 Services provide SSH, web, database, logging, scheduling, networking, and security functions.
 
-### How
-
 systemd uses unit definitions, dependencies, targets, and service state.
-
-### Where
 
 Unit files commonly exist under `/usr/lib/systemd/system`, `/lib/systemd/system`, `/etc/systemd/system`, and runtime locations, depending on distribution.
 
@@ -351,8 +335,6 @@ Cron schedules commands according to time expressions.
 
 It supports backups, maintenance, reports, cleanup, and automation.
 
-### How
-
 A standard crontab entry contains:
 
 ```text
@@ -366,8 +348,6 @@ Example:
 ```
 
 This requests execution daily at 02:30.
-
-### Where
 
 Cron configuration may appear in:
 
@@ -413,8 +393,6 @@ Analysts must inspect both cron and systemd timers when investigating scheduled 
 Log rotation renames, compresses, archives, and removes logs according to policy.
 
 Without rotation, logs can consume storage and disrupt services.
-
-### How
 
 Tools such as `logrotate` apply schedules and retention rules.
 

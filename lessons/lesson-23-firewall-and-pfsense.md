@@ -43,8 +43,6 @@ A firewall evaluates network traffic and permits, rejects, or drops it according
 
 Network reachability should match business need and trust boundaries.
 
-### How
-
 A firewall may evaluate:
 
 - Interface.
@@ -56,8 +54,6 @@ A firewall may evaluate:
 - Connection state.
 - Schedule.
 - Identity or application on supported platforms.
-
-### Where
 
 Firewalls operate on hosts, network gateways, cloud networks, applications, and virtual environments.
 
@@ -100,11 +96,7 @@ pfSense is a FreeBSD-based firewall and routing platform with a web interface an
 
 It provides routing, firewalling, NAT, DHCP, VPN, DNS, monitoring, and package integration in one platform.
 
-### How
-
 Interfaces receive assignments and addresses. Services and rules apply to those interfaces. Stateful filtering controls traffic.
-
-### Where
 
 pfSense can run on supported appliances, physical hardware, or VMs.
 
@@ -197,11 +189,7 @@ Network Address Translation changes address or port information as traffic passe
 
 NAT supports private-address Internet access, publishing selected services, overlapping constraints, and policy design.
 
-### How
-
 The firewall creates translation and connection state.
-
-### Where
 
 NAT commonly operates at Internet boundaries and selected interconnection points.
 
@@ -423,11 +411,7 @@ Segmentation separates systems into network zones and controls communication bet
 
 It limits exposure, lateral movement, broadcast scope, and incident impact.
 
-### How
-
 Use routed interfaces or VLANs, default-deny rules, explicit flows, monitoring, and separate management.
-
-### Where
 
 Zones may include users, servers, DMZ, management, guests, IoT, clinical systems, payment systems, and security tools.
 

@@ -36,11 +36,7 @@ A network attack abuses communication protocols, reachable services, network tru
 
 Networks connect valuable systems. Every exposed interface, port, protocol, account, and service contributes to attack surface.
 
-### How
-
 Attackers may collect information, probe hosts, enumerate services, manipulate traffic, exploit weaknesses, or overwhelm capacity.
-
-### Where
 
 Attacks occur on local networks, wireless networks, the Internet, VPNs, cloud virtual networks, data centers, branch offices, and hybrid infrastructure.
 
@@ -50,14 +46,10 @@ Reconnaissance is information gathering about a target, its people, systems, dom
 
 Accurate information helps an attacker select targets and reduces wasted effort. Defenders use authorized reconnaissance to understand their own external exposure.
 
-### How
-
 Reconnaissance may be:
 
 - **Passive:** gathering information without directly probing target systems.
 - **Active:** interacting with target infrastructure to collect information.
-
-### Where
 
 Sources include public websites, DNS, certificate data, job advertisements, social media, vendor documentation, search engines, and direct network probes.
 
@@ -76,8 +68,6 @@ Port scanning sends network probes to determine which ports and services appear 
 
 An open port can reveal a service that may be intended, misconfigured, outdated, or unnecessarily exposed.
 
-### How
-
 The scanner evaluates responses and classifies ports. Common states include:
 
 | State | Meaning |
@@ -86,8 +76,6 @@ The scanner evaluates responses and classifies ports. Common states include:
 | Closed | The host is reachable, but no service accepts the connection |
 | Filtered | A firewall or network condition prevents a definite conclusion |
 | Open or filtered | The response cannot distinguish the two states |
-
-### Where
 
 Scanning may occur from the Internet, an internal compromised endpoint, a vulnerability-management scanner, or an authorized test workstation.
 
@@ -126,8 +114,6 @@ Enumeration is the active collection of detailed information from reachable serv
 
 Port scanning identifies where a service may exist. Enumeration seeks useful details such as users, shares, hostnames, software versions, groups, DNS records, and service configuration.
 
-### How
-
 Enumeration uses protocol-specific requests and valid or anonymous access where permitted. Examples include:
 
 - DNS record queries.
@@ -137,8 +123,6 @@ Enumeration uses protocol-specific requests and valid or anonymous access where 
 - Web-directory and application discovery.
 - Service-banner collection.
 - User and group discovery.
-
-### Where
 
 Enumeration targets Windows domains, Linux servers, network devices, cloud services, web applications, file servers, and management interfaces.
 
@@ -155,11 +139,7 @@ Address Resolution Protocol (ARP) maps IPv4 addresses to MAC addresses on a loca
 
 Traditional ARP does not authenticate mappings. An attacker on the same Layer 2 network may attempt to redirect or disrupt traffic.
 
-### How
-
 An attacker may claim to own the default gateway's IP address to a victim and claim to own the victim's IP address to the gateway. Traffic may then pass through the attacker or be dropped.
-
-### Where
 
 ARP spoofing is relevant on local Ethernet or Wi-Fi broadcast domains, not as a normal attack sent directly across routers.
 
@@ -187,8 +167,6 @@ DNS poisoning causes a resolver, client, or DNS data source to return an incorre
 
 Users trust names. If a trusted name resolves to an attacker-controlled destination, traffic can be redirected without changing the visible name entered by the user.
 
-### How
-
 Possible paths include:
 
 - Resolver cache poisoning.
@@ -196,8 +174,6 @@ Possible paths include:
 - Malicious local DNS configuration.
 - Unauthorized hosts-file changes.
 - Rogue DHCP supplying an attacker-controlled DNS server.
-
-### Where
 
 DNS attacks affect endpoints, recursive resolvers, authoritative services, registrars, cloud DNS, and local networks.
 
@@ -218,8 +194,6 @@ A man-in-the-middle (MITM) attack places an attacker between communicating parti
 
 Intercepted traffic may reveal credentials, sessions, sensitive data, or commands. Modification can compromise integrity.
 
-### How
-
 MITM positioning may result from:
 
 - ARP spoofing.
@@ -228,8 +202,6 @@ MITM positioning may result from:
 - Compromised routers or proxies.
 - Route manipulation.
 - Certificate-validation bypass.
-
-### Where
 
 Risks are elevated on untrusted wireless networks, flat internal networks, compromised infrastructure, and applications using plaintext or invalid TLS handling.
 
@@ -251,16 +223,12 @@ A denial-of-service (DoS) attack attempts to make a resource unavailable. A dist
 
 Availability failures can halt revenue, healthcare, education, public services, and security operations.
 
-### How
-
 | Category | Method | Target |
 |---|---|---|
 | Volumetric | Consumes bandwidth with high traffic volume | Network links |
 | Protocol or state exhaustion | Consumes firewall, load balancer, or server state | Network infrastructure |
 | Application-layer | Sends expensive or excessive application requests | Web or API resources |
 | Reflection/amplification | Spoofs victim address and uses larger third-party responses | Victim bandwidth and services |
-
-### Where
 
 Targets include websites, DNS, APIs, VPN concentrators, firewalls, game services, financial portals, and government services.
 

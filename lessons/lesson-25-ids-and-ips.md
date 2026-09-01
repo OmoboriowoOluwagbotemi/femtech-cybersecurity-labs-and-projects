@@ -44,11 +44,7 @@ Intrusion detection analyzes activity and generates evidence or alerts when cond
 
 Preventive controls can fail, be bypassed, or permit malicious use of authorized services.
 
-### How
-
 Detection compares observed events with signatures, rules, baselines, models, and threat intelligence.
-
-### Where
 
 Detection runs on networks, endpoints, applications, identity platforms, cloud services, and SIEM systems.
 
@@ -69,8 +65,6 @@ A network IDS analyzes traffic observed at a sensor.
 
 One sensor can monitor traffic for many systems and reveal communication patterns not visible in endpoint logs.
 
-### How
-
 Traffic reaches the sensor through:
 
 - Network tap.
@@ -78,8 +72,6 @@ Traffic reaches the sensor through:
 - Virtual switch mirror.
 - Cloud traffic mirroring.
 - Inline bridge.
-
-### Where
 
 Sensors are placed at Internet edges, DMZs, server zones, data centers, branch links, cloud boundaries, and high-value east-west paths.
 
@@ -133,11 +125,7 @@ Snort is an open-source network intrusion detection and prevention engine using 
 
 It provides signature-based detection, packet logging, and inline capabilities.
 
-### How
-
 Snort decodes traffic, preprocesses or inspects protocols, evaluates rules, and generates alerts or actions.
-
-### Where
 
 It can operate passively or inline at selected network boundaries.
 
@@ -147,11 +135,7 @@ Suricata is an open-source network IDS, IPS, and security-monitoring engine.
 
 It provides multithreaded processing, protocol parsing, file-related visibility, rule compatibility concepts, and structured event output.
 
-### How
-
 Suricata decodes traffic, tracks flows, parses applications, evaluates signatures, and can produce JSON-formatted EVE events.
-
-### Where
 
 It is used at enterprise edges, internal segments, cloud sensors, and security laboratories.
 
@@ -161,11 +145,7 @@ Zeek is a network security monitoring platform that produces rich protocol and c
 
 It gives analysts structured behavioral context beyond individual signatures.
 
-### How
-
 Zeek interprets network activity into events and logs such as connections, DNS, HTTP, TLS, files, and notices.
-
-### Where
 
 It supports threat hunting, incident response, network baselining, and detection engineering.
 
@@ -185,8 +165,6 @@ Signature detection matches known byte patterns, fields, protocol conditions, or
 
 Known attack behavior can often be recognized precisely.
 
-### How
-
 Signatures may inspect:
 
 - Addresses and ports.
@@ -196,8 +174,6 @@ Signatures may inspect:
 - URI or hostname.
 - Flow direction.
 - Threshold and timing.
-
-### Where
 
 Signatures operate in IDS/IPS, EDR, antivirus, WAF, email, SIEM, and other controls.
 
@@ -298,8 +274,6 @@ Anomaly detection identifies activity that differs from an established model or 
 
 Unknown or changed attacks may not match known signatures.
 
-### How
-
 Models may evaluate:
 
 - Volume.
@@ -309,8 +283,6 @@ Models may evaluate:
 - Protocol behavior.
 - Peer groups.
 - Sequence.
-
-### Where
 
 Anomaly detection appears in network analytics, UEBA, EDR, cloud monitoring, fraud systems, and SIEM.
 

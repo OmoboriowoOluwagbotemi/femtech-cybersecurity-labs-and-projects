@@ -44,8 +44,6 @@ Professional security communication transfers accurate information to an audienc
 
 Raw logs, scanner findings, and technical jargon do not create decisions by themselves. Poor communication can cause panic, delayed containment, incorrect remediation, or unjustified risk acceptance.
 
-### How
-
 Effective communication is:
 
 - Accurate.
@@ -55,8 +53,6 @@ Effective communication is:
 - Organized around decisions and actions.
 - Respectful and free of blame.
 - Protected according to sensitivity.
-
-### Where
 
 Communication occurs in tickets, chat, email, dashboards, shift handovers, incident bridges, reports, presentations, risk committees, audit interviews, and public portfolio materials.
 
@@ -91,8 +87,6 @@ Do not give every audience the same report with a different title.
 
 Mixing these categories makes reports difficult to verify and encourages overstatement.
 
-### How
-
 Use language that reflects confidence:
 
 ```text
@@ -108,8 +102,6 @@ compromise has not yet been established.
 Recommendation: Revoke active sessions, reset credentials through the approved
 identity process, remove unauthorized rules, and review related cloud activity.
 ```
-
-### Where
 
 This distinction belongs in incident notes, forensic reports, threat-intelligence products, vulnerability validation, and risk assessments.
 
@@ -136,8 +128,6 @@ Not every report needs every section. A critical incident update may be one page
 An executive summary is a self-contained explanation of the issue, effect, response, current risk, and decisions required.
 
 Senior stakeholders may not read the technical body before making a time-sensitive decision.
-
-### How
 
 Answer:
 
@@ -282,8 +272,6 @@ Audience translation expresses technical facts in terms of services, obligations
 
 Executives and business owners are accountable for outcomes but may not know protocol, malware, or cloud terminology.
 
-### How
-
 Translate:
 
 | Technical statement | Decision-focused translation |
@@ -367,8 +355,6 @@ A cybersecurity portfolio is a curated body of work that demonstrates how a cand
 
 Certificates and resumes list claims. A portfolio provides evidence of practical competency.
 
-### How
-
 Build artifacts such as:
 
 - A sanitized incident report.
@@ -379,8 +365,6 @@ Build artifacts such as:
 - A threat-intelligence enrichment case.
 - A risk register and architecture diagram.
 - Safe Bash, PowerShell, or Python tools with tests.
-
-### Where
 
 Portfolios may be presented through GitHub, a private repository, a controlled document set, or a professional website. Public visibility is not required for every artifact.
 
@@ -416,8 +400,6 @@ Git is a distributed version-control system. GitHub hosts Git repositories and a
 
 Version control preserves history, enables peer review, supports rollback, and demonstrates disciplined work.
 
-### How
-
 A basic workflow:
 
 ```bash
@@ -439,8 +421,6 @@ Important behavior:
 - `git push` sends commits to a remote repository.
 
 Review every staged change before committing.
-
-### Where
 
 Use GitHub for documentation, scripts, detection rules, infrastructure-as-code examples, lab reports, issue tracking, and collaborative review.
 
@@ -525,8 +505,6 @@ Avoid accepting code merely because automation passes. Review intent, dependenci
 A certification validates a defined body of knowledge or skill under an examination scheme. It is one component of professional development.
 
 Certifications can structure learning, meet job or contract requirements, and provide a common baseline. They do not replace hands-on work, ethical judgment, communication, or experience.
-
-### How
 
 Select based on:
 

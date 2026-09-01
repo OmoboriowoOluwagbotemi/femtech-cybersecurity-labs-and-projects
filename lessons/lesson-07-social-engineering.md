@@ -52,8 +52,6 @@ Social engineering is the use of deception, influence, or manipulation to cause 
 
 People must make decisions with incomplete information. Attackers imitate normal communications and exploit business pressure. A message may arrive during a busy period, use a familiar name, and request an action that appears reasonable.
 
-### How
-
 An attacker commonly:
 
 1. Researches a target.
@@ -63,8 +61,6 @@ An attacker commonly:
 5. Requests information, payment, access, or execution.
 6. Uses the result for further compromise.
 7. Conceals or repeats the activity.
-
-### Where
 
 Social engineering occurs through:
 
@@ -100,8 +96,6 @@ Phishing is a deceptive communication intended to make recipients reveal informa
 
 Email and messaging provide low-cost access to many potential targets. Even a small success rate can be profitable.
 
-### How
-
 A phishing message may:
 
 - Link to a credential-harvesting site.
@@ -111,8 +105,6 @@ A phishing message may:
 - Present a QR code leading to a fraudulent site.
 - Ask for sensitive information.
 - Initiate a conversation before making the true request.
-
-### Where
 
 Phishing targets personal and corporate email, Microsoft Teams, SMS, social media, customer portals, and cloud collaboration tools.
 
@@ -150,8 +142,6 @@ Spear phishing is targeted phishing tailored to a particular person, role, organ
 
 Personalization increases credibility. Public websites, social media, breached data, vendor information, job advertisements, and previous compromises provide useful details.
 
-### How
-
 An attacker may study:
 
 - Reporting relationships.
@@ -164,8 +154,6 @@ An attacker may study:
 
 The attacker then creates a message that fits expected work.
 
-### Where
-
 Common targets include finance, human resources, administrators, executives, researchers, procurement, and IT support.
 
 ### Enterprise Example
@@ -177,8 +165,6 @@ A university researcher receives a conference document using the correct event t
 BEC is fraud or unauthorized activity conducted through impersonated or compromised business communications. It commonly targets payments, payroll, procurement, sensitive data, and account changes.
 
 BEC can produce high financial returns without malware. Attackers exploit normal authority and transaction processes.
-
-### How
 
 Common patterns include:
 
@@ -197,8 +183,6 @@ An attacker with mailbox access may:
 - Wait for a payment opportunity.
 - Reply within an existing thread.
 - Change bank details.
-
-### Where
 
 BEC affects finance, payroll, procurement, real estate, legal services, charities, schools, healthcare, and government contracting.
 
@@ -222,8 +206,6 @@ Vishing is voice-based social engineering conducted through telephone calls, voi
 
 Voice creates immediacy and social pressure. Caller ID can be spoofed, and realistic personal information can increase credibility.
 
-### How
-
 Attackers may impersonate:
 
 - Help-desk staff.
@@ -234,8 +216,6 @@ Attackers may impersonate:
 - Patients, employees, or customers.
 
 They may ask for passwords, one-time codes, remote-access installation, payments, or MFA approval.
-
-### Where
 
 Vishing targets support desks, finance teams, customer service, healthcare reception, and remote workers.
 
@@ -254,11 +234,7 @@ Pretexting is constructing a believable scenario and identity to justify a reque
 
 A plausible story explains why an unusual request appears necessary.
 
-### How
-
 The attacker prepares details, establishes rapport, answers likely questions, and gradually requests more sensitive action.
-
-### Where
 
 Examples include:
 

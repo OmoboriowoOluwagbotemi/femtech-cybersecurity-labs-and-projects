@@ -44,11 +44,7 @@ A script is a sequence of instructions executed by an interpreter or shell.
 
 Manual work is slow and inconsistent at scale. Scripts make a process repeatable.
 
-### How
-
 A script accepts input, performs logic, handles errors, and produces output.
-
-### Where
 
 Scripts run on analyst workstations, servers, cloud automation systems, CI/CD pipelines, SIEM platforms, and incident-response tools.
 
@@ -292,8 +288,6 @@ Catch errors that can be handled. Do not suppress every exception or continue af
 A regular expression is a pattern language for matching text.
 
 Logs contain repeated structures such as IP addresses, usernames, dates, and event phrases.
-
-### How
 
 | Pattern | Meaning |
 |---|---|

@@ -45,11 +45,7 @@ Cloud computing provides on-demand access to shared configurable computing resou
 
 Organizations seek speed, elasticity, global reach, managed capabilities, and consumption-based cost.
 
-### How
-
 Customers request resources through portals, APIs, command-line tools, infrastructure-as-code, and managed platforms.
-
-### Where
 
 Cloud workloads run in provider regions, availability zones, edge locations, SaaS tenants, and hybrid connections.
 
@@ -88,11 +84,7 @@ IaaS provides virtualized compute, storage, and networking while the customer ma
 
 It offers control similar to a virtual data center without owning physical infrastructure.
 
-### How
-
 Customers deploy VMs, virtual networks, disks, load balancers, and security rules through cloud management interfaces.
-
-### Where
 
 Examples include AWS EC2 and Azure Virtual Machines.
 
@@ -115,11 +107,7 @@ PaaS provides a managed application platform where the provider operates more of
 
 Developers can focus on application code and data rather than server administration.
 
-### How
-
 Customers deploy code or configure a managed database, function, container platform, or web application service.
-
-### Where
 
 Examples include managed web applications, serverless functions, and managed databases.
 
@@ -142,11 +130,7 @@ SaaS provides a complete provider-operated application consumed by users or syst
 
 Organizations avoid managing the underlying application stack.
 
-### How
-
 Customers configure a tenant, identities, sharing, retention, applications, and data governance.
-
-### Where
 
 Examples include Microsoft 365, cloud CRM, HR, ticketing, and collaboration platforms.
 
@@ -183,11 +167,7 @@ Shared responsibility divides security obligations between cloud provider and cu
 
 The provider cannot control every customer identity, configuration, application, or data decision, while the customer cannot secure provider facilities and hypervisors directly.
 
-### How
-
 Responsibilities shift by service model and contract.
-
-### Where
 
 Apply the model to every control, not only broad layers.
 
@@ -213,8 +193,6 @@ The management plane is the interface used to create, modify, and delete cloud r
 
 Compromise can affect many workloads and regions without exploiting each workload.
 
-### How
-
 Management occurs through:
 
 - Web portals.
@@ -223,8 +201,6 @@ Management occurs through:
 - SDKs.
 - Infrastructure-as-code.
 - Automation identities.
-
-### Where
 
 Every cloud tenant, account, subscription, project, and SaaS environment has privileged control functions.
 

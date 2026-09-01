@@ -45,8 +45,6 @@ Network segmentation divides a network into controlled zones based on function, 
 
 It limits who and what can communicate, reducing attack paths and incident impact.
 
-### How
-
 Segmentation combines:
 
 - Subnets.
@@ -57,8 +55,6 @@ Segmentation combines:
 - Host firewalls.
 - Cloud security controls.
 - Identity-aware policy.
-
-### Where
 
 Segmentation operates in campuses, data centers, branches, cloud virtual networks, industrial environments, and endpoint networks.
 
@@ -114,11 +110,7 @@ A virtual LAN (VLAN) creates a logical Layer 2 broadcast domain on switching inf
 
 It separates devices without requiring a separate physical switch for every zone.
 
-### How
-
 Ethernet frames may be assigned to VLANs by switch-port configuration and, on trunk links, commonly identified with IEEE 802.1Q tags.
-
-### Where
 
 VLANs separate users, voice, guests, servers, management, IoT, and other device classes.
 
@@ -205,8 +197,6 @@ A demilitarized zone is a controlled network segment for systems requiring expos
 
 It limits direct paths from public services into internal systems.
 
-### How
-
 Firewalls enforce separate flows:
 
 - Internet to DMZ.
@@ -214,8 +204,6 @@ Firewalls enforce separate flows:
 - Internal to DMZ.
 - Management to DMZ.
 - DMZ to Internet.
-
-### Where
 
 DMZs host reverse proxies, web servers, email gateways, authoritative DNS, remote-access gateways, and transfer services.
 
@@ -259,8 +247,6 @@ A network ACL is an ordered set of permit or deny conditions controlling traffic
 
 ACLs enforce which sources can reach destinations using selected protocols and ports.
 
-### How
-
 Fields may include:
 
 - Direction.
@@ -270,8 +256,6 @@ Fields may include:
 - Port.
 - Action.
 - Logging.
-
-### Where
 
 ACLs appear on routers, switches, firewalls, cloud networks, wireless systems, and hosts.
 
@@ -336,8 +320,6 @@ Microsegmentation applies granular policy among individual workloads, applicatio
 
 Traditional network zones may still contain many systems that should not communicate freely.
 
-### How
-
 Controls may use:
 
 - Host-based firewalls.
@@ -346,8 +328,6 @@ Controls may use:
 - Software-defined networking.
 - Workload identity.
 - Service mesh policy.
-
-### Where
 
 Microsegmentation is common in data centers, cloud workloads, virtual environments, and high-security application tiers.
 

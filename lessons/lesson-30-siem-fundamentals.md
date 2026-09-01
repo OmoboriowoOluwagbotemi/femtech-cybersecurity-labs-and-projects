@@ -44,11 +44,7 @@ A SIEM centralizes security telemetry for search, detection, investigation, repo
 
 Enterprise evidence is distributed across many systems and disappears at different rates.
 
-### How
-
 The SIEM ingests events, parses fields, normalizes data, enriches context, stores records, evaluates analytics, and presents alerts and cases.
-
-### Where
 
 SIEM platforms may be cloud-native, on-premises, hybrid, commercial, or open source.
 
@@ -172,11 +168,7 @@ Parsing extracts structured fields from raw events.
 
 Analytics need consistent fields such as user, IP, process, action, and result.
 
-### How
-
 Parsers use source schemas, JSON, XML, key-value formats, delimiters, or patterns.
-
-### Where
 
 Parsing may occur at source, collector, ingestion, query, or analytics time.
 
@@ -279,8 +271,6 @@ Correlation connects related events across time, sources, identities, assets, or
 
 Individual events may not justify an alert.
 
-### How
-
 Example:
 
 1. Many failed sign-ins.
@@ -288,8 +278,6 @@ Example:
 3. MFA method changed.
 4. Privileged role assigned.
 5. Large download.
-
-### Where
 
 Correlation runs in scheduled rules, streaming analytics, UEBA, or analyst searches.
 
@@ -488,22 +476,21 @@ Index and field names depend on data onboarding.
 
 ```spl
 index=windows EventCode=4625 earliest=-1h
-| stats count AS failures,
-        dc(user) AS accounts
-  BY src_ip, span=5m
-| where accounts >= 5
-```
-
-Exact time-bucketing syntax and fields should be tested in the target Splunk environment. A common explicit approach is:
-
-```spl
-index=windows EventCode=4625 earliest=-1h
 | bin _time span=5m
 | stats count AS failures,
         dc(user) AS accounts
   BY src_ip, _time
 | where accounts >= 5
 ```
+
+This explicitly groups results into five-minute time buckets. Exact fields should still be tested against the target Splunk data model and onboarding configuration.
+
+```spl
+index=windows EventCode=4625 earliest=-1h
+| stats count AS failures BY _time span=5m, src_ip
+```
+
+The shorter form uses the `stats` time-span syntax directly. Both examples preserve `_time` as the time field used for bucketing.
 
 ## 27. Query Safety and Quality
 

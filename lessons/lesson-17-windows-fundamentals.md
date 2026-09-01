@@ -42,11 +42,7 @@ Windows is an operating-system family built around kernel-mode and user-mode com
 
 Security decisions depend on identity, privilege, object permissions, process context, policy, and protective services.
 
-### How
-
 Applications run primarily in user mode and request operating-system functions through defined interfaces. Kernel-mode components manage memory, processes, devices, security enforcement, and system resources.
-
-### Where
 
 Windows operates on endpoints, servers, VMs, cloud instances, virtual desktops, kiosks, and specialized systems.
 
@@ -73,8 +69,6 @@ A SID identifies a security principal. An access token represents the security c
 
 Windows uses SIDs rather than display names for access decisions. Renaming an account does not change its SID.
 
-### How
-
 An access token may contain:
 
 - User SID.
@@ -85,8 +79,6 @@ An access token may contain:
 - Restrictions.
 - Elevation state.
 
-### Where
-
 Tokens are created during logon and used whenever processes access files, Registry keys, services, processes, and other securable objects.
 
 ## 4. Windows Access Control
@@ -95,14 +87,10 @@ Windows securable objects can have a security descriptor containing ownership an
 
 Permissions determine which principals can read, modify, execute, delete, administer, or audit an object.
 
-### How
-
 - A DACL defines allowed and denied access.
 - A SACL defines auditing behavior.
 - Access control entries reference SIDs and rights.
 - Inheritance can propagate entries from parent objects.
-
-### Where
 
 Access control applies to files, folders, Registry keys, services, processes, shares, Active Directory objects, and other resources.
 
@@ -114,11 +102,7 @@ UAC separates normal activity from elevated administrative activity. Mandatory I
 
 An administrator should not perform every task with a fully elevated token.
 
-### How
-
 An administrative user commonly operates with a filtered token and requests elevation for administrative actions. UAC is a security boundary component and usability control, but it is not a substitute for separate accounts, least privilege, application control, or endpoint protection.
-
-### Where
 
 UAC affects interactive administration, installers, system settings, Registry access, services, and administrative PowerShell sessions.
 
@@ -128,16 +112,12 @@ The Registry is a hierarchical database for operating-system, hardware, applicat
 
 Windows components require structured persistent configuration. Attackers also target the Registry for persistence, defense impairment, and system modification.
 
-### How
-
 The hierarchy contains:
 
 - Hives.
 - Keys and subkeys.
 - Values.
 - Value names, types, and data.
-
-### Where
 
 Registry data is exposed through paths such as:
 
@@ -214,8 +194,6 @@ A Windows service is a long-running program managed by the Service Control Manag
 
 Services provide operating-system, security, networking, database, application, and management functions.
 
-### How
-
 A service definition includes:
 
 - Service name and display name.
@@ -225,8 +203,6 @@ A service definition includes:
 - Dependencies.
 - Recovery actions.
 - Permissions.
-
-### Where
 
 Services run on endpoints and servers, often without an interactive user session.
 
@@ -284,11 +260,7 @@ A process is a running program with virtual memory, handles, threads, token, exe
 
 Process behavior reveals application function, malware execution, persistence, credential access, and system failures.
 
-### How
-
 Processes are created by other processes or operating-system mechanisms. Each has a process ID, but PIDs are reused.
-
-### Where
 
 Inspect through Task Manager, Resource Monitor, Process Explorer where approved, PowerShell, CIM, EDR, and event logs.
 
@@ -338,11 +310,7 @@ Windows Event Logs store structured events from operating-system components, app
 
 They support troubleshooting, monitoring, compliance, and incident investigation.
 
-### How
-
 Event providers write records to channels. Records contain system metadata and event-specific data.
-
-### Where
 
 Common channels include:
 
@@ -450,11 +418,7 @@ PowerShell is a command shell, scripting language, and automation framework base
 
 It supports consistent administration and rich system data. Attackers also abuse it because it is powerful and widely available.
 
-### How
-
 PowerShell commands return objects with properties and methods. The pipeline passes objects rather than only text.
-
-### Where
 
 PowerShell is used for Windows, Microsoft 365, Azure, Active Directory, endpoint administration, and security operations.
 

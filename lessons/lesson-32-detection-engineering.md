@@ -43,8 +43,6 @@ Detection engineering is the disciplined lifecycle of creating and operating sec
 
 Generic vendor alerts cannot cover every enterprise asset, threat, workflow, and data source.
 
-### How
-
 The lifecycle includes:
 
 1. Threat model.
@@ -57,8 +55,6 @@ The lifecycle includes:
 8. Measurement.
 9. Tuning.
 10. Retirement.
-
-### Where
 
 Detections run in SIEM, EDR, IDS/IPS, cloud platforms, email security, IAM, Wazuh, and SOAR.
 
@@ -102,8 +98,6 @@ A data contract defines the telemetry a detection depends on.
 
 A rule can silently fail when fields, schemas, policies, or connectors change.
 
-### How
-
 Record:
 
 - Source and version.
@@ -114,8 +108,6 @@ Record:
 - Latency.
 - Retention.
 - Health check.
-
-### Where
 
 Use for every production detection.
 
@@ -221,8 +213,6 @@ Sigma is a generic, structured format for describing log detections.
 
 It allows platform-neutral sharing and version control of detection intent.
 
-### How
-
 A Sigma rule commonly includes:
 
 - Metadata.
@@ -232,8 +222,6 @@ A Sigma rule commonly includes:
 - False-positive notes.
 - Level.
 - Tags.
-
-### Where
 
 Rules can be converted or adapted to SIEM languages such as KQL or SPL.
 
@@ -328,11 +316,7 @@ ATT&CK mapping associates observed behavior with adversary tactics and technique
 
 It supports common language, coverage analysis, hunting, and reporting.
 
-### How
-
 Map the actual behavior detected, not the alert title or assumed attacker motive.
-
-### Where
 
 Use in rule metadata, dashboards, cases, threat models, and coverage maps.
 
@@ -511,8 +495,6 @@ SOAR combines orchestration, automation, and case-response workflows.
 
 Repetitive enrichment and response consume analyst time and can be inconsistent.
 
-### How
-
 A playbook may:
 
 1. Receive alert.
@@ -523,8 +505,6 @@ A playbook may:
 6. Revoke session.
 7. Create ticket.
 8. Notify stakeholders.
-
-### Where
 
 SOAR integrates SIEM, EDR, IAM, firewall, email, threat intelligence, and ticketing.
 

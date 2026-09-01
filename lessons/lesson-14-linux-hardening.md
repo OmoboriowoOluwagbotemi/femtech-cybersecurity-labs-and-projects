@@ -35,8 +35,6 @@ Hardening is the systematic reduction of security risk through configuration, re
 
 Every service, package, account, permission, and network path can contribute to attack surface.
 
-### How
-
 A hardening program:
 
 1. Inventories the asset and purpose.
@@ -48,8 +46,6 @@ A hardening program:
 7. Records exceptions.
 8. Monitors configuration drift.
 
-### Where
-
 Hardening applies to physical servers, VMs, cloud instances, containers, appliances, images, and templates.
 
 ## 2. Security Baselines
@@ -57,8 +53,6 @@ Hardening applies to physical servers, VMs, cloud instances, containers, applian
 A security baseline is an approved minimum configuration for a defined system type and risk level.
 
 Baselines reduce inconsistency, support repeatable deployment, and provide a measurable reference for drift.
-
-### How
 
 A baseline may define:
 
@@ -72,8 +66,6 @@ A baseline may define:
 - Time synchronization.
 - Cryptographic settings.
 - Monitoring agents.
-
-### Where
 
 Organizations create separate baselines for web servers, database servers, workstations, cloud images, containers, and high-security systems.
 
@@ -95,11 +87,7 @@ Secure Shell (SSH) provides encrypted remote administration, file transfer, tunn
 
 SSH frequently exposes privileged management access. Weak credentials, broad exposure, unsafe keys, or poor configuration can lead to system compromise.
 
-### How
-
 The SSH server reads configuration, authenticates clients, creates sessions, and logs activity.
-
-### Where
 
 SSH is used for Linux administration, automation, file transfer, cloud access, network devices, and secure tunnels.
 
@@ -189,11 +177,7 @@ Uncomplicated Firewall (UFW) is a management interface commonly used on Ubuntu a
 
 A host firewall limits network reachability even when a service is listening.
 
-### How
-
 UFW translates administrator policy into underlying Linux packet-filtering rules.
-
-### Where
 
 UFW protects individual Linux hosts. It complements network firewalls and cloud security groups.
 
@@ -243,15 +227,11 @@ Fail2Ban monitors selected log events and temporarily or permanently applies act
 
 It can reduce repeated online guessing and log noise against exposed services.
 
-### How
-
 Fail2Ban uses:
 
 - **Filters:** patterns identifying relevant log events.
 - **Jails:** combinations of filter, log source, thresholds, duration, and action.
 - **Actions:** responses such as adding firewall blocks.
-
-### Where
 
 It may protect SSH, web authentication, mail services, and other log-producing applications.
 
@@ -284,11 +264,7 @@ The Linux Audit system records selected security-relevant events from the kernel
 
 Standard application logs may not provide sufficient detail about file access, system calls, account changes, or privileged actions.
 
-### How
-
 Audit rules select activity by system call, path, identity, permission, architecture, or other fields. Events may contain multiple correlated records.
-
-### Where
 
 Audit logs commonly appear in:
 
@@ -372,11 +348,7 @@ CIS Benchmarks are consensus-based secure-configuration recommendations for oper
 
 They provide structured assessment guidance and a common hardening reference.
 
-### How
-
 Organizations select an applicable benchmark and profile, tailor it to business requirements, assess current configuration, remediate approved findings, document exceptions, and monitor drift.
-
-### Where
 
 Benchmarks may be applied to Linux servers, Windows, cloud platforms, databases, containers, and network devices.
 

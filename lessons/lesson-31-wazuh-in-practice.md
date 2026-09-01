@@ -43,11 +43,7 @@ Wazuh is an open-source security platform collecting and analyzing endpoint and 
 
 Organizations need centralized visibility, rules, alerts, dashboards, and searchable evidence.
 
-### How
-
 Agents or agentless integrations collect events. The Wazuh manager analyzes data, while indexing and dashboard components store, search, and visualize results.
-
-### Where
 
 Wazuh can monitor endpoints, servers, cloud workloads, network-device logs, applications, containers, and selected cloud services.
 
@@ -132,8 +128,6 @@ The Wazuh agent is software installed on a supported endpoint to collect and mon
 
 Local access provides visibility not available from network logs alone.
 
-### How
-
 The agent communicates with the manager and can perform:
 
 - Log collection.
@@ -143,8 +137,6 @@ The agent communicates with the manager and can perform:
 - Inventory.
 - Active response integration.
 - Vulnerability-related inventory analysis.
-
-### Where
 
 Deploy to supported Windows, Linux, macOS, and other documented environments according to release capability.
 
@@ -227,8 +219,6 @@ Log-source configuration tells Wazuh which event channels, files, commands, or i
 
 Default collection may not include every security use case.
 
-### How
-
 Configuration may specify:
 
 - Log format.
@@ -237,8 +227,6 @@ Configuration may specify:
 - Multiline handling.
 - Exclusions.
 - Labels.
-
-### Where
 
 Configure locally or through centralized agent-group configuration according to architecture.
 
@@ -301,11 +289,7 @@ FIM monitors selected files or directories for changes.
 
 Unexpected modification can indicate persistence, tampering, or configuration drift.
 
-### How
-
 The agent records metadata, checksums, and change events according to configuration.
-
-### Where
 
 Monitor:
 
@@ -370,11 +354,7 @@ A decoder extracts structured fields from an event.
 
 Rules need fields such as source IP, user, action, and process.
 
-### How
-
 Decoders match source structure and parse fields.
-
-### Where
 
 Use built-in decoders or approved custom decoders for unsupported logs.
 
@@ -398,8 +378,6 @@ Wazuh rules evaluate decoded events and context to generate alerts.
 
 Rules translate telemetry into security meaning.
 
-### How
-
 Rules may use:
 
 - Decoder.
@@ -411,8 +389,6 @@ Rules may use:
 - Groups.
 - Severity level.
 - MITRE mapping.
-
-### Where
 
 Use built-in rules and approved local custom rules.
 

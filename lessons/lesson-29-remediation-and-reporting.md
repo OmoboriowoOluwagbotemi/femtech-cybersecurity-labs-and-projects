@@ -45,8 +45,6 @@ Remediation corrects or reduces a vulnerability and its associated risk.
 
 Unresolved weaknesses can be exploited, accumulate, and become harder to manage.
 
-### How
-
 Actions include:
 
 - Install patch.
@@ -59,8 +57,6 @@ Actions include:
 - Add monitoring.
 - Rotate credentials.
 - Retire asset.
-
-### Where
 
 Remediation applies across endpoints, servers, applications, cloud, network devices, containers, SaaS, and processes.
 
@@ -93,8 +89,6 @@ Prioritization orders work according to enterprise risk and urgency.
 
 Organizations cannot correct every finding simultaneously.
 
-### How
-
 Consider:
 
 - Active exploitation.
@@ -108,8 +102,6 @@ Consider:
 - Existing controls.
 - Remediation effort.
 - Age.
-
-### Where
 
 Prioritization applies to queues, campaigns, emergencies, and executive reporting.
 
@@ -324,8 +316,6 @@ Validation testing confirms whether remediation achieved the intended result wit
 
 Tickets and installation status do not prove the weakness is gone.
 
-### How
-
 Use:
 
 - Targeted rescan.
@@ -336,8 +326,6 @@ Use:
 - Negative access test.
 - Application regression test.
 - Log confirmation.
-
-### Where
 
 Validation occurs after implementation and after rollback or major environmental changes.
 
@@ -389,11 +377,7 @@ A vulnerability report communicates validated weakness, risk, evidence, action, 
 
 Different stakeholders need accurate decisions, not raw scanner output.
 
-### How
-
 Reports include executive, technical, operational, and governance views.
-
-### Where
 
 Reports appear in tickets, dashboards, formal assessments, risk registers, and leadership briefings.
 

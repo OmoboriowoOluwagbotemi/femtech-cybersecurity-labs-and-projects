@@ -44,11 +44,7 @@ Examples include Ubuntu, Debian, Red Hat Enterprise Linux, Rocky Linux, AlmaLinu
 
 Linux is stable, flexible, automatable, and widely used in enterprise and cloud infrastructure.
 
-### How
-
 Users interact through graphical tools, applications, remote services, and command-line shells such as Bash.
-
-### Where
 
 Linux runs on physical servers, VMs, cloud instances, containers, laptops, appliances, and embedded devices.
 
@@ -80,11 +76,7 @@ Linux presents files and directories in one hierarchy beginning at the root dire
 
 A predictable hierarchy helps administrators locate programs, configuration, logs, user data, and devices.
 
-### How
-
 Storage devices and remote filesystems are mounted at directories within the hierarchy.
-
-### Where
 
 Files may reside on local disks, removable media, network storage, memory-backed filesystems, container layers, or cloud volumes while appearing within one tree.
 
@@ -242,8 +234,6 @@ Package management installs, updates, verifies, and removes software through dis
 
 It provides dependency handling, update tracking, signatures, and consistent software inventory.
 
-### How
-
 Debian and Ubuntu systems commonly use APT:
 
 ```bash
@@ -262,8 +252,6 @@ sudo dnf upgrade
 sudo dnf install package-name
 sudo dnf remove package-name
 ```
-
-### Where
 
 Repositories may be maintained by distributions, enterprises, or approved vendors.
 
@@ -286,11 +274,7 @@ A process is a running instance of a program. Each process has a process identif
 
 Processes perform system work. Suspicious or failed processes are central to administration and incident investigation.
 
-### How
-
 The kernel creates, schedules, and terminates processes. Processes may create child processes and communicate through files, memory, sockets, and signals.
-
-### Where
 
 Process information appears through commands, `/proc`, system logs, audit systems, and endpoint security tools.
 
@@ -343,8 +327,6 @@ Traditional Linux discretionary access control assigns:
 
 Permissions limit who can read, modify, or execute files and access directories.
 
-### How
-
 ```bash
 ls -l
 ```
@@ -363,8 +345,6 @@ Interpretation:
 - `---`: others have no permissions.
 - Owner: `analyst`.
 - Group: `security`.
-
-### Where
 
 Permissions apply to files, directories, devices, sockets, and other filesystem objects.
 

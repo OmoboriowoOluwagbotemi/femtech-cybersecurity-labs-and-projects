@@ -76,8 +76,6 @@ For example:
 - A government agency must consider espionage and public service availability.
 - A small business often needs low-cost controls that reduce common threats quickly.
 
-### How Security Teams Use Threat Landscape Knowledge
-
 Security teams use threat knowledge to:
 
 - Prioritize vulnerabilities based on real exploitation.
@@ -88,8 +86,6 @@ Security teams use threat knowledge to:
 - Plan incident response playbooks.
 - Map attacker behavior to MITRE ATT&CK.
 - Communicate risk to leadership.
-
-### Where Threat Landscape Knowledge Appears
 
 Threat landscape knowledge appears in:
 
@@ -135,8 +131,6 @@ Malware can affect all parts of the CIA Triad:
 | Cryptominer | Uses systems to mine cryptocurrency without authorization. | Resource exhaustion, cloud cost increase, performance loss. | Cloud monitoring, endpoint alerts, process analysis. |
 | Wiper | Destroys or corrupts data to disrupt operations. | Severe availability and integrity loss. | Backups, segmentation, incident response, destructive activity alerts. |
 
-### How Malware Commonly Enters Environments
-
 Malware often enters through:
 
 - Phishing emails.
@@ -149,8 +143,6 @@ Malware often enters through:
 - Supply chain compromise.
 - Stolen credentials.
 - Malicious scripts.
-
-### Where Malware Is Detected
 
 Malware may be detected through:
 
@@ -212,8 +204,6 @@ Actor identification should be careful. Early in an incident, defenders may not 
 | Terrorist or extremist groups | Ideological disruption or fear. | Public services, critical infrastructure, symbolic targets. | Disruption, propaganda, destructive attacks. |
 | Organized crime groups | Profit at scale. | Financial systems, healthcare, retail, managed service providers. | Ransomware-as-a-service, fraud networks. |
 
-### How Threat Actors Select Targets
-
 Threat actors may choose targets based on:
 
 - Financial value.
@@ -224,8 +214,6 @@ Threat actors may choose targets based on:
 - Supply chain access.
 - Industry importance.
 - Ease of exploitation.
-
-### Where Threat Actors Appear in Enterprise Work
 
 Threat actor analysis appears in:
 
@@ -262,8 +250,6 @@ APTs matter because they may:
 - Abuse trusted vendors.
 - Adapt when defenders block one technique.
 
-### How APTs Commonly Operate
-
 APT operations often include:
 
 - Researching targets.
@@ -275,8 +261,6 @@ APT operations often include:
 - Collecting data.
 - Exfiltrating data.
 - Maintaining access.
-
-### Where APT Risk Is Highest
 
 APT risk is especially relevant to:
 
@@ -331,8 +315,6 @@ The Cyber Kill Chain helps defenders:
 - Explain attacks to leadership.
 - Create response playbooks.
 
-### How Controls Interrupt the Kill Chain
-
 | Kill Chain Stage | Example Controls |
 |---|---|
 | Reconnaissance | Attack surface management, limited public exposure, secure DNS and WHOIS practices. |
@@ -342,8 +324,6 @@ The Cyber Kill Chain helps defenders:
 | Installation | EDR, application allowlisting, file integrity monitoring. |
 | Command and Control | DNS monitoring, proxy logs, firewall egress filtering, IDS/IPS. |
 | Actions on Objectives | DLP, backups, segmentation, privileged access controls, incident response. |
-
-### Where the Kill Chain Is Used
 
 The Cyber Kill Chain is used in:
 
@@ -388,8 +368,6 @@ MITRE ATT&CK helps security teams:
 - Communicate with other security teams.
 - Compare defensive coverage across tactics and techniques.
 
-### How MITRE ATT&CK Is Structured
-
 ATT&CK uses:
 
 - Tactics: the attacker's tactical goal.
@@ -416,8 +394,6 @@ As of the current Enterprise ATT&CK structure, MITRE lists 15 Enterprise tactics
 | Impact | The attacker disrupts, destroys, or manipulates systems or data. |
 | Stealth | The attacker attempts to hide activity before, during, or after operations. |
 | Defense Impairment | The attacker weakens or disables defensive capabilities. |
-
-### Where ATT&CK Is Used
 
 ATT&CK is used in:
 

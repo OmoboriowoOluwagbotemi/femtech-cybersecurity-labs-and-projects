@@ -63,8 +63,6 @@ For example:
 - A government agency must protect sensitive citizen information.
 - A company using Microsoft 365 must protect email, SharePoint files, and Teams conversations.
 
-### How Confidentiality Is Protected
-
 Common confidentiality controls include:
 
 - Authentication, such as passwords and multifactor authentication.
@@ -77,8 +75,6 @@ Common confidentiality controls include:
 - Monitoring for unauthorized access.
 
 In Windows environments, confidentiality may be supported by NTFS permissions, BitLocker, Microsoft Defender, Conditional Access, and Active Directory group membership. In Linux environments, confidentiality may be supported by file permissions, SSH key controls, disk encryption, and restricted sudo access.
-
-### Where Confidentiality Applies
 
 Confidentiality applies wherever sensitive information exists:
 
@@ -108,8 +104,6 @@ For example:
 - A government agency must ensure public records are not manipulated.
 - A SOC must ensure logs have not been deleted or modified by an attacker.
 
-### How Integrity Is Protected
-
 Common integrity controls include:
 
 - Hashing.
@@ -124,8 +118,6 @@ Common integrity controls include:
 - Endpoint detection and response.
 
 Tools such as Wazuh can monitor file integrity. Microsoft Sentinel and Splunk can collect logs that help detect suspicious changes. Git can help preserve the integrity of source code by tracking changes.
-
-### Where Integrity Applies
 
 Integrity applies to:
 
@@ -155,8 +147,6 @@ For example:
 - A small business needs point-of-sale systems during business hours.
 - A government portal must remain available when citizens need public services.
 
-### How Availability Is Protected
-
 Common availability controls include:
 
 - Backups.
@@ -171,8 +161,6 @@ Common availability controls include:
 - Secure system administration.
 
 Availability is supported by both technology and process. A backup is only useful if it can be restored. A failover system is only useful if it has been tested.
-
-### Where Availability Applies
 
 Availability applies to:
 
@@ -205,17 +193,15 @@ A simple way to think about risk is:
 
 Security teams often express risk conceptually as:
 
-`Risk = Threat x Vulnerability x Impact`
+`Risk ≈ Likelihood × Impact`
 
-This is not always a mathematical formula. It is a thinking model that helps professionals evaluate what could go wrong, how likely it is, and how serious the outcome would be.
+Likelihood reflects how plausible the scenario is after considering the relevant threat source, vulnerabilities, exposure, and existing controls. Impact describes the harm to organizational objectives if the scenario occurs. This is a prioritization model rather than a universal mathematical formula; organizations should document their scales, evidence, assumptions, and uncertainty.
 
 Organizations cannot protect everything equally. Time, staff, money, and tools are limited. Risk helps security teams prioritize.
 
 A vulnerability on an isolated test machine may be less urgent than the same vulnerability on an internet-facing payroll server. A weak password on a disabled account may be less serious than a weak password on a domain administrator account.
 
 Risk connects cybersecurity decisions to business reality.
-
-### How Risk Is Managed
 
 Risk management usually includes:
 
@@ -235,8 +221,6 @@ Common risk treatment options include:
 | Mitigate | Reduce likelihood or impact. | Patch a vulnerable server. |
 | Transfer | Shift part of the risk. | Buy cyber insurance or use a managed provider. |
 | Accept | Acknowledge the risk and continue. | Accept a low-risk internal finding temporarily. |
-
-### Where Risk Appears in Security Work
 
 Risk appears in:
 
@@ -264,8 +248,6 @@ Threats are not always attackers. A threat can be a cybercriminal, a malicious i
 
 Security teams must understand threats so they can prepare realistic defenses. Without threat awareness, an organization may spend money on controls that do not address the most likely or most damaging events.
 
-### How Threats Are Categorized
-
 | Threat Category | Description | Example |
 |---|---|---|
 | External human threat | A person or group outside the organization. | Cybercriminals stealing credentials. |
@@ -273,8 +255,6 @@ Security teams must understand threats so they can prepare realistic defenses. W
 | Technical threat | Failure or misuse of technology. | Server crash or insecure software update. |
 | Environmental threat | Physical or natural event. | Flood, fire, power outage. |
 | Process threat | Weakness in procedure. | No approval process for firewall changes. |
-
-### Where Threats Appear
 
 Threats appear across:
 
@@ -317,8 +297,6 @@ Threats become more dangerous when vulnerabilities are present. A phishing email
 
 Security teams reduce risk by finding and fixing vulnerabilities before attackers exploit them.
 
-### How Vulnerabilities Are Found
-
 Common methods include:
 
 - Vulnerability scanning with tools such as Nessus or OpenVAS.
@@ -330,8 +308,6 @@ Common methods include:
 - Log analysis.
 - User access reviews.
 - Security baseline assessments.
-
-### Where Vulnerabilities Appear
 
 | Environment | Common Vulnerabilities |
 |---|---|
@@ -357,8 +333,6 @@ Controls can be technical, managerial, operational, or physical. By function, th
 
 Security controls turn security goals into practical action. It is not enough to say "protect customer data." An organization must implement controls that enforce access, monitor activity, protect systems, and support recovery.
 
-### How Security Controls Are Classified
-
 #### Security+ Control Categories
 
 | Control Category | Meaning | Example |
@@ -382,8 +356,6 @@ CompTIA Security+ SY0-701 commonly uses these four control categories: technical
 | Directive | Directs or instructs people to behave in a required security manner. | Acceptable use policy, security procedures, login banners. |
 
 Recovery controls, such as backups and disaster recovery plans, are still important in enterprise security. In Security+ discussions, recovery is often treated as part of resilience, business continuity, incident response, or corrective activity rather than one of the core control function labels listed above.
-
-### Where Controls Are Used
 
 Controls are used throughout the enterprise:
 
@@ -412,8 +384,6 @@ Modern environments are complex. Organizations use endpoints, servers, cloud pla
 
 Defense in depth makes that attack path harder.
 
-### How Defense in Depth Works
-
 | Layer | Example Controls |
 |---|---|
 | Governance | Policies, risk assessments, security standards. |
@@ -424,8 +394,6 @@ Defense in depth makes that attack path harder.
 | Data | Encryption, backups, data loss prevention. |
 | Monitoring | SIEM, log collection, alerting, threat hunting. |
 | Response | Incident response plan, containment procedures, recovery testing. |
-
-### Where Defense in Depth Applies
 
 Defense in depth applies everywhere security matters:
 
@@ -463,8 +431,6 @@ Attackers look for exposed and weak points. The larger and less managed the atta
 
 Organizations reduce risk by understanding, monitoring, and shrinking their attack surface.
 
-### How Attack Surface Is Identified
-
 Security teams identify attack surface by asking:
 
 - What systems are connected to the network?
@@ -487,8 +453,6 @@ Tools and methods include:
 - Firewall rule reviews.
 - External attack surface management.
 - SIEM log review.
-
-### Where Attack Surface Appears
 
 | Attack Surface Area | Example Exposure |
 |---|---|

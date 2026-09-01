@@ -139,8 +139,6 @@ Alert triage determines whether an alert is explainable, benign, suspicious, or 
 
 Immediate assumptions create unnecessary disruption; delayed escalation permits attacker activity.
 
-### How
-
 Validate:
 
 - Rule logic and data sources.
@@ -151,8 +149,6 @@ Validate:
 - Related identity, endpoint, network, and cloud events.
 - Approved change or administrator activity.
 - Sensor health and missing telemetry.
-
-### Where
 
 Use the SIEM case, EDR process tree, asset inventory, identity logs, proxy, DNS, firewall, and change-management records.
 
@@ -243,16 +239,12 @@ Log analysis reconstructs events from systems that observed identity, process, f
 
 No single log source provides complete truth. Correlation reduces blind spots and false conclusions.
 
-### How
-
 1. Normalize timestamps to UTC while retaining originals.
 2. Establish a narrow initial window.
 3. Build a process and network sequence.
 4. Pivot on host, user, process, hash, domain, IP, and session.
 5. Expand time and population as evidence requires.
 6. Record negative findings with query scope and limitations.
-
-### Where
 
 Use endpoint, Windows, PowerShell, identity, domain-controller, DNS, proxy, firewall, email, cloud, and application logs.
 
@@ -387,11 +379,7 @@ Packet capture records network traffic observed at a collection point.
 
 PCAP can validate DNS, connections, protocol behavior, timing, volume, and unencrypted content. Encryption limits payload visibility but still leaves useful metadata.
 
-### How
-
 Preserve the PCAP, note capture point and filter, verify hash, then use focused Wireshark display filters.
-
-### Where
 
 E-06 contains traffic from `FIN-WS-214` during 09:10-09:35 UTC. The capture point is the user VLAN egress. It does not contain traffic that bypassed that point.
 
@@ -465,8 +453,6 @@ Threat-intelligence enrichment adds context about indicators, infrastructure, ca
 
 Context can improve priority and pivots, but third-party reputation is not proof that an event is malicious or benign.
 
-### How
-
 Use the supplied synthetic records or sanitized indicators. Record:
 
 - Source.
@@ -477,8 +463,6 @@ Use the supplied synthetic records or sanitized indicators. Record:
 - Relationships.
 - Conflicts.
 - Limitations.
-
-### Where
 
 In real authorized work, relevant services may include VirusTotal, AbuseIPDB, AlienVault OTX, MISP, passive DNS, vendor intelligence, and internal history.
 
@@ -525,11 +509,7 @@ ATT&CK mapping associates observed behavior with documented adversary techniques
 
 Mapping supports consistent reporting, detection coverage, response planning, and lessons learned.
 
-### How
-
 Map only behavior supported by evidence. Record the event, evidence ID, technique, confidence, and rationale.
-
-### Where
 
 Include mappings in the case report, detection backlog, threat hunt, and improvement plan.
 
@@ -566,8 +546,6 @@ Incident severity expresses urgency and consequence based on scope, impact, thre
 
 Severity determines escalation, resources, containment speed, communication, and business involvement.
 
-### How
-
 Assess:
 
 - Confirmed malicious execution.
@@ -583,8 +561,6 @@ Assess:
 - Detection and containment status.
 - Recovery capability.
 - Regulatory or contractual concerns.
-
-### Where
 
 Use the organization's incident-severity matrix and document rationale. Do not substitute CVSS; CVSS scores vulnerability severity, not incident impact.
 
@@ -609,11 +585,7 @@ Containment limits further harm while preserving evidence and necessary operatio
 
 Uncoordinated action may destroy evidence, alert an intruder prematurely, interrupt patient care, or leave active sessions and persistence untouched.
 
-### How
-
 Select actions based on confirmed scope, risk, authority, and business impact.
-
-### Where
 
 Contain endpoints, identities, sessions, email rules, domains, IPs, files, shares, and related infrastructure through approved controls.
 

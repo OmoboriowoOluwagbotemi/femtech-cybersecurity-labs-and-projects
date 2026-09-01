@@ -46,8 +46,6 @@ Incident response is the organized capability for managing suspected and confirm
 
 Uncoordinated response can increase damage, destroy evidence, interrupt critical services, and create inconsistent communication.
 
-### How
-
 IR uses:
 
 - Governance.
@@ -60,8 +58,6 @@ IR uses:
 - Recovery.
 - Communication.
 - Improvement.
-
-### Where
 
 IR applies across on-premises, cloud, SaaS, endpoints, applications, third parties, and physical locations.
 
@@ -142,8 +138,6 @@ Identification determines whether observed activity is an incident and establish
 
 Premature closure misses attacks; premature crisis declaration wastes resources.
 
-### How
-
 1. Validate alert and source health.
 2. Review raw evidence.
 3. Identify assets and identities.
@@ -152,8 +146,6 @@ Premature closure misses attacks; premature crisis declaration wastes resources.
 6. Identify known attacker actions.
 7. Estimate scope and confidence.
 8. Assign severity.
-
-### Where
 
 Evidence comes from SIEM, EDR, identity, email, cloud, firewall, applications, users, and third parties.
 
@@ -224,8 +216,6 @@ Containment limits ongoing harm while preserving essential operations and eviden
 
 Investigation without containment can allow continued theft, encryption, or movement.
 
-### How
-
 Actions may include:
 
 - Isolate endpoint.
@@ -237,8 +227,6 @@ Actions may include:
 - Suspend compromised key.
 - Segment a zone.
 - Disable vulnerable service.
-
-### Where
 
 Contain at endpoint, identity, network, application, cloud, data, or business-process layer.
 
@@ -305,8 +293,6 @@ Eradication removes attacker access, persistence, malware, vulnerable conditions
 
 Containment alone does not restore trust.
 
-### How
-
 - Remove persistence.
 - Patch vulnerability.
 - Rebuild systems.
@@ -315,8 +301,6 @@ Containment alone does not restore trust.
 - Remove malicious rules and accounts.
 - Update detections.
 - Correct configuration.
-
-### Where
 
 Eradication may span endpoint, identity, cloud, application, network, and supplier environments.
 
@@ -361,8 +345,6 @@ Recovery restores systems and business operations to a trusted state.
 
 Availability must return without reintroducing compromise.
 
-### How
-
 1. Confirm eradication criteria.
 2. Restore from trusted source.
 3. Patch and harden.
@@ -371,8 +353,6 @@ Availability must return without reintroducing compromise.
 6. Test business function.
 7. Return in stages.
 8. Increase monitoring.
-
-### Where
 
 Recovery includes technology, data, identity, suppliers, users, and communications.
 
@@ -489,8 +469,6 @@ A lessons-learned review identifies improvements after an incident.
 
 Incidents expose gaps in people, process, technology, architecture, and governance.
 
-### How
-
 Ask:
 
 - What worked?
@@ -500,8 +478,6 @@ Ask:
 - Which decisions lacked authority?
 - Did containment affect business?
 - What must change?
-
-### Where
 
 Improvements feed risk, architecture, detection, training, patching, IAM, and plans.
 

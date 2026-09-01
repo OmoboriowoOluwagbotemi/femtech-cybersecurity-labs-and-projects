@@ -44,8 +44,6 @@ IAM is the combination of governance, processes, technologies, and controls used
 
 Organizations need the right identities to receive the right access for the right purpose and duration.
 
-### How
-
 IAM connects:
 
 - Authoritative identity sources.
@@ -56,8 +54,6 @@ IAM connects:
 - Access requests and approvals.
 - Privileged access.
 - Logging, review, and certification.
-
-### Where
 
 IAM applies to on-premises, cloud, SaaS, applications, networks, databases, endpoints, APIs, physical access, and machine identities.
 
@@ -110,13 +106,9 @@ RBAC assigns permissions to roles and users to appropriate roles.
 
 It reduces direct user entitlements and aligns access with job functions.
 
-### How
-
 ```text
 User -> Business Role -> Technical Entitlements -> Resources
 ```
-
-### Where
 
 RBAC appears in Active Directory groups, cloud roles, databases, SaaS applications, SIEM platforms, and business systems.
 
@@ -156,16 +148,12 @@ Separation of duties divides sensitive processes among multiple people or roles.
 
 It reduces fraud, error, and unilateral abuse.
 
-### How
-
 Examples:
 
 - Requester cannot approve own access.
 - Payment creator cannot release payment.
 - Developer cannot directly approve production deployment.
 - PAM administrator cannot freely use every vaulted credential.
-
-### Where
 
 Apply to finance, identity administration, cloud, code deployment, key management, audit, and security operations.
 
@@ -177,8 +165,6 @@ Least privilege grants only the access necessary for an approved task, scope, an
 
 It limits errors, misuse, malware impact, and lateral movement.
 
-### How
-
 Apply least privilege across:
 
 - Permissions.
@@ -188,8 +174,6 @@ Apply least privilege across:
 - device trust.
 - command or action.
 - data set.
-
-### Where
 
 It applies to users, administrators, service accounts, applications, scripts, APIs, databases, and cloud workloads.
 
@@ -229,8 +213,6 @@ PAM is the governance and technology used to control, protect, monitor, and audi
 
 Privileged credentials and sessions have high impact and attract attackers.
 
-### How
-
 PAM capabilities may include:
 
 - Credential vaulting.
@@ -243,8 +225,6 @@ PAM capabilities may include:
 - Discovery of privileged accounts.
 - Check-out and check-in.
 - Analytics and alerting.
-
-### Where
 
 PAM protects operating systems, Active Directory, databases, network devices, cloud roles, applications, secrets, and emergency accounts.
 
@@ -298,8 +278,6 @@ Account lifecycle management controls identities from creation through retiremen
 
 Uncontrolled accounts become orphaned, excessive, stale, or exploitable.
 
-### How
-
 The lifecycle includes:
 
 1. Authoritative identity event.
@@ -312,8 +290,6 @@ The lifecycle includes:
 8. Suspension or disablement.
 9. Deprovisioning.
 10. Record retention.
-
-### Where
 
 Lifecycle applies to employees, contractors, students, vendors, customers, services, devices, and workloads.
 
@@ -402,8 +378,6 @@ An access review asks accountable owners to confirm whether identities still req
 
 Roles, relationships, and risk change over time.
 
-### How
-
 Provide reviewers with:
 
 - Identity.
@@ -413,8 +387,6 @@ Provide reviewers with:
 - Risk and privilege.
 - Manager and owner.
 - Prior decisions.
-
-### Where
 
 Reviews cover privileged groups, applications, cloud roles, shared files, service accounts, and third parties.
 

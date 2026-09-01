@@ -51,8 +51,6 @@ Security weaknesses frequently exist between components:
 - A firewall blocks inbound traffic, but unrestricted outbound traffic enables command and control.
 - Logs exist locally, but an attacker can erase them before collection.
 
-### How
-
 Trace:
 
 1. Business purpose and criticality.
@@ -65,8 +63,6 @@ Trace:
 8. Telemetry and detection.
 9. Response authority and procedures.
 10. Backup, recovery, and continuity.
-
-### Where
 
 Walkthroughs apply to on-premises systems, SaaS, IaaS, hybrid identity, branch networks, industrial or clinical environments, remote work, and supplier-hosted services.
 
@@ -110,8 +106,6 @@ A trust boundary separates components with different identities, ownership, priv
 
 Attacks cross boundaries. The review must identify what authenticates each crossing, what is authorized, what is encrypted, what is logged, and what happens when validation fails.
 
-### How
-
 For every flow, ask:
 
 - Source and destination?
@@ -124,8 +118,6 @@ For every flow, ask:
 - Logging and alerting?
 - Failure and retry behavior?
 - Owner?
-
-### Where
 
 Important boundaries include internet-to-DMZ, user-to-application, application-to-database, on-premises-to-cloud, administrator-to-management plane, supplier-to-enterprise, production-to-backup, and corporate-to-clinical or operational networks.
 
@@ -162,8 +154,6 @@ Dependencies are services or resources required for operation, security, or reco
 
 Hidden dependencies create single points of failure and unexpected blast radius.
 
-### How
-
 Examine:
 
 - DNS and time synchronization.
@@ -175,8 +165,6 @@ Examine:
 - Monitoring and ticketing.
 - Backup and recovery infrastructure.
 - Staff and supplier availability.
-
-### Where
 
 Record dependencies in architecture diagrams, configuration management databases, business-impact analysis, risk registers, recovery plans, and supplier inventories.
 
@@ -205,11 +193,7 @@ Hardening reduces attack surface and constrains behavior by securely configuring
 
 Default configurations prioritize broad compatibility and ease of use. Unnecessary services, privileges, software, protocols, and trust increase attack opportunities.
 
-### How
-
 Use approved baselines, configuration management, exception handling, validation, and drift detection.
-
-### Where
 
 Apply hardening to endpoints, servers, directory services, network devices, hypervisors, containers, cloud resources, SaaS tenants, applications, and management tools.
 
@@ -357,8 +341,6 @@ Detection coverage is the ability to observe and identify meaningful behavior ac
 
 Controls fail. Without sufficient telemetry and tested detection logic, incidents remain invisible.
 
-### How
-
 For critical scenarios, map:
 
 - Required data sources.
@@ -372,8 +354,6 @@ For critical scenarios, map:
 - Investigation steps.
 - Response authority.
 - Test evidence.
-
-### Where
 
 Include identity, endpoint, Windows, Linux, DNS, firewall, VPN, IDS, cloud control plane, SaaS, application, database, and backup telemetry.
 
@@ -406,8 +386,6 @@ Zero Trust is an architectural approach that does not grant implicit trust based
 
 Modern enterprises operate across cloud, SaaS, remote work, suppliers, mobile devices, and hybrid infrastructure. A trusted internal network is too broad a security boundary.
 
-### How
-
 Apply:
 
 - Explicit verification.
@@ -419,8 +397,6 @@ Apply:
 - Segmentation.
 - Continuous telemetry and reevaluation.
 - Automated response with safeguards.
-
-### Where
 
 Zero Trust applies to users, administrators, service identities, APIs, workloads, data, remote access, cloud management, and internal applications.
 
@@ -472,8 +448,6 @@ A security gap is a difference between the required or target state and the obse
 
 Unstructured concerns do not create accountable remediation.
 
-### How
-
 Record:
 
 - Target or requirement.
@@ -488,8 +462,6 @@ Record:
 - Owner and due date.
 - Residual risk and exception status.
 - Validation method.
-
-### Where
 
 Track gaps in findings, risk registers, plans of action, remediation tickets, architecture decisions, compliance records, and executive dashboards.
 

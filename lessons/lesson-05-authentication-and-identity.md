@@ -64,11 +64,7 @@ An identity may contain:
 
 Systems need a reliable way to distinguish one entity from another. Without identity controls, organizations cannot consistently limit access, investigate actions, or remove access when relationships end.
 
-### How
-
 Identity systems create accounts, register authentication methods, assign access, monitor use, and disable or remove identities when no longer required.
-
-### Where
 
 Identities exist in:
 
@@ -108,11 +104,7 @@ Location and behavior are frequently used as contextual or risk signals. Their r
 
 Authentication evidence differs in strength. Passwords can be guessed or stolen. Devices can be lost. Biometrics can be spoofed or become unavailable. Combining independent factors reduces reliance on one control.
 
-### How
-
 An authentication service validates submitted evidence against securely enrolled information. It then applies policy, risk signals, and authorization requirements.
-
-### Where
 
 Authentication occurs at:
 
@@ -139,16 +131,12 @@ MFA reduces the likelihood that a stolen password alone results in account takeo
 - Sensitive records.
 - Password-reset operations.
 
-### How
-
 1. The user identifies an account.
 2. The first factor is validated.
 3. The system requests a second, independent factor.
 4. Risk and access policies are evaluated.
 5. A session is created if all requirements are satisfied.
 6. The authentication event is logged.
-
-### Where
 
 MFA is deployed through identity providers, VPN systems, privileged access platforms, SaaS applications, and endpoint sign-in.
 
@@ -230,16 +218,12 @@ SSO can:
 - Improve authentication logging.
 - Apply MFA consistently.
 
-### How
-
 1. A user requests an application.
 2. The application redirects the user to an identity provider.
 3. The identity provider authenticates the user and applies policy.
 4. The identity provider issues a protected assertion or token.
 5. The application validates it.
 6. The application creates an authorized session.
-
-### Where
 
 SSO is used across:
 
@@ -281,8 +265,6 @@ A token is a protected data object representing authorization, authentication in
 
 Tokens support scalable web, mobile, API, cloud, and federated access. They can be limited by audience, scope, lifetime, and other claims.
 
-### How
-
 After authentication or authorization, a trusted service issues a token. The receiving service validates:
 
 - Issuer.
@@ -292,8 +274,6 @@ After authentication or authorization, a trusted service issues a token. The rec
 - Scope or permissions.
 - Nonce or state where required.
 - Other policy claims.
-
-### Where
 
 Tokens appear in:
 
@@ -341,11 +321,7 @@ A password is a secret knowledge factor. A passphrase is typically longer and ma
 
 Passwords remain common because they are inexpensive and broadly supported. Their weaknesses include reuse, predictable choices, phishing, insecure storage, and recovery abuse.
 
-### How
-
 Users create or receive a secret, and the authentication system verifies it against a protected stored representation.
-
-### Where
 
 Passwords protect local accounts, directories, applications, databases, cloud services, devices, and recovery systems.
 
@@ -368,8 +344,6 @@ Secure password storage retains a one-way derived value instead of plaintext or 
 
 If an authentication database is stolen, secure derivation increases the cost of offline guessing and prevents administrators from directly reading passwords.
 
-### How
-
 1. Generate a unique random salt.
 2. Combine the password and salt through a password-specific derivation function.
 3. Apply a suitable work factor and, where supported, memory cost and parallelism settings.
@@ -378,8 +352,6 @@ If an authentication database is stolen, secure derivation increases the cost of
 6. Compare values using a safe implementation.
 
 Suitable technologies include Argon2id, bcrypt, scrypt, and PBKDF2 when properly configured.
-
-### Where
 
 This process belongs in application authentication systems, identity platforms, and any approved system that must directly verify passwords.
 

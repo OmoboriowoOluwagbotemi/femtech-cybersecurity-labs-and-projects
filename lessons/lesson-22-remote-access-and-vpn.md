@@ -42,8 +42,6 @@ Remote access allows an identity or system outside a resource's immediate networ
 
 Organizations operate across homes, branches, cloud platforms, vendors, and mobile workforces.
 
-### How
-
 Remote access may use:
 
 - VPN.
@@ -54,8 +52,6 @@ Remote access may use:
 - Virtual desktop infrastructure.
 - Zero Trust Network Access.
 
-### Where
-
 Connections may terminate at a firewall, VPN concentrator, cloud gateway, identity-aware proxy, application, or managed endpoint service.
 
 ## 2. VPN Concepts
@@ -64,11 +60,7 @@ A virtual private network creates a protected logical communication path across 
 
 Traffic may traverse untrusted infrastructure such as the Internet.
 
-### How
-
 A VPN encapsulates packets and commonly provides encryption, integrity, peer authentication, and replay protection.
-
-### Where
 
 VPNs connect users to organizations, branches to headquarters, cloud networks to data centers, and administrators to management networks.
 
@@ -255,8 +247,6 @@ Zero Trust is a security approach that does not grant implicit trust based only 
 
 Users, devices, applications, and resources operate across hybrid and cloud environments where an internal network is not automatically safe.
 
-### How
-
 Common principles:
 
 - Verify explicitly.
@@ -265,8 +255,6 @@ Common principles:
 - Evaluate identity, device, resource, and context.
 - Segment access.
 - Monitor continuously.
-
-### Where
 
 Zero Trust applies to workforce access, applications, cloud resources, endpoints, APIs, privileged administration, and data.
 
@@ -309,11 +297,7 @@ Remote Desktop Protocol provides graphical remote interaction with Windows syste
 
 Administrators and users need remote access to Windows applications and desktops.
 
-### How
-
 RDP carries display, keyboard, mouse, audio, device redirection, clipboard, and authentication-related communication according to configuration.
-
-### Where
 
 RDP is used for servers, workstations, virtual desktops, support, and administration.
 

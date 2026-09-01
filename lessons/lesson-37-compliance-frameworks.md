@@ -50,8 +50,6 @@ Compliance means meeting requirements that apply to an organization or defined s
 
 Organizations must understand what they are required or have committed to do. Failure may cause regulatory action, contractual penalties, litigation, loss of certification, interrupted payment processing, reputational damage, or harm to individuals.
 
-### How
-
 A compliance program:
 
 1. Identifies obligations.
@@ -64,8 +62,6 @@ A compliance program:
 8. Collects and protects evidence.
 9. Tests design and effectiveness.
 10. Remediates gaps and reports status.
-
-### Where
 
 Compliance applies across governance, employees, facilities, endpoints, networks, applications, cloud services, data, suppliers, and business processes. It is not owned only by the security team.
 
@@ -101,8 +97,6 @@ A technically compliant control can be ineffective. For example, a quarterly acc
 
 Incorrect scope creates false assurance. If a payment tokenization service, cloud identity provider, backup platform, or support vendor can affect protected data, excluding it without analysis may conceal risk.
 
-### How
-
 Document:
 
 - Legal entities and jurisdictions.
@@ -115,8 +109,6 @@ Document:
 - Third parties and shared responsibilities.
 - Supporting systems that can affect security.
 - Explicit inclusions, exclusions, and rationale.
-
-### Where
 
 Scoping appears in system inventories, data-flow diagrams, contracts, statements of applicability, PCI scope records, privacy records, risk assessments, and audit plans.
 
@@ -137,8 +129,6 @@ Functions contain Categories and Subcategories. Organizational Profiles describe
 
 The CSF provides a common language between executives, risk teams, engineers, suppliers, and assessors. It is broad enough for small businesses, enterprises, government, education, healthcare, and cloud environments.
 
-### How
-
 An organization can:
 
 1. Establish organizational context and priorities.
@@ -147,8 +137,6 @@ An organization can:
 4. Analyze gaps.
 5. Prioritize actions, owners, resources, and measures.
 6. Reassess as risks and business conditions change.
-
-### Where
 
 Use CSF 2.0 for enterprise risk communication, strategy, program assessment, supplier conversations, architecture review, and mapping multiple requirements into a common outcome model.
 
@@ -174,16 +162,12 @@ IG1 is the foundation; IG2 and IG3 build cumulatively.
 
 CIS Controls converts broad security goals into implementable safeguards. It is especially useful when an organization needs a prioritized technical and operational starting point.
 
-### How
-
 1. Select the appropriate Implementation Group using risk and enterprise characteristics.
 2. Inventory applicable assets and data.
 3. Assign every Safeguard an owner.
 4. Define implementation, evidence, and measurement.
 5. Record exceptions and compensating controls.
 6. Assess implementation and improve coverage.
-
-### Where
 
 Use CIS Controls in small-business security programs, hardening roadmaps, internal assessments, cloud programs, supplier requirements, and mappings to NIST CSF or other obligations.
 
@@ -205,8 +189,6 @@ Annex A provides a reference set of controls grouped into organizational, people
 
 An ISMS creates governance, repeatability, accountability, evidence, internal audit, management review, and continual improvement. Certification can provide external assurance that the scoped management system meets the standard's requirements.
 
-### How
-
 1. Define ISMS scope and context.
 2. Establish policy, roles, and objectives.
 3. Define a risk-assessment and treatment method.
@@ -216,8 +198,6 @@ An ISMS creates governance, repeatability, accountability, evidence, internal au
 7. Monitor objectives and control performance.
 8. Conduct internal audits and management reviews.
 9. Correct nonconformities and improve.
-
-### Where
 
 ISO/IEC 27001 is used by cloud providers, financial organizations, government suppliers, healthcare technology companies, universities, and managed service providers seeking structured governance or certification.
 
@@ -233,8 +213,6 @@ PCI DSS contains 12 high-level requirements covering areas such as network secur
 
 Compromise of cardholder data enables fraud and damages customers and payment ecosystems. PCI DSS creates a shared minimum for protecting the cardholder data environment (CDE).
 
-### How
-
 Organizations:
 
 - Determine their merchant or service-provider obligations.
@@ -246,8 +224,6 @@ Organizations:
 - Perform required testing and attest compliance.
 
 The customized approach permits an entity to meet a requirement's defined objective through a designed control, but it requires rigorous documentation, targeted risk analysis, testing, and assessor validation. It is not permission to omit the objective.
-
-### Where
 
 PCI DSS applies to e-commerce, retail, financial services, payment gateways, call centers, hospitality, and service providers that can affect payment security.
 
@@ -265,8 +241,6 @@ As of this lesson's publication, HHS's January 2025 proposal to strengthen the S
 
 Healthcare systems contain highly sensitive information and support patient care. Security failures can cause privacy harm, fraud, treatment disruption, and patient-safety consequences.
 
-### How
-
 Security operations support:
 
 - Accurate ePHI system and data-flow inventories.
@@ -278,8 +252,6 @@ Security operations support:
 - Incident procedures and contingency planning.
 - Business-associate governance.
 - Documentation and periodic evaluation.
-
-### Where
 
 The Security Rule applies in hospitals, clinics, health plans, clearinghouses, qualifying providers, and business associates such as cloud, billing, analytics, and managed-service providers handling ePHI.
 
@@ -303,8 +275,6 @@ Core processing principles include:
 
 Cybersecurity protects data, but GDPR addresses the broader legitimacy and governance of processing. Strong encryption does not make unnecessary or unlawfully collected personal data compliant.
 
-### How
-
 Organizations may need to:
 
 - Map processing activities and data flows.
@@ -319,8 +289,6 @@ Organizations may need to:
 - assess and document personal-data breaches and notification decisions.
 
 Security teams should rapidly provide facts about affected data, individuals, systems, exposure, protective measures, containment, and likely consequences. Privacy and legal teams determine formal notification duties.
-
-### Where
 
 GDPR can affect organizations established in the European Economic Area and, under specified territorial conditions, organizations elsewhere that offer goods or services to, or monitor the behavior of, people in the EU.
 

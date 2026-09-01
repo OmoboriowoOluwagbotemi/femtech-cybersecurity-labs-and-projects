@@ -65,8 +65,6 @@ Data regularly travels through or resides in environments that cannot be assumed
 
 Cryptography reduces the value of exposed data and helps detect tampering. It also enables trust between systems that have not previously communicated.
 
-### How
-
 A cryptographic operation normally involves:
 
 - Plaintext or original input.
@@ -76,8 +74,6 @@ A cryptographic operation normally involves:
 - A secure process for generating, storing, distributing, rotating, revoking, and destroying keys.
 
 An **algorithm** is the mathematical procedure. A **key** is the value that controls a cryptographic operation. The security of modern cryptography should depend on protecting the key, not hiding the algorithm.
-
-### Where
 
 Cryptography appears in:
 
@@ -121,8 +117,6 @@ Hashing is not encryption. It does not use a decryption key and is not designed 
 
 Hashing allows a system or analyst to determine whether data has changed without comparing every part of the original content. It is also used as one component of secure password storage and digital signatures.
 
-### How
-
 The input is processed by a hash algorithm. A secure cryptographic hash function should have these properties:
 
 - **Deterministic:** the same input produces the same digest.
@@ -132,8 +126,6 @@ The input is processed by a hash algorithm. A secure cryptographic hash function
 - **Fixed-length output:** output size is determined by the algorithm, not input size.
 
 For example, changing one character in an incident report produces a different SHA-256 digest.
-
-### Where
 
 Hashing is used for:
 
@@ -199,16 +191,12 @@ Symmetric encryption uses the same secret key, or closely related secret keys, f
 
 Symmetric algorithms are efficient and suitable for encrypting large amounts of data. They are commonly used for disks, files, databases, backups, and the bulk-data portion of network sessions.
 
-### How
-
 1. A secret key is generated.
 2. Plaintext and the key are processed by a symmetric algorithm.
 3. Ciphertext is produced.
 4. An authorized party uses the secret key to decrypt the ciphertext.
 
 Anyone who possesses the key may be able to decrypt the data. Secure key distribution and storage are therefore essential.
-
-### Where
 
 Symmetric encryption is used in:
 
@@ -255,8 +243,6 @@ Asymmetric cryptography helps solve the challenge of establishing trust and exch
 
 It also supports digital signatures and scalable identity verification.
 
-### How
-
 For confidentiality:
 
 1. A sender obtains the recipient's authentic public key.
@@ -269,8 +255,6 @@ For digital signatures:
 2. The signer uses the private key to create a signature over the digest.
 3. A recipient uses the public key to verify the signature.
 4. Successful verification supports integrity and signer authentication.
-
-### Where
 
 Asymmetric cryptography is used in:
 
@@ -325,11 +309,7 @@ Digital signatures help recipients determine:
 - Whether the signature corresponds to a particular private key.
 - Whether the associated public key is trusted for that purpose.
 
-### How
-
 The signing system calculates a digest and creates a signature using the signer's private key. The verifier independently calculates a digest, verifies the signature with the public key, and evaluates the certificate and trust path where certificates are used.
-
-### Where
 
 Digital signatures protect:
 
@@ -358,8 +338,6 @@ Public key infrastructure (PKI) is the combination of people, policies, procedur
 
 A public key alone does not prove who owns it. PKI provides a structured trust system that binds public keys to identified subjects such as websites, users, devices, or services.
 
-### How
-
 A typical PKI uses:
 
 - **Certificate authority (CA):** issues and signs certificates.
@@ -370,8 +348,6 @@ A typical PKI uses:
 - **Certificate policy and practice documentation:** defines issuance and operational requirements.
 - **Revocation services:** communicate whether a certificate should no longer be trusted.
 - **Hardware security module (HSM):** protects high-value cryptographic keys and performs controlled cryptographic operations.
-
-### Where
 
 PKI supports:
 
@@ -420,8 +396,6 @@ The commonly used certificate format is X.509.
 
 Certificates allow systems to verify identity and public-key ownership at scale. Without trustworthy validation, an attacker could present a fraudulent public key and impersonate a service.
 
-### How
-
 A certificate normally contains:
 
 - Subject information.
@@ -435,8 +409,6 @@ A certificate normally contains:
 - Key Usage and Extended Key Usage fields.
 
 For modern TLS hostname validation, the SAN extension identifies the DNS names or addresses the certificate is valid for.
-
-### Where
 
 Certificates are installed on:
 
@@ -486,8 +458,6 @@ TLS can provide:
 - Confidentiality.
 - Message integrity.
 
-### How
-
 A simplified TLS connection works as follows:
 
 1. The client connects and proposes supported cryptographic parameters.
@@ -498,8 +468,6 @@ A simplified TLS connection works as follows:
 6. Symmetric authenticated encryption protects application data.
 
 Modern TLS designs use ephemeral key establishment where supported. This can provide **forward secrecy**, meaning later compromise of a server's long-term private key should not reveal previously recorded sessions.
-
-### Where
 
 TLS protects:
 
@@ -553,8 +521,6 @@ Examples include:
 
 Stored data may be exposed through device theft, lost media, unauthorized access, decommissioned equipment, cloud misconfiguration, or backup compromise.
 
-### How
-
 Organizations protect data at rest through:
 
 - Full-disk or volume encryption.
@@ -565,8 +531,6 @@ Organizations protect data at rest through:
 - Cloud storage encryption.
 - Access controls and separation of duties.
 - Secure key storage and recovery procedures.
-
-### Where
 
 Examples include:
 
@@ -586,8 +550,6 @@ Data in transit, also called data in motion, is data moving between systems, net
 
 Network paths may include wireless networks, Internet service providers, cloud networks, proxies, gateways, and other infrastructure outside the organization's direct control.
 
-### How
-
 Data in transit may be protected with:
 
 - TLS for application traffic.
@@ -596,8 +558,6 @@ Data in transit may be protected with:
 - VPNs for protected remote or site-to-site connectivity.
 - Secure Wi-Fi protocols.
 - Message-level or application-level encryption.
-
-### Where
 
 Examples include:
 
@@ -623,8 +583,6 @@ Key management is the controlled handling of cryptographic keys throughout their
 
 Cryptographic strength depends heavily on key protection. A strong algorithm cannot preserve confidentiality if an attacker obtains the decryption key.
 
-### How
-
 An enterprise key lifecycle includes:
 
 1. Secure generation.
@@ -635,8 +593,6 @@ An enterprise key lifecycle includes:
 6. Backup and recovery where appropriate.
 7. Revocation or deactivation.
 8. Secure destruction.
-
-### Where
 
 Keys may be protected in:
 

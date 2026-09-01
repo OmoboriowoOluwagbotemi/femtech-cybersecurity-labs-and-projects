@@ -44,8 +44,6 @@ Threat intelligence is threat-related information that has been collected, evalu
 
 Raw indicators do not explain relevance, reliability, impact, or required action.
 
-### How
-
 The intelligence cycle commonly includes:
 
 1. Direction and requirements.
@@ -54,8 +52,6 @@ The intelligence cycle commonly includes:
 4. Analysis.
 5. Dissemination.
 6. Feedback.
-
-### Where
 
 CTI operates in SOCs, incident response, vulnerability management, fraud, risk, government, and sector-sharing communities.
 
@@ -171,11 +167,7 @@ VirusTotal is a threat-analysis service that aggregates detections and contextua
 
 It helps analysts compare multiple security-engine results and relationships.
 
-### How
-
 Analysts can search known indicators and, under approved policy, submit artifacts for analysis.
-
-### Where
 
 Use during malware triage, phishing analysis, hunting, and alert enrichment.
 
@@ -215,11 +207,7 @@ AbuseIPDB is a community-driven service for reports about abusive IP-address act
 
 It provides reputation context such as report categories, recency, and reporter observations.
 
-### How
-
 Users and integrations query an address or submit abuse reports under service rules.
-
-### Where
 
 Use to enrich firewall, brute-force, scanning, spam, and network alerts.
 
@@ -239,11 +227,7 @@ AlienVault Open Threat Exchange (OTX) is a community threat-intelligence sharing
 
 It provides indicators, descriptions, tags, references, and community context.
 
-### How
-
 Analysts search indicators, subscribe to relevant collections, and use APIs or integrations according to service capabilities.
-
-### Where
 
 Use for enrichment, hunting, detection ideas, and campaign context.
 
@@ -263,11 +247,7 @@ MISP is an open-source threat-intelligence platform for storing, correlating, sh
 
 Organizations need controlled intelligence sharing with context, relationships, confidence, and distribution rules.
 
-### How
-
 MISP organizes data into events, attributes, objects, tags, galaxies, sightings, correlations, and sharing controls.
-
-### Where
 
 Use internally, across trusted communities, in sector exchanges, and with SIEM or detection integrations.
 
@@ -376,8 +356,6 @@ Alert enrichment adds context to support triage.
 
 An IP or hash alone provides little business meaning.
 
-### How
-
 Add:
 
 - Asset criticality.
@@ -388,8 +366,6 @@ Add:
 - Historical alerts.
 - Campaign.
 - ATT&CK behavior.
-
-### Where
 
 Enrichment can occur in SIEM, SOAR, ticketing, threat platforms, or analyst workflow.
 

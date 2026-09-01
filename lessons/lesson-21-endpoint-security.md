@@ -44,8 +44,6 @@ Endpoint security protects devices throughout provisioning, operation, monitorin
 
 Endpoints execute untrusted content, store data, authenticate users, and connect to enterprise resources.
 
-### How
-
 Controls include:
 
 - Secure build.
@@ -59,8 +57,6 @@ Controls include:
 - Device management.
 - Logging.
 - Backup and recovery.
-
-### Where
 
 Controls operate locally and through centralized management platforms.
 
@@ -96,8 +92,6 @@ Microsoft Defender is a family of security capabilities. On Windows, Microsoft D
 
 Organizations need prevention and endpoint-level behavioral evidence.
 
-### How
-
 Capabilities may include:
 
 - Real-time protection.
@@ -111,8 +105,6 @@ Capabilities may include:
 - Automated investigation and remediation.
 - Device isolation.
 - Live response.
-
-### Where
 
 Defender capabilities can protect supported Windows, Linux, macOS, mobile, server, and cloud-connected environments, with platform-specific differences.
 
@@ -182,8 +174,6 @@ EDR continuously records selected endpoint activity and supports behavioral dete
 
 Attackers can change file hashes and use legitimate tools. Behavior and relationships provide more durable evidence.
 
-### How
-
 EDR may collect:
 
 - Process creation and ancestry.
@@ -195,8 +185,6 @@ EDR may collect:
 - Module loads.
 - Script behavior.
 - Device and user context.
-
-### Where
 
 EDR agents send telemetry to a central platform for detection and analysis.
 
@@ -267,11 +255,7 @@ BitLocker provides full-volume encryption for supported Windows volumes.
 
 It reduces data disclosure if a powered-off device or drive is lost, stolen, or accessed offline.
 
-### How
-
 BitLocker uses volume encryption keys protected by one or more key protectors. A Trusted Platform Module (TPM) can release key material when expected platform measurements and policy conditions are satisfied.
-
-### Where
 
 BitLocker protects operating-system, fixed-data, and removable volumes according to configuration.
 
@@ -349,8 +333,6 @@ Patch management identifies, evaluates, tests, deploys, verifies, and documents 
 
 Known vulnerabilities are common attack paths, but poorly managed updates can cause outages.
 
-### How
-
 1. Maintain asset and software inventory.
 2. Monitor updates and vulnerabilities.
 3. Determine applicability and exposure.
@@ -360,8 +342,6 @@ Known vulnerabilities are common attack paths, but poorly managed updates can ca
 7. Verify installation and function.
 8. Remediate failures.
 9. Report exceptions.
-
-### Where
 
 Patch operating systems, applications, browsers, drivers, firmware, security tools, and third-party software.
 
@@ -414,8 +394,6 @@ Endpoint hardening applies secure configuration to reduce attack surface and con
 
 Default functionality may exceed business need.
 
-### How
-
 Use:
 
 - Security baselines.
@@ -428,8 +406,6 @@ Use:
 - Device control.
 - Browser and Office hardening.
 - Logging.
-
-### Where
 
 Hardening differs for standard users, developers, kiosks, servers, and privileged workstations.
 
