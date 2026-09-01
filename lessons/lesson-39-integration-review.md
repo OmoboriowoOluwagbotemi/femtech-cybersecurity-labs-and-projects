@@ -42,11 +42,7 @@ The goal is not to draw an attractive diagram. The goal is to verify that actual
 
 ## 1. Security Architecture Walkthrough
 
-### What
-
 A security architecture walkthrough is a structured examination of how a business service is designed, operated, monitored, and recovered.
-
-### Why
 
 Security weaknesses frequently exist between components:
 
@@ -110,11 +106,7 @@ Diagrams and inventories can be wrong. Reconcile documentation with observed con
 
 ## 4. Trust Boundaries and Data Flows
 
-### What
-
 A trust boundary separates components with different identities, ownership, privilege, exposure, or security assumptions. A data flow shows how information moves between entities, processes, and storage.
-
-### Why
 
 Attacks cross boundaries. The review must identify what authenticates each crossing, what is authorized, what is encrypted, what is logged, and what happens when validation fails.
 
@@ -166,11 +158,7 @@ An isolated workload is not protected if its hypervisor or management plane is b
 
 ## 6. Dependency Analysis
 
-### What
-
 Dependencies are services or resources required for operation, security, or recovery.
-
-### Why
 
 Hidden dependencies create single points of failure and unexpected blast radius.
 
@@ -213,11 +201,7 @@ Do not count duplicated controls as independent when they share the same failure
 
 ## 8. System Hardening Review
 
-### What
-
 Hardening reduces attack surface and constrains behavior by securely configuring systems and removing unnecessary exposure.
-
-### Why
 
 Default configurations prioritize broad compatibility and ease of use. Unnecessary services, privileges, software, protocols, and trust increase attack opportunities.
 
@@ -369,11 +353,7 @@ Verify that:
 
 ## 16. Telemetry and Detection Review
 
-### What
-
 Detection coverage is the ability to observe and identify meaningful behavior across relevant attack paths.
-
-### Why
 
 Controls fail. Without sufficient telemetry and tested detection logic, incidents remain invisible.
 
@@ -422,11 +402,7 @@ Recovery should not reconnect systems into the same unresolved attack path.
 
 ## 18. Zero Trust Principles
 
-### What
-
 Zero Trust is an architectural approach that does not grant implicit trust based only on network location, ownership, or a previous authentication. Access is explicitly evaluated using identity, device, resource, context, policy, and risk.
-
-### Why
 
 Modern enterprises operate across cloud, SaaS, remote work, suppliers, mobile devices, and hybrid infrastructure. A trusted internal network is too broad a security boundary.
 
@@ -463,7 +439,7 @@ An access decision may evaluate:
 
 Access granted at 09:00 should not necessarily remain trusted after the device becomes high risk at 09:15.
 
-## 20. What Zero Trust Does Not Mean
+## 20. Zero Trust Limitations and Misconceptions
 
 Zero Trust does not mean:
 
@@ -492,11 +468,7 @@ Poorly designed controls can create denial-of-service risk or unsafe workarounds
 
 ## 22. Gap Identification
 
-### What
-
 A security gap is a difference between the required or target state and the observed state.
-
-### Why
 
 Unstructured concerns do not create accountable remediation.
 

@@ -41,11 +41,7 @@ Security analysts usually do not own every affected system. Clear evidence and a
 
 ## 1. Remediation
 
-### What
-
 Remediation corrects or reduces a vulnerability and its associated risk.
-
-### Why
 
 Unresolved weaknesses can be exploited, accumulate, and become harder to manage.
 
@@ -93,11 +89,7 @@ Mitigation can be appropriate temporarily or when remediation is unavailable, bu
 
 ## 4. Prioritization
 
-### What
-
 Prioritization orders work according to enterprise risk and urgency.
-
-### Why
 
 Organizations cannot correct every finding simultaneously.
 
@@ -328,11 +320,7 @@ Closure without verification creates misleading metrics.
 
 ## 17. Validation Testing
 
-### What
-
 Validation testing confirms whether remediation achieved the intended result without unacceptable side effects.
-
-### Why
 
 Tickets and installation status do not prove the weakness is gone.
 
@@ -397,11 +385,7 @@ A security fix that silently disables audit logging or breaks patient care is in
 
 ## 21. Vulnerability Reporting
 
-### What
-
 A vulnerability report communicates validated weakness, risk, evidence, action, ownership, and status.
-
-### Why
 
 Different stakeholders need accurate decisions, not raw scanner output.
 

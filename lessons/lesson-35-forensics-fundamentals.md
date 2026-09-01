@@ -41,11 +41,7 @@ Evidence collection must be authorized and coordinated with legal, privacy, HR, 
 
 ## 1. Digital Forensics
 
-### What
-
 Digital forensics is the disciplined handling and analysis of digital evidence.
-
-### Why
 
 Organizations need trustworthy answers about what happened, how, when, by whom, and with what impact.
 
@@ -148,11 +144,7 @@ Limitations:
 
 ## 6. Acquisition
 
-### What
-
 Acquisition creates a controlled copy or collection of evidence.
-
-### Why
 
 Analysis should preserve originals where feasible.
 
@@ -218,11 +210,7 @@ Matching acquisition and verification hashes support integrity but do not prove 
 
 ## 10. Timeline Analysis
 
-### What
-
 Timeline analysis orders events from multiple evidence sources.
-
-### Why
 
 Attacks unfold across identity, endpoint, network, cloud, and business systems.
 
@@ -304,11 +292,7 @@ Filter from broad incident window toward relevant entities and behavior.
 
 ## 15. Memory Forensics
 
-### What
-
 Memory forensics examines captured volatile memory.
-
-### Why
 
 Memory may contain:
 
@@ -344,11 +328,7 @@ Acquisition changes memory because the tool itself runs. This limitation must be
 
 ## 17. Volatility
 
-### What
-
 Volatility is an open-source memory-forensics framework. Modern training commonly uses Volatility 3.
-
-### Why
 
 It reconstructs operating-system and process artifacts from memory images.
 

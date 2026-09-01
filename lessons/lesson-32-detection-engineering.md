@@ -39,11 +39,7 @@ Threats, environments, schemas, and business processes change. Detections must c
 
 ## 1. Detection Engineering
 
-### What
-
 Detection engineering is the disciplined lifecycle of creating and operating security analytics.
-
-### Why
 
 Generic vendor alerts cannot cover every enterprise asset, threat, workflow, and data source.
 
@@ -102,11 +98,7 @@ Document:
 
 ## 4. Data Contract
 
-### What
-
 A data contract defines the telemetry a detection depends on.
-
-### Why
 
 A rule can silently fail when fields, schemas, policies, or connectors change.
 
@@ -225,11 +217,7 @@ Required fields:
 
 ## 11. Sigma
 
-### What
-
 Sigma is a generic, structured format for describing log detections.
-
-### Why
 
 It allows platform-neutral sharing and version control of detection intent.
 
@@ -336,11 +324,7 @@ Do not store sensitive production events or credentials in a public repository.
 
 ## 17. MITRE ATT&CK Mapping
 
-### What
-
 ATT&CK mapping associates observed behavior with adversary tactics and techniques.
-
-### Why
 
 It supports common language, coverage analysis, hunting, and reporting.
 
@@ -523,11 +507,7 @@ Retirement should preserve history and coverage impact.
 
 ## 29. SOAR
 
-### What
-
 SOAR combines orchestration, automation, and case-response workflows.
-
-### Why
 
 Repetitive enrichment and response consume analyst time and can be inconsistent.
 

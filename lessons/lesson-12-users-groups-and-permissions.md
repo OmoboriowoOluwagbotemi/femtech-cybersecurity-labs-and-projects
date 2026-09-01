@@ -31,11 +31,7 @@ Linux accounts and permissions protect web servers, databases, cloud workloads, 
 
 ## 1. Linux Identity
 
-### What
-
 A Linux identity is represented primarily by a numeric user identifier (UID). Groups are represented by group identifiers (GIDs).
-
-### Why
 
 The kernel makes access decisions using numeric identities and permissions. Usernames and group names provide human-readable mappings.
 
@@ -92,11 +88,7 @@ The `x` indicates that password information is stored separately, commonly in `/
 
 ## 4. User Management
 
-### What
-
 User management controls account creation, attributes, authentication status, group assignment, and retirement.
-
-### Why
 
 Accounts must match an approved identity and business need throughout their lifecycle.
 
@@ -163,11 +155,7 @@ Password-aging policy must match organizational standards and current identity s
 
 ## 6. Groups
 
-### What
-
 A group is a collection of identities used to assign access.
-
-### Why
 
 Group-based access is more scalable and auditable than assigning permissions separately to every user.
 
@@ -193,11 +181,7 @@ Group changes may not affect an existing session until the user signs in again o
 
 ## 7. Ownership
 
-### What
-
 Linux filesystem objects normally have an owning user and owning group.
-
-### Why
 
 Ownership determines which user and group permission sets apply.
 
@@ -224,11 +208,7 @@ Recursive ownership changes can damage services or expose data. Verify the exact
 
 ## 8. chmod
 
-### What
-
 `chmod` changes permission mode bits.
-
-### Why
 
 It controls read, write, and execute access for owner, group, and others.
 
@@ -298,11 +278,7 @@ World-writable directories without appropriate protections create significant ri
 
 ## 10. Default Permissions and umask
 
-### What
-
 `umask` removes permission bits from the default modes requested when new files and directories are created.
-
-### Why
 
 Secure defaults reduce accidental exposure.
 
@@ -326,11 +302,7 @@ Umask can be configured in shells, service definitions, application settings, an
 
 ## 11. Access Control Lists
 
-### What
-
 POSIX ACLs provide permissions for additional named users and groups beyond the traditional owner, group, and other entries.
-
-### Why
 
 ACLs support exceptions without changing primary ownership or creating excessive groups.
 
@@ -394,11 +366,7 @@ A `+` after permission characters in some `ls -l` output indicates extended ACL 
 
 ## 14. sudo and sudoers
 
-### What
-
 `sudo` allows an authorized user to execute specified commands with another identity, commonly root.
-
-### Why
 
 It supports controlled privilege elevation, accountability, and separation between routine and administrative work.
 

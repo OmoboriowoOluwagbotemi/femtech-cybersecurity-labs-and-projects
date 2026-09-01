@@ -47,13 +47,11 @@ The CIA Triad is the foundational model used to describe the three primary goals
 | Integrity | Information and systems remain accurate, complete, and trustworthy. | Has this data or system been changed improperly? |
 | Availability | Information and services are accessible when needed. | Can authorized users access the system when required? |
 
-### What Is Confidentiality?
+### Confidentiality
 
 Confidentiality means protecting information from unauthorized access or disclosure.
 
 In simple terms, confidentiality ensures that private data stays private. Examples include customer records, employee salary data, bank account details, medical records, government documents, source code, and security investigation reports.
-
-### Why Confidentiality Matters
 
 Loss of confidentiality can cause financial loss, regulatory penalties, identity theft, reputational damage, and legal exposure.
 
@@ -94,13 +92,11 @@ Confidentiality applies wherever sensitive information exists:
 - Source code repositories.
 - Identity platforms.
 
-### What Is Integrity?
+### Integrity
 
 Integrity means ensuring that data, systems, and processes remain accurate, complete, and trustworthy.
 
 Integrity is not only about preventing attackers from changing data. It also includes preventing accidental corruption, unauthorized configuration changes, software tampering, and improper administrative actions.
-
-### Why Integrity Matters
 
 If integrity fails, users and systems can no longer trust the information they depend on.
 
@@ -143,13 +139,11 @@ Integrity applies to:
 - Cloud identity settings.
 - Vulnerability scan results.
 
-### What Is Availability?
+### Availability
 
 Availability means ensuring that authorized users can access systems, applications, and data when needed.
 
 Availability is critical because even perfectly confidential and accurate data has limited value if nobody can access it during business operations.
-
-### Why Availability Matters
 
 Availability failures can stop business operations, disrupt public services, and endanger people.
 
@@ -195,7 +189,7 @@ Availability applies to:
 
 ## 2. Risk
 
-### What Is Risk?
+### Risk
 
 Risk is the possibility that a threat will exploit a vulnerability and cause harm to an asset or business process.
 
@@ -214,8 +208,6 @@ Security teams often express risk conceptually as:
 `Risk = Threat x Vulnerability x Impact`
 
 This is not always a mathematical formula. It is a thinking model that helps professionals evaluate what could go wrong, how likely it is, and how serious the outcome would be.
-
-### Why Risk Matters
 
 Organizations cannot protect everything equally. Time, staff, money, and tools are limited. Risk helps security teams prioritize.
 
@@ -264,13 +256,11 @@ A small accounting firm stores client tax documents in a cloud file-sharing plat
 
 ## 3. Threats
 
-### What Is a Threat?
+### Threats
 
 A threat is anything that can cause harm to an asset, system, network, user, or organization.
 
 Threats are not always attackers. A threat can be a cybercriminal, a malicious insider, a careless employee, a power outage, a failed update, a natural disaster, or a misconfigured cloud service.
-
-### Why Threats Matter
 
 Security teams must understand threats so they can prepare realistic defenses. Without threat awareness, an organization may spend money on controls that do not address the most likely or most damaging events.
 
@@ -304,7 +294,7 @@ A financial institution faces threats from phishing, credential stuffing, ransom
 
 ## 4. Vulnerabilities
 
-### What Is a Vulnerability?
+### Vulnerabilities
 
 A vulnerability is a weakness that can be exploited by a threat.
 
@@ -322,8 +312,6 @@ Examples include:
 - Default credentials.
 - Insecure firewall rules.
 - Lack of security awareness.
-
-### Why Vulnerabilities Matter
 
 Threats become more dangerous when vulnerabilities are present. A phishing email is more likely to succeed if users are not trained, MFA is not enabled, and suspicious login alerts are not monitored.
 
@@ -361,13 +349,11 @@ A healthcare organization runs an outdated file server that stores patient docum
 
 ## 5. Security Controls
 
-### What Is a Security Control?
+### Security Controls
 
 A security control is a safeguard used to reduce risk.
 
 Controls can be technical, managerial, operational, or physical. By function, they can prevent, deter, detect, correct, compensate for, or direct security activity.
-
-### Why Security Controls Matter
 
 Security controls turn security goals into practical action. It is not enough to say "protect customer data." An organization must implement controls that enforce access, monitor activity, protect systems, and support recovery.
 
@@ -416,13 +402,11 @@ A hybrid enterprise uses on-premises Active Directory and Microsoft 365. To prot
 
 ## 6. Defense in Depth
 
-### What Is Defense in Depth?
+### Defense in Depth
 
 Defense in depth is a security strategy that uses multiple layers of controls so that if one control fails, other controls still provide protection.
 
 The idea is simple: no single control is perfect. Passwords can be stolen. Firewalls can be misconfigured. Antivirus can miss new malware. Employees can make mistakes. Systems can fail. Layered defense reduces the chance that one weakness becomes a full compromise.
-
-### Why Defense in Depth Matters
 
 Modern environments are complex. Organizations use endpoints, servers, cloud platforms, remote workers, SaaS applications, mobile devices, APIs, third-party vendors, and identity providers. Attackers often move through several stages, from phishing to credential theft to privilege escalation to data theft.
 
@@ -469,13 +453,11 @@ No single layer solves ransomware alone. Together, the layers reduce risk signif
 
 ## 7. Attack Surface
 
-### What Is Attack Surface?
+### Attack Surface
 
 Attack surface is the total set of points where an attacker could try to enter, interact with, or exploit an environment.
 
 An attack surface includes technology, people, processes, identities, vendors, and exposed services.
-
-### Why Attack Surface Matters
 
 Attackers look for exposed and weak points. The larger and less managed the attack surface, the more opportunities attackers have.
 

@@ -41,11 +41,7 @@ Security teams advise, but business risk owners make accountable decisions.
 
 ## 1. Cybersecurity Risk
 
-### What
-
 Risk is the possibility that uncertainty or a threat will affect organizational objectives.
-
-### Why
 
 Organizations cannot eliminate all risk and must allocate limited resources.
 
@@ -268,11 +264,7 @@ Estimates require ranges and confidence. Cyber events rarely provide perfect fre
 
 ## 14. Threat Modeling
 
-### What
-
 Threat modeling systematically identifies security threats and design controls before or during system development.
-
-### Why
 
 Design flaws are cheaper and safer to address before production.
 
@@ -366,11 +358,7 @@ Update after architecture, data, threat, or control changes.
 
 ## 20. Risk Register
 
-### What
-
 A risk register records identified risks, analysis, ownership, treatment, and status.
-
-### Why
 
 Risk decisions require traceability and follow-through.
 

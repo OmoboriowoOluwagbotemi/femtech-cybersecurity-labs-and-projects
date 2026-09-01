@@ -41,11 +41,7 @@ Cloud services can be deployed quickly, making governance and continuous visibil
 
 ## 1. Cloud Computing
 
-### What
-
 Cloud computing provides on-demand access to shared configurable computing resources through provider-operated services.
-
-### Why
 
 Organizations seek speed, elasticity, global reach, managed capabilities, and consumption-based cost.
 
@@ -88,11 +84,7 @@ Deployment model is different from service model. A private cloud can still offe
 
 ## 4. Infrastructure as a Service
 
-### What
-
 IaaS provides virtualized compute, storage, and networking while the customer manages operating systems, applications, identities, and data.
-
-### Why
 
 It offers control similar to a virtual data center without owning physical infrastructure.
 
@@ -119,11 +111,7 @@ The provider protects physical facilities, hardware, and underlying virtualizati
 
 ## 5. Platform as a Service
 
-### What
-
 PaaS provides a managed application platform where the provider operates more of the runtime, middleware, scaling, and operating system.
-
-### Why
 
 Developers can focus on application code and data rather than server administration.
 
@@ -150,11 +138,7 @@ PaaS removes some patching responsibility but does not remove secure coding or c
 
 ## 6. Software as a Service
 
-### What
-
 SaaS provides a complete provider-operated application consumed by users or systems.
-
-### Why
 
 Organizations avoid managing the underlying application stack.
 
@@ -195,11 +179,7 @@ Exact boundaries vary by service. Contracts and provider documentation are autho
 
 ## 8. Shared Responsibility
 
-### What
-
 Shared responsibility divides security obligations between cloud provider and customer.
-
-### Why
 
 The provider cannot control every customer identity, configuration, application, or data decision, while the customer cannot secure provider facilities and hypervisors directly.
 
@@ -229,11 +209,7 @@ For each service ask:
 
 ## 10. Cloud Management Plane
 
-### What
-
 The management plane is the interface used to create, modify, and delete cloud resources and policy.
-
-### Why
 
 Compromise can affect many workloads and regions without exploiting each workload.
 

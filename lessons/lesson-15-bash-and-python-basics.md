@@ -40,11 +40,7 @@ Scripts must be reviewed, tested, versioned, monitored, and assigned an owner.
 
 ## 1. Security Scripting
 
-### What
-
 A script is a sequence of instructions executed by an interpreter or shell.
-
-### Why
 
 Manual work is slow and inconsistent at scale. Scripts make a process repeatable.
 
@@ -134,7 +130,6 @@ Treat command output as untrusted input.
 
 def main():
     print("Security script started")
-
 
 if __name__ == "__main__":
     main()
@@ -294,11 +289,7 @@ Catch errors that can be handled. Do not suppress every exception or continue af
 
 ## 13. Regular Expressions
 
-### What
-
 A regular expression is a pattern language for matching text.
-
-### Why
 
 Logs contain repeated structures such as IP addresses, usernames, dates, and event phrases.
 

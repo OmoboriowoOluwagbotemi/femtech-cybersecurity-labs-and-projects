@@ -46,11 +46,7 @@ Linux systems commonly provide web, DNS, database, file, monitoring, automation,
 
 ## 1. Linux Networking
 
-### What
-
 Linux networking is the set of kernel, interface, routing, name-resolution, socket, firewall, and application functions that enable communication.
-
-### Why
 
 Applications depend on correct and secure connectivity. A failure may result from configuration, routing, DNS, firewall, authentication, encryption, application state, or a security incident.
 
@@ -70,11 +66,7 @@ Networking operates across physical interfaces, virtual adapters, bridges, VLANs
 
 ## 2. Interfaces and Addresses
 
-### What
-
 A network interface is a software representation of a physical or virtual communication endpoint.
-
-### Why
 
 Interfaces hold addresses and link state and connect the host to a network.
 
@@ -156,11 +148,7 @@ A service bound to `127.0.0.1` is not normally reachable from another host. A li
 
 ## 5. Routing
 
-### What
-
 Routing selects the next hop and outgoing interface for a destination.
-
-### Why
 
 A correctly addressed interface still cannot reach remote networks without a suitable route.
 
@@ -193,11 +181,7 @@ Trace tools infer path behavior using TTL or hop-limit responses. Missing hops m
 
 ## 7. Sockets
 
-### What
-
 A socket is a kernel communication endpoint associated with protocol, addresses, ports, state, and process context.
-
-### Why
 
 Socket inspection shows which services are exposed and which remote systems have active communication.
 
@@ -211,11 +195,7 @@ Sockets include TCP, UDP, raw, Unix-domain, and other families.
 
 ## 8. netstat
 
-### What
-
 `netstat` is a legacy tool for displaying network connections, listeners, routes, interfaces, and statistics.
-
-### Why
 
 It remains common in older procedures and systems.
 
@@ -241,11 +221,7 @@ Common options:
 
 ## 9. ss
 
-### What
-
 `ss` is a modern socket-inspection tool in the `iproute2` suite.
-
-### Why
 
 It provides efficient, detailed visibility into socket state and filtering.
 
@@ -310,11 +286,7 @@ Many `TIME-WAIT` sockets can be normal after short connections. Persistent `CLOS
 
 ## 11. DNS Resolution
 
-### What
-
 DNS maps names to records such as addresses, mail exchangers, name servers, aliases, and text data.
-
-### Why
 
 Applications depend on names, but resolution failure and malicious changes can redirect or interrupt communication.
 
@@ -328,11 +300,7 @@ Linux DNS configuration may involve `/etc/resolv.conf`, NetworkManager, `systemd
 
 ## 12. dig
 
-### What
-
 `dig` is a DNS query and troubleshooting tool.
-
-### Why
 
 It exposes response codes, record data, TTL, flags, authority, and responding server.
 
@@ -374,11 +342,7 @@ DNS data does not authenticate an HTTPS service by itself. TLS hostname and trus
 
 ## 14. curl
 
-### What
-
 `curl` transfers data using protocols such as HTTP and HTTPS and displays request or response information.
-
-### Why
 
 It supports repeatable testing of status, headers, redirects, certificates, APIs, and service behavior.
 
@@ -425,11 +389,7 @@ curl --fail --show-error \
 
 ## 16. SSH Tunneling
 
-### What
-
 SSH tunneling forwards selected network connections through an encrypted SSH session.
-
-### Why
 
 It can protect otherwise exposed paths, reach controlled management services, and support secure administration.
 
@@ -498,11 +458,7 @@ Detection may involve SSH session logs, unexpected local listeners, process comm
 
 ## 21. File Sharing
 
-### What
-
 File sharing exposes files through a network protocol while applying identity, authorization, locking, and transport controls.
-
-### Why
 
 Organizations need controlled collaboration and application access.
 
@@ -516,11 +472,7 @@ Linux may share files through SMB/Samba, NFS, SFTP, HTTPS applications, or cloud
 
 ## 22. Samba
 
-### What
-
 Samba implements SMB-related services on Unix-like systems and can interoperate with Windows clients and Active Directory environments.
-
-### Why
 
 It allows Linux systems to provide or consume enterprise file and printer services.
 

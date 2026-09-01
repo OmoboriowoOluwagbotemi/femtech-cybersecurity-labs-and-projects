@@ -40,11 +40,7 @@ Many security incidents use valid credentials and excessive authorization rather
 
 ## 1. Identity and Access Management
 
-### What
-
 IAM is the combination of governance, processes, technologies, and controls used to manage identities and access.
-
-### Why
 
 Organizations need the right identities to receive the right access for the right purpose and duration.
 
@@ -110,11 +106,7 @@ Enterprises often combine models.
 
 ## 5. Role-Based Access Control
 
-### What
-
 RBAC assigns permissions to roles and users to appropriate roles.
-
-### Why
 
 It reduces direct user entitlements and aligns access with job functions.
 
@@ -160,11 +152,7 @@ RBAC should not force every exceptional need into a permanent role.
 
 ## 8. Separation of Duties
 
-### What
-
 Separation of duties divides sensitive processes among multiple people or roles.
-
-### Why
 
 It reduces fraud, error, and unilateral abuse.
 
@@ -185,11 +173,7 @@ Small teams may require compensating controls such as independent review, strong
 
 ## 9. Least Privilege
 
-### What
-
 Least privilege grants only the access necessary for an approved task, scope, and duration.
-
-### Why
 
 It limits errors, misuse, malware impact, and lateral movement.
 
@@ -241,11 +225,7 @@ Privilege is broader than "administrator" labels. A user who can edit a startup 
 
 ## 12. Privileged Access Management
 
-### What
-
 PAM is the governance and technology used to control, protect, monitor, and audit privileged access.
-
-### Why
 
 Privileged credentials and sessions have high impact and attract attackers.
 
@@ -314,11 +294,7 @@ Recording is detective and accountability support; it does not prevent every har
 
 ## 16. Account Lifecycle Management
 
-### What
-
 Account lifecycle management controls identities from creation through retirement.
-
-### Why
 
 Uncontrolled accounts become orphaned, excessive, stale, or exploitable.
 
@@ -422,11 +398,7 @@ Approval does not prove correct implementation. Provisioning and later removal m
 
 ## 22. Access Reviews
 
-### What
-
 An access review asks accountable owners to confirm whether identities still require access.
-
-### Why
 
 Roles, relationships, and risk change over time.
 

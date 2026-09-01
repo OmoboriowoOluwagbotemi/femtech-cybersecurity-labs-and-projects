@@ -48,11 +48,7 @@ Organizations need secure processes, usable reporting, identity protection, moni
 
 ## 1. Social Engineering Fundamentals
 
-### What
-
 Social engineering is the use of deception, influence, or manipulation to cause a person to disclose information or perform an action that benefits an attacker.
-
-### Why
 
 People must make decisions with incomplete information. Attackers imitate normal communications and exploit business pressure. A message may arrive during a busy period, use a familiar name, and request an action that appears reasonable.
 
@@ -100,11 +96,7 @@ Influence is not evidence of user weakness. Secure systems anticipate ordinary h
 
 ## 3. Phishing
 
-### What
-
 Phishing is a deceptive communication intended to make recipients reveal information, open malicious content, visit a fraudulent service, transfer value, or grant access.
-
-### Why
 
 Email and messaging provide low-cost access to many potential targets. Even a small success rate can be profitable.
 
@@ -154,11 +146,7 @@ No single indicator proves maliciousness. Analysts combine technical and context
 
 ## 5. Spear Phishing
 
-### What
-
 Spear phishing is targeted phishing tailored to a particular person, role, organization, or business process.
-
-### Why
 
 Personalization increases credibility. Public websites, social media, breached data, vendor information, job advertisements, and previous compromises provide useful details.
 
@@ -186,11 +174,7 @@ A university researcher receives a conference document using the correct event t
 
 ## 6. Business Email Compromise
 
-### What
-
 BEC is fraud or unauthorized activity conducted through impersonated or compromised business communications. It commonly targets payments, payroll, procurement, sensitive data, and account changes.
-
-### Why
 
 BEC can produce high financial returns without malware. Attackers exploit normal authority and transaction processes.
 
@@ -234,11 +218,7 @@ Email authentication may not stop BEC sent from a genuinely compromised account.
 
 ## 7. Vishing
 
-### What
-
 Vishing is voice-based social engineering conducted through telephone calls, voice messages, or voice-enabled platforms.
-
-### Why
 
 Voice creates immediacy and social pressure. Caller ID can be spoofed, and realistic personal information can increase credibility.
 
@@ -270,11 +250,7 @@ Vishing targets support desks, finance teams, customer service, healthcare recep
 
 ## 8. Pretexting
 
-### What
-
 Pretexting is constructing a believable scenario and identity to justify a request.
-
-### Why
 
 A plausible story explains why an unusual request appears necessary.
 

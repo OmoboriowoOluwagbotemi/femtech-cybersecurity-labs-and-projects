@@ -39,11 +39,7 @@ The platform requires governance and operations; installation alone does not cre
 
 ## 1. Wazuh
 
-### What
-
 Wazuh is an open-source security platform collecting and analyzing endpoint and log telemetry.
-
-### Why
 
 Organizations need centralized visibility, rules, alerts, dashboards, and searchable evidence.
 
@@ -132,11 +128,7 @@ The SIEM contains sensitive data and detection logic and is a high-value target.
 
 ## 6. Wazuh Agent
 
-### What
-
 The Wazuh agent is software installed on a supported endpoint to collect and monitor selected activity.
-
-### Why
 
 Local access provides visibility not available from network logs alone.
 
@@ -231,11 +223,7 @@ No alert activity from a critical server can indicate quiet behavior or failed c
 
 ## 11. Log-Source Configuration
 
-### What
-
 Log-source configuration tells Wazuh which event channels, files, commands, or integrations to collect.
-
-### Why
 
 Default collection may not include every security use case.
 
@@ -309,11 +297,7 @@ Do not expose an unauthenticated syslog listener broadly.
 
 ## 15. File-Integrity Monitoring
 
-### What
-
 FIM monitors selected files or directories for changes.
-
-### Why
 
 Unexpected modification can indicate persistence, tampering, or configuration drift.
 
@@ -382,11 +366,7 @@ This complements, not replaces, dedicated vulnerability assessment and validatio
 
 ## 19. Decoders
 
-### What
-
 A decoder extracts structured fields from an event.
-
-### Why
 
 Rules need fields such as source IP, user, action, and process.
 
@@ -414,11 +394,7 @@ Regex parsing can be brittle. Prefer structured JSON fields where available.
 
 ## 21. Rules
 
-### What
-
 Wazuh rules evaluate decoded events and context to generate alerts.
-
-### Why
 
 Rules translate telemetry into security meaning.
 

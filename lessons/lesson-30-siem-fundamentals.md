@@ -40,11 +40,7 @@ Without correlation, each source may appear harmless. Together they may reveal a
 
 ## 1. SIEM
 
-### What
-
 A SIEM centralizes security telemetry for search, detection, investigation, reporting, and selected response integrations.
-
-### Why
 
 Enterprise evidence is distributed across many systems and disappears at different rates.
 
@@ -172,11 +168,7 @@ Collecting every available event without defined use can create cost and noise.
 
 ## 8. Parsing
 
-### What
-
 Parsing extracts structured fields from raw events.
-
-### Why
 
 Analytics need consistent fields such as user, IP, process, action, and result.
 
@@ -283,11 +275,7 @@ Apply:
 
 ## 14. Correlation
 
-### What
-
 Correlation connects related events across time, sources, identities, assets, or behavior.
-
-### Why
 
 Individual events may not justify an alert.
 

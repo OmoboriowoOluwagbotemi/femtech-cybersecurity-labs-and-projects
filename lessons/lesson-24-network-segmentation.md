@@ -41,11 +41,7 @@ Flat networks allow one compromise to reach far more systems.
 
 ## 1. Network Segmentation
 
-### What
-
 Network segmentation divides a network into controlled zones based on function, sensitivity, trust, exposure, or administrative need.
-
-### Why
 
 It limits who and what can communicate, reducing attack paths and incident impact.
 
@@ -114,11 +110,7 @@ Risks:
 
 ## 4. VLANs
 
-### What
-
 A virtual LAN (VLAN) creates a logical Layer 2 broadcast domain on switching infrastructure.
-
-### Why
 
 It separates devices without requiring a separate physical switch for every zone.
 
@@ -209,11 +201,7 @@ Defenses:
 
 ## 9. DMZ Architecture
 
-### What
-
 A demilitarized zone is a controlled network segment for systems requiring exposure to less trusted networks.
-
-### Why
 
 It limits direct paths from public services into internal systems.
 
@@ -267,11 +255,7 @@ The security objective matters more than the number of firewalls.
 
 ## 12. Access Control Lists
 
-### What
-
 A network ACL is an ordered set of permit or deny conditions controlling traffic.
-
-### Why
 
 ACLs enforce which sources can reach destinations using selected protocols and ports.
 
@@ -348,11 +332,7 @@ Perimeter firewalls mainly observe north-south paths. Internal segmentation is r
 
 ## 18. Microsegmentation
 
-### What
-
 Microsegmentation applies granular policy among individual workloads, applications, or small groups.
-
-### Why
 
 Traditional network zones may still contain many systems that should not communicate freely.
 

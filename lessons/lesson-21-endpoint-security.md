@@ -40,11 +40,7 @@ Compromised endpoints can expose credentials, data, sessions, administrative too
 
 ## 1. Endpoint Security
 
-### What
-
 Endpoint security protects devices throughout provisioning, operation, monitoring, incident response, recovery, and retirement.
-
-### Why
 
 Endpoints execute untrusted content, store data, authenticate users, and connect to enterprise resources.
 
@@ -96,11 +92,7 @@ Product labels vary. Evaluate actual telemetry, detection, response, retention, 
 
 ## 4. Microsoft Defender
 
-### What
-
 Microsoft Defender is a family of security capabilities. On Windows, Microsoft Defender Antivirus provides antimalware protection. Microsoft Defender for Endpoint adds enterprise endpoint detection, investigation, response, vulnerability-related visibility, and centralized operations according to licensing and configuration.
-
-### Why
 
 Organizations need prevention and endpoint-level behavioral evidence.
 
@@ -186,11 +178,7 @@ An ASR alert describes behavior; analysts still validate context.
 
 ## 8. EDR Concepts
 
-### What
-
 EDR continuously records selected endpoint activity and supports behavioral detection, investigation, threat hunting, and response.
-
-### Why
 
 Attackers can change file hashes and use legitimate tools. Behavior and relationships provide more durable evidence.
 
@@ -275,11 +263,7 @@ Endpoint response must coordinate with IAM, network, cloud, and incident-respons
 
 ## 12. BitLocker
 
-### What
-
 BitLocker provides full-volume encryption for supported Windows volumes.
-
-### Why
 
 It reduces data disclosure if a powered-off device or drive is lost, stolen, or accessed offline.
 
@@ -361,11 +345,7 @@ Combine it with secure boot, endpoint protection, authentication, least privileg
 
 ## 17. Patch Management
 
-### What
-
 Patch management identifies, evaluates, tests, deploys, verifies, and documents software and firmware updates.
-
-### Why
 
 Known vulnerabilities are common attack paths, but poorly managed updates can cause outages.
 
@@ -430,11 +410,7 @@ Offline, forgotten, and unsupported devices require active escalation, not silen
 
 ## 21. Endpoint Hardening
 
-### What
-
 Endpoint hardening applies secure configuration to reduce attack surface and constrain behavior.
-
-### Why
 
 Default functionality may exceed business need.
 

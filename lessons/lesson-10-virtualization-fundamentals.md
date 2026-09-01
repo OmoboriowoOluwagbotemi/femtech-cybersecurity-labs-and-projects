@@ -42,8 +42,6 @@ Poor isolation or management can expose the host, production network, credential
 
 ## 1. Virtualization
 
-### What
-
 Virtualization abstracts computing resources so a software-defined system can operate independently of the underlying physical hardware.
 
 A VM normally has virtual:
@@ -54,8 +52,6 @@ A VM normally has virtual:
 - Network adapters.
 - Firmware.
 - Peripheral devices.
-
-### Why
 
 Virtualization improves hardware utilization, consistency, portability, recovery, testing, and isolation.
 
@@ -83,11 +79,7 @@ The guest behaves like a separate computer, but it still shares physical resourc
 
 ## 3. Hypervisors
 
-### What
-
 A hypervisor creates, runs, and controls virtual machines.
-
-### Why
 
 It separates guest operating systems from physical hardware and from one another while allocating resources.
 
@@ -113,11 +105,7 @@ Type does not determine security by itself. Configuration, patching, access cont
 
 ## 5. VirtualBox
 
-### What
-
 Oracle VirtualBox is a hosted virtualization platform commonly used for desktop laboratories.
-
-### Why
 
 It supports multiple guest operating systems, snapshots, cloning, and configurable virtual networking.
 
@@ -140,11 +128,7 @@ It is useful in training, software testing, demonstrations, and isolated cyberse
 
 ## 6. VMware
 
-### What
-
 VMware provides desktop and enterprise virtualization products. VMware Workstation and Fusion support desktop labs, while ESXi and related management platforms support enterprise infrastructure.
-
-### Why
 
 VMware platforms provide mature VM management, virtual networking, snapshots, templates, and enterprise operational capabilities.
 
@@ -194,11 +178,7 @@ Each virtual adapter connects to a selected virtual network mode. Incorrect mode
 
 ## 8. Snapshots
 
-### What
-
 A snapshot records VM state at a point in time so changes can later be reverted. Depending on the product and options, it may include disk, configuration, and memory state.
-
-### Why
 
 Snapshots allow students and administrators to return to a known state after configuration changes, software testing, or an isolated exercise.
 
@@ -235,11 +215,7 @@ Before cloning, remove embedded secrets and ensure unique hostnames, machine ide
 
 ## 10. Virtual Networking
 
-### What
-
 Virtual networking connects guest adapters to the host, other VMs, physical networks, or the Internet through software-defined switches and services.
-
-### Why
 
 Network mode determines reachability, exposure, and lab isolation.
 
@@ -253,11 +229,7 @@ Virtual networks support labs, server segments, management networks, cloud virtu
 
 ## 11. NAT Mode
 
-### What
-
 Network Address Translation (NAT) mode allows a VM to send traffic outward using the host or virtualization platform's translated connectivity.
-
-### Why
 
 NAT provides convenient outbound access while normally preventing unsolicited inbound connections from the physical network unless port forwarding is configured.
 
@@ -279,11 +251,7 @@ NAT is suitable for guest updates and general Internet access when direct LAN pr
 
 ## 12. Bridged Mode
 
-### What
-
 Bridged mode connects a VM to the physical network as if it were another device on that network.
-
-### Why
 
 It is useful when a guest must receive an address from the physical network or be directly reachable by other physical hosts.
 
@@ -306,11 +274,7 @@ Do not use bridged mode for malware analysis, intentionally vulnerable machines,
 
 ## 13. Host-Only Mode
 
-### What
-
 Host-only networking creates a private network between the host and selected VMs, normally without direct access to the physical network or Internet.
-
-### Why
 
 It provides a useful boundary for controlled security exercises.
 

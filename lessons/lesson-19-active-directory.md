@@ -43,11 +43,7 @@ An attacker who compromises privileged directory access may control identities, 
 
 ## 1. Active Directory Domain Services
 
-### What
-
 AD DS is a directory service that stores objects and provides identity, authentication, authorization, policy, and discovery.
-
-### Why
 
 Enterprises need consistent identity and access decisions across many systems.
 
@@ -85,11 +81,7 @@ Moving an object changes its distinguished name but not necessarily its SID or g
 
 ## 3. Domains
 
-### What
-
 A domain is an administrative, replication, authentication, and policy boundary within a forest.
-
-### Why
 
 It groups directory objects under a DNS namespace and common domain policies.
 
@@ -107,16 +99,12 @@ The forest is the primary security boundary in traditional AD DS. Highly privile
 
 ## 4. Forests
 
-### What
-
 A forest is the top-level AD DS structure sharing:
 
 - Schema.
 - Configuration partition.
 - Global Catalog.
 - Trust relationships among its domains.
-
-### Why
 
 It creates a common directory and trust architecture.
 
@@ -142,11 +130,7 @@ Forest-level administrators and domain controllers require the highest protectio
 
 ## 5. Domain Controllers
 
-### What
-
 A domain controller hosts AD DS and provides directory and authentication services.
-
-### Why
 
 Clients require trusted systems to validate identity and retrieve directory information.
 
@@ -183,11 +167,7 @@ The Global Catalog stores a full copy of local-domain objects and a partial attr
 
 ## 7. Trusts
 
-### What
-
 A trust allows authentication from one domain or forest to be recognized for potential access in another.
-
-### Why
 
 Organizations need controlled access across domains, forests, mergers, partners, or legacy environments.
 
@@ -255,11 +235,7 @@ Run applications or services. Prefer managed service accounts where supported to
 
 ## 10. Groups
 
-### What
-
 Groups assign permissions, roles, communication, and policy to collections of principals.
-
-### Why
 
 Group-based authorization scales better than direct user permissions.
 
@@ -297,11 +273,7 @@ This is often summarized as AGDLP. In multi-domain designs, universal groups may
 
 ## 12. Organizational Units
 
-### What
-
 An organizational unit (OU) is a directory container used to organize objects, delegate administration, and link Group Policy.
-
-### Why
 
 OUs allow policy and delegated management aligned with technical administration.
 
@@ -344,11 +316,7 @@ A password-reset right over a privileged user is privileged access even if the d
 
 ## 14. Kerberos
 
-### What
-
 Kerberos is the preferred AD DS authentication protocol for supported domain scenarios. It uses tickets and symmetric cryptography.
-
-### Why
 
 It enables centralized authentication without sending the user's password to every service.
 
@@ -416,11 +384,7 @@ Defenses:
 
 ## 18. NTLM
 
-### What
-
 NTLM is a challenge-response authentication family retained for compatibility.
-
-### Why
 
 Legacy systems and scenarios without suitable Kerberos conditions may depend on it.
 
@@ -467,11 +431,7 @@ Disabling NTLM without discovery can interrupt critical legacy applications.
 
 ## 21. LDAP
 
-### What
-
 Lightweight Directory Access Protocol (LDAP) is used to query and modify directory information.
-
-### Why
 
 Applications and administrators need structured directory access.
 
@@ -530,11 +490,7 @@ LDAPS commonly refers to LDAP over TLS from connection establishment. Security d
 
 ## 24. Group Policy
 
-### What
-
 Group Policy centrally configures users and computers through Group Policy Objects (GPOs).
-
-### Why
 
 Enterprises need repeatable settings for security, software, scripts, firewall, auditing, and operating-system behavior.
 

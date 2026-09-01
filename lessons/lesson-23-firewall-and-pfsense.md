@@ -39,11 +39,7 @@ Poor firewall rules can expose services or interrupt business operations.
 
 ## 1. Firewalls
 
-### What
-
 A firewall evaluates network traffic and permits, rejects, or drops it according to policy.
-
-### Why
 
 Network reachability should match business need and trust boundaries.
 
@@ -100,11 +96,7 @@ Default deny should not be enabled blindly on a remote firewall.
 
 ## 4. pfSense Architecture
 
-### What
-
 pfSense is a FreeBSD-based firewall and routing platform with a web interface and underlying packet-filtering capabilities.
-
-### Why
 
 It provides routing, firewalling, NAT, DHCP, VPN, DNS, monitoring, and package integration in one platform.
 
@@ -201,11 +193,7 @@ Asymmetric routing can cause a stateful firewall to drop traffic if it does not 
 
 ## 9. NAT
 
-### What
-
 Network Address Translation changes address or port information as traffic passes.
-
-### Why
 
 NAT supports private-address Internet access, publishing selected services, overlapping constraints, and policy design.
 
@@ -431,11 +419,7 @@ Firewall logs should correlate with endpoint, DNS, DHCP, VPN, IDS, and applicati
 
 ## 23. Segmentation Design
 
-### What
-
 Segmentation separates systems into network zones and controls communication between them.
-
-### Why
 
 It limits exposure, lateral movement, broadcast scope, and incident impact.
 

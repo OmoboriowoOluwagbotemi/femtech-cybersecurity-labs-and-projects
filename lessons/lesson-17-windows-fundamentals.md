@@ -38,11 +38,7 @@ Windows supports employee workstations, application servers, domain infrastructu
 
 ## 1. Windows Architecture
 
-### What
-
 Windows is an operating-system family built around kernel-mode and user-mode components, securable objects, services, identities, and management interfaces.
-
-### Why
 
 Security decisions depend on identity, privilege, object permissions, process context, policy, and protective services.
 
@@ -73,11 +69,7 @@ Windows operates on endpoints, servers, VMs, cloud instances, virtual desktops, 
 
 ## 3. Security Identifiers and Access Tokens
 
-### What
-
 A SID identifies a security principal. An access token represents the security context of a process or thread.
-
-### Why
 
 Windows uses SIDs rather than display names for access decisions. Renaming an account does not change its SID.
 
@@ -99,11 +91,7 @@ Tokens are created during logon and used whenever processes access files, Regist
 
 ## 4. Windows Access Control
 
-### What
-
 Windows securable objects can have a security descriptor containing ownership and access control lists.
-
-### Why
 
 Permissions determine which principals can read, modify, execute, delete, administer, or audit an object.
 
@@ -122,11 +110,7 @@ An empty DACL and a null DACL are not equivalent. A null DACL can allow full acc
 
 ## 5. User Account Control and Integrity
 
-### What
-
 UAC separates normal activity from elevated administrative activity. Mandatory Integrity Control assigns integrity levels such as low, medium, high, and system.
-
-### Why
 
 An administrator should not perform every task with a fully elevated token.
 
@@ -140,11 +124,7 @@ UAC affects interactive administration, installers, system settings, Registry ac
 
 ## 6. The Windows Registry
 
-### What
-
 The Registry is a hierarchical database for operating-system, hardware, application, service, user, and policy configuration.
-
-### Why
 
 Windows components require structured persistent configuration. Attackers also target the Registry for persistence, defense impairment, and system modification.
 
@@ -230,11 +210,7 @@ Registry auditing must be configured on selected keys to generate useful securit
 
 ## 10. Windows Services
 
-### What
-
 A Windows service is a long-running program managed by the Service Control Manager (SCM).
-
-### Why
 
 Services provide operating-system, security, networking, database, application, and management functions.
 
@@ -304,11 +280,7 @@ An unquoted path is exploitable only when additional conditions, such as a writa
 
 ## 13. Windows Processes
 
-### What
-
 A process is a running program with virtual memory, handles, threads, token, executable image, parent relationship, and other state.
-
-### Why
 
 Process behavior reveals application function, malware execution, persistence, credential access, and system failures.
 
@@ -362,11 +334,7 @@ During an incident, coordinate process termination with containment, memory coll
 
 ## 16. Windows Event Logs
 
-### What
-
 Windows Event Logs store structured events from operating-system components, applications, security auditing, and services.
-
-### Why
 
 They support troubleshooting, monitoring, compliance, and incident investigation.
 
@@ -478,11 +446,7 @@ Central forwarding and source-health monitoring improve resilience.
 
 ## 22. PowerShell Fundamentals
 
-### What
-
 PowerShell is a command shell, scripting language, and automation framework based on .NET objects.
-
-### Why
 
 It supports consistent administration and rich system data. Attackers also abuse it because it is powerful and widely available.
 

@@ -42,11 +42,7 @@ Response quality determines business impact, regulatory exposure, recovery time,
 
 ## 1. Incident Response
 
-### What
-
 Incident response is the organized capability for managing suspected and confirmed cybersecurity incidents.
-
-### Why
 
 Uncoordinated response can increase damage, destroy evidence, interrupt critical services, and create inconsistent communication.
 
@@ -142,11 +138,7 @@ One person may hold several roles in a small organization, but responsibilities 
 
 ## 7. Incident Identification
 
-### What
-
 Identification determines whether observed activity is an incident and establishes initial scope and priority.
-
-### Why
 
 Premature closure misses attacks; premature crisis declaration wastes resources.
 
@@ -228,11 +220,7 @@ Do not scope only by one IOC. Attackers change infrastructure and may use valid 
 
 ## 12. Containment
 
-### What
-
 Containment limits ongoing harm while preserving essential operations and evidence.
-
-### Why
 
 Investigation without containment can allow continued theft, encryption, or movement.
 
@@ -313,11 +301,7 @@ Deleting a resource too early can destroy evidence.
 
 ## 17. Eradication
 
-### What
-
 Eradication removes attacker access, persistence, malware, vulnerable conditions, and root cause.
-
-### Why
 
 Containment alone does not restore trust.
 
@@ -373,11 +357,7 @@ Neither choice resolves stolen credentials or other compromised systems automati
 
 ## 20. Recovery
 
-### What
-
 Recovery restores systems and business operations to a trusted state.
-
-### Why
 
 Availability must return without reintroducing compromise.
 
@@ -505,11 +485,7 @@ Separate facts, assumptions, and unknowns.
 
 ## 27. Lessons Learned
 
-### What
-
 A lessons-learned review identifies improvements after an incident.
-
-### Why
 
 Incidents expose gaps in people, process, technology, architecture, and governance.
 

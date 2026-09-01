@@ -50,8 +50,6 @@ Cryptography is therefore both a technical security control and an operational r
 
 ## 1. Cryptography
 
-### What
-
 Cryptography is the use of mathematical algorithms and keys to protect information and communications.
 
 Cryptographic systems commonly provide:
@@ -62,8 +60,6 @@ Cryptographic systems commonly provide:
 - **Non-repudiation:** providing evidence that a specific private key was used to create a digital signature.
 
 Cryptography does not automatically provide availability. An encrypted service can still be disrupted, and loss of an encryption key can make legitimate data unavailable.
-
-### Why
 
 Data regularly travels through or resides in environments that cannot be assumed to be fully trusted. A laptop may be stolen, a backup may be misplaced, or network traffic may cross infrastructure controlled by other parties.
 
@@ -119,13 +115,9 @@ A secure cryptographic design should remain secure even if an attacker knows how
 
 ## 3. Hashing
 
-### What
-
 Hashing is a one-way mathematical process that converts input of any practical size into a fixed-length output called a **hash**, **digest**, or **message digest**.
 
 Hashing is not encryption. It does not use a decryption key and is not designed to restore the original input.
-
-### Why
 
 Hashing allows a system or analyst to determine whether data has changed without comparing every part of the original content. It is also used as one component of secure password storage and digital signatures.
 
@@ -203,11 +195,7 @@ For authenticated integrity, organizations may use:
 
 ## 4. Symmetric Encryption
 
-### What
-
 Symmetric encryption uses the same secret key, or closely related secret keys, for encryption and decryption.
-
-### Why
 
 Symmetric algorithms are efficient and suitable for encrypting large amounts of data. They are commonly used for disks, files, databases, backups, and the bulk-data portion of network sessions.
 
@@ -256,16 +244,12 @@ Authenticated encryption modes, such as AES-GCM, protect confidentiality and als
 
 ## 5. Asymmetric Encryption
 
-### What
-
 Asymmetric cryptography uses a mathematically related key pair:
 
 - A **public key**, which may be distributed.
 - A **private key**, which must remain protected.
 
 What one key does depends on the cryptographic operation. Public-key encryption and digital signing are different uses and should not be described as simply "encrypting with either key."
-
-### Why
 
 Asymmetric cryptography helps solve the challenge of establishing trust and exchanging secrets without first sharing one secret key through an insecure channel.
 
@@ -333,11 +317,7 @@ This hybrid approach provides:
 
 ## 7. Digital Signatures
 
-### What
-
 A digital signature is a cryptographic mechanism that uses a private key to sign data and a corresponding public key to verify the signature.
-
-### Why
 
 Digital signatures help recipients determine:
 
@@ -374,11 +354,7 @@ Digital signatures can support non-repudiation, but technology alone does not se
 
 ## 8. Public Key Infrastructure
 
-### What
-
 Public key infrastructure (PKI) is the combination of people, policies, procedures, hardware, software, and services used to create, manage, distribute, validate, revoke, and retire digital certificates and public-key credentials.
-
-### Why
 
 A public key alone does not prove who owns it. PKI provides a structured trust system that binds public keys to identified subjects such as websites, users, devices, or services.
 
@@ -438,13 +414,9 @@ A private CA certificate is not automatically trusted by external devices. The o
 
 ## 10. Digital Certificates
 
-### What
-
 A digital certificate is a signed electronic document that binds a public key to a subject and describes how that key may be used.
 
 The commonly used certificate format is X.509.
-
-### Why
 
 Certificates allow systems to verify identity and public-key ownership at scale. Without trustworthy validation, an attacker could present a fraudulent public key and impersonate a service.
 
@@ -501,13 +473,9 @@ Revocation is not identical to expiration. Expiration occurs when the defined va
 
 ## 12. TLS and SSL
 
-### What
-
 Transport Layer Security (TLS) is a protocol that protects application communications over a network.
 
 Secure Sockets Layer (SSL) is the obsolete predecessor to TLS. People sometimes use the phrase "SSL certificate," but modern secure services should use supported TLS versions and configurations.
-
-### Why
 
 Without transport protection, an attacker positioned on a network path may be able to read or modify traffic, steal session information, or impersonate a service.
 
@@ -543,7 +511,7 @@ TLS protects:
 - Cloud-management interfaces.
 - Internal service-to-service traffic.
 
-### What TLS Does Not Guarantee
+### TLS Limitations
 
 A valid TLS connection does not prove that:
 
@@ -571,8 +539,6 @@ Administrators should not teach users to bypass certificate warnings as a routin
 
 ## 14. Data at Rest
 
-### What
-
 Data at rest is data stored on media and not actively moving between systems.
 
 Examples include:
@@ -584,8 +550,6 @@ Examples include:
 - Backups.
 - Mobile-device storage.
 - Removable media.
-
-### Why
 
 Stored data may be exposed through device theft, lost media, unauthorized access, decommissioned equipment, cloud misconfiguration, or backup compromise.
 
@@ -618,11 +582,7 @@ Full-disk encryption is most effective when a device is powered off and the key 
 
 ## 15. Data in Transit
 
-### What
-
 Data in transit, also called data in motion, is data moving between systems, networks, services, or locations.
-
-### Why
 
 Network paths may include wireless networks, Internet service providers, cloud networks, proxies, gateways, and other infrastructure outside the organization's direct control.
 
@@ -659,11 +619,7 @@ Data in use is included for comparison. Protecting data at rest and in transit d
 
 ## 17. Key Management
 
-### What
-
 Key management is the controlled handling of cryptographic keys throughout their lifecycle.
-
-### Why
 
 Cryptographic strength depends heavily on key protection. A strong algorithm cannot preserve confidentiality if an attacker obtains the decryption key.
 

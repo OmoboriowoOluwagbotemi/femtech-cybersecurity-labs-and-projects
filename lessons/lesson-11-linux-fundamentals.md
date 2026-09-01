@@ -38,13 +38,9 @@ A security analyst may need to identify a suspicious process, verify a package, 
 
 ## 1. Linux Fundamentals
 
-### What
-
 Linux is an open-source operating-system kernel. A Linux distribution combines the kernel with system utilities, package management, libraries, services, and applications.
 
 Examples include Ubuntu, Debian, Red Hat Enterprise Linux, Rocky Linux, AlmaLinux, Fedora, and Kali Linux.
-
-### Why
 
 Linux is stable, flexible, automatable, and widely used in enterprise and cloud infrastructure.
 
@@ -80,11 +76,7 @@ id
 
 ## 3. Linux Filesystem Model
 
-### What
-
 Linux presents files and directories in one hierarchy beginning at the root directory, `/`.
-
-### Why
 
 A predictable hierarchy helps administrators locate programs, configuration, logs, user data, and devices.
 
@@ -246,11 +238,7 @@ Manual pages commonly include synopsis, description, options, files, examples, a
 
 ## 11. Package Management
 
-### What
-
 Package management installs, updates, verifies, and removes software through distribution-managed packages and repositories.
-
-### Why
 
 It provides dependency handling, update tracking, signatures, and consistent software inventory.
 
@@ -294,11 +282,7 @@ Repositories may be maintained by distributions, enterprises, or approved vendor
 
 ## 12. Processes
 
-### What
-
 A process is a running instance of a program. Each process has a process identifier (PID), owner, state, parent, command, and resource use.
-
-### Why
 
 Processes perform system work. Suspicious or failed processes are central to administration and incident investigation.
 
@@ -351,15 +335,11 @@ Stopping a suspicious process can destroy volatile evidence or trigger attacker 
 
 ## 15. File Ownership and Permissions
 
-### What
-
 Traditional Linux discretionary access control assigns:
 
 - An owning user.
 - An owning group.
 - Permissions for user, group, and others.
-
-### Why
 
 Permissions limit who can read, modify, or execute files and access directories.
 

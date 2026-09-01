@@ -48,11 +48,7 @@ Applied cryptography requires coordination among:
 
 ## 1. Applied Cryptography
 
-### What
-
 Applied cryptography is the implementation and operation of cryptographic controls within real technologies and business processes.
-
-### Why
 
 Cryptographic designs fail when organizations:
 
@@ -84,8 +80,6 @@ Applied cryptography protects email, websites, APIs, VPNs, cloud workloads, data
 
 ## 2. Email Identity and Spoofing
 
-### What
-
 Email spoofing occurs when a message presents sender information intended to make it appear associated with another identity or domain.
 
 An email contains several identities, including:
@@ -97,8 +91,6 @@ An email contains several identities, including:
 - Reply-to and routing information.
 
 These identities may legitimately differ. Attackers exploit that complexity to deceive recipients.
-
-### Why
 
 Email was not originally designed with strong sender authentication. Attackers use impersonation for phishing, invoice fraud, credential theft, malware delivery, and business email compromise.
 
@@ -112,11 +104,7 @@ These controls are used by public and private organizations operating email thro
 
 ## 3. Sender Policy Framework
 
-### What
-
 Sender Policy Framework (SPF) allows a domain owner to publish which mail systems are authorized to send email for the domain used in the SMTP envelope sender identity.
-
-### Why
 
 Without SPF, receiving servers have less evidence for determining whether a sending IP address is authorized by the envelope domain.
 
@@ -157,11 +145,7 @@ SPF records are published in the sending domain's DNS and evaluated by receiving
 
 ## 4. DomainKeys Identified Mail
 
-### What
-
 DomainKeys Identified Mail (DKIM) applies a cryptographic signature to selected message headers and a body representation. The signature identifies a signing domain.
-
-### Why
 
 DKIM gives receivers evidence that signed content has not been modified in a way that invalidates the signature and that a domain controlling the private key signed it.
 
@@ -202,11 +186,7 @@ Selectors support key rotation and allow multiple services to use separate keys.
 
 ## 5. Domain-Based Message Authentication, Reporting, and Conformance
 
-### What
-
 DMARC is an email authentication policy and reporting mechanism. It evaluates whether SPF or DKIM passes with a domain aligned to the visible `From` domain.
-
-### Why
 
 Users primarily see the visible `From` address. DMARC connects that identity to SPF and DKIM results, tells receivers how the domain owner wants failures handled, and supplies reports for monitoring.
 
@@ -299,11 +279,7 @@ Lesson 7 expands full email-header analysis.
 
 ## 8. HTTPS in Practice
 
-### What
-
 HTTPS is HTTP carried over TLS. It protects web communications between a client and server.
-
-### Why
 
 HTTPS helps prevent network observers from reading or modifying traffic and allows the client to authenticate the server name through a trusted certificate.
 
@@ -442,11 +418,7 @@ Use least privilege, approvals for high-risk certificates, protected automation 
 
 ## 13. Encryption Failures
 
-### What
-
 An encryption failure occurs when cryptographic protection does not provide its intended security objective or creates unacceptable operational harm.
-
-### Why
 
 Failures can expose data, permit tampering, interrupt services, undermine legal compliance, and damage trust.
 

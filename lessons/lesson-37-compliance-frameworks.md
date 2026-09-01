@@ -46,11 +46,7 @@ SOC analysts support compliance by preserving logs, following escalation procedu
 
 ## 1. Compliance Foundations
 
-### What
-
 Compliance means meeting requirements that apply to an organization or defined scope. A requirement may arise from law, regulation, contract, standard, policy, or another authoritative obligation.
-
-### Why
 
 Organizations must understand what they are required or have committed to do. Failure may cause regulatory action, contractual penalties, litigation, loss of certification, interrupted payment processing, reputational damage, or harm to individuals.
 
@@ -101,11 +97,7 @@ A technically compliant control can be ineffective. For example, a quarterly acc
 
 ## 4. Scoping and Applicability
 
-### What
-
 **Applicability** determines whether an obligation covers the organization or activity. **Scope** defines the people, processes, technologies, locations, data, and suppliers included in an assessment.
-
-### Why
 
 Incorrect scope creates false assurance. If a payment tokenization service, cloud identity provider, backup platform, or support vendor can affect protected data, excluding it without analysis may conceal risk.
 
@@ -130,8 +122,6 @@ Scoping appears in system inventories, data-flow diagrams, contracts, statements
 
 ## 5. NIST Cybersecurity Framework 2.0
 
-### What
-
 NIST CSF 2.0 is a technology-neutral framework for managing cybersecurity risk. Its Core organizes cybersecurity outcomes into six Functions:
 
 | Function | Purpose |
@@ -144,8 +134,6 @@ NIST CSF 2.0 is a technology-neutral framework for managing cybersecurity risk. 
 | Recover | Restore affected assets and operations and communicate recovery |
 
 Functions contain Categories and Subcategories. Organizational Profiles describe current and target outcomes. Tiers characterize the rigor of cybersecurity risk governance and management practices; they are not simple maturity scores or certification levels.
-
-### Why
 
 The CSF provides a common language between executives, risk teams, engineers, suppliers, and assessors. It is broad enough for small businesses, enterprises, government, education, healthcare, and cloud environments.
 
@@ -170,8 +158,6 @@ A university identifies that unmanaged research devices are missing from invento
 
 ## 6. CIS Controls v8.1
 
-### What
-
 CIS Controls v8.1 is a prioritized set of 18 Controls supported by specific Safeguards. It emphasizes practical defenses against common attacks.
 
 The Controls begin with inventory and control of enterprise assets and software, then address data protection, secure configuration, account and access management, vulnerability management, logging, email and browser protection, malware defenses, recovery, network infrastructure, awareness, service providers, application security, incident response, and penetration testing.
@@ -185,8 +171,6 @@ Implementation Groups help prioritize:
 | IG3 | Safeguards for organizations facing sophisticated threats or high-impact consequences |
 
 IG1 is the foundation; IG2 and IG3 build cumulatively.
-
-### Why
 
 CIS Controls converts broad security goals into implementable safeguards. It is especially useful when an organization needs a prioritized technical and operational starting point.
 
@@ -205,8 +189,6 @@ Use CIS Controls in small-business security programs, hardening roadmaps, intern
 
 ## 7. ISO/IEC 27001:2022
 
-### What
-
 ISO/IEC 27001:2022 defines requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS). It is a certifiable management-system standard. Amendment 1:2024 adds climate-action considerations to the management-system context requirements.
 
 The ISMS includes:
@@ -220,8 +202,6 @@ The ISMS includes:
 - Improvement.
 
 Annex A provides a reference set of controls grouped into organizational, people, physical, and technological themes. ISO/IEC 27001 requires a risk-based control-selection process; it does not require blindly applying every Annex A control.
-
-### Why
 
 An ISMS creates governance, repeatability, accountability, evidence, internal audit, management review, and continual improvement. Certification can provide external assurance that the scoped management system meets the standard's requirements.
 
@@ -247,13 +227,9 @@ Certification applies to a stated ISMS scope, not automatically to every product
 
 ## 8. PCI DSS v4.0.1
 
-### What
-
 The Payment Card Industry Data Security Standard (PCI DSS) establishes security requirements for entities that store, process, transmit, or can affect the security of payment-account data. PCI DSS v4.0.1 is a limited revision of version 4.0. Its future-dated requirements became effective on 31 March 2025.
 
 PCI DSS contains 12 high-level requirements covering areas such as network security controls, secure configurations, account data, cryptography, malware protection, secure development, access control, authentication, physical access, logging, testing, and security policy.
-
-### Why
 
 Compromise of cardholder data enables fraud and damages customers and payment ecosystems. PCI DSS creates a shared minimum for protecting the cardholder data environment (CDE).
 
@@ -281,15 +257,11 @@ A retailer outsources payment capture to a hosted provider. Outsourcing may redu
 
 ## 9. HIPAA Security Rule
 
-### What
-
 The HIPAA Security Rule establishes U.S. national standards for protecting electronic protected health information (ePHI) created, received, maintained, or transmitted by covered entities and business associates. It requires appropriate administrative, physical, and technical safeguards to protect confidentiality, integrity, and availability.
 
 Some implementation specifications are described as **required** and others as **addressable**. Addressable does not mean optional. A regulated entity must assess whether the specification is reasonable and appropriate, implement it when appropriate, or document why an equivalent alternative or non-implementation is reasonable under the circumstances.
 
 As of this lesson's publication, HHS's January 2025 proposal to strengthen the Security Rule remains a proposed rule, not a replacement final rule. Compliance teams must monitor official rulemaking and avoid treating proposals as current obligations.
-
-### Why
 
 Healthcare systems contain highly sensitive information and support patient care. Security failures can cause privacy harm, fraud, treatment disruption, and patient-safety consequences.
 
@@ -317,8 +289,6 @@ A hospital cannot patch a life-supporting legacy device immediately. It document
 
 ## 10. GDPR
 
-### What
-
 The General Data Protection Regulation is European Union law governing processing of personal data within its material and territorial scope. It establishes principles, lawful bases, data-subject rights, controller and processor responsibilities, security obligations, accountability, privacy by design and default, and breach-related duties.
 
 Core processing principles include:
@@ -330,8 +300,6 @@ Core processing principles include:
 - Storage limitation.
 - Integrity and confidentiality.
 - Accountability.
-
-### Why
 
 Cybersecurity protects data, but GDPR addresses the broader legitimacy and governance of processing. Strong encryption does not make unnecessary or unlawfully collected personal data compliant.
 

@@ -40,11 +40,7 @@ Encrypted traffic, high volume, cloud architecture, and normal administrative be
 
 ## 1. Intrusion Detection
 
-### What
-
 Intrusion detection analyzes activity and generates evidence or alerts when conditions indicate possible attack or policy violation.
-
-### Why
 
 Preventive controls can fail, be bypassed, or permit malicious use of authorized services.
 
@@ -69,11 +65,7 @@ An IPS is not automatically better. Inline prevention requires confidence, perfo
 
 ## 3. Network IDS
 
-### What
-
 A network IDS analyzes traffic observed at a sensor.
-
-### Why
 
 One sensor can monitor traffic for many systems and reveal communication patterns not visible in endpoint logs.
 
@@ -137,11 +129,7 @@ Use selective capture, encryption, least privilege, and documented retention.
 
 ## 7. Snort
 
-### What
-
 Snort is an open-source network intrusion detection and prevention engine using rules and protocol inspection.
-
-### Why
 
 It provides signature-based detection, packet logging, and inline capabilities.
 
@@ -155,11 +143,7 @@ It can operate passively or inline at selected network boundaries.
 
 ## 8. Suricata
 
-### What
-
 Suricata is an open-source network IDS, IPS, and security-monitoring engine.
-
-### Why
 
 It provides multithreaded processing, protocol parsing, file-related visibility, rule compatibility concepts, and structured event output.
 
@@ -173,11 +157,7 @@ It is used at enterprise edges, internal segments, cloud sensors, and security l
 
 ## 9. Zeek
 
-### What
-
 Zeek is a network security monitoring platform that produces rich protocol and connection logs and supports event-driven analysis.
-
-### Why
 
 It gives analysts structured behavioral context beyond individual signatures.
 
@@ -201,11 +181,7 @@ These tools can complement one another. Zeek is not simply a signature IDS repla
 
 ## 11. Signature-Based Detection
 
-### What
-
 Signature detection matches known byte patterns, fields, protocol conditions, or event combinations.
-
-### Why
 
 Known attack behavior can often be recognized precisely.
 
@@ -318,11 +294,7 @@ Use approved packet captures or isolated lab traffic. Do not reproduce attacks o
 
 ## 17. Anomaly-Based Detection
 
-### What
-
 Anomaly detection identifies activity that differs from an established model or baseline.
-
-### Why
 
 Unknown or changed attacks may not match known signatures.
 

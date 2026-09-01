@@ -49,8 +49,6 @@ Strong identity security combines technology, policy, monitoring, user support, 
 
 ## 1. Identity and Access
 
-### What
-
 A digital identity is a representation of a user, device, application, service, or workload within an information system.
 
 An identity may contain:
@@ -63,8 +61,6 @@ An identity may contain:
 - Assigned permissions.
 - Device or risk attributes.
 - Account status.
-
-### Why
 
 Systems need a reliable way to distinguish one entity from another. Without identity controls, organizations cannot consistently limit access, investigate actions, or remove access when relationships end.
 
@@ -98,8 +94,6 @@ These functions are related but not interchangeable. Successful authentication d
 
 ## 3. Authentication Factors
 
-### What
-
 An authentication factor is a category of evidence used to verify identity.
 
 | Factor | Meaning | Examples |
@@ -111,8 +105,6 @@ An authentication factor is a category of evidence used to verify identity.
 | Something you do | Behavioral characteristic | Typing rhythm, gesture, signature dynamics |
 
 Location and behavior are frequently used as contextual or risk signals. Their reliability depends on implementation and should not be assumed equal to a strong cryptographic authenticator.
-
-### Why
 
 Authentication evidence differs in strength. Passwords can be guessed or stolen. Devices can be lost. Biometrics can be spoofed or become unavailable. Combining independent factors reduces reliance on one control.
 
@@ -134,13 +126,9 @@ Authentication occurs at:
 
 ## 4. Multifactor Authentication
 
-### What
-
 MFA requires evidence from two or more different authentication factor categories.
 
 A password plus a PIN is not MFA because both are something the user knows. A password plus a hardware security key is MFA because knowledge and possession are different factors.
-
-### Why
 
 MFA reduces the likelihood that a stolen password alone results in account takeover. It is especially important for:
 
@@ -229,13 +217,9 @@ Strong daily authentication can be undermined by a weak help-desk reset process.
 
 ## 7. Single Sign-On
 
-### What
-
 SSO allows a user to authenticate through a central identity service and access multiple connected applications without entering credentials separately for each one.
 
 SSO is not the same as using one shared password in many systems. Proper SSO uses trusted authentication assertions or tokens.
-
-### Why
 
 SSO can:
 
@@ -293,11 +277,7 @@ SSO centralizes control but also increases the impact of identity-provider compr
 
 ## 9. Token-Based Authentication
 
-### What
-
 A token is a protected data object representing authorization, authentication information, or a session. It allows a system to make access decisions without repeatedly transmitting a password.
-
-### Why
 
 Tokens support scalable web, mobile, API, cloud, and federated access. They can be limited by audience, scope, lifetime, and other claims.
 
@@ -357,11 +337,7 @@ Validation must not trust claims before verifying the approved signature algorit
 
 ## 11. Passwords and Passphrases
 
-### What
-
 A password is a secret knowledge factor. A passphrase is typically longer and may consist of multiple words.
-
-### Why
 
 Passwords remain common because they are inexpensive and broadly supported. Their weaknesses include reuse, predictable choices, phishing, insecure storage, and recovery abuse.
 
@@ -388,11 +364,7 @@ Organizations should:
 
 ## 12. Secure Password Storage
 
-### What
-
 Secure password storage retains a one-way derived value instead of plaintext or reversibly encrypted passwords.
-
-### Why
 
 If an authentication database is stolen, secure derivation increases the cost of offline guessing and prevents administrators from directly reading passwords.
 

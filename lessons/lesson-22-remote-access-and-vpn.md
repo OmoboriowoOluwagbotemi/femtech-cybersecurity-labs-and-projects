@@ -38,11 +38,7 @@ Stolen credentials, unmanaged devices, exposed RDP, weak VPN configuration, and 
 
 ## 1. Remote Access
 
-### What
-
 Remote access allows an identity or system outside a resource's immediate network to connect and perform authorized actions.
-
-### Why
 
 Organizations operate across homes, branches, cloud platforms, vendors, and mobile workforces.
 
@@ -64,11 +60,7 @@ Connections may terminate at a firewall, VPN concentrator, cloud gateway, identi
 
 ## 2. VPN Concepts
 
-### What
-
 A virtual private network creates a protected logical communication path across another network.
-
-### Why
 
 Traffic may traverse untrusted infrastructure such as the Internet.
 
@@ -259,11 +251,7 @@ Traditional VPN may provide network reachability to many systems. Application-le
 
 ## 12. Zero Trust Basics
 
-### What
-
 Zero Trust is a security approach that does not grant implicit trust based only on network location.
-
-### Why
 
 Users, devices, applications, and resources operate across hybrid and cloud environments where an internal network is not automatically safe.
 
@@ -317,11 +305,7 @@ Decisions may allow, block, require stronger authentication, limit session, prov
 
 ## 15. RDP
 
-### What
-
 Remote Desktop Protocol provides graphical remote interaction with Windows systems.
-
-### Why
 
 Administrators and users need remote access to Windows applications and desktops.
 

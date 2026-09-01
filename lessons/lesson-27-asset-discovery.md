@@ -66,7 +66,7 @@ Asset discovery, asset inventory, and asset management work together.
 
 A discovery result without ownership and business context is incomplete. A professional analyst should always ask: what is this asset, who owns it, why does it exist, how important is it, and how is it protected?
 
-## 4. Why Unknown Assets Create Risk
+## 4. Security Risk from Unknown Assets
 
 An unknown asset is any system, service, account, application, data store, or cloud resource that exists but is not properly recorded or governed.
 

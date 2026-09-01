@@ -41,11 +41,7 @@ Compromise or outage can affect the entire organization rather than one workstat
 
 ## 1. Windows Server
 
-### What
-
 Windows Server is Microsoft's server operating-system family for infrastructure, identity, application, storage, networking, and virtualization workloads.
-
-### Why
 
 Enterprises need centrally managed, resilient services that support many users and systems.
 
@@ -59,11 +55,7 @@ Windows Server runs on physical systems, VMs, private clouds, public cloud IaaS,
 
 ## 2. Server Roles and Features
 
-### What
-
 A server role is a major business or infrastructure function. A feature is a supporting component that may assist one or more roles.
-
-### Why
 
 Role-based installation allows administrators to deploy only required capabilities.
 
@@ -127,11 +119,7 @@ For example, placing a public web application on an identity server exposes crit
 
 ## 5. DNS
 
-### What
-
 DNS translates names into records and supports service discovery and infrastructure operation.
-
-### Why
 
 Users and applications rely on names. Active Directory also depends heavily on DNS service records.
 
@@ -258,11 +246,7 @@ TCP DNS is not only for zone transfers; large or truncated responses and modern 
 
 ## 12. DHCP
 
-### What
-
 DHCP automatically supplies IP configuration to clients.
-
-### Why
 
 Manual addressing does not scale and creates inconsistency.
 
@@ -370,11 +354,7 @@ An IPv4 address in `169.254.0.0/16` often indicates Automatic Private IP Address
 
 ## 18. Event Viewer
 
-### What
-
 Event Viewer is a graphical management console for Windows Event Logs, subscriptions, custom views, and selected operational logs.
-
-### Why
 
 Server troubleshooting requires correlating role, service, system, and security events.
 
@@ -428,11 +408,7 @@ High-volume analytic logs should be enabled based on defined requirements and ca
 
 ## 22. Basic Server Hardening
 
-### What
-
 Server hardening applies secure configuration based on the server's role, risk, and dependencies.
-
-### Why
 
 Servers concentrate critical data and services and may be continuously reachable.
 

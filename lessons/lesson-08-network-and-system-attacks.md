@@ -32,11 +32,7 @@ Defenders must know what normal traffic looks like, which services should be rea
 
 ## 1. Network Attack Foundations
 
-### What
-
 A network attack abuses communication protocols, reachable services, network trust, or system resources to discover, intercept, alter, disrupt, or gain unauthorized access.
-
-### Why
 
 Networks connect valuable systems. Every exposed interface, port, protocol, account, and service contributes to attack surface.
 
@@ -50,11 +46,7 @@ Attacks occur on local networks, wireless networks, the Internet, VPNs, cloud vi
 
 ## 2. Reconnaissance
 
-### What
-
 Reconnaissance is information gathering about a target, its people, systems, domains, technologies, and relationships.
-
-### Why
 
 Accurate information helps an attacker select targets and reduces wasted effort. Defenders use authorized reconnaissance to understand their own external exposure.
 
@@ -80,11 +72,7 @@ Organizations should inventory public assets, remove unnecessary information, mo
 
 ## 3. Port Scanning
 
-### What
-
 Port scanning sends network probes to determine which ports and services appear reachable on a host.
-
-### Why
 
 An open port can reveal a service that may be intended, misconfigured, outdated, or unnecessarily exposed.
 
@@ -134,11 +122,7 @@ False positives can arise from vulnerability scanners, monitoring systems, asset
 
 ## 5. Enumeration
 
-### What
-
 Enumeration is the active collection of detailed information from reachable services and systems.
-
-### Why
 
 Port scanning identifies where a service may exist. Enumeration seeks useful details such as users, shares, hostnames, software versions, groups, DNS records, and service configuration.
 
@@ -167,11 +151,7 @@ Enumeration targets Windows domains, Linux servers, network devices, cloud servi
 
 ## 6. ARP Spoofing
 
-### What
-
 Address Resolution Protocol (ARP) maps IPv4 addresses to MAC addresses on a local broadcast domain. ARP spoofing sends deceptive ARP information so systems associate an IP address with the attacker's MAC address.
-
-### Why
 
 Traditional ARP does not authenticate mappings. An attacker on the same Layer 2 network may attempt to redirect or disrupt traffic.
 
@@ -203,11 +183,7 @@ ARP spoofing is relevant on local Ethernet or Wi-Fi broadcast domains, not as a 
 
 ## 7. DNS Poisoning
 
-### What
-
 DNS poisoning causes a resolver, client, or DNS data source to return an incorrect mapping.
-
-### Why
 
 Users trust names. If a trusted name resolves to an attacker-controlled destination, traffic can be redirected without changing the visible name entered by the user.
 
@@ -238,11 +214,7 @@ DNS attacks affect endpoints, recursive resolvers, authoritative services, regis
 
 ## 8. Man-in-the-Middle Attacks
 
-### What
-
 A man-in-the-middle (MITM) attack places an attacker between communicating parties so the attacker can observe, relay, or modify traffic while each party believes it is communicating normally.
-
-### Why
 
 Intercepted traffic may reveal credentials, sessions, sensitive data, or commands. Modification can compromise integrity.
 
@@ -275,11 +247,7 @@ An attacker may relay encrypted traffic without reading it. Confidentiality is c
 
 ## 9. Denial-of-Service and DDoS
 
-### What
-
 A denial-of-service (DoS) attack attempts to make a resource unavailable. A distributed denial-of-service (DDoS) attack uses many sources or distributed infrastructure.
-
-### Why
 
 Availability failures can halt revenue, healthcare, education, public services, and security operations.
 

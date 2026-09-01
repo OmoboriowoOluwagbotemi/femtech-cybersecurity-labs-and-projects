@@ -40,11 +40,7 @@ Security reports are operational records, not school essays. They may be read by
 
 ## 1. Professional Communication
 
-### What
-
 Professional security communication transfers accurate information to an audience so that it can understand risk, make a decision, or perform an action.
-
-### Why
 
 Raw logs, scanner findings, and technical jargon do not create decisions by themselves. Poor communication can cause panic, delayed containment, incorrect remediation, or unjustified risk acceptance.
 
@@ -88,14 +84,10 @@ Do not give every audience the same report with a different title.
 
 ## 3. Evidence, Analysis, and Conclusion
 
-### What
-
 - **Observation:** Directly supported fact.
 - **Analysis:** Interpretation of one or more observations.
 - **Conclusion:** Best-supported determination.
 - **Recommendation:** Proposed action.
-
-### Why
 
 Mixing these categories makes reports difficult to verify and encourages overstatement.
 
@@ -141,11 +133,7 @@ Not every report needs every section. A critical incident update may be one page
 
 ## 5. Executive Summary
 
-### What
-
 An executive summary is a self-contained explanation of the issue, effect, response, current risk, and decisions required.
-
-### Why
 
 Senior stakeholders may not read the technical body before making a time-sensitive decision.
 
@@ -290,11 +278,7 @@ A scanner score is not a complete risk rating, and a risk owner is not necessari
 
 ## 10. Communicating with Non-Technical Stakeholders
 
-### What
-
 Audience translation expresses technical facts in terms of services, obligations, financial effects, safety, reputation, and decisions without losing accuracy.
-
-### Why
 
 Executives and business owners are accountable for outcomes but may not know protocol, malware, or cloud terminology.
 
@@ -379,11 +363,7 @@ An independent technical review is especially valuable for high-impact findings.
 
 ## 14. Portfolio Building
 
-### What
-
 A cybersecurity portfolio is a curated body of work that demonstrates how a candidate thinks, investigates, documents, and improves systems.
-
-### Why
 
 Certificates and resumes list claims. A portfolio provides evidence of practical competency.
 
@@ -432,11 +412,7 @@ Use fictional names, reserved example domains, synthetic logs, lab IP ranges, an
 
 ## 16. Git and GitHub Fundamentals
 
-### What
-
 Git is a distributed version-control system. GitHub hosts Git repositories and adds collaboration, issues, pull requests, automation, and access controls.
-
-### Why
 
 Version control preserves history, enables peer review, supports rollback, and demonstrates disciplined work.
 
@@ -546,11 +522,7 @@ Avoid accepting code merely because automation passes. Review intent, dependenci
 
 ## 20. Certification Planning
 
-### What
-
 A certification validates a defined body of knowledge or skill under an examination scheme. It is one component of professional development.
-
-### Why
 
 Certifications can structure learning, meet job or contract requirements, and provide a common baseline. They do not replace hands-on work, ethical judgment, communication, or experience.
 

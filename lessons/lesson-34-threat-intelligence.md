@@ -40,11 +40,7 @@ Poor intelligence can create false blocks, privacy exposure, and wasted analyst 
 
 ## 1. Threat Intelligence
 
-### What
-
 Threat intelligence is threat-related information that has been collected, evaluated, analyzed, and placed in context for a decision.
-
-### Why
 
 Raw indicators do not explain relevance, reliability, impact, or required action.
 
@@ -171,11 +167,7 @@ This is a reasoning model, not a fixed scoring system. Detection should combine 
 
 ## 9. VirusTotal
 
-### What
-
 VirusTotal is a threat-analysis service that aggregates detections and contextual information for files, hashes, URLs, domains, IPs, and related artifacts.
-
-### Why
 
 It helps analysts compare multiple security-engine results and relationships.
 
@@ -219,11 +211,7 @@ Search by hash first. External services may retain, process, or share submitted 
 
 ## 12. AbuseIPDB
 
-### What
-
 AbuseIPDB is a community-driven service for reports about abusive IP-address activity.
-
-### Why
 
 It provides reputation context such as report categories, recency, and reporter observations.
 
@@ -247,11 +235,7 @@ Do not automatically block solely on a community score without context, duration
 
 ## 14. AlienVault OTX
 
-### What
-
 AlienVault Open Threat Exchange (OTX) is a community threat-intelligence sharing platform organized around contributed intelligence collections commonly called pulses.
-
-### Why
 
 It provides indicators, descriptions, tags, references, and community context.
 
@@ -275,11 +259,7 @@ Trace indicators back to original evidence where possible.
 
 ## 16. MISP
 
-### What
-
 MISP is an open-source threat-intelligence platform for storing, correlating, sharing, and managing structured threat information.
-
-### Why
 
 Organizations need controlled intelligence sharing with context, relationships, confidence, and distribution rules.
 
@@ -392,11 +372,7 @@ Geolocation is approximate and does not identify the attacker.
 
 ## 24. Alert Enrichment
 
-### What
-
 Alert enrichment adds context to support triage.
-
-### Why
 
 An IP or hash alone provides little business meaning.
 

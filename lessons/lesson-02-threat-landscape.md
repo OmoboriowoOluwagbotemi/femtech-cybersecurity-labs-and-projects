@@ -50,7 +50,7 @@ SOC analysts, security administrators, incident responders, vulnerability analys
 
 ## 1. Understanding the Threat Landscape
 
-### What Is the Threat Landscape?
+### The Threat Landscape
 
 The threat landscape is the collection of threats that exist against an organization, industry, technology, region, or business process.
 
@@ -65,8 +65,6 @@ It includes:
 - Cloud and identity attacks.
 - Supply chain risks.
 - Geopolitical and criminal trends.
-
-### Why the Threat Landscape Matters
 
 Organizations cannot defend well if they do not understand realistic threats. A school, a bank, and a hospital may all use laptops, cloud email, and networks, but the risk priorities are not identical.
 
@@ -106,13 +104,11 @@ Threat landscape knowledge appears in:
 
 ## 2. Malware Types
 
-### What Is Malware?
+### Malware
 
 Malware is malicious software designed to damage systems, steal data, disrupt operations, spy on users, gain unauthorized access, or help attackers maintain control.
 
 Malware is not one single thing. It is a broad category that includes many tools and techniques.
-
-### Why Malware Matters
 
 Malware can affect all parts of the CIA Triad:
 
@@ -187,13 +183,11 @@ Defensive response should include:
 
 ## 3. Threat Actors
 
-### What Is a Threat Actor?
+### Threat Actors
 
 A threat actor is a person, group, or organization that can cause harm through cyber activity.
 
 Threat actors differ by motivation, capability, resources, targeting, patience, and risk tolerance.
-
-### Why Threat Actor Identification Matters
 
 Understanding the likely actor helps defenders estimate:
 
@@ -251,13 +245,11 @@ The likely actor may be financially motivated cybercriminals rather than an APT.
 
 ## 4. Advanced Persistent Threats
 
-### What Is an APT?
+### Advanced Persistent Threats (APTs)
 
 An advanced persistent threat is a highly capable and patient threat actor or campaign that uses sustained, targeted activity to gain and maintain access to an environment.
 
 The word "advanced" does not mean every technique is technically complex. APTs often combine advanced methods with simple methods that work, such as phishing, credential theft, and abuse of legitimate administration tools.
-
-### Why APTs Matter
 
 APTs matter because they may:
 
@@ -314,7 +306,7 @@ Defensive priorities include:
 
 ## 5. Cyber Kill Chain
 
-### What Is the Cyber Kill Chain?
+### The Cyber Kill Chain
 
 The Cyber Kill Chain is a model that describes common stages of an intrusion. It helps defenders understand how an attack progresses and where security controls can interrupt it.
 
@@ -329,8 +321,6 @@ The commonly taught stages are:
 | Installation | The attacker installs malware or persistence. | What changed on the endpoint or system? |
 | Command and Control | The compromised system communicates with attacker infrastructure. | What network traffic indicates external control? |
 | Actions on Objectives | The attacker performs the final goal. | Was data stolen, encrypted, altered, or disrupted? |
-
-### Why the Cyber Kill Chain Matters
 
 The Cyber Kill Chain helps defenders:
 
@@ -382,13 +372,11 @@ Kill Chain analysis:
 
 ## 6. MITRE ATT&CK Framework
 
-### What Is MITRE ATT&CK?
+### MITRE ATT&CK
 
 MITRE ATT&CK is a knowledge base of adversary tactics, techniques, and procedures based on observed real-world activity. It helps defenders describe what attackers are trying to accomplish and how they attempt to do it.
 
 ATT&CK does not replace the Cyber Kill Chain. The Kill Chain gives a high-level sequence. ATT&CK provides detailed behavior categories and techniques that defenders can map to evidence.
-
-### Why MITRE ATT&CK Matters
 
 MITRE ATT&CK helps security teams:
 

@@ -135,11 +135,7 @@ The sequence organizes work, but investigators may loop back when new evidence c
 
 ## 5. Phase 1: SIEM Alert
 
-### What
-
 Alert triage determines whether an alert is explainable, benign, suspicious, or a confirmed incident candidate.
-
-### Why
 
 Immediate assumptions create unnecessary disruption; delayed escalation permits attacker activity.
 
@@ -243,11 +239,7 @@ Analyst actions:
 
 ## 8. Phase 2: Log Analysis
 
-### What
-
 Log analysis reconstructs events from systems that observed identity, process, file, network, and administrative activity.
-
-### Why
 
 No single log source provides complete truth. Correlation reduces blind spots and false conclusions.
 
@@ -391,11 +383,7 @@ Document the query range and data-source coverage. "No other affected hosts foun
 
 ## 12. Phase 3: PCAP Review
 
-### What
-
 Packet capture records network traffic observed at a collection point.
-
-### Why
 
 PCAP can validate DNS, connections, protocol behavior, timing, volume, and unencrypted content. Encryption limits payload visibility but still leaves useful metadata.
 
@@ -473,11 +461,7 @@ The PCAP does not reveal encrypted HTTPS content without authorized session keys
 
 ## 15. Phase 4: Threat-Intelligence Investigation
 
-### What
-
 Threat-intelligence enrichment adds context about indicators, infrastructure, campaigns, and behavior.
-
-### Why
 
 Context can improve priority and pivots, but third-party reputation is not proof that an event is malicious or benign.
 
@@ -537,11 +521,7 @@ Use indicators for pivots and containment, then retain behavioral detection for 
 
 ## 18. Phase 5: MITRE ATT&CK Mapping
 
-### What
-
 ATT&CK mapping associates observed behavior with documented adversary techniques.
-
-### Why
 
 Mapping supports consistent reporting, detection coverage, response planning, and lessons learned.
 
@@ -582,11 +562,7 @@ A good mapping explains exactly how the observed procedure matches the technique
 
 ## 21. Phase 6: Severity Assessment
 
-### What
-
 Incident severity expresses urgency and consequence based on scope, impact, threat, controls, and confidence.
-
-### Why
 
 Severity determines escalation, resources, containment speed, communication, and business involvement.
 
@@ -629,11 +605,7 @@ Escalate severity if evidence confirms payment diversion, broader account compro
 
 ## 23. Phase 7: Containment
 
-### What
-
 Containment limits further harm while preserving evidence and necessary operations.
-
-### Why
 
 Uncoordinated action may destroy evidence, alert an intruder prematurely, interrupt patient care, or leave active sessions and persistence untouched.
 

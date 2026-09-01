@@ -31,11 +31,7 @@ Hardening supports prevention, detection, compliance, vulnerability management, 
 
 ## 1. Linux Hardening
 
-### What
-
 Hardening is the systematic reduction of security risk through configuration, removal of unnecessary functionality, and implementation of safeguards.
-
-### Why
 
 Every service, package, account, permission, and network path can contribute to attack surface.
 
@@ -58,11 +54,7 @@ Hardening applies to physical servers, VMs, cloud instances, containers, applian
 
 ## 2. Security Baselines
 
-### What
-
 A security baseline is an approved minimum configuration for a defined system type and risk level.
-
-### Why
 
 Baselines reduce inconsistency, support repeatable deployment, and provide a measurable reference for drift.
 
@@ -99,11 +91,7 @@ A benchmark should not be applied blindly. Compatibility, threat model, legal ob
 
 ## 4. SSH Security
 
-### What
-
 Secure Shell (SSH) provides encrypted remote administration, file transfer, tunneling, and authentication.
-
-### Why
 
 SSH frequently exposes privileged management access. Weak credentials, broad exposure, unsafe keys, or poor configuration can lead to system compromise.
 
@@ -197,11 +185,7 @@ An SSH key remains an active credential even after a user's password is locked.
 
 ## 8. UFW Firewall
 
-### What
-
 Uncomplicated Firewall (UFW) is a management interface commonly used on Ubuntu and related systems to configure host firewall policy.
-
-### Why
 
 A host firewall limits network reachability even when a service is listening.
 
@@ -255,11 +239,7 @@ A firewall allow rule does not make a vulnerable service secure.
 
 ## 10. Fail2Ban
 
-### What
-
 Fail2Ban monitors selected log events and temporarily or permanently applies actions, commonly blocking sources that exceed configured failure thresholds.
-
-### Why
 
 It can reduce repeated online guessing and log noise against exposed services.
 
@@ -300,11 +280,7 @@ Monitor bans, false positives, service health, and rule effectiveness.
 
 ## 12. auditd Basics
 
-### What
-
 The Linux Audit system records selected security-relevant events from the kernel. `auditd` receives and writes audit records.
-
-### Why
 
 Standard application logs may not provide sufficient detail about file access, system calls, account changes, or privileged actions.
 
@@ -392,11 +368,7 @@ Analysts must correlate all records sharing the same audit event identifier. A s
 
 ## 16. CIS Benchmarks
 
-### What
-
 CIS Benchmarks are consensus-based secure-configuration recommendations for operating systems, cloud services, applications, and other technologies.
-
-### Why
 
 They provide structured assessment guidance and a common hardening reference.
 

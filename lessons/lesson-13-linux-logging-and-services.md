@@ -40,11 +40,7 @@ Logs are useful only when systems generate the right events, timestamps are reli
 
 ## 1. Linux Logging
 
-### What
-
 Logging is the creation of timestamped event records describing system, service, application, security, or user activity.
-
-### Why
 
 Logs help answer:
 
@@ -86,11 +82,7 @@ Logs are evidence, not infallible truth. Correlate multiple independent sources.
 
 ## 3. Syslog
 
-### What
-
 Syslog is a logging model and protocol family used to send event messages from applications and systems to local or remote collectors.
-
-### Why
 
 It provides common routing by message source and severity.
 
@@ -209,11 +201,7 @@ One failure may be user error or Internet noise. Many accounts from one source m
 
 ## 9. systemd Journal
 
-### What
-
 The systemd journal is a structured logging service managed by `systemd-journald`.
-
-### Why
 
 It captures metadata and supports filtering by service, boot, process, priority, and time.
 
@@ -275,11 +263,7 @@ Local root access may permit log manipulation. Central forwarding reduces, but d
 
 ## 12. Linux Services
 
-### What
-
 A service is a background function managed by the operating system, commonly through systemd units.
-
-### Why
 
 Services provide SSH, web, database, logging, scheduling, networking, and security functions.
 
@@ -363,11 +347,7 @@ An enabled unfamiliar service can be a persistence mechanism.
 
 ## 16. Cron
 
-### What
-
 Cron schedules commands according to time expressions.
-
-### Why
 
 It supports backups, maintenance, reports, cleanup, and automation.
 
@@ -430,11 +410,7 @@ Analysts must inspect both cron and systemd timers when investigating scheduled 
 
 ## 19. Log Rotation
 
-### What
-
 Log rotation renames, compresses, archives, and removes logs according to policy.
-
-### Why
 
 Without rotation, logs can consume storage and disrupt services.
 

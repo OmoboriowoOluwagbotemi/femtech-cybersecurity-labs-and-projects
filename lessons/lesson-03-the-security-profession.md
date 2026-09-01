@@ -47,9 +47,7 @@ For example:
 
 Professional cybersecurity requires both technical skill and operational discipline.
 
-## 1. What Is the Cybersecurity Profession?
-
-### What
+## 1. The Cybersecurity Profession
 
 The cybersecurity profession is the field responsible for protecting systems, networks, applications, data, identities, and business operations from security risks.
 
@@ -64,8 +62,6 @@ Cybersecurity professionals work across:
 - Compliance.
 - Architecture.
 - Awareness and training.
-
-### Why
 
 Organizations depend on technology for nearly every business function. If technology is compromised, the organization can lose money, data, trust, legal standing, and operational capability.
 
@@ -130,11 +126,7 @@ Cybersecurity roles can be grouped into broad families. A single organization ma
 
 ## 3. SOC Analyst
 
-### What
-
 A SOC Analyst monitors security alerts, investigates suspicious activity, and escalates confirmed incidents.
-
-### Why
 
 Organizations generate large volumes of logs from endpoints, servers, identity systems, cloud platforms, firewalls, and applications. SOC analysts help separate normal activity from potential threats.
 
@@ -178,11 +170,7 @@ A Microsoft Sentinel alert shows impossible travel for a Microsoft 365 user foll
 
 ## 4. Cybersecurity Analyst
 
-### What
-
 A cybersecurity analyst is a broad role that may include monitoring, risk analysis, vulnerability review, control validation, reporting, and security improvement.
-
-### Why
 
 Many organizations need professionals who can connect technical evidence to business risk.
 
@@ -209,11 +197,7 @@ A vulnerability scan shows critical findings on an internet-facing VPN server. T
 
 ## 5. Security Administrator
 
-### What
-
 A security administrator configures, operates, and maintains security controls.
-
-### Why
 
 Security tools only reduce risk when they are properly configured, monitored, updated, and maintained.
 
@@ -241,11 +225,7 @@ A company deploys Microsoft Defender for Endpoint. The security administrator co
 
 ## 6. Systems Administrator With Security Responsibilities
 
-### What
-
 A systems administrator manages servers, endpoints, operating systems, directories, updates, and core IT services. In many organizations, systems administrators perform important security work.
-
-### Why
 
 Many security failures begin as system administration weaknesses: missing patches, excessive privileges, weak logging, insecure services, or poor backup practices.
 
@@ -272,11 +252,7 @@ A hospital runs legacy Windows servers for a clinical application. The systems a
 
 ## 7. Vulnerability Management Analyst
 
-### What
-
 A vulnerability management analyst identifies, validates, prioritizes, and tracks vulnerabilities until remediation is complete.
-
-### Why
 
 Not every vulnerability carries the same risk. Organizations need a disciplined process to decide what must be fixed first.
 
@@ -304,11 +280,7 @@ A bank identifies a critical vulnerability on an internet-facing web server. The
 
 ## 8. Incident Responder
 
-### What
-
 An incident responder investigates security incidents, coordinates containment, supports eradication, and helps restore normal operations.
-
-### Why
 
 When an attack occurs, organizations need calm, structured action. Poor response can destroy evidence, extend downtime, or allow attackers to remain inside the environment.
 
@@ -336,11 +308,7 @@ A ransomware alert appears on several endpoints. The incident responder coordina
 
 ## 9. IAM Analyst
 
-### What
-
 An Identity and Access Management analyst helps ensure that the right users have the right access at the right time.
-
-### Why
 
 Modern attacks often target identity. Stolen credentials, excessive privileges, stale accounts, and weak MFA enforcement can give attackers direct access to sensitive systems.
 
@@ -368,11 +336,7 @@ A former contractor's account still has access to a project SharePoint site. The
 
 ## 10. GRC Analyst
 
-### What
-
 A Governance, Risk, and Compliance analyst supports policies, risk assessments, audits, standards, and regulatory requirements.
-
-### Why
 
 Security must be accountable. Organizations need evidence that controls exist, risks are tracked, and legal or regulatory obligations are understood.
 
@@ -399,11 +363,7 @@ A healthcare organization prepares for an audit. The GRC analyst collects eviden
 
 ## 11. Penetration Tester and Red Team Roles
 
-### What
-
 A penetration tester performs authorized security testing to identify exploitable weaknesses. A red team may simulate more realistic adversary behavior to test detection and response.
-
-### Why
 
 Organizations need to understand whether security controls work under realistic conditions.
 
@@ -428,11 +388,7 @@ A company authorizes a test of its external web application. The tester identifi
 
 ## 12. Career Paths
 
-### What
-
 A career path is a realistic progression of skills, roles, experience, and certifications.
-
-### Why
 
 Cybersecurity is broad. A clear path helps students avoid confusion and build depth step by step.
 
@@ -501,11 +457,7 @@ Before registering for any certification, students should verify the current exa
 
 ### Security+
 
-#### What
-
 Security+ is a vendor-neutral cybersecurity certification that validates broad security knowledge.
-
-#### Why
 
 Security+ is often useful for students entering SOC, security analyst, systems administrator, security administrator, and junior cybersecurity roles.
 
@@ -525,11 +477,7 @@ Security+ fits early in the learning journey, after students understand basic IT
 
 ### CySA+
 
-#### What
-
 CySA+ is a cybersecurity analyst certification focused on security operations, analytics, vulnerability management, incident response, and reporting.
-
-#### Why
 
 It is useful for students targeting SOC Analyst, Cybersecurity Analyst, Vulnerability Analyst, and incident response support roles.
 
@@ -550,11 +498,7 @@ CySA+ fits after Security+ or equivalent knowledge, especially when the student 
 
 ### CEH
 
-#### What
-
 CEH, Certified Ethical Hacker, introduces ethical hacking concepts and offensive security vocabulary under an authorized testing model.
-
-#### Why
 
 It helps students understand how attackers think, but it must be paired with real lab practice, defensive thinking, and professional ethics.
 
@@ -576,11 +520,7 @@ CEH may fit after foundational security knowledge, especially for students who w
 
 ### OSCP / OSCP+
 
-#### What
-
 OSCP is a practical penetration testing certification path from OffSec. OSCP+ is associated with OffSec's current certification branding and continuing education model.
-
-#### Why
 
 It is widely respected for hands-on offensive security skill because students must demonstrate practical exploitation and reporting ability in a controlled exam environment.
 
@@ -603,11 +543,7 @@ OSCP fits later than Security+ and most beginner courses. Students should not ru
 
 ### CISSP
 
-#### What
-
 CISSP is an advanced security certification for experienced professionals across broad security domains.
-
-#### Why
 
 It is valuable for security managers, architects, consultants, senior analysts, and professionals who need broad governance, risk, architecture, and leadership knowledge.
 
@@ -632,11 +568,7 @@ CISSP is not usually the first certification for beginners. It is better treated
 
 ## 14. Continuous Learning Strategies
 
-### What
-
 Continuous learning is the habit of regularly improving technical knowledge, practical skill, professional judgment, and communication ability.
-
-### Why
 
 Cybersecurity changes constantly. Attackers adapt. Tools change. Cloud platforms evolve. Regulations are updated. New vulnerabilities are disclosed. A security professional who stops learning becomes less effective over time.
 
@@ -695,11 +627,7 @@ This is professional because it is specific, evidence-based, and action-oriented
 
 ## 16. Building a Professional Portfolio
 
-### What
-
 A portfolio is a collection of practical work that shows what a student can do.
-
-### Why
 
 Beginners often lack job experience. A portfolio helps demonstrate learning, discipline, and practical ability.
 
