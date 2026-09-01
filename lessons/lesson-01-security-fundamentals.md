@@ -4,7 +4,7 @@
 
 Cybersecurity begins with a simple professional question: what must be protected, from what, and how well?
 
-Security fundamentals give analysts, administrators, and incident responders the language needed to answer that question in a business environment. Before a student can understand malware, firewalls, SIEM alerts, cloud security, Active Directory, or incident response, the student must understand the relationship between assets, risk, threats, vulnerabilities, controls, defense in depth, and attack surface.
+Security fundamentals give analysts, administrators, and incident responders the language needed to answer that question in a business environment. These concepts connect technical events to business consequences. They also prepare students to understand malware, firewalls, SIEM alerts, cloud security, Active Directory, and incident response in later lessons.
 
 This lesson introduces the foundation that every later lesson will build on. The goal is not only to memorize terms, but to think like a security professional who can connect technical weaknesses to real business impact.
 
@@ -177,8 +177,6 @@ Availability applies to:
 
 ## 2. Risk
 
-### Risk
-
 Risk is the possibility that a threat will exploit a vulnerability and cause harm to an asset or business process.
 
 A simple way to think about risk is:
@@ -240,8 +238,6 @@ A small accounting firm stores client tax documents in a cloud file-sharing plat
 
 ## 3. Threats
 
-### Threats
-
 A threat is anything that can cause harm to an asset, system, network, user, or organization.
 
 Threats are not always attackers. A threat can be a cybercriminal, a malicious insider, a careless employee, a power outage, a failed update, a natural disaster, or a misconfigured cloud service.
@@ -273,8 +269,6 @@ Threats appear across:
 A financial institution faces threats from phishing, credential stuffing, ransomware, insider fraud, DDoS attacks, and third-party compromise. A security team must understand these threats so it can design controls such as MFA, transaction monitoring, endpoint protection, SIEM correlation, DDoS protection, and privileged access monitoring.
 
 ## 4. Vulnerabilities
-
-### Vulnerabilities
 
 A vulnerability is a weakness that can be exploited by a threat.
 
@@ -325,15 +319,15 @@ A healthcare organization runs an outdated file server that stores patient docum
 
 ## 5. Security Controls
 
-### Security Controls
-
 A security control is a safeguard used to reduce risk.
 
 Controls can be technical, managerial, operational, or physical. By function, they can prevent, deter, detect, correct, compensate for, or direct security activity.
 
 Security controls turn security goals into practical action. It is not enough to say "protect customer data." An organization must implement controls that enforce access, monitor activity, protect systems, and support recovery.
 
-#### Security+ Control Categories
+### Security+ Control Categories
+
+Security+ groups controls by the kind of safeguard being implemented. The categories make it easier to separate technology from governance, human activity, and physical protection.
 
 | Control Category | Meaning | Example |
 |---|---|---|
@@ -345,6 +339,8 @@ Security controls turn security goals into practical action. It is not enough to
 CompTIA Security+ SY0-701 commonly uses these four control categories: technical, managerial, operational, and physical. Older materials and some organizations may use the term administrative control, but for this course we will follow the SY0-701 wording unless a real enterprise framework uses different terminology.
 
 #### Control Types by Function
+
+Controls can also be classified by the result they are intended to produce during prevention, detection, response, or recovery.
 
 | Control Function | Purpose | Example |
 |---|---|---|
@@ -373,8 +369,6 @@ Controls are used throughout the enterprise:
 A hybrid enterprise uses on-premises Active Directory and Microsoft 365. To protect administrator accounts, it implements MFA, privileged access workstations, conditional access policies, passwordless authentication for admins, PowerShell logging, Microsoft Defender for Endpoint, and SIEM alerts in Microsoft Sentinel. These controls work together to reduce the risk of account compromise.
 
 ## 6. Defense in Depth
-
-### Defense in Depth
 
 Defense in depth is a security strategy that uses multiple layers of controls so that if one control fails, other controls still provide protection.
 
@@ -420,8 +414,6 @@ Consider ransomware protection in a corporate enterprise:
 No single layer solves ransomware alone. Together, the layers reduce risk significantly.
 
 ## 7. Attack Surface
-
-### Attack Surface
 
 Attack surface is the total set of points where an attacker could try to enter, interact with, or exploit an environment.
 

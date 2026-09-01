@@ -40,7 +40,11 @@ Integration reviews support:
 
 The goal is not to draw an attractive diagram. The goal is to verify that actual architecture and operations protect the business service under realistic failure and attack conditions.
 
-## 1. Security Architecture Walkthrough
+## Architecture and Dependency Review
+
+An integration review starts with a business service, not an isolated device. The reviewer traces identities, data, administrative paths, trust boundaries, and dependencies so that individual controls can be evaluated in the context of the service they protect.
+
+### Security Architecture Walkthrough
 
 A security architecture walkthrough is a structured examination of how a business service is designed, operated, monitored, and recovered.
 
@@ -66,7 +70,7 @@ Trace:
 
 Walkthroughs apply to on-premises systems, SaaS, IaaS, hybrid identity, branch networks, industrial or clinical environments, remote work, and supplier-hosted services.
 
-## 2. Start with the Business Service
+### Start with the Business Service
 
 Document:
 
@@ -82,7 +86,7 @@ Document:
 
 A server is not the business service. For example, online banking depends on DNS, identity, certificates, APIs, transaction databases, fraud monitoring, support teams, telecommunications, and recovery processes.
 
-## 3. Build an Evidence-Based Architecture View
+### Build an Evidence-Based Architecture View
 
 Use multiple evidence sources:
 
@@ -100,7 +104,7 @@ Use multiple evidence sources:
 
 Diagrams and inventories can be wrong. Reconcile documentation with observed configuration and telemetry.
 
-## 4. Trust Boundaries and Data Flows
+### Trust Boundaries and Data Flows
 
 A trust boundary separates components with different identities, ownership, privilege, exposure, or security assumptions. A data flow shows how information moves between entities, processes, and storage.
 
@@ -119,9 +123,9 @@ For every flow, ask:
 - Failure and retry behavior?
 - Owner?
 
-Important boundaries include internet-to-DMZ, user-to-application, application-to-database, on-premises-to-cloud, administrator-to-management plane, supplier-to-enterprise, production-to-backup, and corporate-to-clinical or operational networks.
+Important boundaries include internet-to-DMZ, user-to-application, application-to-database, and on-premises-to-cloud connections. Administrative, supplier, backup, clinical, and operational network boundaries also require explicit review.
 
-## 5. Administrative Paths
+### Administrative Paths
 
 Administrative access can bypass normal application controls. Trace:
 
@@ -148,7 +152,7 @@ Validate:
 
 An isolated workload is not protected if its hypervisor or management plane is broadly accessible.
 
-## 6. Dependency Analysis
+### Dependency Analysis
 
 Dependencies are services or resources required for operation, security, or recovery.
 
@@ -168,7 +172,7 @@ Examine:
 
 Record dependencies in architecture diagrams, configuration management databases, business-impact analysis, risk registers, recovery plans, and supplier inventories.
 
-## 7. Defense-in-Depth Review
+### Defense-in-Depth Review
 
 Defense in depth uses independent or complementary controls so that one failure does not expose the objective.
 
@@ -187,7 +191,11 @@ Example: protecting a remote administrator:
 
 Do not count duplicated controls as independent when they share the same failure mode. Two tools using the same compromised identity provider may fail together.
 
-## 8. System Hardening Review
+## Integrated Control Review
+
+Hardening cannot be assessed one platform at a time. Windows, Linux, endpoints, networks, cloud services, applications, vulnerability management, telemetry, and recovery controls must support one another across the same attack paths and business dependencies.
+
+### System Hardening Review
 
 Hardening reduces attack surface and constrains behavior by securely configuring systems and removing unnecessary exposure.
 
@@ -197,7 +205,7 @@ Use approved baselines, configuration management, exception handling, validation
 
 Apply hardening to endpoints, servers, directory services, network devices, hypervisors, containers, cloud resources, SaaS tenants, applications, and management tools.
 
-## 9. Windows and Active Directory Review
+### Windows and Active Directory Review
 
 Review:
 
@@ -220,7 +228,7 @@ Review:
 
 Evidence should include effective policy, not only intended Group Policy Objects.
 
-## 10. Linux Review
+### Linux Review
 
 Review:
 
@@ -240,7 +248,7 @@ Review:
 
 Use `ss`, `systemctl`, package inventory, permissions, logs, and configuration-management evidence to validate the actual state.
 
-## 11. Endpoint Review
+### Endpoint Review
 
 Evaluate:
 
@@ -259,7 +267,7 @@ Evaluate:
 
 Coverage percentages need complete denominators. Reporting "98% protected" is unreliable if unknown devices are absent from inventory.
 
-## 12. Network and Remote-Access Review
+### Network and Remote-Access Review
 
 Review:
 
@@ -280,7 +288,7 @@ Review:
 
 Validate a rule from source to destination. A firewall entry can exist yet fail because of routing, state, NAT order, or an overlooked alternate path.
 
-## 13. Cloud and SaaS Review
+### Cloud and SaaS Review
 
 Review:
 
@@ -301,7 +309,7 @@ Review:
 
 A cloud provider secures the platform; the customer still owns configuration and responsibilities assigned by the service model.
 
-## 14. Application and Data Review
+### Application and Data Review
 
 Review:
 
@@ -320,7 +328,7 @@ Review:
 
 Do not treat TLS as proof that application authorization or input handling is secure.
 
-## 15. Vulnerability and Patch Integration
+### Vulnerability and Patch Integration
 
 Verify that:
 
@@ -335,7 +343,7 @@ Verify that:
 - Remediation is rescanned or otherwise validated.
 - Metrics distinguish accepted, mitigated, fixed, and overdue risk.
 
-## 16. Telemetry and Detection Review
+### Telemetry and Detection Review
 
 Detection coverage is the ability to observe and identify meaningful behavior across relevant attack paths.
 
@@ -357,11 +365,11 @@ For critical scenarios, map:
 
 Include identity, endpoint, Windows, Linux, DNS, firewall, VPN, IDS, cloud control plane, SaaS, application, database, and backup telemetry.
 
-### Coverage Validation
+#### Coverage Validation
 
 An ATT&CK mapping is not evidence of effective detection. Generate an authorized test event, confirm source logging, collection, parsing, rule execution, alert routing, analyst interpretation, and response.
 
-## 17. Incident Response and Recovery Review
+### Incident Response and Recovery Review
 
 Evaluate:
 
@@ -380,7 +388,11 @@ Evaluate:
 
 Recovery should not reconnect systems into the same unresolved attack path.
 
-## 18. Zero Trust Principles
+## Zero Trust Evaluation
+
+Zero Trust provides decision principles rather than a product checklist. The review should examine the identity, device, resource, context, policy, telemetry, and recovery evidence used for each access decision while recognizing operational limits and maturity gaps.
+
+### Zero Trust Principles
 
 Zero Trust is an architectural approach that does not grant implicit trust based only on network location, ownership, or a previous authentication. Access is explicitly evaluated using identity, device, resource, context, policy, and risk.
 
@@ -400,7 +412,7 @@ Apply:
 
 Zero Trust applies to users, administrators, service identities, APIs, workloads, data, remote access, cloud management, and internal applications.
 
-## 19. Zero Trust Decision Flow
+### Zero Trust Decision Flow
 
 An access decision may evaluate:
 
@@ -415,7 +427,7 @@ An access decision may evaluate:
 
 Access granted at 09:00 should not necessarily remain trusted after the device becomes high risk at 09:15.
 
-## 20. Zero Trust Limitations and Misconceptions
+### Zero Trust Limitations and Misconceptions
 
 Zero Trust does not mean:
 
@@ -429,7 +441,9 @@ Zero Trust does not mean:
 
 Poorly designed controls can create denial-of-service risk or unsafe workarounds. Use phased deployment and business validation.
 
-## 21. Zero Trust Maturity Questions
+### Zero Trust Maturity Questions
+
+Maturity should be judged from verified decision inputs and enforcement behavior rather than product ownership or architecture labels.
 
 | Domain | Review questions |
 |---|---|
@@ -442,7 +456,11 @@ Poorly designed controls can create denial-of-service risk or unsafe workarounds
 | Visibility | Can decisions be reconstructed from logs? |
 | Governance | Are policies, owners, exceptions, and metrics defined? |
 
-## 22. Gap Identification
+## Gap Analysis and Roadmap
+
+A useful review turns evidence into prioritized action. Gaps should be tied to realistic attack paths and business consequences, then translated into findings with owners, target dates, dependencies, validation criteria, and a feasible improvement sequence.
+
+### Gap Identification
 
 A security gap is a difference between the required or target state and the observed state.
 
@@ -465,7 +483,9 @@ Record:
 
 Track gaps in findings, risk registers, plans of action, remediation tickets, architecture decisions, compliance records, and executive dashboards.
 
-## 23. Gap Types
+### Gap Types
+
+Classifying a gap helps identify the accountable owner and the kind of corrective work required.
 
 | Type | Example |
 |---|---|
@@ -478,7 +498,7 @@ Track gaps in findings, risk registers, plans of action, remediation tickets, ar
 | Governance gap | Firewall exceptions have no owner or expiry |
 | Validation gap | Recovery plan has never been tested |
 
-## 24. Attack-Path Analysis
+### Attack-Path Analysis
 
 Prioritize connected weaknesses, not isolated scores.
 
@@ -495,7 +515,7 @@ Each issue may appear moderate alone. Together they create a high-impact ransomw
 
 Break paths at multiple points through phishing-resistant authentication, consent restrictions, secrets management, least privilege, segmentation, backup isolation, and tested detections.
 
-## 25. Prioritization
+### Prioritization
 
 Prioritize using:
 
@@ -512,7 +532,7 @@ Prioritize using:
 
 Quick wins matter, but do not allow many easy low-risk actions to displace a difficult material risk.
 
-## 26. Findings and Roadmap
+### Findings and Roadmap
 
 Group actions into:
 
@@ -523,29 +543,33 @@ Group actions into:
 
 Every roadmap item needs an accountable owner, resources, dependencies, success measure, and validation.
 
-## 27. Enterprise Scenarios
+## Enterprise Review Scenarios
 
-### Scenario A: Healthcare Architecture
+The following scenarios apply the same review method to organizations with different constraints. Each example connects service dependencies, control evidence, attack paths, and remediation priorities instead of producing an isolated checklist.
+
+### Enterprise Scenarios
+
+#### Scenario A: Healthcare Architecture
 
 A clinical device cannot support modern authentication. The organization isolates it, permits only required clinical flows, routes vendor support through PAM and a monitored bastion, passively monitors traffic, and maintains a replacement deadline. Zero Trust is achieved through surrounding controls, not an unsafe forced agent installation.
 
-### Scenario B: Financial Recovery Gap
+#### Scenario B: Financial Recovery Gap
 
 The bank has immutable backups, but backup administrators authenticate through the production domain. The review identifies a shared identity failure, separates recovery credentials, hardens the management plane, and conducts a domain-compromise recovery exercise.
 
-### Scenario C: University Cloud Sprawl
+#### Scenario C: University Cloud Sprawl
 
 Research subscriptions are missing from central logging. The university establishes organization-level inventory, enrollment guardrails, delegated ownership, minimum log requirements, and a monitored exception path for sensitive experiments.
 
-### Scenario D: Government Supplier Access
+#### Scenario D: Government Supplier Access
 
 A vendor VPN allows broad network reach during a six-month project. The agency replaces it with approved-device, time-bound, resource-specific access through a bastion and correlates vendor identity, session, endpoint, and target logs.
 
-### Scenario E: Small Business
+#### Scenario E: Small Business
 
 A small company cannot implement every advanced tool. It uses CIS IG1 priorities: inventory, MFA, patching, secure configuration, backups, endpoint protection, logging, and an external incident-response contact. Its architecture remains simple and supportable.
 
-## 28. Enterprise Troubleshooting During Review
+### Enterprise Troubleshooting During Review
 
 When a control appears absent:
 
@@ -560,7 +584,7 @@ When a control appears absent:
 
 For example, a missing SIEM event may indicate source logging disabled, collector failure, parser mismatch, filter suppression, network interruption, clock skew, or wrong query scope.
 
-## 29. Classroom Hands-On Practical
+## Classroom Hands-On Practical
 
 ### Title
 
@@ -597,7 +621,7 @@ A fictional hybrid healthcare organization has:
 
 Students must use evidence, distinguish target from observed state, include recovery and operational controls, use correct Security+ control taxonomy, and avoid treating products as proof of architecture effectiveness.
 
-## 30. Take-Home Practical
+## Take-Home Practical
 
 Review the complete isolated course lab.
 
@@ -618,7 +642,7 @@ Produce:
 
 For each finding, state evidence, confidence, impact, owner, deadline, and validation method.
 
-## 31. Assessment Questions
+## Assessment Questions
 
 ### Multiple Choice
 
@@ -681,7 +705,7 @@ For each finding, state evidence, confidence, impact, owner, deadline, and valid
 
 13. A hybrid enterprise uses MFA for remote access, but administrators connect from unmanaged personal devices to a broad VPN, use standing Domain Admin accounts, and manage both production and backup systems. Identify the integrated risks and propose a phased architecture improvement.
 
-## 33. Glossary
+## Glossary
 
 | Term | Definition |
 |---|---|
@@ -699,7 +723,7 @@ For each finding, state evidence, confidence, impact, owner, deadline, and valid
 | Trust boundary | Transition where identity, ownership, privilege, or security assumptions change |
 | Zero Trust | Architecture that avoids implicit trust and explicitly evaluates access using context and risk |
 
-## 34. Lesson Review Checklist
+## Lesson Review Checklist
 
 Students should now be able to:
 
@@ -714,6 +738,6 @@ Students should now be able to:
 - [ ] Prioritize an evidence-based roadmap.
 - [ ] Communicate technical and executive findings.
 
-## 35. Continuity Note
+## Continuity Note
 
-This lesson integrates the complete architecture and operations taught throughout the course. Lesson 40 will require students to apply those competencies in a capstone investigation from SIEM alert through log and PCAP analysis, threat intelligence, ATT&CK mapping, severity assessment, containment, and written incident reporting.
+This lesson integrates the complete architecture and operations taught throughout the course. Lesson 40 requires students to apply these competencies in a capstone investigation. The workflow moves from a SIEM alert through log and PCAP analysis, threat intelligence, ATT&CK mapping, severity assessment, containment, and written reporting.

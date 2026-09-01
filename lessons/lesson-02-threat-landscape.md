@@ -2,9 +2,9 @@
 
 ## Lesson Overview
 
-The threat landscape is the complete environment of cyber threats that may affect an organization. It includes the types of malware attackers use, the kinds of threat actors behind attacks, the methods used by advanced persistent threats, and the frameworks defenders use to understand attacker behavior.
+The threat landscape is the complete environment of cyber threats that may affect an organization. It includes malware, threat actors, sustained campaigns, and the frameworks defenders use to interpret attacker behavior.
 
-Lesson 1 introduced assets, threats, vulnerabilities, risk, controls, defense in depth, and attack surface. Lesson 2 builds on that foundation by asking a more operational question: who might attack, what methods might they use, and how can defenders recognize the attack before serious damage occurs?
+Lesson 1 introduced assets, threats, vulnerabilities, risk, controls, defense in depth, and attack surface. This lesson builds on that foundation by examining likely attackers, their methods, and the evidence defenders can recognize before serious damage occurs.
 
 Security professionals do not study threats to create fear. They study threats to make better decisions about prevention, detection, response, and recovery.
 
@@ -49,8 +49,6 @@ The threat landscape affects every organization:
 SOC analysts, security administrators, incident responders, vulnerability analysts, and system administrators all use threat landscape knowledge to decide which risks deserve priority.
 
 ## 1. Understanding the Threat Landscape
-
-### The Threat Landscape
 
 The threat landscape is the collection of threats that exist against an organization, industry, technology, region, or business process.
 
@@ -100,8 +98,6 @@ Threat landscape knowledge appears in:
 
 ## 2. Malware Types
 
-### Malware
-
 Malware is malicious software designed to damage systems, steal data, disrupt operations, spy on users, gain unauthorized access, or help attackers maintain control.
 
 Malware is not one single thing. It is a broad category that includes many tools and techniques.
@@ -115,6 +111,8 @@ Malware can affect all parts of the CIA Triad:
 | Availability | Ransomware encrypts systems and stops business operations. |
 
 ### Common Malware Types
+
+The categories below describe common behavior, but real malware can combine several of them. For example, one campaign may use a Trojan for delivery, fileless techniques for execution, and ransomware for impact.
 
 | Malware Type | What It Does | Enterprise Impact | Defensive Focus |
 |---|---|---|---|
@@ -175,8 +173,6 @@ Defensive response should include:
 
 ## 3. Threat Actors
 
-### Threat Actors
-
 A threat actor is a person, group, or organization that can cause harm through cyber activity.
 
 Threat actors differ by motivation, capability, resources, targeting, patience, and risk tolerance.
@@ -192,6 +188,8 @@ Understanding the likely actor helps defenders estimate:
 Actor identification should be careful. Early in an incident, defenders may not know who is behind the activity. Analysts should avoid unsupported conclusions and focus first on observable behavior.
 
 ### Common Threat Actor Categories
+
+Actor categories help analysts form initial hypotheses about motivation and capability. They should not be treated as attribution unless reliable evidence supports the conclusion.
 
 | Threat Actor | Motivation | Typical Targets | Example Activity |
 |---|---|---|---|
@@ -232,8 +230,6 @@ A small business receives a fake Microsoft 365 login email. An employee enters c
 The likely actor may be financially motivated cybercriminals rather than an APT. The practical controls include MFA, mailbox rule monitoring, user training, conditional access, and alerting for unusual sign-ins.
 
 ## 4. Advanced Persistent Threats
-
-### Advanced Persistent Threats (APTs)
 
 An advanced persistent threat is a highly capable and patient threat actor or campaign that uses sustained, targeted activity to gain and maintain access to an environment.
 
@@ -289,8 +285,6 @@ Defensive priorities include:
 - Incident response with legal and research leadership involvement.
 
 ## 5. Cyber Kill Chain
-
-### The Cyber Kill Chain
 
 The Cyber Kill Chain is a model that describes common stages of an intrusion. It helps defenders understand how an attack progresses and where security controls can interrupt it.
 
@@ -351,8 +345,6 @@ Kill Chain analysis:
 | Actions on Objectives | Attempted file share discovery and data collection. |
 
 ## 6. MITRE ATT&CK Framework
-
-### MITRE ATT&CK
 
 MITRE ATT&CK is a knowledge base of adversary tactics, techniques, and procedures based on observed real-world activity. It helps defenders describe what attackers are trying to accomplish and how they attempt to do it.
 
@@ -420,6 +412,8 @@ Scenario: A Windows endpoint runs suspicious PowerShell, contacts an unusual ext
 ATT&CK mapping should be evidence-based. Analysts should not force a technique label if the logs do not support it.
 
 ## 7. Comparing the Cyber Kill Chain and MITRE ATT&CK
+
+The two models describe attacks at different levels of detail. The Cyber Kill Chain provides a simple progression that is useful for communicating an incident story, while ATT&CK provides a richer vocabulary for behaviors, detections, and coverage analysis.
 
 | Feature | Cyber Kill Chain | MITRE ATT&CK |
 |---|---|---|

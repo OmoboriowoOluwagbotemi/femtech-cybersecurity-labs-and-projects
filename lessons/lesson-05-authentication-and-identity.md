@@ -47,7 +47,11 @@ Compromised credentials can give an attacker valid-looking access to:
 
 Strong identity security combines technology, policy, monitoring, user support, and incident response.
 
-## 1. Identity and Access
+## Identity and Authentication Foundations
+
+Identity security begins by distinguishing a claimed identity from the evidence used to verify it and the permissions granted afterward. The concepts in this section form the basis for MFA, federation, tokens, credential protection, and access monitoring.
+
+### Identity and Access
 
 A digital identity is a representation of a user, device, application, service, or workload within an information system.
 
@@ -77,7 +81,9 @@ Identities exist in:
 - Databases and applications.
 - Devices, certificates, and service workloads.
 
-## 2. Identification, Authentication, Authorization, and Accounting
+### Identification, Authentication, Authorization, and Accounting
+
+Access decisions involve four related functions. Keeping them separate prevents a successful login from being mistaken for permission to perform every action.
 
 | Function | Question | Example |
 |---|---|---|
@@ -88,7 +94,7 @@ Identities exist in:
 
 These functions are related but not interchangeable. Successful authentication does not automatically justify unrestricted access.
 
-## 3. Authentication Factors
+### Authentication Factors
 
 An authentication factor is a category of evidence used to verify identity.
 
@@ -116,7 +122,11 @@ Authentication occurs at:
 - Physical access systems.
 - Customer-facing services.
 
-## 4. Multifactor Authentication
+## Strong Authentication
+
+Passwords alone provide weak assurance when they are reused, phished, guessed, or stolen. MFA strengthens authentication by requiring evidence from separate factor categories, but its effectiveness still depends on enrollment, recovery, user verification, and resistance to social engineering.
+
+### Multifactor Authentication
 
 MFA requires evidence from two or more different authentication factor categories.
 
@@ -140,7 +150,9 @@ MFA reduces the likelihood that a stolen password alone results in account takeo
 
 MFA is deployed through identity providers, VPN systems, privileged access platforms, SaaS applications, and endpoint sign-in.
 
-## 5. MFA Methods
+### MFA Methods
+
+MFA methods provide different levels of resistance to phishing, device theft, interception, and recovery abuse. Selection should reflect the risk of the protected account and the available recovery process.
 
 | Method | Strengths | Risks and Limitations |
 |---|---|---|
@@ -153,7 +165,7 @@ MFA is deployed through identity providers, VPN systems, privileged access platf
 | FIDO2 security key or passkey | Origin-bound and resistant to credential phishing | Enrollment, recovery, device support, and user training are required |
 | Biometrics | Convenient and tied to the user | Privacy, sensor reliability, spoofing, and fallback-method risks |
 
-### Phishing-Resistant Authentication
+#### Phishing-Resistant Authentication
 
 Phishing-resistant authentication uses cryptographic mechanisms bound to the legitimate service origin. FIDO2 security keys and appropriately implemented passkeys can prevent a credential from being replayed to a fraudulent domain.
 
@@ -166,9 +178,9 @@ No MFA method removes the need for:
 - User awareness.
 - Incident response.
 
-## 6. MFA Attacks and Defenses
+### MFA Attacks and Defenses
 
-### MFA Fatigue
+#### MFA Fatigue
 
 An attacker with a stolen password repeatedly sends push requests, hoping the user approves one to stop the notifications.
 
@@ -181,7 +193,7 @@ Defenses include:
 - Phishing-resistant authenticators.
 - Training users to deny and report unexpected prompts.
 
-### Real-Time Phishing
+#### Real-Time Phishing
 
 An adversary-in-the-middle site can relay a password and one-time code to the real service and steal the resulting session.
 
@@ -193,17 +205,21 @@ Defenses include:
 - Token protection where supported.
 - Detection of unusual sessions and sign-in properties.
 
-### SIM Swapping
+#### SIM Swapping
 
 An attacker persuades or compromises a telecommunications provider to transfer a victim's phone number.
 
 Organizations should avoid relying on SMS for high-risk access when stronger methods are practical.
 
-### Recovery Abuse
+#### Recovery Abuse
 
 Strong daily authentication can be undermined by a weak help-desk reset process. Recovery must verify identity, record approval, notify the user, and apply additional controls to privileged accounts.
 
-## 7. Single Sign-On
+## Federation, Single Sign-On, and Tokens
+
+Modern organizations connect many applications to centralized identity services. Single sign-on improves usability, federation carries identity assertions across trust boundaries, and tokens allow applications and APIs to make bounded access decisions without repeatedly handling a user's password.
+
+### Single Sign-On
 
 SSO allows a user to authenticate through a central identity service and access multiple connected applications without entering credentials separately for each one.
 
@@ -234,7 +250,7 @@ SSO is used across:
 - Educational portals.
 - Customer and partner applications.
 
-## 8. Federation and SSO Components
+### Federation and SSO Components
 
 **Federation** is a trust relationship that allows identities managed in one security domain to access services in another.
 
@@ -255,11 +271,11 @@ Common technologies include:
 
 OAuth does not by itself authenticate a user. OIDC adds standardized identity information and an ID token.
 
-### SSO Risk
+#### SSO Risk
 
 SSO centralizes control but also increases the impact of identity-provider compromise. Defense in depth requires strong MFA, privileged access controls, resilient availability, logging, secure federation settings, and emergency access procedures.
 
-## 9. Token-Based Authentication
+### Token-Based Authentication
 
 A token is a protected data object representing authorization, authentication information, or a session. It allows a system to make access decisions without repeatedly transmitting a password.
 
@@ -285,7 +301,9 @@ Tokens appear in:
 - Service-to-service access.
 - Password-reset workflows.
 
-## 10. Token Types and Security
+### Token Types and Security
+
+Tokens serve different purposes and carry different risks. Analysts should identify the token's audience, lifetime, permissions, storage location, and revocation behavior before deciding whether its use is safe.
 
 | Token | Purpose | Security Consideration |
 |---|---|---|
@@ -295,7 +313,7 @@ Tokens appear in:
 | Session token or cookie | Maintains an authenticated web session | Use Secure, HttpOnly, and appropriate SameSite protections |
 | Password-reset token | Authorizes a limited recovery action | Make single-use, short-lived, random, and securely delivered |
 
-### Bearer Tokens
+#### Bearer Tokens
 
 Many access and session tokens are bearer tokens: possession may be sufficient for use. If stolen, they may allow access without re-entering the password or MFA.
 
@@ -309,13 +327,17 @@ Protect tokens by:
 - Monitoring unusual token use.
 - Preventing script access to cookies where appropriate.
 
-### JSON Web Tokens
+#### JSON Web Tokens
 
 A JSON Web Token (JWT) is a compact token format containing claims. A signed JWT is generally encoded, not encrypted. Its contents may be readable, so sensitive data should not be placed in it merely because it is signed.
 
 Validation must not trust claims before verifying the approved signature algorithm, key, issuer, audience, and time restrictions.
 
-## 11. Passwords and Passphrases
+## Credential Security
+
+Credentials must be protected throughout their lifecycle, from creation and storage to use, rotation, recovery, and retirement. The defensive goal is not merely to enforce a complicated password rule; it is to reduce the chance that stolen or abused credentials can produce unauthorized access.
+
+### Passwords and Passphrases
 
 A password is a secret knowledge factor. A passphrase is typically longer and may consist of multiple words.
 
@@ -325,7 +347,7 @@ Users create or receive a secret, and the authentication system verifies it agai
 
 Passwords protect local accounts, directories, applications, databases, cloud services, devices, and recovery systems.
 
-### Better Password Practice
+#### Better Password Practice
 
 Organizations should:
 
@@ -338,7 +360,7 @@ Organizations should:
 - Protect privileged and service-account credentials more strongly.
 - Add MFA wherever practical.
 
-## 12. Secure Password Storage
+### Secure Password Storage
 
 Secure password storage retains a one-way derived value instead of plaintext or reversibly encrypted passwords.
 
@@ -355,7 +377,9 @@ Suitable technologies include Argon2id, bcrypt, scrypt, and PBKDF2 when properly
 
 This process belongs in application authentication systems, identity platforms, and any approved system that must directly verify passwords.
 
-### Salt, Pepper, and Work Factor
+#### Salt, Pepper, and Work Factor
+
+These elements address different password-storage risks and should not be treated as interchangeable controls.
 
 | Element | Purpose | Secret? |
 |---|---|---|
@@ -367,7 +391,9 @@ A general-purpose fast hash such as unsalted MD5, SHA-1, or SHA-256 alone is uns
 
 Passwords should not be encrypted merely so the application can decrypt and compare them. Systems requiring recovery of another service's password should use an approved secrets vault and strong access controls, not treat it as ordinary password verification.
 
-## 13. Credential Attacks
+### Credential Attacks
+
+Credential attacks target creation, storage, authentication, recovery, or active sessions. The most effective defenses combine resistant authentication with monitoring and rapid revocation.
 
 | Attack | How It Works | Primary Defense |
 |---|---|---|
@@ -384,46 +410,50 @@ Passwords should not be encrypted merely so the application can decrypt and comp
 
 Account lockout can slow online guessing but may also be abused to deny service. Smart lockout, risk-based controls, rate limiting, and monitoring provide a more balanced design.
 
-## 14. Credential Security Lifecycle
+### Credential Security Lifecycle
 
-### Enrollment
+#### Enrollment
 
 - Verify identity before registering authenticators.
 - Record authorized devices and methods.
 - Protect activation links and initial secrets.
 - Apply stronger approval to privileged accounts.
 
-### Use
+#### Use
 
 - Require MFA based on risk.
 - Use TLS.
 - Limit sign-in locations, devices, and protocols where justified.
 - Alert on suspicious authentication.
 
-### Storage
+#### Storage
 
 - Use password-specific derivation.
 - Store service secrets in managed vaults.
 - Protect tokens and private keys in platform security stores.
 - Prohibit secrets in source code and documentation.
 
-### Rotation and Reset
+#### Rotation and Reset
 
 - Change credentials after compromise, exposure, personnel changes, or policy-defined cryptoperiods.
 - Verify reset requests.
 - Revoke sessions and refresh tokens when necessary.
 - Notify users of security changes.
 
-### Revocation and Offboarding
+#### Revocation and Offboarding
 
 - Disable accounts promptly.
 - Remove active sessions, tokens, keys, and application consent.
 - Recover organizational devices and authenticators.
 - Review recent activity for misuse.
 
-## 15. Privileged, Service, and Emergency Accounts
+## Privileged and Adaptive Access
 
-### Privileged Accounts
+Not every account or sign-in carries the same risk. Privileged identities, service accounts, emergency access, device state, location, and observed behavior require stronger controls than a routine low-risk user session.
+
+### Privileged, Service, and Emergency Accounts
+
+#### Privileged Accounts
 
 Administrative identities have greater impact and should use:
 
@@ -434,7 +464,7 @@ Administrative identities have greater impact and should use:
 - Dedicated administrative workstations where appropriate.
 - Session logging and alerting.
 
-### Service Accounts
+#### Service Accounts
 
 Service identities support applications and automation. They should:
 
@@ -445,7 +475,7 @@ Service identities support applications and automation. They should:
 - Have an accountable owner.
 - Be monitored for unusual use.
 
-### Emergency Access Accounts
+#### Emergency Access Accounts
 
 Emergency or break-glass accounts support recovery if normal identity services fail. They require:
 
@@ -455,7 +485,7 @@ Emergency or break-glass accounts support recovery if normal identity services f
 - Regular testing.
 - Documented authorization and post-use review.
 
-## 16. Conditional and Risk-Based Access
+### Conditional and Risk-Based Access
 
 Conditional access evaluates context before granting access.
 
@@ -474,35 +504,39 @@ Possible decisions include allow, block, require MFA, require a compliant device
 
 Risk signals are evidence, not certainty. Analysts must account for VPN use, mobile networks, travel, shared infrastructure, and false positives.
 
-## 17. Enterprise Scenarios
+## Identity Operations and Monitoring
 
-### Small Business: Microsoft 365 Account Takeover
+Identity controls become effective only when they are connected to business processes, reliable telemetry, and incident response. The following scenarios show how design decisions and monitoring evidence work together in practice.
+
+### Enterprise Scenarios
+
+#### Small Business: Microsoft 365 Account Takeover
 
 An employee reuses a password exposed in another breach. An attacker signs in and creates a mailbox forwarding rule.
 
 The organization enables MFA, blocks legacy authentication, reviews sign-in and audit logs, removes the rule, resets the password, revokes sessions, and checks for additional affected accounts.
 
-### Bank: Privileged Administrator
+#### Bank: Privileged Administrator
 
 A bank requires a separate administrator account, FIDO2 authentication, a managed workstation, time-limited privilege, and session monitoring. A password alone cannot authorize high-risk administration.
 
-### Hospital: Emergency Access
+#### Hospital: Emergency Access
 
 Clinical staff normally authenticate through SSO and MFA. A monitored emergency access process supports continuity during identity-service disruption. Every emergency use triggers review to balance availability with accountability.
 
-### University: Student and Staff Federation
+#### University: Student and Staff Federation
 
 A university uses one IdP for learning, library, and administrative applications. Students and staff receive different claims and authorization. Disabling a departed staff identity blocks connected applications without separate account-by-account password changes.
 
-### Government Agency: Contractor Offboarding
+#### Government Agency: Contractor Offboarding
 
 A contractor's directory account, VPN certificate, active sessions, cloud tokens, and application assignments are revoked when the contract ends. Removing only the password would leave other credentials active.
 
-### Cloud Application: Stolen Token
+#### Cloud Application: Stolen Token
 
 A user successfully completes MFA, but malware steals the browser session cookie. The SOC detects use from an unmanaged device, revokes the session, isolates the endpoint, and investigates the malware. This demonstrates why MFA does not prevent every token-based attack.
 
-## 18. SOC Monitoring and Incident Response
+### SOC Monitoring and Incident Response
 
 Useful identity log fields include:
 
@@ -518,7 +552,7 @@ Useful identity log fields include:
 - Session or correlation identifier.
 - Geographic and risk information.
 
-### Investigation Workflow
+#### Investigation Workflow
 
 1. Validate the alert and normalize time zones.
 2. Identify the affected identity and privilege level.
@@ -531,7 +565,7 @@ Useful identity log fields include:
 9. Identify the initial access method.
 10. Correct control gaps and tune detections.
 
-## 19. Security+ SY0-701 Alignment
+## Security+ SY0-701 Alignment
 
 This lesson supports Security+ concepts involving:
 
@@ -547,7 +581,7 @@ This lesson supports Security+ concepts involving:
 
 Authentication mechanisms are technical controls. Enrollment, recovery, access review, and offboarding are operational controls. Identity policy and governance are managerial controls.
 
-## 20. Classroom Hands-On Practical
+## Classroom Hands-On Practical
 
 ### Practical Title
 
@@ -608,7 +642,7 @@ Analyze these fictional events:
 - Containment may include session revocation, temporary blocking, credential reset, device investigation, and payroll review.
 - Analysts should request identity, cloud audit, endpoint, mailbox, application, and help-desk records.
 
-## 21. Take-Home Practical
+## Take-Home Practical
 
 Design an authentication and credential-security standard for one organization:
 
@@ -632,7 +666,7 @@ Include:
 - Monitoring and incident-response requirements.
 - At least ten risks mapped to controls.
 
-## 22. Assessment Questions
+## Assessment Questions
 
 ### Multiple Choice
 
@@ -714,7 +748,7 @@ Include:
 3. A hospital's IdP is unavailable. Explain how resilient design can protect both availability and accountability.
 4. A service account signs in interactively from a user workstation. Explain why this is suspicious.
 
-## 23. Glossary
+## Glossary
 
 | Term | Definition |
 |---|---|
@@ -741,7 +775,7 @@ Include:
 | Single Sign-On (SSO) | Central authentication that enables access to multiple connected applications. |
 | Work Factor | A configurable cost that makes password derivation and guessing more expensive. |
 
-## 24. Lesson Review Checklist
+## Lesson Review Checklist
 
 Students should be able to confirm:
 
@@ -756,7 +790,7 @@ Students should be able to confirm:
 - I can recommend controls for privileged and service accounts.
 - I can investigate a suspicious identity event.
 
-## 25. Continuity With Future Lessons
+## Continuity With Future Lessons
 
 Lesson 6 applies cryptography to email security, HTTPS, certificate lifecycle, and encryption failures. Lesson 7 then examines social engineering and credential attacks in greater investigative depth.
 

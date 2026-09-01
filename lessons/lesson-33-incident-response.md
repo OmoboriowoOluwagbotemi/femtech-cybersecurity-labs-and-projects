@@ -40,7 +40,11 @@ Incidents can involve:
 
 Response quality determines business impact, regulatory exposure, recovery time, and stakeholder trust.
 
-## 1. Incident Response
+## Response Foundations
+
+Incident response is a coordinated business and technical capability. It begins by distinguishing routine events from incidents, selecting a practical workflow, and understanding how current NIST guidance connects response activities to broader cybersecurity risk management.
+
+### Incident Response
 
 Incident response is the organized capability for managing suspected and confirmed cybersecurity incidents.
 
@@ -61,7 +65,9 @@ IR uses:
 
 IR applies across on-premises, cloud, SaaS, endpoints, applications, third parties, and physical locations.
 
-## 2. Event, Alert, Incident, and Crisis
+### Event, Alert, Incident, and Crisis
+
+These terms describe different levels of evidence and organizational impact. Using them consistently prevents routine events from being escalated unnecessarily and serious incidents from being understated.
 
 | Term | Meaning |
 |---|---|
@@ -72,7 +78,7 @@ IR applies across on-premises, cloud, SaaS, endpoints, applications, third parti
 
 Not every alert is an incident. An incident may exist before an alert fires.
 
-## 3. NIST SP 800-61 Revision 3 Context
+### NIST SP 800-61 Revision 3 Context
 
 Current NIST guidance treats incident response as part of cybersecurity risk management across:
 
@@ -85,7 +91,7 @@ Current NIST guidance treats incident response as part of cybersecurity risk man
 
 IR preparation is therefore not a separate phase performed only by the SOC.
 
-## 4. Practical Response Workflow
+### Practical Response Workflow
 
 Operational activities remain:
 
@@ -98,7 +104,11 @@ Operational activities remain:
 
 These activities overlap and repeat. Recovery may reveal persistence and return the team to containment.
 
-## 5. Preparation
+## Preparation, Identification, and Declaration
+
+Effective response depends on preparation completed before an alert arrives. Clear roles, accessible evidence, tested communications, severity criteria, and declaration authority help the team move from initial identification to a controlled incident process without unnecessary delay.
+
+### Preparation
 
 Preparation includes:
 
@@ -116,7 +126,9 @@ Preparation includes:
 
 An IR plan not exercised may fail when people, credentials, tools, or contacts are unavailable.
 
-## 6. Roles
+### Roles
+
+Roles should be assigned before an incident and include decision authority, alternates, and secure contact methods.
 
 | Role | Responsibility |
 |---|---|
@@ -132,7 +144,7 @@ An IR plan not exercised may fail when people, credentials, tools, or contacts a
 
 One person may hold several roles in a small organization, but responsibilities should remain explicit.
 
-## 7. Incident Identification
+### Incident Identification
 
 Identification determines whether observed activity is an incident and establishes initial scope and priority.
 
@@ -149,7 +161,9 @@ Premature closure misses attacks; premature crisis declaration wastes resources.
 
 Evidence comes from SIEM, EDR, identity, email, cloud, firewall, applications, users, and third parties.
 
-## 8. Triage Questions
+### Triage Questions
+
+Initial triage creates a working picture of the event while clearly separating confirmed facts from assumptions and missing evidence.
 
 - What happened?
 - When did it begin?
@@ -162,7 +176,7 @@ Evidence comes from SIEM, EDR, identity, email, cloud, firewall, applications, u
 - What business operations depend on the system?
 - Who must be notified now?
 
-## 9. Severity
+### Severity
 
 Consider:
 
@@ -178,7 +192,7 @@ Consider:
 
 Severity can change as evidence develops.
 
-## 10. Incident Declaration
+### Incident Declaration
 
 Declaration should record:
 
@@ -193,7 +207,11 @@ Declaration should record:
 
 Use one authoritative case record to avoid conflicting timelines.
 
-## 11. Scoping
+## Scoping and Containment
+
+Scoping determines which identities, systems, data, and business processes may be affected. Containment uses that evolving evidence to limit harm while preserving visibility, maintaining essential services, and avoiding actions that alert an attacker prematurely or destroy evidence.
+
+### Scoping
 
 Scope by:
 
@@ -210,7 +228,7 @@ Scope by:
 
 Do not scope only by one IOC. Attackers change infrastructure and may use valid tools.
 
-## 12. Containment
+### Containment
 
 Containment limits ongoing harm while preserving essential operations and evidence.
 
@@ -230,13 +248,13 @@ Actions may include:
 
 Contain at endpoint, identity, network, application, cloud, data, or business-process layer.
 
-## 13. Short-Term and Long-Term Containment
+### Short-Term and Long-Term Containment
 
-### Short-Term
+#### Short-Term
 
 Rapid action to stop immediate harm.
 
-### Long-Term
+#### Long-Term
 
 Controlled temporary state allowing business operation while eradication proceeds.
 
@@ -245,7 +263,7 @@ Example:
 - Short-term: isolate compromised web server.
 - Long-term: deploy clean replacement behind stricter firewall while investigation continues.
 
-## 14. Containment Decision
+### Containment Decision
 
 Balance:
 
@@ -259,7 +277,7 @@ Balance:
 
 Watching an attacker longer can produce intelligence but requires explicit authorization and risk ownership.
 
-## 15. Identity Containment
+### Identity Containment
 
 May require:
 
@@ -274,7 +292,9 @@ May require:
 
 Password reset alone is often insufficient.
 
-## 16. Cloud Containment
+### Cloud Containment
+
+Cloud containment should account for identities, tokens, automation, replicated resources, and provider logging rather than focusing only on virtual machines.
 
 - Restrict roles.
 - Disable keys.
@@ -287,7 +307,11 @@ Password reset alone is often insufficient.
 
 Deleting a resource too early can destroy evidence.
 
-## 17. Eradication
+## Eradication and Recovery
+
+Containment creates time to remove the cause of the incident and restore trustworthy operations. Eradication addresses malicious artifacts and enabling weaknesses, while recovery validates rebuilt or cleaned systems and watches for recurrence before normal operations are fully resumed.
+
+### Eradication
 
 Eradication removes attacker access, persistence, malware, vulnerable conditions, and root cause.
 
@@ -304,7 +328,7 @@ Containment alone does not restore trust.
 
 Eradication may span endpoint, identity, cloud, application, network, and supplier environments.
 
-## 18. Root Cause
+### Root Cause
 
 Distinguish:
 
@@ -321,7 +345,7 @@ Example:
 - Persistence: stolen token and mailbox rule.
 - Process weakness: delayed alert review.
 
-## 19. Rebuild Versus Clean
+### Rebuild Versus Clean
 
 Rebuild is often preferred when:
 
@@ -339,7 +363,7 @@ Cleaning may be appropriate when:
 
 Neither choice resolves stolen credentials or other compromised systems automatically.
 
-## 20. Recovery
+### Recovery
 
 Recovery restores systems and business operations to a trusted state.
 
@@ -356,7 +380,7 @@ Availability must return without reintroducing compromise.
 
 Recovery includes technology, data, identity, suppliers, users, and communications.
 
-## 21. Recovery Validation
+### Recovery Validation
 
 Validate:
 
@@ -373,7 +397,7 @@ Validate:
 
 Use defined recovery time and recovery point objectives where applicable.
 
-## 22. Monitoring After Recovery
+### Monitoring After Recovery
 
 Watch for:
 
@@ -387,7 +411,11 @@ Watch for:
 
 Define heightened-monitoring duration and exit criteria.
 
-## 23. Evidence Preservation
+## Evidence and Communication
+
+Technical actions must remain explainable and defensible. Evidence preservation, chain-of-custody records, audience-specific communication, and regular status updates allow responders, leaders, legal advisers, regulators, and affected teams to make decisions from the same verified facts.
+
+### Evidence Preservation
 
 Evidence may include:
 
@@ -412,7 +440,7 @@ Record:
 - Storage.
 - Transfers.
 
-## 24. Chain of Custody
+### Chain of Custody
 
 Chain of custody records possession and handling of evidence.
 
@@ -425,7 +453,7 @@ It supports:
 
 Every transfer should record who, when, what, why, and how.
 
-## 25. Communication
+### Communication
 
 Audiences:
 
@@ -449,7 +477,7 @@ Communication should be:
 
 Do not speculate beyond evidence.
 
-## 26. Status Updates
+### Status Updates
 
 Include:
 
@@ -463,7 +491,11 @@ Include:
 
 Separate facts, assumptions, and unknowns.
 
-## 27. Lessons Learned
+## Learning, Reporting, and Measurement
+
+Closing an incident requires more than restoring service. The organization should document the timeline and decisions, identify systemic improvements without blame, and measure useful aspects of performance. Updated playbooks allow the next response to begin from a stronger position.
+
+### Lessons Learned
 
 A lessons-learned review identifies improvements after an incident.
 
@@ -481,7 +513,7 @@ Ask:
 
 Improvements feed risk, architecture, detection, training, patching, IAM, and plans.
 
-## 28. Blameless Review
+### Blameless Review
 
 Blameless does not mean no accountability. It means examining system conditions and decisions without discouraging honest reporting.
 
@@ -493,7 +525,7 @@ Actions need:
 - Verification.
 - Governance tracking.
 
-## 29. Incident Report
+### Incident Report
 
 Structure:
 
@@ -510,7 +542,7 @@ Structure:
 11. Evidence.
 12. Lessons and actions.
 
-## 30. Timeline
+### Timeline
 
 Use:
 
@@ -524,7 +556,9 @@ Use:
 
 Preserve original time and time zone. Distinguish event time from discovery and ingestion time.
 
-## 31. Incident Metrics
+### Incident Metrics
+
+Metrics should improve decisions and response capability. They should not reward premature closure or encourage responders to sacrifice evidence quality for speed.
 
 - Mean time to detect.
 - Mean time to contain.
@@ -537,7 +571,7 @@ Preserve original time and time zone. Distinguish event time from discovery and 
 
 Metrics can mislead if start and stop definitions differ.
 
-## 32. Playbooks
+### Playbooks
 
 Develop playbooks for:
 
@@ -552,39 +586,39 @@ Develop playbooks for:
 
 Playbooks guide decisions but do not replace judgment.
 
-## 33. Enterprise Scenarios
+### Enterprise Scenarios
 
-### Small Business
+#### Small Business
 
 A mailbox compromise changes supplier payment details. The team revokes sessions, removes rules, contacts the bank and supplier, and reviews other mailboxes.
 
-### Financial Institution
+#### Financial Institution
 
 An actively exploited VPN is isolated through redundant access. Sessions and credentials are revoked while customer services remain available.
 
-### Healthcare Organization
+#### Healthcare Organization
 
 Ransomware affects a clinical segment. Patient safety drives staged containment and tested restoration.
 
-### Educational Institution
+#### Educational Institution
 
 A compromised student account scans servers. Identity, endpoint, and network evidence determine whether it is malware or intentional misuse.
 
-### Government Agency
+#### Government Agency
 
 An administrator token is stolen. Responders protect the identity control plane, preserve evidence, and rotate high-value credentials.
 
-### Cloud Environment
+#### Cloud Environment
 
 An API key creates resources and accesses storage. Cloud audit logs, role changes, workload snapshots, and billing evidence define scope.
 
-## 34. Security+ SY0-701 Alignment
+## Security+ SY0-701 Alignment
 
 This lesson supports incident response, preparation, detection, analysis, containment, eradication, recovery, evidence, communication, lessons learned, and reporting.
 
 Isolation, session revocation, and blocking are technical controls. Triage, containment coordination, recovery, and lessons learned are operational controls. IR policy and authority are managerial controls and directive in function.
 
-## 35. Classroom Hands-On Practical
+## Classroom Hands-On Practical
 
 ### Practical Title
 
@@ -619,7 +653,7 @@ A SIEM alert shows:
 |---|---|---|---|---|---|
 |  |  |  |  |  |  |
 
-## 36. Take-Home Practical
+## Take-Home Practical
 
 Create an incident-response plan containing:
 
@@ -635,7 +669,7 @@ Create an incident-response plan containing:
 - Report template.
 - Metrics and exercises.
 
-## 37. Assessment Questions
+## Assessment Questions
 
 ### Multiple Choice
 
@@ -718,7 +752,7 @@ Create an incident-response plan containing:
 4. A restored server recreates persistence. Explain lifecycle iteration.
 5. Leadership requests certainty before evidence is complete. Draft communication.
 
-## 38. Glossary
+## Glossary
 
 | Term | Definition |
 |---|---|
@@ -732,7 +766,7 @@ Create an incident-response plan containing:
 | Root Cause | Underlying condition enabling an incident. |
 | Scribe | Role maintaining timeline and decision records. |
 
-## 39. Lesson Review Checklist
+## Lesson Review Checklist
 
 - I can explain current NIST incident-response guidance.
 - I can identify and classify incidents.
@@ -742,7 +776,7 @@ Create an incident-response plan containing:
 - I can communicate clearly.
 - I can conduct lessons learned and write reports.
 
-## 40. Continuity With Future Lessons
+## Continuity With Future Lessons
 
 Lesson 34 enriches incident and alert evidence with threat intelligence using VirusTotal, AbuseIPDB, AlienVault OTX, MISP, IOC investigation, and alert enrichment.
 

@@ -38,7 +38,11 @@ A SIEM can connect:
 
 Without correlation, each source may appear harmless. Together they may reveal an attack.
 
-## 1. SIEM
+## SIEM Architecture and Collection
+
+A SIEM is best understood as a data pipeline rather than a single alert screen. Reliable detection begins with choosing useful sources, transporting their events safely, and continuously confirming that the expected data is still arriving.
+
+### SIEM
 
 A SIEM centralizes security telemetry for search, detection, investigation, reporting, and selected response integrations.
 
@@ -48,7 +52,9 @@ The SIEM ingests events, parses fields, normalizes data, enriches context, store
 
 SIEM platforms may be cloud-native, on-premises, hybrid, commercial, or open source.
 
-## 2. SIEM Data Flow
+### SIEM Data Flow
+
+The following pipeline shows the major stages an event passes through before it becomes useful investigation evidence.
 
 ```text
 Source
@@ -64,7 +70,9 @@ Source
 
 Failure at any stage can create a blind spot.
 
-## 3. SIEM Components
+### SIEM Components
+
+Each component supports a different part of collection, processing, storage, detection, or analyst interaction.
 
 | Component | Purpose |
 |---|---|
@@ -79,7 +87,9 @@ Failure at any stage can create a blind spot.
 | Case management | Tracks investigation |
 | SOAR integration | Automates approved actions |
 
-## 4. Collection Methods
+### Collection Methods
+
+Organizations usually combine several collection methods because endpoint, network, cloud, and application sources expose telemetry in different ways.
 
 - Endpoint agent.
 - Syslog.
@@ -93,7 +103,7 @@ Failure at any stage can create a blind spot.
 
 Choose based on reliability, latency, authentication, scale, and source support.
 
-## 5. Collection Reliability
+### Collection Reliability
 
 Validate:
 
@@ -109,9 +119,9 @@ Validate:
 
 No alerts may indicate failed collection.
 
-## 6. Log Sources
+### Log Sources
 
-### Identity
+#### Identity
 
 - Domain controllers.
 - Microsoft Entra ID.
@@ -120,7 +130,7 @@ No alerts may indicate failed collection.
 - PAM.
 - SaaS authentication.
 
-### Endpoint
+#### Endpoint
 
 - EDR.
 - Windows Security.
@@ -128,7 +138,7 @@ No alerts may indicate failed collection.
 - Defender.
 - Linux auth and audit.
 
-### Network
+#### Network
 
 - Firewall.
 - DNS.
@@ -138,7 +148,7 @@ No alerts may indicate failed collection.
 - IDS/IPS.
 - Zeek.
 
-### Cloud and Application
+#### Cloud and Application
 
 - Cloud management.
 - Storage access.
@@ -148,7 +158,7 @@ No alerts may indicate failed collection.
 - Application.
 - WAF.
 
-## 7. Source Prioritization
+### Source Prioritization
 
 Prioritize by:
 
@@ -162,7 +172,11 @@ Prioritize by:
 
 Collecting every available event without defined use can create cost and noise.
 
-## 8. Parsing
+## Processing, Enrichment, and Retention
+
+Collected events are not automatically useful. They must be parsed into dependable fields, normalized carefully, aligned to trustworthy timestamps, enriched with relevant context, retained for an appropriate period, and protected from unauthorized access or alteration.
+
+### Parsing
 
 Parsing extracts structured fields from raw events.
 
@@ -172,7 +186,7 @@ Parsers use source schemas, JSON, XML, key-value formats, delimiters, or pattern
 
 Parsing may occur at source, collector, ingestion, query, or analytics time.
 
-## 9. Normalization
+### Normalization
 
 Different sources may use:
 
@@ -190,7 +204,7 @@ Benefits:
 
 Raw data should remain available where feasible because normalization can lose detail or contain errors.
 
-## 10. Timestamp Management
+### Timestamp Management
 
 An event may contain:
 
@@ -209,7 +223,7 @@ Challenges:
 
 Use synchronized clocks, preserve original timestamps, and understand which field a query uses.
 
-## 11. Enrichment
+### Enrichment
 
 Add:
 
@@ -224,7 +238,7 @@ Add:
 
 Enrichment can become stale or incorrect. Preserve source and update time.
 
-## 12. Storage and Retention
+### Storage and Retention
 
 Retention design considers:
 
@@ -244,7 +258,7 @@ Data tiers may include:
 
 Archive is useful only if retrieval time meets investigation needs.
 
-## 13. Data Protection
+### Data Protection
 
 SIEM data may contain:
 
@@ -265,7 +279,11 @@ Apply:
 - Export controls.
 - Separation of duties.
 
-## 14. Correlation
+## Correlation and Alert Operations
+
+Correlation turns individual events into an analytic story by connecting activity across identities, assets, sources, and time. Alerts then need severity, confidence, ownership, tuning, and a controlled lifecycle so that analysts can distinguish actionable incidents from incomplete or benign evidence.
+
+### Correlation
 
 Correlation connects related events across time, sources, identities, assets, or behavior.
 
@@ -281,7 +299,7 @@ Example:
 
 Correlation runs in scheduled rules, streaming analytics, UEBA, or analyst searches.
 
-## 15. Correlation Rule Anatomy
+### Correlation Rule Anatomy
 
 A rule should define:
 
@@ -298,7 +316,9 @@ A rule should define:
 - Test.
 - Owner.
 
-## 16. Correlation Examples
+### Correlation Examples
+
+These examples show how separate events can support a stronger analytic conclusion when they share an identity, asset, source, or time window.
 
 | Detection | Correlation |
 |---|---|
@@ -308,7 +328,7 @@ A rule should define:
 | Web compromise | WAF exploit alert, web process shell, outbound connection |
 | Data exfiltration | Sensitive access, unusual volume, rare destination |
 
-## 17. Rule Windows and Grouping
+### Rule Windows and Grouping
 
 Poor design can:
 
@@ -324,7 +344,7 @@ Choose:
 - Group by user, device, IP, application, or combination.
 - Threshold and suppression.
 
-## 18. Alerting
+### Alerting
 
 An alert represents rule or analytic output requiring evaluation.
 
@@ -343,19 +363,21 @@ Fields:
 
 An alert is not automatically an incident.
 
-## 19. Severity and Confidence
+### Severity and Confidence
 
-### Severity
+#### Severity
 
 Potential impact if malicious.
 
-### Confidence
+#### Confidence
 
 Strength of evidence that behavior is malicious.
 
 A high-impact but low-confidence alert may require urgent validation. A high-confidence low-impact alert may be automated safely.
 
-## 20. Alert Lifecycle
+### Alert Lifecycle
+
+An alert should move through a documented state model so ownership, evidence, decisions, and closure remain visible.
 
 1. New.
 2. Assigned.
@@ -374,7 +396,7 @@ Common dispositions:
 - Duplicate.
 - Informational.
 
-## 21. Tuning
+### Tuning
 
 Tune:
 
@@ -389,7 +411,11 @@ Tune:
 
 Avoid broad exclusions. Every exception needs owner, reason, test, and review.
 
-## 22. KQL Basics
+## Querying SIEM Data
+
+Queries allow analysts to test assumptions directly against telemetry. The examples below introduce KQL and SPL as investigation tools while emphasizing schema awareness, explicit time ranges, null handling, aggregation, and safe performance practices.
+
+### KQL Basics
 
 KQL is used by Microsoft Sentinel and other Microsoft data platforms.
 
@@ -414,7 +440,9 @@ Operators:
 
 Table and field names depend on connector and schema.
 
-## 23. KQL Aggregation
+### KQL Aggregation
+
+Aggregation can reveal repeated activity that would appear insignificant when each event is reviewed alone.
 
 ```kusto
 SecurityEvent
@@ -437,7 +465,7 @@ Consider:
 - Event delays.
 - Successful follow-on logons.
 
-## 24. KQL String and Null Handling
+### KQL String and Null Handling
 
 Useful concepts:
 
@@ -449,7 +477,7 @@ Useful concepts:
 
 Field normalization matters because casing, domain format, and missing values can split one identity into multiple groups.
 
-## 25. SPL Basics
+### SPL Basics
 
 SPL is used by Splunk.
 
@@ -472,7 +500,9 @@ Concepts:
 
 Index and field names depend on data onboarding.
 
-## 26. SPL Aggregation
+### SPL Aggregation
+
+The same password-spraying hypothesis can be expressed in SPL by grouping failures by source, account, and time.
 
 ```spl
 index=windows EventCode=4625 earliest=-1h
@@ -492,7 +522,9 @@ index=windows EventCode=4625 earliest=-1h
 
 The shorter form uses the `stats` time-span syntax directly. Both examples preserve `_time` as the time field used for bucketing.
 
-## 27. Query Safety and Quality
+### Query Safety and Quality
+
+Safe queries use bounded time ranges, known schemas, and the smallest data set required to answer the investigation question.
 
 - Limit time range.
 - Select required indexes or tables.
@@ -507,7 +539,11 @@ The shorter form uses the `stats` time-span syntax directly. Both examples prese
 
 A query returning no rows may indicate no events, wrong fields, wrong time, or failed ingestion.
 
-## 28. Detection Testing
+## Validation and SIEM Operations
+
+A syntactically valid query is only one part of a dependable monitoring capability. Teams must test detections end to end, monitor platform health, connect alerts to triage procedures, and manage implementation as an ongoing service rather than a one-time installation.
+
+### Detection Testing
 
 Test with:
 
@@ -522,7 +558,7 @@ Test with:
 
 Record expected and actual results.
 
-## 29. SIEM Health
+### SIEM Health
 
 Monitor:
 
@@ -538,33 +574,35 @@ Monitor:
 
 SIEM monitoring must monitor the SIEM itself.
 
-## 30. Enterprise Scenarios
+### Enterprise Scenarios
 
-### Small Business
+#### Small Business
 
 Wazuh or a managed SIEM receives endpoint, firewall, and Microsoft 365 logs. Source-health alerts identify a disconnected endpoint agent.
 
-### Financial Institution
+#### Financial Institution
 
 Splunk correlates VPN authentication, PAM activation, and payment-system access. High-risk privileged sessions receive immediate triage.
 
-### Healthcare Organization
+#### Healthcare Organization
 
 A clinical account accesses many patient records. SIEM enrichment adds role and department before escalation.
 
-### Educational Institution
+#### Educational Institution
 
 Student password spraying is separated from authorized security labs using scanner inventory and network segments.
 
-### Government Agency
+#### Government Agency
 
 Microsoft Sentinel correlates cloud privilege assignment with Defender process alerts and DNS activity.
 
-### Hybrid Enterprise
+#### Hybrid Enterprise
 
 On-premises domain events and cloud sign-ins normalize one identity across different naming formats.
 
-## 31. SOC Triage
+### SOC Triage
+
+Triage should confirm both the alert logic and the health of its data sources before analysts interpret the activity as malicious.
 
 1. Validate alert rule and source health.
 2. Confirm entities and time.
@@ -577,7 +615,9 @@ On-premises domain events and cloud sign-ins normalize one identity across diffe
 9. Document queries and evidence.
 10. Recommend tuning.
 
-## 32. SIEM Implementation Lifecycle
+### SIEM Implementation Lifecycle
+
+A SIEM implementation improves through repeated cycles of use-case selection, onboarding, testing, measurement, and tuning.
 
 1. Define use cases.
 2. Prioritize sources.
@@ -592,13 +632,13 @@ On-premises domain events and cloud sign-ins normalize one identity across diffe
 
 Buying a SIEM without operating processes creates an expensive log repository.
 
-## 33. Security+ SY0-701 Alignment
+## Security+ SY0-701 Alignment
 
 This lesson supports SIEM, log sources, normalization, correlation, alerting, querying, retention, tuning, incident response, and monitoring.
 
 Collectors, parsers, correlation rules, and access controls are technical controls. Triage, tuning, onboarding, and source-health review are operational controls. Logging and detection standards are managerial controls and directive in function.
 
-## 34. Classroom Hands-On Practical
+## Classroom Hands-On Practical
 
 ### Practical Title
 
@@ -644,7 +684,7 @@ Events include:
 | Triage |  |
 | Tests |  |
 
-## 35. Take-Home Practical
+## Take-Home Practical
 
 Design SIEM architecture for one organization. Include:
 
@@ -660,7 +700,7 @@ Design SIEM architecture for one organization. Include:
 - Health monitoring.
 - Privacy and access controls.
 
-## 36. Assessment Questions
+## Assessment Questions
 
 ### Multiple Choice
 
@@ -743,7 +783,7 @@ Design SIEM architecture for one organization. Include:
 4. A privileged alert lacks asset context. Improve enrichment.
 5. A SIEM query returns no results after onboarding. Troubleshoot.
 
-## 37. Glossary
+## Glossary
 
 | Term | Definition |
 |---|---|
@@ -758,7 +798,7 @@ Design SIEM architecture for one organization. Include:
 | SPL | Splunk Search Processing Language. |
 | Source Health | Reliability, freshness, parsing, and completeness of a telemetry source. |
 
-## 38. Lesson Review Checklist
+## Lesson Review Checklist
 
 - I can explain SIEM architecture and data flow.
 - I can prioritize and validate log sources.
@@ -768,7 +808,7 @@ Design SIEM architecture for one organization. Include:
 - I can tune and test detections.
 - I can monitor SIEM health and protect data.
 
-## 39. Continuity With Future Lessons
+## Continuity With Future Lessons
 
 Lesson 31 applies these concepts in Wazuh through agents, log-source configuration, dashboards, querying, and alert tuning.
 
