@@ -1,8 +1,8 @@
-# Tool Lab 01 - Kali Linux Analyst Workstation and Bash Basics
+# Tool Lab 01 - Introduction to Linux, Kali Workstation, and Bash Basics
 
 ## Purpose
 
-Kali Linux is the student analyst workstation for discovery, validation, packet capture, web testing, OpenVAS operation, Bash automation, and evidence handling. This lab teaches students to use Kali professionally inside an authorised private range while building the Bash skills needed for real analyst work.
+Kali Linux is the student analyst workstation for discovery, validation, packet capture, web testing, OpenVAS operation, Bash automation, and evidence handling. This lab introduces Linux fundamentals, then teaches students to use Kali professionally inside an authorised private range while building the Bash skills needed for real analyst work.
 
 ## Scenario
 
@@ -23,6 +23,24 @@ FEMTECH has assigned you a Kali workstation named `kali01`. Before you are allow
 - Do not scan the Internet, the physical LAN, school systems, or another student's VM.
 - Record source IP, target IP, purpose, date, start time, and stop time before each test.
 - Save command output; do not rely only on screenshots.
+
+## Introduction to Linux Skills Covered
+
+Students will practise:
+
+- Understanding Linux as an operating system used for servers, security tools, cloud systems, and analyst workstations.
+- Identifying the current user, hostname, kernel, distribution, and system time.
+- Navigating the filesystem with `pwd`, `ls`, `cd`, and common directories such as `/home`, `/etc`, `/var/log`, `/tmp`, and `/usr/bin`.
+- Reading files safely with `cat`, `less`, `head`, and `tail`.
+- Understanding root privilege and `sudo`.
+- Checking users and groups with `whoami`, `id`, and `groups`.
+- Viewing file ownership and permissions with `ls -l` and `stat`.
+- Checking processes with `ps` and service status with `systemctl`.
+- Checking installed packages with `dpkg` and APT.
+- Reading system logs from `/var/log` where permitted.
+- Checking IP addresses, routes, DNS, neighbours, and listening ports.
+
+Linux matters in cybersecurity because many enterprise systems, security tools, firewalls, SIEM components, web servers, cloud workloads, containers, and forensic workstations are Linux-based. A student who cannot navigate Linux will struggle with SOC analysis, vulnerability management, incident response, and system hardening.
 
 ## Bash Skills Covered
 
@@ -66,9 +84,62 @@ Key Bash points:
 - `{01-baseline,02-validation,...}` creates several folders in one command.
 - `tee` shows output on screen and saves it to a file.
 
-## Step 2 - Practise Essential Bash Checks
+## Step 2 - Practise Essential Linux and Bash Checks
 
-Run:
+Run these Linux orientation commands:
+
+```bash
+pwd | tee "$EVIDENCE/01-baseline/current-directory.txt"
+whoami | tee "$EVIDENCE/01-baseline/current-user.txt"
+id | tee "$EVIDENCE/01-baseline/current-user-id.txt"
+groups | tee "$EVIDENCE/01-baseline/current-user-groups.txt"
+uname -a | tee "$EVIDENCE/01-baseline/kernel-info.txt"
+cat /etc/os-release | tee "$EVIDENCE/01-baseline/os-release.txt"
+date -u +'%Y-%m-%dT%H:%M:%SZ' | tee "$EVIDENCE/01-baseline/current-time.txt"
+```
+
+Review important directories:
+
+```bash
+ls -ld / /home /etc /var /var/log /tmp /usr /usr/bin | tee "$EVIDENCE/01-baseline/linux-directory-summary.txt"
+```
+
+Interpret the directories:
+
+| Directory | Practical meaning |
+|---|---|
+| `/` | Root of the Linux filesystem |
+| `/home` | User home directories |
+| `/etc` | System and application configuration files |
+| `/var/log` | Many system and application logs |
+| `/tmp` | Temporary files; often cleared and not trusted for permanent evidence |
+| `/usr/bin` | Many user commands and installed tools |
+
+Check permissions:
+
+```bash
+ls -l "$EVIDENCE" | tee "$EVIDENCE/01-baseline/evidence-folder-permissions.txt"
+stat "$EVIDENCE" | tee "$EVIDENCE/01-baseline/evidence-folder-stat.txt"
+```
+
+Check processes, services, and packages:
+
+```bash
+ps aux --sort=-%mem | head -n 10 | tee "$EVIDENCE/01-baseline/top-processes.txt"
+systemctl --type=service --state=running --no-pager | head -n 25 | tee "$EVIDENCE/01-baseline/running-services.txt"
+dpkg -l nmap tcpdump curl openssl 2>/dev/null | tee "$EVIDENCE/01-baseline/security-tool-packages.txt"
+```
+
+Important Linux points:
+
+- `root` is the most privileged account on Linux.
+- `sudo` temporarily runs an approved command with administrative privilege.
+- Configuration files are commonly stored under `/etc`.
+- Logs are commonly stored under `/var/log`.
+- Linux permissions control read, write, and execute access for owner, group, and others.
+- Processes are running programs; services are background processes managed by the system.
+
+Now practise Bash:
 
 ```bash
 echo "Evidence folder: $EVIDENCE" | tee "$EVIDENCE/01-baseline/bash-variable-test.txt"
@@ -280,6 +351,11 @@ Answer:
 8. What is the difference between `>` and `>>`?
 9. Why is quoting `"$EVIDENCE"` safer than using `$EVIDENCE` without quotes?
 10. Why is saving command output important in cybersecurity work?
+11. What is the difference between `/etc` and `/var/log`?
+12. Why should analysts understand `sudo` before running commands from a lab guide?
+13. What do Linux file permissions protect?
+14. How are processes and services different?
+15. Why is Linux knowledge important for cybersecurity jobs?
 
 ## Step 10 - Package Evidence
 
@@ -303,19 +379,22 @@ exit
 | Script says permission denied | Script is not executable | `chmod 750 validate-target.sh` |
 | Variable output is blank | Variable not set in current shell | `echo "$EVIDENCE"` and rerun Step 1 |
 | Loop output overwrites evidence | Used `>` instead of `>>` or `tee -a` | Use append for repeated loop output |
+| Permission denied reading a file | Normal user lacks access | Check `ls -l`; use `sudo` only when authorised |
+| Command not found | Package not installed or not in PATH | Use `which <command>` and `dpkg -l <package>` |
 
 ## Deliverables
 
 - Scope record.
+- Linux orientation evidence.
 - Kali IP, route, DNS, and neighbour evidence.
 - Connectivity tests.
 - Nmap outputs in all three formats.
 - PCAP and hash.
 - Bash validation script.
-- Bash variable, loop, parsing, and exit-code evidence.
+- Bash variable, loop, parsing, script, and exit-code evidence.
 - Technical notes.
 - Final `hashes.sha256`.
 
 ## Pass Condition
 
-The student passes when they can prove Kali is isolated, correctly scoped, able to validate authorised systems, able to use Bash for repeatable evidence collection, and able to preserve professional evidence.
+The student passes when they can explain basic Linux structure, prove Kali is isolated, work from the command line safely, validate authorised systems, use Bash for repeatable evidence collection, and preserve professional evidence.

@@ -32,7 +32,7 @@ The [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) defines the mandator
 
 | ID | Practical | Core lessons | Expected time |
 |---|---|---:|---:|
-| Tool Lab 01 | Kali Linux analyst workstation and Bash basics | 8, 10, 15, 16, 27 | 5-6 hours |
+| Tool Lab 01 | Introduction to Linux, Kali workstation, and Bash basics | 8, 10, 11, 15, 16, 27 | 5-6 hours |
 | Tool Lab 02 | Ubuntu Server administration and hardening | 11-16, 21, 29 | 5-6 hours |
 | Tool Lab 03 | pfSense firewall and segmentation | 22-24, 27, 30 | 5-6 hours |
 | Tool Lab 04 | Windows Server and Active Directory | 17-20, 21, 30 | 6-8 hours |
@@ -57,7 +57,7 @@ Every guided lab should strengthen at least one professional tool skill. The tab
 
 | Core tool | Required practical coverage | Primary evidence students must submit |
 |---|---|---|
-| Kali Linux | Analyst workstation, Bash basics, network validation, Nmap, packet capture, OpenSSL/curl checks, safe assessment workflow | Source IP proof, route proof, authorised scope, Bash script, saved command output, scan or validation files |
+| Kali Linux | Introduction to Linux, analyst workstation use, Bash basics, network validation, Nmap, packet capture, OpenSSL/curl checks, safe assessment workflow | Linux orientation evidence, source IP proof, route proof, authorised scope, Bash script, saved command output, scan or validation files |
 | Ubuntu Server | Linux administration, users/groups, permissions, SSH, UFW, logs, services, hardening, remediation | Before/after service state, UFW rules, SSH configuration, authentication logs, rollback evidence |
 | pfSense | Interfaces, DHCP, NAT, aliases, firewall rules, segmentation, logs, allowed/blocked validation | Interface plan, rule matrix, config export, allowed traffic test, denied traffic test, firewall log proof |
 | Windows Server | DNS, DHCP, server roles, Event Viewer, Active Directory, groups, OUs, Group Policy, security logs | IP/DNS proof, role evidence, AD structure, group membership, GPO result, EVTX or event evidence |

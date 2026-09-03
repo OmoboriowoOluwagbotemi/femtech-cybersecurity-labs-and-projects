@@ -32,7 +32,7 @@ A student has not mastered a tool simply because they opened it or followed one 
 
 | Tool | First exposure | Skill-building labs | Professional outcome |
 |---|---|---|---|
-| Kali Linux | Tool Lab 01 | Tool Labs 05-06 and Advanced Lab 07 | Analyst workstation for Bash basics, discovery, validation, packet review, evidence collection, and controlled security testing |
+| Kali Linux | Tool Lab 01 | Tool Labs 05-06 and Advanced Lab 07 | Introduction to Linux plus analyst workstation skills for Bash basics, discovery, validation, packet review, evidence collection, and controlled security testing |
 | Ubuntu Server | Tool Lab 02 | Tool Labs 05-06 and Advanced Lab 07 | Linux administration, hardening, service validation, logging, remediation, and incident evidence |
 | pfSense | Tool Lab 03 | Tool Labs 05-06 and Advanced Lab 07 | Segmentation, firewall policy, DHCP, NAT, routing validation, and log-based troubleshooting |
 | Windows Server | Tool Lab 04 | Tool Lab 06 | Server roles, Event Viewer, Active Directory basics, Group Policy, access control, and Windows security logging |
@@ -46,6 +46,7 @@ Kali is the analyst workstation. In this course it is used for authorised discov
 Required student skills:
 
 - Confirm adapter mode and prove Kali is not bridged to the physical network.
+- Navigate basic Linux directories, users, permissions, processes, services, packages, and logs.
 - Use Bash variables, command substitution, loops, simple conditionals, functions, scripts, and output redirection for repeatable evidence collection.
 - Record source IP, target IP, gateway, DNS server, route, and time before testing.
 - Use `ip`, `ss`, `dig`, `nc`, `curl`, `openssl`, `nmap`, `tcpdump`, `tshark`, and browser tools where relevant.
