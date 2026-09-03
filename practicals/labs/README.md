@@ -4,7 +4,7 @@ Use these labs with the [Core Tool Skills Pathway](../CORE_TOOL_SKILLS_PATHWAY.m
 
 ## Required Tool Labs
 
-1. [Kali Linux Analyst Workstation](tool-lab-01-kali-analyst-workstation.md)
+1. [Kali Linux Analyst Workstation and Bash Basics](tool-lab-01-kali-analyst-workstation.md)
 2. [Ubuntu Server Administration and Hardening](tool-lab-02-ubuntu-server-hardening.md)
 3. [pfSense Firewall and Segmentation](tool-lab-03-pfsense-firewall-segmentation.md)
 4. [Windows Server and Active Directory](tool-lab-04-windows-server-active-directory.md)
@@ -21,7 +21,7 @@ Read the [programme guide](../README.md) before Tool Lab 01. Its rules of engage
 
 | Checkpoint | Labs | Required student capability |
 |---|---|---|
-| Kali analyst workstation | Tool Labs 01, 05, 06, Advanced Lab 07 | Verify isolation, record source/target details, run authorised validation commands, preserve evidence, and explain output |
+| Kali analyst workstation and Bash basics | Tool Labs 01, 05, 06, Advanced Lab 07 | Verify isolation, use Bash variables/loops/scripts, record source/target details, run authorised validation commands, preserve evidence, and explain output |
 | Ubuntu Server administration | Tool Labs 02, 05, 06, Advanced Lab 07 | Manage users, permissions, services, logs, SSH, UFW, hardening, remediation, and rollback |
 | pfSense firewall and segmentation | Tool Labs 03, 05, 06, Advanced Lab 07 | Configure interfaces, DHCP, NAT, aliases, rules, logs, and positive/negative traffic tests |
 | Windows Server and AD | Tool Labs 04, 06 | Build basic enterprise identity, apply groups and policy, inspect Windows events, and connect telemetry to Wazuh |
@@ -36,7 +36,7 @@ Each tool lab must produce technical evidence, written interpretation, and a pro
 
 | Lab | Core tools reinforced | Student must demonstrate | Minimum evidence | Pass condition |
 |---|---|---|---|---|
-| Tool Lab 01 - Kali Linux Analyst Workstation | Kali, Nmap, tcpdump, curl, OpenSSL | Confirm Kali isolation, create scope records, validate approved targets, run safe discovery, capture and hash a PCAP | IP/route proof, scope record, connectivity tests, Nmap files, PCAP hash, technical notes | Student can use Kali as a safe analyst workstation |
+| Tool Lab 01 - Kali Linux Analyst Workstation and Bash Basics | Kali, Bash, Nmap, tcpdump, curl, OpenSSL | Confirm Kali isolation, use Bash variables/loops/scripts, create scope records, validate approved targets, run safe discovery, capture and hash a PCAP | IP/route proof, Bash script, scope record, connectivity tests, Nmap files, PCAP hash, technical notes | Student can use Kali as a safe analyst workstation and automate basic evidence collection |
 | Tool Lab 02 - Ubuntu Server Administration and Hardening | Ubuntu, SSH, UFW, Fail2Ban, systemd, logs | Harden Linux access, manage users/groups/permissions, configure services, read logs, and prepare rollback | Baseline, permissions proof, SSH settings, UFW status, service status, auth logs, rollback plan | Student can administer and harden a Linux server without breaking required service |
 | Tool Lab 03 - pfSense Firewall and Segmentation | pfSense, aliases, DHCP, NAT, firewall logs | Configure zones, aliases, rules, management access, allowed tests, denied tests, and configuration exports | Interface plan, DHCP plan, alias list, rule matrix, traffic tests, log evidence, XML backup | Student can enforce segmentation and troubleshoot firewall behavior |
 | Tool Lab 04 - Windows Server and Active Directory | Windows Server, AD DS, DNS, PowerShell, GPO, Event Viewer | Configure server networking, install AD DS/DNS, create OUs/users/groups, apply GPO, inspect security logs | IP/DNS proof, AD services, OU/group/user export, share ACL, GPO report, EVTX/hash | Student can build and explain basic enterprise identity administration |
