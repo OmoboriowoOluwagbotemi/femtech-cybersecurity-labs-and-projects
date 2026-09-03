@@ -26,6 +26,8 @@ By the end, a successful student can:
 
 The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optional tool matrix plus detailed packs for Sysmon, osquery, BloodHound CE defensive review, YARA, Chainsaw, Sleuth Kit/Autopsy, Velociraptor, MISP, password auditing, Git/Gitleaks, Trivy, OpenTofu, and Ansible.
 
+The [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) defines the mandatory hands-on skill progression for Kali Linux, Ubuntu Server, pfSense, Windows Server, Greenbone/OpenVAS, and Wazuh. Instructors should use it as the practical competency checklist for the course.
+
 ## Programme Map
 
 | ID | Practical | Core lessons | Expected time |
@@ -57,6 +59,21 @@ The [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) provides the complete core/optio
 | Project 09 | Perform DFIR after a Linux web compromise | 9, 13-16, 29, 33-35 | 2 weeks |
 | Project 10 | Defend Northstar Manufacturing | All 40 lessons | 3-4 weeks |
 | Project 11 | Recover the asset truth at MeridianPay | 16, 24, 26-29, 36, 38 | 5 class days or 2 weeks part-time |
+
+## Core Tool Skill Coverage
+
+Every guided lab should strengthen at least one professional tool skill. The table below shows the minimum required coverage for the tools the course depends on most.
+
+| Core tool | Required practical coverage | Primary evidence students must submit |
+|---|---|---|
+| Kali Linux | Analyst workstation, network validation, Nmap, packet capture, OpenSSL/curl checks, safe assessment workflow | Source IP proof, route proof, authorised scope, saved command output, scan or validation files |
+| Ubuntu Server | Linux administration, users/groups, permissions, SSH, UFW, logs, services, hardening, remediation | Before/after service state, UFW rules, SSH configuration, authentication logs, rollback evidence |
+| pfSense | Interfaces, DHCP, NAT, aliases, firewall rules, segmentation, logs, allowed/blocked validation | Interface plan, rule matrix, config export, allowed traffic test, denied traffic test, firewall log proof |
+| Windows Server | DNS, DHCP, server roles, Event Viewer, Active Directory, groups, OUs, Group Policy, security logs | IP/DNS proof, role evidence, AD structure, group membership, GPO result, EVTX or event evidence |
+| Greenbone/OpenVAS | Scanner setup, target creation, scan execution, report export, finding validation, remediation, rescan | Scanner health, exact target scope, report export, validation notes, remediation proof, rescan result |
+| Wazuh | Manager/agent deployment, log onboarding, event generation, dashboard search, alert interpretation, tuning | Agent status, raw event, alert details, search filter, rule ID/level, triage recommendation |
+
+Students should revisit the [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) after Labs 01, 03, 06, 07, 11, 12, 13, 14, and 16 to confirm that each tool skill is moving from guided use toward independent performance.
 
 ## Required Rules of Engagement
 
@@ -332,4 +349,4 @@ Run Labs 01-04 after Lessons 1-16, Lab 05 immediately after Lesson 27, Labs 06-0
 
 ## Practical Files
 
-The detailed guides are in the [guided lab index](labs/README.md) and [professional project index](projects/README.md). Use the [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) for complete tool coverage and command packs. Reusable forms are in the [template pack](templates/README.md).
+The detailed guides are in the [guided lab index](labs/README.md) and [professional project index](projects/README.md). Use the [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) for required hands-on competency checkpoints and the [Tool Mastery Guide](TOOL_MASTERY_GUIDE.md) for complete tool coverage and command packs. Reusable forms are in the [template pack](templates/README.md).

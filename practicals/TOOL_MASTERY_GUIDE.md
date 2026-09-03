@@ -11,6 +11,8 @@ The practical programme teaches decisions and evidence, not tool collecting. Thi
 
 Mastery means the student can state what question a tool answers, collect evidence safely, explain important options, validate results with a second source, recognise limitations, recover from failure, and communicate the result.
 
+For the mandatory hands-on progression across Kali Linux, Ubuntu Server, pfSense, Windows Server, Greenbone/OpenVAS, and Wazuh, use the [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) alongside this guide.
+
 ## Complete Tool Coverage Matrix
 
 | Domain | Core tools | Important extensions/alternatives | Mastery evidence |
