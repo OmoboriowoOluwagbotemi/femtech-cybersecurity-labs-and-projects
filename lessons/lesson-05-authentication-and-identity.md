@@ -792,7 +792,7 @@ Students should be able to confirm:
 
 ## Continuity With Future Lessons
 
-Lesson 6 applies cryptography to email security, HTTPS, certificate lifecycle, and encryption failures. Lesson 7 then examines social engineering and credential attacks in greater investigative depth.
+Lesson 6 expands identity into access control, authorization models, least privilege, privileged access, and defense in depth. Lesson 7 then examines social engineering and credential attacks in greater investigative depth.
 
 Carry forward these questions:
 
