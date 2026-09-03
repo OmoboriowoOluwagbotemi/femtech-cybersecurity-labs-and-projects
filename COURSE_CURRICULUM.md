@@ -51,15 +51,22 @@ This curriculum is the source of truth for the 40-lesson professional cybersecur
 - Password Storage
 - Credential Security
 
-## Lesson 6: Applied Cryptography
+## Lesson 6: Access Control and Defense in Depth
 
-- Email Security
-  - SPF
-  - DKIM
-  - DMARC
-- HTTPS in Practice
-- Certificate Lifecycle
-- Encryption Failures and Their Impact
+- Access Control Concepts
+- Identification, Authentication, Authorization, and Accounting
+- Authorization Models
+  - DAC
+  - MAC
+  - RBAC
+  - Rule-Based Access Control
+  - ABAC
+- Least Privilege
+- Need to Know
+- Separation of Duties
+- Privileged Access
+- Defense in Depth
+- Security Control Categories and Functions
 
 ## Lesson 7: Social Engineering
 

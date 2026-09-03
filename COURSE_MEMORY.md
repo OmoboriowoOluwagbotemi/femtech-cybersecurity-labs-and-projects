@@ -23,7 +23,7 @@ Windows Server and Windows 11 are used only as official time-limited evaluation 
 | 3 | The Security Profession | Complete | `lessons/lesson-03-the-security-profession.md` |
 | 4 | Cryptography Fundamentals | Complete | `lessons/lesson-04-cryptography-fundamentals.md` |
 | 5 | Authentication and Identity | Complete | `lessons/lesson-05-authentication-and-identity.md` |
-| 6 | Applied Cryptography | Complete | `lessons/lesson-06-applied-cryptography.md` |
+| 6 | Access Control and Defense in Depth | Complete | `lessons/lesson-06-access-control-and-defense-in-depth.md` |
 | 7 | Social Engineering | Complete | `lessons/lesson-07-social-engineering.md` |
 | 8 | Network and System Attacks | Complete | `lessons/lesson-08-network-and-system-attacks.md` |
 | 9 | Web Attacks and Malware | Complete | `lessons/lesson-09-web-attacks-and-malware.md` |
@@ -114,12 +114,20 @@ Windows Server and Windows 11 are used only as official time-limited evaluation 
 | Password Storage | Lesson 5 | Explained with unique salts, password-specific derivation functions, work factors, and optional peppers. |
 | Credential Security | Lesson 5 | Covered enrollment, use, storage, reset, revocation, offboarding, and monitoring. |
 | Conditional Access | Lesson 5 | Introduced as context-aware access decisions based on identity, device, application, location, and risk. |
-| SPF | Lesson 6 | Defined as DNS-published authorization of sending infrastructure for an SMTP envelope domain. |
-| DKIM | Lesson 6 | Defined as domain-controlled digital signing of selected email headers and body content. |
-| DMARC | Lesson 6 | Defined as aligned email authentication policy and reporting based on SPF or DKIM. |
-| HTTPS | Lesson 6 | Applied TLS to practical web, API, proxy, load balancer, and back-end protection. |
-| Certificate Lifecycle | Lesson 6 | Expanded into inventory, ownership, request, issuance, deployment, monitoring, renewal, revocation, and retirement. |
-| Encryption Failure | Lesson 6 | Classified failures involving absent or weak protection, trust, keys, configuration, randomness, expiration, and availability. |
+| Access Control | Lesson 6 | Expanded as the process of deciding whether a subject may perform an action on an object. |
+| Identification | Lesson 6 | Defined as the claimed identity of a user, device, service, process, or workload. |
+| Authentication | Lesson 5 | Expanded in Lesson 6 as the verification step before authorization decisions. |
+| Authorization | Lesson 6 | Defined as the decision about what an authenticated subject is allowed to do. |
+| Accounting | Lesson 6 | Defined as logging and tracking user, system, and process activity. |
+| DAC | Lesson 6 | Defined as discretionary access control where owners or administrators can grant access. |
+| MAC | Lesson 6 | Defined as mandatory access control using centrally managed labels or policy. |
+| RBAC | Lesson 6 | Defined as role-based access control through job-role permission assignment. |
+| Rule-Based Access Control | Lesson 6 | Defined as access decisions based on explicit rules such as time, network, or firewall policy. |
+| ABAC | Lesson 6 | Defined as attribute-based access control using user, device, resource, location, risk, and context attributes. |
+| Least Privilege | Lesson 6 | Expanded as giving only the access required for approved work. |
+| Need to Know | Lesson 6 | Defined as limiting information access to users with a legitimate business requirement. |
+| Separation of Duties | Lesson 6 | Defined as dividing sensitive responsibilities to reduce fraud, mistakes, and abuse. |
+| Privileged Access | Lesson 6 | Introduced as elevated access that can administer systems, change controls, or affect many users. |
 | Social Engineering | Lesson 7 | Defined as manipulation causing disclosure, payment, access, or unsafe action; taught without victim blame. |
 | Phishing | Lesson 7 | Covered bulk, spear, whaling, smishing, QR, angler, and clone variants. |
 | Business Email Compromise | Lesson 7 | Explained through executive, supplier, payroll, and conversation-hijacking fraud. |
@@ -341,8 +349,6 @@ Windows Server and Windows 11 are used only as official time-limited evaluation 
 | Hardware Security Module | Lesson 4 | High-assurance protection for cryptographic keys and operations. |
 | FIDO2 Security Key | Lesson 5 | Phishing-resistant possession-based authentication example. |
 | Password Manager | Lesson 5 | Recommended for generating and storing long, unique user passwords. |
-| Resolve-DnsName | Lesson 6 | Windows PowerShell command used to inspect email-authentication DNS records. |
-| dig | Lesson 6 | Linux DNS query tool used to inspect SPF, DKIM, and DMARC records. |
 | Wireshark | Lesson 8 | Packet capture and filtering for authorized network investigation. |
 | VirtualBox | Lesson 10 | Hosted virtualization platform for isolated course labs. |
 | VMware | Lesson 10 | Desktop and enterprise virtualization platform family. |
@@ -408,7 +414,7 @@ Windows Server and Windows 11 are used only as official time-limited evaluation 
 | OAuth 2.0 | Lesson 5 | Authorization framework for delegated access; explicitly distinguished from authentication. |
 | OpenID Connect | Lesson 5 | Identity layer built on OAuth 2.0. |
 | Kerberos | Lesson 5 | Briefly introduced as ticket-based authentication used in Active Directory; expanded in Lesson 19. |
-| SPF, DKIM, and DMARC | Lesson 6 | Applied email-domain authentication controls and alignment. |
+| Access Review | Lesson 6 | Introduced as a recurring process for validating whether assigned access still matches business need. |
 | NIST CSF 2.0 | Lesson 37 | Six-function cybersecurity outcome and risk-governance framework using Current and Target Profiles. |
 | CIS Controls v8.1 | Lesson 37 | Prioritized safeguards and cumulative Implementation Groups. |
 | ISO/IEC 27001:2022 | Lesson 37 | Certifiable risk-based Information Security Management System standard, including Statement of Applicability. |
@@ -443,10 +449,11 @@ Windows Server and Windows 11 are used only as official time-limited evaluation 
 | Hospital emergency identity access | Lesson 5 | Can be reused for IAM, availability, and incident response. |
 | University federated SSO | Lesson 5 | Can be reused for Active Directory, IAM, and cloud security. |
 | Cloud session-token theft | Lesson 5 | Can be reused for malware, SOC, and incident response lessons. |
-| Small-business certificate expiration outage | Lesson 6 | Can be reused for vulnerability management and incident response. |
-| Hospital encrypted-backup recovery failure | Lesson 6 | Can be reused for ransomware, resilience, and incident response. |
-| Government signing-key compromise | Lesson 6 | Can be reused for forensics, incident response, and compliance. |
-| Cloud key-policy overpermission | Lesson 6 | Can be reused for cloud security, IAM, and risk assessment. |
+| Small-business broad cloud-folder access | Lesson 6 | Can be reused for IAM, cloud security, compliance, and incident response. |
+| Corporate role-creep access review | Lesson 6 | Can be reused for Active Directory, IAM, SIEM, and audit lessons. |
+| Financial separation-of-duties payment risk | Lesson 6 | Can be reused for compliance, risk, fraud prevention, and incident response. |
+| Healthcare Linux patient-report permissions | Lesson 6 | Can be reused for Linux permissions, hardening, monitoring, and compliance. |
+| Cloud overbroad storage role | Lesson 6 | Can be reused for cloud IAM, vulnerability management, and risk assessment. |
 | Supplier invoice-thread compromise | Lesson 7 | Can be reused for BEC, incident response, and financial controls. |
 | Bank help-desk vishing | Lesson 7 | Can be reused for IAM, PAM, and incident response. |
 | University QR phishing | Lesson 7 | Can be reused for web attacks, IAM, and awareness. |
@@ -598,9 +605,9 @@ Depth remediation and publication audit are complete across Lessons 1-40. All mu
 - Lesson 4 should build on confidentiality and integrity when introducing encryption and hashing.
 - Lesson 4 should connect cryptography to roles from Lesson 3: SOC, systems administration, security administration, IAM, and incident response.
 - Lesson 5 should reference Lesson 4 hashing and key concepts when teaching password storage, tokens, and credential protection without reteaching cryptographic foundations.
-- Lesson 6 should expand Lesson 4 TLS, certificates, and lifecycle foundations into operational HTTPS and email security.
+- Lesson 6 should expand Lesson 1 controls and defense in depth plus Lesson 5 authentication into authorization, access control models, least privilege, privileged access, and layered enterprise safeguards.
 - Lesson 7 should expand Lesson 5 phishing, MFA fatigue, credential theft, and identity-log analysis without reteaching authentication architecture.
-- Lesson 7 should reuse Lesson 6 SPF, DKIM, DMARC, and trusted-header interpretation while emphasizing that authentication pass does not prove benign content.
+- Lesson 7 should reuse Lesson 6 access control and defense-in-depth concepts when explaining why phishing controls must include identity protection, least privilege, payment verification, monitoring, and response.
 - Lesson 8 may reference social engineering as an initial-access path but should focus on network and system attack mechanics.
 - Lesson 9 should build from exposed services into web exploitation, malware, persistence, IOC, and IOA analysis.
 - Lesson 10 should provide isolated virtualization foundations for later security labs and reinforce authorization and snapshots.

@@ -479,7 +479,7 @@ Certificates are installed on:
 
 ## 11. Certificate Lifecycle
 
-Although Lesson 6 examines certificate lifecycle in greater operational depth, students need the foundational sequence:
+Later security operations lessons examine certificate lifecycle in greater operational depth, but students need the foundational sequence:
 
 1. **Request:** a subject generates or receives a key pair and creates a certificate signing request.
 2. **Identity validation:** the CA or RA validates the requester according to policy.
@@ -1069,7 +1069,7 @@ Students should be able to confirm:
 
 Lesson 5 will build on these foundations through authentication and identity, including MFA, single sign-on, token-based authentication, password storage, and credential security.
 
-Lesson 6 will apply cryptographic concepts to email security, HTTPS, certificate lifecycle operations, and the business impact of encryption failures.
+Lesson 6 will move from authentication into access control and defense in depth. Later lessons will continue applying cryptographic concepts to phishing analysis, secure protocols, endpoint protection, cloud security, incident response, and compliance.
 
 Students should carry forward these questions:
 

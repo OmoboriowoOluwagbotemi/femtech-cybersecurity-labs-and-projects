@@ -4,7 +4,7 @@
 
 Social engineering is the manipulation of people into revealing information, transferring value, granting access, or performing an unsafe action. Attackers exploit trust, authority, urgency, fear, curiosity, helpfulness, and normal business processes.
 
-This lesson covers phishing, spear phishing, business email compromise (BEC), vishing, pretexting, credential attacks, and email-header analysis. It builds on Lesson 5 identity security and Lesson 6 email authentication. Students will learn that social engineering is an enterprise process risk, not merely a user-awareness problem.
+This lesson covers phishing, spear phishing, business email compromise (BEC), vishing, pretexting, credential attacks, and email-header analysis. It builds on Lesson 5 identity security and Lesson 6 access control and defense in depth. Students will learn that social engineering is an enterprise process risk, not merely a user-awareness problem.
 
 ## Learning Objectives
 
@@ -29,7 +29,8 @@ Students should understand:
 - SOC and incident-response responsibilities from Lesson 3.
 - TLS, signatures, and certificates from Lesson 4.
 - MFA, SSO, tokens, passwords, and credential security from Lesson 5.
-- SPF, DKIM, DMARC, and email authentication results from Lesson 6.
+- Access control, least privilege, and defense in depth from Lesson 6.
+- Basic awareness that SPF, DKIM, and DMARC are email authentication results used as evidence during header analysis.
 
 ## Enterprise Relevance
 
