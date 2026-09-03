@@ -47,7 +47,7 @@ Present options: maintenance mode, pfSense source block, account/session reset, 
 
 ## Phase 4 - Application Assessment
 
-After taking a snapshot, run ZAP baseline and a constrained active scan as in Lab 09. Manually validate at least four findings, including authentication/session, authorisation, input handling, and security configuration. Do not equate alert count with vulnerabilities.
+After taking a snapshot, follow the same evidence discipline used in Tool Lab 01 and Tool Lab 05: verify scope, preserve command output, run only authorised assessment checks, and manually validate at least four findings, including authentication/session, authorisation, input handling, and security configuration. Do not equate alert count with vulnerabilities.
 
 ## Phase 5 - Remediation
 

@@ -1,6 +1,6 @@
 # FEMTECH Cybersecurity Practical Programme
 
-## 16 Guided Labs and 11 Professional Projects
+## 6 Tool Labs, 1 Advanced Integration Lab, and 11 Professional Projects
 
 This practical programme consolidates the 40-lesson Enterprise Cybersecurity Course. It is designed to move a student through four levels of performance:
 
@@ -32,22 +32,13 @@ The [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) defines the mandator
 
 | ID | Practical | Core lessons | Expected time |
 |---|---|---:|---:|
-| Lab 01 | Build and prove an isolated cyber range | 1, 8, 10 | 4-6 hours |
-| Lab 02 | Linux administration and least privilege | 11-13, 15 | 4 hours |
-| Lab 03 | Harden and audit an Ubuntu server | 13-16, 21 | 5 hours |
-| Lab 04 | Build a private PKI and secure a web service | 4-6 | 4-5 hours |
-| Lab 05 | Discover, classify, and baseline assets | 8, 16, 27 | 6-8 hours |
-| Lab 06 | Segment an enterprise with pfSense | 22-25 | 6 hours |
-| Lab 07 | Build Active Directory and role-based access | 17-20 | 6-8 hours |
-| Lab 08 | Harden and monitor a Windows endpoint | 17, 21, 30-32 | 5 hours |
-| Lab 09 | Assess an intentionally vulnerable web app | 7-9, 27-29 | 5 hours |
-| Lab 10 | Detect network activity with Suricata and Zeek | 8, 25, 30, 32 | 5 hours |
-| Lab 11 | Run a governed vulnerability-management cycle | 27-29, 36-37 | 6 hours |
-| Lab 12 | Deploy Wazuh and onboard endpoints | 30-31 | 6-8 hours |
-| Lab 13 | Engineer and tune a detection | 2, 30-32, 34 | 5 hours |
-| Lab 14 | Triage and contain a simulated incident | 2, 7, 33-34 | 5 hours |
-| Lab 15 | Preserve evidence and build a forensic timeline | 33, 35, 38 | 5 hours |
-| Lab 16 | Perform a professional vulnerability assessment with Nmap and Greenbone/OpenVAS | 27-29, 36-37 | 6-8 hours |
+| Tool Lab 01 | Kali Linux analyst workstation | 8, 10, 15, 16, 27 | 4-5 hours |
+| Tool Lab 02 | Ubuntu Server administration and hardening | 11-16, 21, 29 | 5-6 hours |
+| Tool Lab 03 | pfSense firewall and segmentation | 22-24, 27, 30 | 5-6 hours |
+| Tool Lab 04 | Windows Server and Active Directory | 17-20, 21, 30 | 6-8 hours |
+| Tool Lab 05 | Greenbone/OpenVAS vulnerability assessment on Kali | 27-29, 36-37 | 6-8 hours plus feed synchronisation |
+| Tool Lab 06 | Wazuh SIEM/XDR operations | 30-34 | 6-8 hours |
+| Advanced Lab 07 | Professional vulnerability assessment with Nmap and Greenbone/OpenVAS | 27-29, 36-37 | 6-8 hours |
 | Project 01 | Secure a community health clinic | 1-25, 36-39 | 2-3 weeks |
 | Project 02 | Make a school ransomware-ready | 1-2, 14, 19-25, 33-37 | 2 weeks |
 | Project 03 | Build a SOC for a fintech startup | 25, 30-34, 38 | 2-3 weeks |
@@ -73,7 +64,7 @@ Every guided lab should strengthen at least one professional tool skill. The tab
 | Greenbone/OpenVAS | Scanner setup, target creation, scan execution, report export, finding validation, remediation, rescan | Scanner health, exact target scope, report export, validation notes, remediation proof, rescan result |
 | Wazuh | Manager/agent deployment, log onboarding, event generation, dashboard search, alert interpretation, tuning | Agent status, raw event, alert details, search filter, rule ID/level, triage recommendation |
 
-Students should revisit the [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) after Labs 01, 03, 06, 07, 11, 12, 13, 14, and 16 to confirm that each tool skill is moving from guided use toward independent performance.
+Students should revisit the [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) after each tool lab to confirm that each skill is moving from guided use toward independent performance.
 
 ## Required Rules of Engagement
 
@@ -313,7 +304,7 @@ This moves from interface to application and prevents random configuration chang
 
 ## Lab Assessment Model
 
-Each guided lab is scored out of 100:
+Each tool lab is scored out of 100:
 
 | Category | Points | What earns full credit |
 |---|---:|---|
@@ -345,7 +336,7 @@ Professional projects deliberately contain ambiguity. A high-scoring team docume
 
 ## Delivery Sequence
 
-Run Labs 01-04 after Lessons 1-16, Lab 05 immediately after Lesson 27, Labs 06-09 after Lessons 17-29, Labs 10-15 after Lessons 30-38, and Lab 16 after Lessons 27-29 as a detailed vulnerability-assessment and remediation exercise. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
+Run Tool Lab 01 after Lesson 10, Tool Lab 02 after Lesson 16, Tool Lab 03 after Lesson 24, Tool Lab 04 after Lesson 20, Tool Lab 05 after Lesson 29, and Tool Lab 06 after Lesson 31. Run Advanced Lab 07 after Tool Lab 05 as the detailed vulnerability-assessment and remediation exercise. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
 
 ## Practical Files
 

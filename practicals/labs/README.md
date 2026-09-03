@@ -1,61 +1,48 @@
-# Guided Lab Index
+# Tool Lab Index
 
-Use these labs with the [Core Tool Skills Pathway](../CORE_TOOL_SKILLS_PATHWAY.md). The pathway explains the required practical competencies for Kali Linux, Ubuntu Server, pfSense, Windows Server, Greenbone/OpenVAS, and Wazuh.
+Use these labs with the [Core Tool Skills Pathway](../CORE_TOOL_SKILLS_PATHWAY.md). The labs are now organised around the main tools students must operate confidently: Kali Linux, Ubuntu Server, pfSense, Windows Server, Greenbone/OpenVAS, and Wazuh.
 
-1. [Build and prove an isolated cyber range](lab-01-isolated-cyber-range.md)
-2. [Linux administration and least privilege](lab-02-linux-least-privilege.md)
-3. [Harden and audit an Ubuntu server](lab-03-ubuntu-hardening.md)
-4. [Build a private PKI and secure a web service](lab-04-private-pki-tls.md)
-5. [Discover, classify, and baseline assets](lab-05-asset-discovery.md)
-6. [Segment an enterprise with pfSense](lab-06-pfsense-segmentation.md)
-7. [Build Active Directory and role-based access](lab-07-active-directory-rbac.md)
-8. [Harden and monitor a Windows endpoint](lab-08-windows-hardening-monitoring.md)
-9. [Assess an intentionally vulnerable web application](lab-09-web-security-assessment.md)
-10. [Detect network activity with Suricata and Zeek](lab-10-network-detection.md)
-11. [Run a governed vulnerability-management cycle](lab-11-vulnerability-management.md)
-12. [Deploy Wazuh and onboard endpoints](lab-12-wazuh-deployment.md)
-13. [Engineer and tune a detection](lab-13-detection-engineering.md)
-14. [Triage and contain a simulated incident](lab-14-incident-response.md)
-15. [Preserve evidence and build a forensic timeline](lab-15-forensic-timeline.md)
-16. [Perform a professional vulnerability assessment with Nmap and Greenbone/OpenVAS](lab-16-professional-vulnerability-assessment.md)
+## Required Tool Labs
 
-Read the [programme guide](../README.md) before Lab 01. Its rules of engagement, evidence standard, topology, troubleshooting method, and scoring model apply to every lab.
+1. [Kali Linux Analyst Workstation](tool-lab-01-kali-analyst-workstation.md)
+2. [Ubuntu Server Administration and Hardening](tool-lab-02-ubuntu-server-hardening.md)
+3. [pfSense Firewall and Segmentation](tool-lab-03-pfsense-firewall-segmentation.md)
+4. [Windows Server and Active Directory](tool-lab-04-windows-server-active-directory.md)
+5. [Greenbone/OpenVAS Vulnerability Assessment on Kali](tool-lab-05-openvas-vulnerability-assessment.md)
+6. [Wazuh SIEM/XDR Operations](tool-lab-06-wazuh-siem-xdr.md)
 
-## Core Tool Checkpoints
+## Advanced Integration Lab
+
+7. [Professional Vulnerability Assessment with Nmap and Greenbone/OpenVAS](tool-lab-07-professional-vulnerability-assessment.md)
+
+Read the [programme guide](../README.md) before Tool Lab 01. Its rules of engagement, evidence standard, topology, troubleshooting method, and scoring model apply to every lab.
+
+## Tool Competency Checkpoints
 
 | Checkpoint | Labs | Required student capability |
 |---|---|---|
-| Kali analyst workstation | 01, 03, 05, 09, 10, 11, 14, 15, 16 | Verify isolation, record source/target details, run authorised validation commands, preserve evidence, and explain output |
-| Ubuntu Server administration | 01, 02, 03, 04, 05, 09, 10, 11, 12, 14 | Manage users, permissions, services, logs, SSH, UFW, hardening, remediation, and rollback |
-| pfSense firewall and segmentation | 01, 05, 06, 10, 11, 12, 14, 16 | Configure interfaces, DHCP, NAT, aliases, rules, logs, and positive/negative traffic tests |
-| Windows Server and AD | 07, 08, 12, 13, 14 | Build basic enterprise identity, apply groups and policy, inspect Windows events, and connect telemetry to Wazuh |
-| Greenbone/OpenVAS vulnerability management | 11, 16 | Install or operate scanner, create scoped targets, scan, validate findings, remediate, rescan, and report |
-| Wazuh SIEM/XDR | 12, 13, 14, 15 | Onboard agents, generate events, search alerts, interpret rule details, tune noise, and support incident response |
+| Kali analyst workstation | Tool Labs 01, 05, 06, Advanced Lab 07 | Verify isolation, record source/target details, run authorised validation commands, preserve evidence, and explain output |
+| Ubuntu Server administration | Tool Labs 02, 05, 06, Advanced Lab 07 | Manage users, permissions, services, logs, SSH, UFW, hardening, remediation, and rollback |
+| pfSense firewall and segmentation | Tool Labs 03, 05, 06, Advanced Lab 07 | Configure interfaces, DHCP, NAT, aliases, rules, logs, and positive/negative traffic tests |
+| Windows Server and AD | Tool Labs 04, 06 | Build basic enterprise identity, apply groups and policy, inspect Windows events, and connect telemetry to Wazuh |
+| Greenbone/OpenVAS vulnerability management | Tool Lab 05, Advanced Lab 07 | Install or operate scanner, create scoped targets, scan, validate findings, remediate, rescan, and report |
+| Wazuh SIEM/XDR | Tool Lab 06 | Onboard agents, generate events, search alerts, interpret rule details, tune noise, and support incident response |
 
-Students should not move to the capstone until they can complete each checkpoint with limited instructor prompting.
+Students should not move to the advanced integration lab until they can complete each checkpoint with limited instructor prompting.
 
-## Lab Completion Matrix
+## Tool Lab Completion Matrix
 
-Each lab must produce technical evidence, written interpretation, and a professional decision. The table below defines the minimum standard for a complete submission.
+Each tool lab must produce technical evidence, written interpretation, and a professional decision. The table below defines the minimum standard for a complete submission.
 
 | Lab | Core tools reinforced | Student must demonstrate | Minimum evidence | Pass condition |
 |---|---|---|---|---|
-| 01 - Isolated cyber range | VirtualBox, pfSense, Kali, Ubuntu Server | Build an isolated routed lab and prove targets do not touch the physical LAN directly | VM adapter proof, IP plan, pfSense routes/rules, Kali-to-Ubuntu positive and negative tests, snapshot proof | Student can safely create, validate, and recover the lab range |
-| 02 - Linux least privilege | Ubuntu Server, Bash, Linux permissions | Create users, groups, shared folders, setgid directories, sudo boundaries, and log-review access | `id`, `groups`, `namei`, `getfacl`, sudo test, denied-access test, command log | Student can apply least privilege without breaking required work |
-| 03 - Ubuntu hardening | Ubuntu Server, SSH, UFW, Fail2Ban, auditd, Kali | Harden SSH, configure host firewall rules, validate lockout controls, and preserve audit evidence | SSH before/after config, UFW status, Nmap validation, auth logs, Fail2Ban status, audit rules | Student can harden a Linux server and prove business services still work |
-| 04 - Private PKI and TLS | Ubuntu Server, OpenSSL, Nginx, Kali | Build a private CA, issue a server certificate, configure TLS, and validate trust correctly | CA files, CSR, certificate details, Nginx config, `openssl s_client` validation, file-permission proof | Student can explain and operate basic certificate lifecycle tasks |
-| 05 - Asset discovery | Kali, Nmap, Ubuntu Server, pfSense, optional Windows Server | Discover assets safely, reconcile network and host evidence, identify unknown assets, and build an inventory | Scope record, route proof, Nmap outputs, host listener checks, inventory, rogue-asset escalation | Student can turn scan output into a business asset inventory |
-| 06 - pfSense segmentation | pfSense, Kali, Ubuntu Server, Wazuh/analyst host | Build segmented firewall policy using interfaces, aliases, rules, logs, and traffic validation | Interface plan, alias list, rule matrix, allowed/denied tests, firewall logs, config export | Student can enforce and troubleshoot segmentation rules |
-| 07 - Active Directory RBAC | Windows Server, AD DS, DNS, PowerShell, Windows client | Build basic domain structure, groups, OUs, shared access, GPO, and account lifecycle workflow | IP/DNS proof, AD objects, group membership, GPO report, access tests, event evidence | Student can administer basic identity and authorization safely |
-| 08 - Windows hardening and monitoring | Windows endpoint/server tools, Defender, Firewall, Event Viewer, PowerShell, Sysmon | Baseline Windows security, enable audit controls, generate benign events, export logs, and validate telemetry | Defender status, firewall profiles, audit policy, EVTX exports, Sysmon/osquery evidence | Student can harden and monitor Windows with defensible evidence |
-| 09 - Web security assessment | Ubuntu DMZ, OWASP Juice Shop, ZAP, Kali, Nmap | Assess an intentionally vulnerable web application within strict scope and validate findings manually | Scope statement, app map, ZAP report, manual validation, finding triage, cleanup proof | Student can report web weaknesses without unsafe testing behavior |
-| 10 - Network detection | Ubuntu Server, Suricata, Zeek, tcpdump, Kali | Deploy detection, write a local rule, generate safe traffic, compare alert data with Zeek metadata | Suricata test output, local rule, PCAP hash, EVE alert, Zeek logs, tuning notes | Student can explain what an alert proves and what it does not prove |
-| 11 - Vulnerability management | Kali, Greenbone/OpenVAS, Nmap, Ubuntu, pfSense | Run a governed scan, validate findings, rank risk, remediate one issue, and confirm closure | Scan plan, feed health, reports, five validation records, risk register, remediation, retest | Student can manage vulnerabilities as a lifecycle, not just run a scanner |
-| 12 - Wazuh deployment | Wazuh, Ubuntu Server, Kali, pfSense | Deploy Wazuh, onboard an Ubuntu agent, trace authentication/FIM events, and troubleshoot telemetry loss | Service status, agent status, raw event, alert, query/filter, FIM change, telemetry failure timeline | Student can prove an event travelled from endpoint to SIEM dashboard |
-| 13 - Detection engineering | Wazuh, Windows logs, Sigma concepts, PowerShell | Build a detection hypothesis, test known positives/benign activity, tune noise, and write a triage runbook | Source events, Wazuh fields, local rule, test matrix, false-positive analysis, runbook | Student can create a usable detection with documented limits |
-| 14 - Incident response | Wazuh, Ubuntu logs, pfSense logs, PCAP, Kali | Triage an incident, preserve evidence, correlate sources, scope impact, and recommend containment | Intake record, volatile state, log exports, timeline, IOC notes, scope table, incident report | Student can separate confirmed facts from assumptions during response |
-| 15 - Forensic timeline | Kali/Ubuntu forensic VM, Volatility, EVTX tools, tshark, YARA, Sleuth Kit/Autopsy | Preserve evidence, analyse memory/log/PCAP/disk artefacts, test hypotheses, and build a timeline | Chain-of-custody record, hashes, tool versions, process/network/log artefacts, timeline | Student can defend a forensic conclusion with traceable evidence |
-| 16 - Professional vulnerability assessment | Kali, Nmap, Greenbone/OpenVAS, Ubuntu Server, pfSense | Complete a full vulnerability assessment from authorization to management report | Authorization record, Nmap evidence, OpenVAS setup, baseline report, finding worksheet, remediation, rescan, final report | Student can perform and explain an end-to-end vulnerability assessment |
+| Tool Lab 01 - Kali Linux Analyst Workstation | Kali, Nmap, tcpdump, curl, OpenSSL | Confirm Kali isolation, create scope records, validate approved targets, run safe discovery, capture and hash a PCAP | IP/route proof, scope record, connectivity tests, Nmap files, PCAP hash, technical notes | Student can use Kali as a safe analyst workstation |
+| Tool Lab 02 - Ubuntu Server Administration and Hardening | Ubuntu, SSH, UFW, Fail2Ban, systemd, logs | Harden Linux access, manage users/groups/permissions, configure services, read logs, and prepare rollback | Baseline, permissions proof, SSH settings, UFW status, service status, auth logs, rollback plan | Student can administer and harden a Linux server without breaking required service |
+| Tool Lab 03 - pfSense Firewall and Segmentation | pfSense, aliases, DHCP, NAT, firewall logs | Configure zones, aliases, rules, management access, allowed tests, denied tests, and configuration exports | Interface plan, DHCP plan, alias list, rule matrix, traffic tests, log evidence, XML backup | Student can enforce segmentation and troubleshoot firewall behavior |
+| Tool Lab 04 - Windows Server and Active Directory | Windows Server, AD DS, DNS, PowerShell, GPO, Event Viewer | Configure server networking, install AD DS/DNS, create OUs/users/groups, apply GPO, inspect security logs | IP/DNS proof, AD services, OU/group/user export, share ACL, GPO report, EVTX/hash | Student can build and explain basic enterprise identity administration |
+| Tool Lab 05 - Greenbone/OpenVAS Vulnerability Assessment | Kali, Nmap, Greenbone/OpenVAS, Ubuntu, pfSense | Install/use OpenVAS on Kali, scan an authorised target, validate one finding, remediate, and rescan | GVM health, target scope, Nmap baseline, report export, finding worksheet, remediation and rescan proof | Student can perform a controlled vulnerability assessment lifecycle |
+| Tool Lab 06 - Wazuh SIEM/XDR Operations | Wazuh, Ubuntu agent, Windows agent, pfSense, Kali | Verify Wazuh health, onboard agents, generate Linux/Windows events, search alerts, triage and tune | Manager health, agent proof, raw event, alert details, query/filter, triage note, telemetry failure recovery | Student can trace endpoint events into Wazuh and explain response decisions |
+| Advanced Lab 07 - Professional Vulnerability Assessment | Kali, Nmap, Greenbone/OpenVAS, Ubuntu, pfSense | Complete a full professional assessment from authorization to final management report | Authorization, Nmap evidence, OpenVAS setup, baseline report, validation, remediation, rescan, final report | Student can perform and defend an end-to-end vulnerability assessment |
 
 ## Minimum Completeness Rules
 

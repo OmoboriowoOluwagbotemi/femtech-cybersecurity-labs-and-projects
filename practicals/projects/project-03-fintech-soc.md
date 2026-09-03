@@ -82,7 +82,7 @@ Define severity and escalation using asset criticality, confidence, blast radius
 
 ## Phase 5 - Run a Purple-Team Validation
 
-Use only benign simulations from Labs 10, 12, and 13: Nmap approved ports, failed/successful SSH, temporary account creation/removal, file change, and agent stop/start. Measure:
+Use only benign simulations from the tool labs, especially Tool Lab 01 and Tool Lab 06: Nmap approved ports, failed/successful SSH, temporary account creation/removal, file change, and agent stop/start. Measure:
 
 - Event generated?
 - Collected?

@@ -32,12 +32,12 @@ A student has not mastered a tool simply because they opened it or followed one 
 
 | Tool | First exposure | Skill-building labs | Professional outcome |
 |---|---|---|---|
-| Kali Linux | Lab 01 | Labs 03, 04, 05, 09, 10, 11, 14, 15, 16 | Analyst workstation for discovery, validation, packet review, evidence collection, and controlled security testing |
-| Ubuntu Server | Lab 01 | Labs 02, 03, 04, 05, 09, 10, 11, 12, 14 | Linux administration, hardening, service validation, logging, remediation, and incident evidence |
-| pfSense | Lab 01 | Labs 05, 06, 10, 11, 12, 14, 16 | Segmentation, firewall policy, DHCP, NAT, routing validation, and log-based troubleshooting |
-| Windows Server | Lab 07 | Labs 08, 12, 13, 14 | Server roles, Event Viewer, Active Directory basics, Group Policy, access control, and Windows security logging |
-| Greenbone/OpenVAS | Lab 11 | Lab 16 | Vulnerability scanning, finding validation, risk ranking, remediation tracking, and rescan proof |
-| Wazuh | Lab 12 | Labs 13, 14, 15 | Endpoint telemetry, SIEM investigation, alert validation, detection tuning, and incident response evidence |
+| Kali Linux | Tool Lab 01 | Tool Labs 05-06 and Advanced Lab 07 | Analyst workstation for discovery, validation, packet review, evidence collection, and controlled security testing |
+| Ubuntu Server | Tool Lab 02 | Tool Labs 05-06 and Advanced Lab 07 | Linux administration, hardening, service validation, logging, remediation, and incident evidence |
+| pfSense | Tool Lab 03 | Tool Labs 05-06 and Advanced Lab 07 | Segmentation, firewall policy, DHCP, NAT, routing validation, and log-based troubleshooting |
+| Windows Server | Tool Lab 04 | Tool Lab 06 | Server roles, Event Viewer, Active Directory basics, Group Policy, access control, and Windows security logging |
+| Greenbone/OpenVAS | Tool Lab 05 | Advanced Lab 07 | Vulnerability scanning, finding validation, risk ranking, remediation tracking, and rescan proof |
+| Wazuh | Tool Lab 06 | Tool Lab 04 where Windows event integration is used | Endpoint telemetry, SIEM investigation, alert validation, detection tuning, and incident response evidence |
 
 ## Kali Linux Skills
 
@@ -225,4 +225,3 @@ Before accepting a lab submission, verify:
 - Findings are written in business language as well as technical language.
 - Reports identify limitations and next steps.
 - No real credentials, personal data, production data, or public targets were used.
-
