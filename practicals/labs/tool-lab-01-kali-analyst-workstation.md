@@ -42,6 +42,48 @@ Students will practise:
 
 Linux matters in cybersecurity because many enterprise systems, security tools, firewalls, SIEM components, web servers, cloud workloads, containers, and forensic workstations are Linux-based. A student who cannot navigate Linux will struggle with SOC analysis, vulnerability management, incident response, and system hardening.
 
+## Beginner Terms
+
+| Term | Simple meaning | Example |
+|---|---|---|
+| Operating system | Software that manages the computer and lets users run programs | Kali Linux, Ubuntu, Windows |
+| Terminal | Text window where commands are typed | The black command window in Kali |
+| Shell | Program that reads commands and runs them | Bash |
+| Command | Instruction typed into the terminal | `pwd` |
+| Directory | A folder in Linux | `/home/kali` |
+| File | A stored item such as a note, log, script, or configuration | `notes.txt` |
+| Path | The location of a file or folder | `/var/log/auth.log` |
+| User | Account currently using the system | `kali` |
+| Root | Most powerful Linux administrator account | Similar to full administrator |
+| `sudo` | Runs one approved command with administrator privilege | `sudo apt update` |
+| Process | A running program | Browser, SSH service, terminal |
+| Service | A background program managed by Linux | SSH, web server |
+| Package | Installed software managed by the system | `nmap`, `curl` |
+| Log | Record of system or application activity | Authentication log |
+| Permission | Rule controlling who can read, write, or run a file | `rwx` |
+
+## How to Read a Linux Command
+
+Linux commands usually follow this pattern:
+
+```text
+command option target
+```
+
+Example:
+
+```bash
+ls -l /home
+```
+
+| Part | Meaning |
+|---|---|
+| `ls` | The command; it lists files and folders |
+| `-l` | An option; it asks for long detailed output |
+| `/home` | The target; it tells `ls` what location to list |
+
+Do not type the word `bash` from the code-block label. The label only tells you the command is meant for a Linux Bash terminal.
+
 ## Bash Skills Covered
 
 Students will practise:
@@ -59,7 +101,158 @@ Students will practise:
 
 These Bash skills matter because analysts often need to collect repeatable evidence quickly during vulnerability assessments, SOC triage, server checks, and incident response.
 
-## Step 1 - Create the Evidence Folder
+## Step 1 - Open Terminal and Learn the Prompt
+
+Open the Kali terminal.
+
+Run one command at a time:
+
+```bash
+pwd
+```
+
+Meaning: print working directory. It shows the folder you are currently inside.
+
+```bash
+whoami
+```
+
+Meaning: show the current username.
+
+```bash
+hostname
+```
+
+Meaning: show the computer name.
+
+```bash
+date
+```
+
+Meaning: show the current date and time.
+
+Now clear the screen:
+
+```bash
+clear
+```
+
+This does not delete files. It only clears the terminal view.
+
+## Step 2 - Move Around the Linux Filesystem
+
+Run:
+
+```bash
+pwd
+ls
+ls -l
+cd /home
+pwd
+ls
+cd ~
+pwd
+```
+
+What happened:
+
+- `pwd` showed your current location.
+- `ls` listed files and folders.
+- `ls -l` showed details such as owner, group, size, and permissions.
+- `cd /home` moved into `/home`.
+- `cd ~` returned to your own home folder.
+
+Create a practice folder:
+
+```bash
+mkdir linux-practice
+cd linux-practice
+pwd
+```
+
+Create and read a simple file:
+
+```bash
+echo "This is my first Linux note" > note.txt
+cat note.txt
+ls -l note.txt
+```
+
+Important:
+
+- `>` writes output into a file.
+- If the file already exists, `>` replaces its content.
+- `cat` displays the content of a small file.
+
+Append a second line:
+
+```bash
+echo "Linux is important for cybersecurity" >> note.txt
+cat note.txt
+```
+
+Important:
+
+- `>>` adds to the end of a file.
+- `>>` is safer than `>` when you do not want to overwrite existing notes.
+
+## Step 3 - Understand Files, Permissions, and Help
+
+Run:
+
+```bash
+ls -l note.txt
+stat note.txt
+```
+
+In `ls -l`, output may look like this:
+
+```text
+-rw-r--r-- 1 kali kali 67 Sep 03 10:00 note.txt
+```
+
+Simple interpretation:
+
+| Part | Meaning |
+|---|---|
+| `-` | This is a regular file |
+| `rw-` | Owner can read and write |
+| `r--` | Group can read |
+| `r--` | Others can read |
+| `kali kali` | Owner and group |
+| `note.txt` | File name |
+
+Learn how to get help:
+
+```bash
+man ls
+```
+
+Press `q` to quit the manual page.
+
+Try short help:
+
+```bash
+ls --help | head
+```
+
+## Step 4 - Create the Evidence Folder
+
+```bash
+mkdir -p ~/femtech-evidence/kali-tool-lab
+mkdir -p ~/femtech-evidence/kali-tool-lab/01-baseline
+mkdir -p ~/femtech-evidence/kali-tool-lab/02-validation
+mkdir -p ~/femtech-evidence/kali-tool-lab/03-scans
+mkdir -p ~/femtech-evidence/kali-tool-lab/04-pcap
+mkdir -p ~/femtech-evidence/kali-tool-lab/05-report
+mkdir -p ~/femtech-evidence/kali-tool-lab/06-scripts
+date -u +'%Y-%m-%dT%H:%M:%SZ' | tee ~/femtech-evidence/kali-tool-lab/session-start-utc.txt
+script -af ~/femtech-evidence/kali-tool-lab/command-log.txt
+```
+
+Exit the transcript at the end with `exit`.
+
+Now create variables so later commands are shorter:
 
 ```bash
 LAB_NAME="kali-tool-lab"
@@ -68,23 +261,18 @@ TARGET_IP="10.10.20.20"
 TARGET_NET="10.10.20.0/24"
 GATEWAY_IP="10.10.10.1"
 PORTS="22,80,443"
-
-mkdir -p "$EVIDENCE"/{01-baseline,02-validation,03-scans,04-pcap,05-report,06-scripts}
-date -u +'%Y-%m-%dT%H:%M:%SZ' | tee "$EVIDENCE/session-start-utc.txt"
-script -af "$EVIDENCE/command-log.txt"
 ```
-
-Exit the transcript at the end with `exit`.
 
 Key Bash points:
 
 - `LAB_NAME="kali-tool-lab"` creates a variable.
 - `$HOME` expands to the current user's home directory.
 - `"$EVIDENCE"` is quoted so paths with spaces do not break commands.
-- `{01-baseline,02-validation,...}` creates several folders in one command.
 - `tee` shows output on screen and saves it to a file.
+- A variable stores a value so you do not type the same long path many times.
+- If you close the terminal, you must create the variables again.
 
-## Step 2 - Practise Essential Linux and Bash Checks
+## Step 5 - Practise Essential Linux and Bash Checks
 
 Run these Linux orientation commands:
 
@@ -179,7 +367,7 @@ ip -br address | awk '{print $1, $3}' | tee "$EVIDENCE/01-baseline/interface-add
 ip route | grep default | tee "$EVIDENCE/01-baseline/default-route.txt"
 ```
 
-## Step 3 - Prove Kali Identity and Network Placement
+## Step 6 - Prove Kali Identity and Network Placement
 
 ```bash
 hostnamectl | tee "$EVIDENCE/01-baseline/hostname.txt"
@@ -197,7 +385,7 @@ Write a short note explaining:
 - Approved target subnet.
 - Why a bridged adapter would be unsafe in this course.
 
-## Step 4 - Verify Authorised Scope
+## Step 7 - Verify Authorised Scope
 
 Create `scope-record.md`:
 
@@ -220,7 +408,7 @@ Start time UTC:
 Stop time UTC:
 ```
 
-## Step 5 - Test Basic Connectivity
+## Step 8 - Test Basic Connectivity
 
 ```bash
 ping -c 3 "$GATEWAY_IP" | tee "$EVIDENCE/02-validation/ping-gateway.txt"
@@ -230,7 +418,7 @@ nc -vz -w 3 "$TARGET_IP" 22 2>&1 | tee "$EVIDENCE/02-validation/tcp-ssh.txt"
 
 If ping fails but TCP succeeds, explain why ICMP filtering does not always mean the host is down.
 
-## Step 6 - Create a Reusable Bash Validation Script
+## Step 9 - Create a Reusable Bash Validation Script
 
 Create a simple script:
 
@@ -286,7 +474,7 @@ Important Bash points:
 - `for PORT in 22 80 443` repeats a command for each port.
 - `|| true` allows the script to continue when HTTP is unavailable.
 
-## Step 7 - Run Safe Nmap Discovery
+## Step 10 - Run Safe Nmap Discovery
 
 ```bash
 cd "$EVIDENCE/03-scans"
@@ -309,7 +497,7 @@ grep "Ports:" service-check-ubuntu.gnmap | tee "$EVIDENCE/03-scans/open-port-sum
 awk '/Ports:/ {print $0}' service-check-ubuntu.gnmap | tee "$EVIDENCE/03-scans/awk-port-summary.txt"
 ```
 
-## Step 8 - Capture a Small PCAP
+## Step 11 - Capture a Small PCAP
 
 Open one terminal on Kali:
 
@@ -331,7 +519,7 @@ sha256sum "$EVIDENCE/04-pcap/kali-validation.pcap" \
   | tee "$EVIDENCE/04-pcap/kali-validation.pcap.sha256"
 ```
 
-## Step 9 - Interpret Bash and Security Results
+## Step 12 - Interpret Linux, Bash, and Security Results
 
 Create `technical-notes.md`:
 
@@ -357,7 +545,7 @@ Answer:
 14. How are processes and services different?
 15. Why is Linux knowledge important for cybersecurity jobs?
 
-## Step 10 - Package Evidence
+## Step 13 - Package Evidence
 
 ```bash
 find "$EVIDENCE" -type f ! -name hashes.sha256 -print0 \
