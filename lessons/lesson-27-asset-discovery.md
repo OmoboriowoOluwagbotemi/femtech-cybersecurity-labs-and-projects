@@ -27,6 +27,14 @@ Students will be able to:
 
 Students should already understand the CIA triad, risk, threats, vulnerabilities, controls, reconnaissance, basic networking, Windows and Linux systems, cloud fundamentals, and network segmentation.
 
+## Enterprise Relevance
+
+Asset discovery is a foundation for security operations because every major security process depends on accurate scope. SOC monitoring depends on knowing which systems should generate logs. Vulnerability management depends on knowing which assets must be scanned, patched, or excepted. Incident response depends on knowing whether an alert involves a business-critical server, a temporary test machine, a cloud workload, or an unmanaged device.
+
+Asset discovery also supports systems administration, compliance, procurement, cloud governance, identity governance, backup planning, and attack-surface reduction. A professional inventory should connect technical facts to business ownership: what the asset is, who owns it, what data it handles, what services it exposes, what controls protect it, and what risk exists if it fails or is compromised.
+
+In real enterprises, asset discovery must include endpoints, servers, network devices, user accounts, service accounts, SaaS platforms, cloud resources, databases, certificates, domains, APIs, backups, and third-party integrations. A small business may need a simple spreadsheet and endpoint list. A financial institution may need CMDB integration, cloud inventory, certificate ownership, vulnerability scan coverage, and audit evidence. A healthcare organization may need extra care for fragile clinical systems that cannot be scanned aggressively. A government agency may require ownership, classification, authorization, and lifecycle records for every sensitive asset.
+
 ## 1. Asset Discovery as a Cybersecurity Foundation
 
 An asset is anything valuable that an organization must protect, manage, monitor, or account for. In cybersecurity, assets are not limited to physical computers. Assets include servers, laptops, mobile devices, firewalls, cloud workloads, user accounts, service accounts, databases, applications, websites, APIs, certificates, backups, and business data.
@@ -423,7 +431,7 @@ Include at least ten assets. For each asset, record the type, owner, location, b
 
 ## 24. Assessment Questions
 
-### Multiple Choice Questions
+### Multiple Choice
 
 1. What is an asset in cybersecurity?
    A. Anything valuable that must be protected or managed
@@ -491,7 +499,7 @@ Include at least ten assets. For each asset, record the type, owner, location, b
 
 2. A hospital needs to identify medical devices on its network, but some devices may fail if scanned aggressively. Explain which discovery methods should be prioritized and how the security team can balance visibility with patient safety.
 
-### Theory Questions
+### Short Answer
 
 1. Explain asset discovery in your own words and describe why it is important for cybersecurity operations.
 2. Explain the difference between asset discovery, asset inventory, and asset management.

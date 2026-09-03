@@ -693,6 +693,36 @@ Students may submit a written report or a table-based assessment. The report sho
    C. Internet-facing services, user accounts, endpoints, and cloud resources
    D. Only systems with confirmed vulnerabilities
 
+6. Which statement best describes risk?
+   A. A tool used only by attackers
+   B. The possibility that a threat exploits a vulnerability and causes harm
+   C. A guaranteed security incident
+   D. A list of employee names
+
+7. Which control category is implemented mainly through hardware, software, or automation?
+   A. Technical
+   B. Physical
+   C. Managerial
+   D. Operational
+
+8. Which control function tells people what behavior is required?
+   A. Detective
+   B. Corrective
+   C. Directive
+   D. Compensating
+
+9. Which example best represents integrity?
+   A. A server is reachable during business hours
+   B. Payroll records are accurate and cannot be changed without authorization
+   C. A password is hidden from other users
+   D. A camera records the server room
+
+10. Which is the best example of defense in depth?
+    A. Using only one firewall
+    B. Combining MFA, least privilege, endpoint protection, backups, monitoring, and incident response
+    C. Removing all user accounts
+    D. Ignoring low-risk systems
+
 ### Short Answer
 
 1. Explain the difference between a threat and a vulnerability.

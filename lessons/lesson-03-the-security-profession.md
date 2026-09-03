@@ -740,6 +740,36 @@ Create a one-page career plan that includes:
    C. Deleting uncertain details from memory
    D. Avoiding timestamps
 
+6. Which role is most likely to manage firewall rules, endpoint protection policies, and security tool configuration?
+   A. Security Administrator
+   B. Marketing Assistant
+   C. Payroll Clerk
+   D. Receptionist
+
+7. Which role commonly manages operating systems, services, patches, accounts, and backups?
+   A. Systems Administrator
+   B. Customer Service Agent
+   C. Graphic Designer
+   D. Sales Representative
+
+8. Which certification is generally associated with hands-on penetration testing skill?
+   A. OSCP
+   B. Basic typing certificate
+   C. Office attendance certificate
+   D. Driver's license
+
+9. Why is continuous learning required in cybersecurity?
+   A. Threats, tools, platforms, and best practices change over time
+   B. Security knowledge never changes
+   C. Certifications permanently replace experience
+   D. Logs always explain themselves
+
+10. Which portfolio item best demonstrates practical beginner skill?
+    A. A copied screenshot with no explanation
+    B. A documented lab showing scope, steps, evidence, findings, and lessons learned
+    C. A private employer report uploaded publicly
+    D. A list of tools without examples
+
 ### Short Answer
 
 1. Explain the difference between a SOC analyst and an incident responder.

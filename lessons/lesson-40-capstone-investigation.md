@@ -908,16 +908,31 @@ Automatic major deductions apply for fabricating evidence, exposing supplied sen
    - C. ATT&CK cannot describe enterprise behavior.
    - D. Only malware names can be mapped.
 
+9. Which evidence best supports a timeline conclusion?
+   - A. Multiple related events normalized to one time reference with source context preserved
+   - B. A single unsupported guess
+   - C. A deleted alert title
+   - D. A screenshot with no timestamp
+
+10. Which action best protects evidence integrity?
+    - A. Track source, collection time, handler, hash where applicable, and storage location
+    - B. Edit raw logs to make them easier to read
+    - C. Delete inconvenient events
+    - D. Share all evidence publicly
+
 ### Short Answer
 
-9. List six additional pivots needed to determine scope.
-10. Explain why the endpoint should not be immediately reimaged before evidence decisions.
-11. Give four reasons the incident is High severity and three facts that would increase severity.
-12. Distinguish an IOC from an IOA using case examples.
+1. List six additional pivots needed to determine scope.
+2. Explain why the endpoint should not be immediately reimaged before evidence decisions.
+3. Give four reasons the incident is High severity and three facts that would increase severity.
+4. Distinguish an IOC from an IOA using case examples.
+5. Explain how an analyst should write a conclusion when evidence confirms malicious execution but does not confirm data exfiltration.
 
 ### Scenario
 
 13. Ten minutes after containment, a second finance endpoint queries the same domain but has no endpoint process telemetry because its EDR sensor stopped reporting two days earlier. Explain the immediate actions, evidence priorities, severity implications, and coverage gap.
+
+14. The finance manager reports that a supplier called to ask why payment was sent to a new bank account. No external transfer of the workbook is confirmed, but mailbox-rule creation and finance-file access are confirmed. Explain how the investigation should handle payment verification, evidence limits, containment, stakeholder communication, and severity reassessment.
 
 ## 40. Instructor Review Guide
 
@@ -972,7 +987,7 @@ The probable initial execution path is a fraudulent supplier-themed document ope
 | SNI | TLS Server Name Indication used to identify the requested hostname during handshake |
 | Triage | Initial validation and prioritization of an alert or incident |
 
-## 42. Final Course Competency Checklist
+## 42. Lesson Review Checklist and Final Course Competency Checklist
 
 Students completing the capstone should be able to:
 

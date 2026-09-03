@@ -23,7 +23,7 @@ Do not distribute this file before the assessment closes. Accept defensible scen
 2. Hospital medical-device discovery:
    Strong answers should prioritize passive discovery, DHCP/DNS records, switch/router records, vendor documentation, maintenance windows, clinical engineering input, and carefully approved authenticated or platform-based sources. Students should explain that aggressive scanning may disrupt patient-care equipment. A good response balances safety and visibility by using controlled scope, approvals, test windows, vendor guidance, and evidence documentation.
 
-## Theory Question Guidance
+## Short Answer Guidance
 
 1. Asset discovery is the process of identifying systems, applications, accounts, services, cloud resources, data stores, and other technology assets in an environment. It matters because patching, monitoring, incident response, vulnerability management, compliance, and access control depend on accurate scope.
 

@@ -698,16 +698,31 @@ Before submission, perform a secret scan and manual review for personal, employe
    - C. Encrypt GitHub
    - D. Delete remote history automatically
 
+9. Which report quality is most important for a junior analyst?
+   - A. Clear evidence-based writing that separates facts, analysis, and uncertainty
+   - B. Long technical language that hides uncertainty
+   - C. Immediate attribution without proof
+   - D. Screenshots with no explanation
+
+10. What should students remove before publishing a portfolio artifact?
+    - A. Sensitive names, real IPs, secrets, customer data, and employer identifiers
+    - B. All explanations of their method
+    - C. All dates and timestamps from synthetic labs
+    - D. All references to limitations
+
 ### Short Answer
 
-9. List five elements of a good executive summary.
-10. Explain why deleting a secret from the latest Git commit is insufficient.
-11. Describe three ways to sanitize a security portfolio artifact.
-12. Explain how a technical recommendation becomes actionable.
+1. List five elements of a good executive summary.
+2. Explain why deleting a secret from the latest Git commit is insufficient.
+3. Describe three ways to sanitize a security portfolio artifact.
+4. Explain how a technical recommendation becomes actionable.
+5. Explain how a junior analyst should communicate uncertainty without weakening the value of the report.
 
 ### Scenario
 
 13. A junior analyst must brief executives about a possible ransomware event. Endpoint encryption activity is confirmed on eight systems, but exfiltration is unconfirmed. Write the structure and core content of the briefing without overstating the evidence.
+
+14. A student wants to publish a portfolio investigation based on a lab that resembles a real workplace incident. Explain how the student should sanitize the artifact, document evidence, protect sensitive details, and still demonstrate practical skill.
 
 ## 29. Glossary
 

@@ -600,16 +600,31 @@ State all assumptions and identify decisions requiring legal, privacy, audit, or
    - C. Non-repudiation
    - D. Deterrence
 
+9. Which CIS Controls Implementation Group is intended as the basic cyber hygiene starting point for smaller or less mature organizations?
+   - A. IG1
+   - B. IG2
+   - C. IG3 only
+   - D. PCI Level 1
+
+10. Which statement best describes audit evidence?
+    - A. Information used to show whether a control or requirement is satisfied
+    - B. A marketing brochure from a vendor
+    - C. A guess that a control probably works
+    - D. A password list used by administrators
+
 ### Short Answer
 
-9. Distinguish control design effectiveness from operating effectiveness.
-10. Explain why a cloud provider's certification does not make a customer automatically compliant.
-11. List six fields required in a defensible exception record.
-12. Describe how a SOC analyst contributes to compliance without becoming the legal decision-maker.
+1. Distinguish control design effectiveness from operating effectiveness.
+2. Explain why a cloud provider's certification does not make a customer automatically compliant.
+3. List six fields required in a defensible exception record.
+4. Describe how a SOC analyst contributes to compliance without becoming the legal decision-maker.
+5. Explain why compliance scope must include people, processes, systems, data, suppliers, and evidence.
 
 ### Scenario
 
 13. An auditor finds that a privileged-access review policy exists, but contractors were excluded from the reviewed population and two departed administrators remain enabled. Analyze the design failure, operating failure, immediate response, evidence required, and longer-term corrective action.
+
+14. A regional clinic stores patient billing data in a SaaS platform and accepts card payments through a third-party payment provider. Management believes the provider's certifications mean the clinic has no remaining security responsibilities. Explain the scoping mistake, shared responsibility issues, evidence needed, and practical next steps.
 
 ## Glossary
 

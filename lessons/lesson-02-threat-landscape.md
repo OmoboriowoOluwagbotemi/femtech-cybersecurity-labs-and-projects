@@ -632,6 +632,36 @@ The report must use professional language and avoid unsupported claims. Students
    C. Base conclusions on observable evidence
    D. Delete all affected files before investigation
 
+6. Which malware type records user keystrokes?
+   A. Keylogger
+   B. Wiper
+   C. Logic bomb
+   D. Adware only
+
+7. Which actor is most likely to abuse legitimate access from inside an organization?
+   A. Insider threat
+   B. Script kiddie
+   C. Natural disaster
+   D. Search engine crawler
+
+8. In the Cyber Kill Chain, which stage commonly involves delivering a malicious attachment or link?
+   A. Delivery
+   B. Recovery
+   C. Retirement
+   D. Procurement
+
+9. In MITRE ATT&CK, what does a technique describe?
+   A. The method an adversary uses to achieve a tactical goal
+   B. The organization's annual budget
+   C. The color of a dashboard
+   D. The number of employees in a department
+
+10. Which control is most useful for reducing ransomware impact?
+    A. Tested backups and recovery procedures
+    B. Publicly posting administrator passwords
+    C. Disabling all logs
+    D. Ignoring endpoint alerts
+
 ### Short Answer
 
 1. Explain the difference between malware type and threat actor.

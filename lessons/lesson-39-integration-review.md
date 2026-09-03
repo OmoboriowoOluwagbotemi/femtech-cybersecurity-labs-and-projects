@@ -694,16 +694,31 @@ For each finding, state evidence, confidence, impact, owner, deadline, and valid
    - C. Consider connected attack paths, business impact, exposure, controls, and recovery.
    - D. Address findings alphabetically.
 
+9. Which item is most important when reviewing a business-critical data flow?
+   - A. Source, destination, identity, protocol, data sensitivity, controls, and logging
+   - B. Only the color of the network diagram
+   - C. Only the vendor name
+   - D. Whether the diagram fits on one page
+
+10. Which statement best describes a compensating control in an architecture review?
+    - A. An alternative safeguard used when the preferred control is not currently feasible
+    - B. A control that removes the need for risk acceptance
+    - C. A control that is always stronger than remediation
+    - D. A control that applies only to physical buildings
+
 ### Short Answer
 
-9. List six questions to ask about a data flow crossing a trust boundary.
-10. Explain why effective Group Policy must be checked rather than only intended configuration.
-11. Distinguish a coverage gap from an operating gap.
-12. Explain how Zero Trust can be applied to a legacy clinical device.
+1. List six questions to ask about a data flow crossing a trust boundary.
+2. Explain why effective Group Policy must be checked rather than only intended configuration.
+3. Distinguish a coverage gap from an operating gap.
+4. Explain how Zero Trust can be applied to a legacy clinical device.
+5. Explain why backup and recovery architecture must be reviewed separately from production access controls.
 
 ### Scenario
 
 13. A hybrid enterprise uses MFA for remote access, but administrators connect from unmanaged personal devices to a broad VPN, use standing Domain Admin accounts, and manage both production and backup systems. Identify the integrated risks and propose a phased architecture improvement.
+
+14. A financial institution has strong endpoint protection and SIEM monitoring, but cloud administrator activity is not logged centrally and database backups depend on the same identity provider as production. Identify the visibility, recovery, and shared-failure risks, then recommend practical improvements.
 
 ## Glossary
 
