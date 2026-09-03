@@ -32,36 +32,37 @@ A student has not mastered a tool simply because they opened it or followed one 
 
 | Tool | First exposure | Skill-building labs | Professional outcome |
 |---|---|---|---|
-| Kali Linux | Tool Lab 01 | Tool Labs 05-06 and Advanced Lab 07 | Introduction to Linux plus analyst workstation skills for Bash basics, discovery, validation, packet review, evidence collection, and controlled security testing |
+| Kali Linux | Tool Lab 01 | Tool Labs 05-06 and Advanced Lab 07 | Introduction to VirtualBox, Kali Linux, terminal use, Bash basics, evidence handling, and later analyst workstation skills |
 | Ubuntu Server | Tool Lab 02 | Tool Labs 05-06 and Advanced Lab 07 | Linux administration, hardening, service validation, logging, remediation, and incident evidence |
 | pfSense | Tool Lab 03 | Tool Labs 05-06 and Advanced Lab 07 | Segmentation, firewall policy, DHCP, NAT, routing validation, and log-based troubleshooting |
 | Windows Server | Tool Lab 04 | Tool Lab 06 | Server roles, Event Viewer, Active Directory basics, Group Policy, access control, and Windows security logging |
 | Greenbone/OpenVAS | Tool Lab 05 | Advanced Lab 07 | Vulnerability scanning, finding validation, risk ranking, remediation tracking, and rescan proof |
 | Wazuh | Tool Lab 06 | Tool Lab 04 where Windows event integration is used | Endpoint telemetry, SIEM investigation, alert validation, detection tuning, and incident response evidence |
 
-## Kali Linux Skills
+## VirtualBox and Kali Linux Skills
 
-Kali is the analyst workstation. In this course it is used for authorised discovery, validation, packet work, web testing, vulnerability assessment support, and forensic handling. Students must treat Kali as a professional workbench, not as an attack toy.
+Kali is first introduced as a Linux virtual machine running in VirtualBox. Students must become comfortable starting Kali, using the desktop, opening the terminal, navigating folders, creating files, saving evidence, and writing simple Bash before using Kali for security testing in later labs.
 
 Required student skills:
 
-- Confirm adapter mode and prove Kali is not bridged to the physical network.
+- Start Kali from VirtualBox and shut it down safely.
 - Navigate basic Linux directories, users, permissions, processes, services, packages, and logs.
 - Use Bash variables, command substitution, loops, simple conditionals, functions, scripts, and output redirection for repeatable evidence collection.
-- Record source IP, target IP, gateway, DNS server, route, and time before testing.
-- Use `ip`, `ss`, `dig`, `nc`, `curl`, `openssl`, `nmap`, `tcpdump`, `tshark`, and browser tools where relevant.
-- Save Nmap output in normal, grepable, and XML formats when asset or vulnerability evidence is required.
-- Capture packets only for authorised targets and hash the PCAP.
-- Keep case folders organised by date, lab, source, target, and evidence type.
-- Explain the difference between discovery, service validation, vulnerability scanning, exploitation, and denial of service.
+- Create and read files using `echo`, `cat`, `ls`, `cd`, `pwd`, `mkdir`, and `nano`.
+- Understand `>`, `>>`, `|`, `tee`, `chmod`, and `sha256sum`.
+- Keep evidence folders organised by date, lab, and evidence type.
+- Explain why administrator commands require care.
 
-Minimum Kali evidence:
+Minimum Tool Lab 01 evidence:
 
-- `ip -br address` and `ip route` output.
-- Scope statement showing authorised target range.
-- Nmap or validation output saved to file.
-- At least one negative test showing a blocked or out-of-scope path is not used.
-- Analyst notes explaining what the result proves and what it does not prove.
+- Kali username, hostname, date, and current folder evidence.
+- Practice file created and appended.
+- Evidence file created with `tee`.
+- Bash variables evidence.
+- Simple loop evidence.
+- First Bash script and script output.
+- Linux distribution, kernel, user ID, and group evidence.
+- `hashes.sha256`.
 
 ## Ubuntu Server Skills
 

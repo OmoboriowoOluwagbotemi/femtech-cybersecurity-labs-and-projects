@@ -1,145 +1,144 @@
-# Tool Lab 01 - Introduction to Linux, Kali Workstation, and Bash Basics
+# Tool Lab 01 - Introduction to VirtualBox, Kali Linux, and Bash
 
 ## Purpose
 
-Kali Linux is the student analyst workstation for discovery, validation, packet capture, web testing, OpenVAS operation, Bash automation, and evidence handling. This lab introduces Linux fundamentals, then teaches students to use Kali professionally inside an authorised private range while building the Bash skills needed for real analyst work.
+This first lab is intentionally basic. Students learn how to open Kali Linux in VirtualBox, understand the Linux desktop, use the terminal, navigate files and folders, and write simple Bash commands.
+
+Only two tools are used in this lab:
+
+- VirtualBox
+- Kali Linux
+
+Students should not use pfSense, Ubuntu Server, Windows Server, Nmap scanning, OpenVAS, Wazuh, packet capture, or any target machine in this lab. The goal is confidence with the lab computer before security testing begins.
 
 ## Scenario
 
-FEMTECH has assigned you a Kali workstation named `kali01`. Before you are allowed to scan or test anything, you must prove that Kali is isolated, correctly addressed, able to reach only approved lab targets, and ready to preserve evidence.
+You are a new cybersecurity student at FEMTECH. Before you can work with firewalls, servers, vulnerability scanners, or SIEM tools, you must first prove that you can safely use a Kali Linux virtual machine and operate basic Linux commands.
 
-## Systems
+## Systems Used
 
-| System | Role | Example address |
-|---|---|---|
-| Kali Linux | Analyst workstation | `10.10.10.60` |
-| pfSense | Gateway/firewall | `10.10.10.1` |
-| Ubuntu Server | Approved test target | `10.10.20.20` |
-
-## Safety Rules
-
-- Test only the approved private lab ranges.
-- Kali must not use a bridged adapter during security testing.
-- Do not scan the Internet, the physical LAN, school systems, or another student's VM.
-- Record source IP, target IP, purpose, date, start time, and stop time before each test.
-- Save command output; do not rely only on screenshots.
-
-## Introduction to Linux Skills Covered
-
-Students will practise:
-
-- Understanding Linux as an operating system used for servers, security tools, cloud systems, and analyst workstations.
-- Identifying the current user, hostname, kernel, distribution, and system time.
-- Navigating the filesystem with `pwd`, `ls`, `cd`, and common directories such as `/home`, `/etc`, `/var/log`, `/tmp`, and `/usr/bin`.
-- Reading files safely with `cat`, `less`, `head`, and `tail`.
-- Understanding root privilege and `sudo`.
-- Checking users and groups with `whoami`, `id`, and `groups`.
-- Viewing file ownership and permissions with `ls -l` and `stat`.
-- Checking processes with `ps` and service status with `systemctl`.
-- Checking installed packages with `dpkg` and APT.
-- Reading system logs from `/var/log` where permitted.
-- Checking IP addresses, routes, DNS, neighbours, and listening ports.
-
-Linux matters in cybersecurity because many enterprise systems, security tools, firewalls, SIEM components, web servers, cloud workloads, containers, and forensic workstations are Linux-based. A student who cannot navigate Linux will struggle with SOC analysis, vulnerability management, incident response, and system hardening.
+| System | Purpose |
+|---|---|
+| VirtualBox | Runs Kali as a virtual machine |
+| Kali Linux | Student Linux workstation |
 
 ## Beginner Terms
 
-| Term | Simple meaning | Example |
-|---|---|---|
-| Operating system | Software that manages the computer and lets users run programs | Kali Linux, Ubuntu, Windows |
-| Terminal | Text window where commands are typed | The black command window in Kali |
-| Shell | Program that reads commands and runs them | Bash |
-| Command | Instruction typed into the terminal | `pwd` |
-| Directory | A folder in Linux | `/home/kali` |
-| File | A stored item such as a note, log, script, or configuration | `notes.txt` |
-| Path | The location of a file or folder | `/var/log/auth.log` |
-| User | Account currently using the system | `kali` |
-| Root | Most powerful Linux administrator account | Similar to full administrator |
-| `sudo` | Runs one approved command with administrator privilege | `sudo apt update` |
-| Process | A running program | Browser, SSH service, terminal |
-| Service | A background program managed by Linux | SSH, web server |
-| Package | Installed software managed by the system | `nmap`, `curl` |
-| Log | Record of system or application activity | Authentication log |
-| Permission | Rule controlling who can read, write, or run a file | `rwx` |
+| Term | Simple meaning |
+|---|---|
+| Host computer | The physical computer you are using |
+| Virtual machine | A computer running inside your physical computer |
+| VirtualBox | The program used to run virtual machines |
+| Kali Linux | A Linux operating system used by cybersecurity learners and professionals |
+| Desktop | The graphical screen with menus, icons, and windows |
+| Terminal | A window where commands are typed |
+| Shell | The program that reads terminal commands |
+| Bash | The common Linux shell used in this lab |
+| Command | An instruction typed into the terminal |
+| File | A saved item such as a note, script, or log |
+| Folder or directory | A place where files are stored |
+| Path | The location of a file or folder |
+| User | The account currently using the system |
+| Root | The most powerful administrator account in Linux |
+| `sudo` | Runs an approved command with administrator power |
 
-## How to Read a Linux Command
+## Safety Rules
 
-Linux commands usually follow this pattern:
+- Use only the Kali virtual machine in this lab.
+- Do not scan any IP address.
+- Do not attack any website, network, computer, or classmate.
+- Do not change VirtualBox network settings unless the instructor asks.
+- Do not delete system files.
+- Do not run commands you do not understand.
+- If a command asks for a password, pause and ask why administrator permission is needed.
+
+## Step 1 - Open Kali in VirtualBox
+
+1. Open VirtualBox.
+2. Select the Kali Linux virtual machine.
+3. Click **Start**.
+4. Wait for Kali to boot.
+5. Log in with the classroom credentials provided by the instructor.
+
+Record in your notebook:
 
 ```text
-command option target
+Kali VM name:
+Login username:
+Date:
+Start time:
 ```
 
-Example:
+## Step 2 - Understand the Kali Desktop
 
-```bash
-ls -l /home
+Find these items on the Kali desktop:
+
+| Item | What it is used for |
+|---|---|
+| Applications menu | Opens installed programs |
+| Terminal icon | Opens the command line |
+| File manager | Opens folders and files visually |
+| Web browser | Opens web pages when allowed |
+| Power/logout menu | Shuts down or logs out safely |
+
+Do not worry if your Kali screen looks slightly different. Linux desktops can use different themes.
+
+## Step 3 - Open the Terminal
+
+Open the terminal.
+
+You may see something similar to:
+
+```text
+kali@kali:~$
 ```
+
+Simple meaning:
 
 | Part | Meaning |
 |---|---|
-| `ls` | The command; it lists files and folders |
-| `-l` | An option; it asks for long detailed output |
-| `/home` | The target; it tells `ls` what location to list |
+| `kali` before `@` | Current username |
+| `kali` after `@` | Computer name |
+| `~` | Your home folder |
+| `$` | Normal user prompt |
 
-Do not type the word `bash` from the code-block label. The label only tells you the command is meant for a Linux Bash terminal.
+If the prompt ends with `#`, that usually means root or administrator mode. Beginners should avoid working as root unless instructed.
 
-## Bash Skills Covered
+## Step 4 - Run Your First Commands
 
-Students will practise:
-
-- Variables for evidence paths, source IPs, targets, and ports.
-- Command substitution using `$(...)`.
-- Quoting paths and variables correctly.
-- Output redirection with `>`, `>>`, and `2>/dev/null`.
-- `tee` for viewing and saving evidence at the same time.
-- Simple `for` loops for repeated checks.
-- `if` statements for basic pass/fail decisions.
-- Functions for reusable validation commands.
-- Exit codes using `$?`.
-- Basic text parsing with `grep`, `awk`, and `cut`.
-
-These Bash skills matter because analysts often need to collect repeatable evidence quickly during vulnerability assessments, SOC triage, server checks, and incident response.
-
-## Step 1 - Open Terminal and Learn the Prompt
-
-Open the Kali terminal.
-
-Run one command at a time:
+Type one command at a time.
 
 ```bash
 pwd
 ```
 
-Meaning: print working directory. It shows the folder you are currently inside.
+Meaning: shows your current folder.
 
 ```bash
 whoami
 ```
 
-Meaning: show the current username.
+Meaning: shows your current username.
 
 ```bash
 hostname
 ```
 
-Meaning: show the computer name.
+Meaning: shows the computer name.
 
 ```bash
 date
 ```
 
-Meaning: show the current date and time.
-
-Now clear the screen:
+Meaning: shows the current date and time.
 
 ```bash
 clear
 ```
 
-This does not delete files. It only clears the terminal view.
+Meaning: clears the terminal screen. It does not delete files.
 
-## Step 2 - Move Around the Linux Filesystem
+## Step 5 - Learn Files and Folders
 
 Run:
 
@@ -147,6 +146,17 @@ Run:
 pwd
 ls
 ls -l
+```
+
+Meaning:
+
+- `pwd` shows where you are.
+- `ls` lists files and folders.
+- `ls -l` lists files and folders with details.
+
+Move to `/home` and back:
+
+```bash
 cd /home
 pwd
 ls
@@ -154,15 +164,15 @@ cd ~
 pwd
 ```
 
-What happened:
+Meaning:
 
-- `pwd` showed your current location.
-- `ls` listed files and folders.
-- `ls -l` showed details such as owner, group, size, and permissions.
-- `cd /home` moved into `/home`.
-- `cd ~` returned to your own home folder.
+- `cd` changes directory.
+- `/home` stores user folders.
+- `~` means your own home folder.
 
-Create a practice folder:
+## Step 6 - Create a Practice Folder and File
+
+Create a folder:
 
 ```bash
 mkdir linux-practice
@@ -170,419 +180,340 @@ cd linux-practice
 pwd
 ```
 
-Create and read a simple file:
+Create a file:
 
 ```bash
 echo "This is my first Linux note" > note.txt
 cat note.txt
-ls -l note.txt
 ```
 
-Important:
+Meaning:
 
-- `>` writes output into a file.
-- If the file already exists, `>` replaces its content.
-- `cat` displays the content of a small file.
+- `echo` prints text.
+- `>` saves output into a file.
+- `cat` displays a small file.
 
-Append a second line:
+Add another line:
 
 ```bash
-echo "Linux is important for cybersecurity" >> note.txt
+echo "I am learning Kali and Bash" >> note.txt
 cat note.txt
 ```
 
-Important:
+Meaning:
 
-- `>>` adds to the end of a file.
-- `>>` is safer than `>` when you do not want to overwrite existing notes.
+- `>>` adds text to the end of a file.
+- `>` replaces file content.
+- `>>` appends file content.
 
-## Step 3 - Understand Files, Permissions, and Help
+## Step 7 - Understand Basic File Permissions
 
 Run:
 
 ```bash
 ls -l note.txt
-stat note.txt
 ```
 
-In `ls -l`, output may look like this:
+You may see something like:
 
 ```text
--rw-r--r-- 1 kali kali 67 Sep 03 10:00 note.txt
+-rw-r--r-- 1 kali kali 60 Sep 03 10:00 note.txt
 ```
 
-Simple interpretation:
+Simple meaning:
 
 | Part | Meaning |
 |---|---|
-| `-` | This is a regular file |
+| `-` | This is a normal file |
 | `rw-` | Owner can read and write |
 | `r--` | Group can read |
 | `r--` | Others can read |
 | `kali kali` | Owner and group |
 | `note.txt` | File name |
 
-Learn how to get help:
+Run:
+
+```bash
+stat note.txt
+```
+
+`stat` gives more details about the file, including size, owner, permissions, and timestamps.
+
+## Step 8 - Learn How to Get Help
+
+Use the manual:
 
 ```bash
 man ls
 ```
 
-Press `q` to quit the manual page.
+Press `q` to quit.
 
-Try short help:
+Use short help:
 
 ```bash
 ls --help | head
 ```
 
-## Step 4 - Create the Evidence Folder
+Meaning:
+
+- `man` opens the manual page.
+- `--help` prints command help.
+- `head` shows only the first lines.
+
+## Step 9 - Create an Evidence Folder
+
+Cybersecurity work must be documented. Create an evidence folder:
 
 ```bash
-mkdir -p ~/femtech-evidence/kali-tool-lab
-mkdir -p ~/femtech-evidence/kali-tool-lab/01-baseline
-mkdir -p ~/femtech-evidence/kali-tool-lab/02-validation
-mkdir -p ~/femtech-evidence/kali-tool-lab/03-scans
-mkdir -p ~/femtech-evidence/kali-tool-lab/04-pcap
-mkdir -p ~/femtech-evidence/kali-tool-lab/05-report
-mkdir -p ~/femtech-evidence/kali-tool-lab/06-scripts
-date -u +'%Y-%m-%dT%H:%M:%SZ' | tee ~/femtech-evidence/kali-tool-lab/session-start-utc.txt
-script -af ~/femtech-evidence/kali-tool-lab/command-log.txt
+mkdir -p ~/femtech-evidence/kali-intro-lab
+cd ~/femtech-evidence/kali-intro-lab
+pwd
 ```
 
-Exit the transcript at the end with `exit`.
-
-Now create variables so later commands are shorter:
+Save basic system evidence:
 
 ```bash
-LAB_NAME="kali-tool-lab"
-EVIDENCE="$HOME/femtech-evidence/$LAB_NAME"
-TARGET_IP="10.10.20.20"
-TARGET_NET="10.10.20.0/24"
-GATEWAY_IP="10.10.10.1"
-PORTS="22,80,443"
+whoami > current-user.txt
+hostname > hostname.txt
+date > date.txt
+pwd > current-folder.txt
 ```
 
-Key Bash points:
-
-- `LAB_NAME="kali-tool-lab"` creates a variable.
-- `$HOME` expands to the current user's home directory.
-- `"$EVIDENCE"` is quoted so paths with spaces do not break commands.
-- `tee` shows output on screen and saves it to a file.
-- A variable stores a value so you do not type the same long path many times.
-- If you close the terminal, you must create the variables again.
-
-## Step 5 - Practise Essential Linux and Bash Checks
-
-Run these Linux orientation commands:
+Check the files:
 
 ```bash
-pwd | tee "$EVIDENCE/01-baseline/current-directory.txt"
-whoami | tee "$EVIDENCE/01-baseline/current-user.txt"
-id | tee "$EVIDENCE/01-baseline/current-user-id.txt"
-groups | tee "$EVIDENCE/01-baseline/current-user-groups.txt"
-uname -a | tee "$EVIDENCE/01-baseline/kernel-info.txt"
-cat /etc/os-release | tee "$EVIDENCE/01-baseline/os-release.txt"
-date -u +'%Y-%m-%dT%H:%M:%SZ' | tee "$EVIDENCE/01-baseline/current-time.txt"
+ls -l
+cat current-user.txt
+cat hostname.txt
+cat date.txt
+cat current-folder.txt
 ```
 
-Review important directories:
+## Step 10 - Use `tee` to See and Save Output
+
+Run:
 
 ```bash
-ls -ld / /home /etc /var /var/log /tmp /usr /usr/bin | tee "$EVIDENCE/01-baseline/linux-directory-summary.txt"
+echo "FEMTECH Kali introduction lab" | tee lab-title.txt
 ```
 
-Interpret the directories:
+Meaning:
 
-| Directory | Practical meaning |
-|---|---|
-| `/` | Root of the Linux filesystem |
-| `/home` | User home directories |
-| `/etc` | System and application configuration files |
-| `/var/log` | Many system and application logs |
-| `/tmp` | Temporary files; often cleared and not trusted for permanent evidence |
-| `/usr/bin` | Many user commands and installed tools |
+- `echo` prints text.
+- `|` sends output into the next command.
+- `tee` displays the output and saves it into a file.
 
-Check permissions:
+Run:
 
 ```bash
-ls -l "$EVIDENCE" | tee "$EVIDENCE/01-baseline/evidence-folder-permissions.txt"
-stat "$EVIDENCE" | tee "$EVIDENCE/01-baseline/evidence-folder-stat.txt"
+date | tee lab-time.txt
 ```
 
-Check processes, services, and packages:
+## Step 11 - Start Simple Bash Variables
+
+A variable stores a value.
+
+Run:
 
 ```bash
-ps aux --sort=-%mem | head -n 10 | tee "$EVIDENCE/01-baseline/top-processes.txt"
-systemctl --type=service --state=running --no-pager | head -n 25 | tee "$EVIDENCE/01-baseline/running-services.txt"
-dpkg -l nmap tcpdump curl openssl 2>/dev/null | tee "$EVIDENCE/01-baseline/security-tool-packages.txt"
+STUDENT_NAME="Student One"
+LAB_NAME="Kali Introduction"
+echo "$STUDENT_NAME"
+echo "$LAB_NAME"
 ```
 
-Important Linux points:
-
-- `root` is the most privileged account on Linux.
-- `sudo` temporarily runs an approved command with administrative privilege.
-- Configuration files are commonly stored under `/etc`.
-- Logs are commonly stored under `/var/log`.
-- Linux permissions control read, write, and execute access for owner, group, and others.
-- Processes are running programs; services are background processes managed by the system.
-
-Now practise Bash:
+Now save them:
 
 ```bash
-echo "Evidence folder: $EVIDENCE" | tee "$EVIDENCE/01-baseline/bash-variable-test.txt"
-NOW_UTC="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-echo "Current UTC time is $NOW_UTC" | tee "$EVIDENCE/01-baseline/bash-command-substitution.txt"
+echo "Student: $STUDENT_NAME" | tee student-name.txt
+echo "Lab: $LAB_NAME" | tee lab-name.txt
 ```
 
-Check exit codes:
+Important:
+
+- No spaces around `=` when creating a variable.
+- Use quotes around text values.
+- Use `$VARIABLE_NAME` to read the variable.
+
+## Step 12 - Use Command Substitution
+
+Command substitution puts command output inside a variable.
+
+Run:
 
 ```bash
-ping -c 1 "$GATEWAY_IP" >/dev/null 2>&1
-echo "Gateway ping exit code: $?" | tee "$EVIDENCE/01-baseline/gateway-exit-code.txt"
+TODAY="$(date)"
+echo "$TODAY"
+echo "Lab completed at: $TODAY" | tee completed-time.txt
 ```
 
-Use an `if` statement:
+Meaning:
+
+- `$(date)` runs the `date` command.
+- The result is saved inside `TODAY`.
+
+## Step 13 - Use a Simple Loop
+
+A loop repeats commands.
+
+Run:
 
 ```bash
-if ping -c 1 "$GATEWAY_IP" >/dev/null 2>&1; then
-  echo "PASS: Gateway is reachable" | tee "$EVIDENCE/01-baseline/gateway-check.txt"
-else
-  echo "FAIL: Gateway is not reachable" | tee "$EVIDENCE/01-baseline/gateway-check.txt"
-fi
-```
-
-Use a loop:
-
-```bash
-for CHECK_PORT in 22 80 443; do
-  nc -vz -w 3 "$TARGET_IP" "$CHECK_PORT" 2>&1 | tee -a "$EVIDENCE/02-validation/port-loop-check.txt"
+for ITEM in user hostname date; do
+  echo "Checking $ITEM"
 done
 ```
 
-Use simple parsing:
+Now save repeated output:
 
 ```bash
-ip -br address | awk '{print $1, $3}' | tee "$EVIDENCE/01-baseline/interface-address-summary.txt"
-ip route | grep default | tee "$EVIDENCE/01-baseline/default-route.txt"
+for FILE in current-user.txt hostname.txt date.txt; do
+  echo "----- $FILE -----" >> evidence-review.txt
+  cat "$FILE" >> evidence-review.txt
+done
+cat evidence-review.txt
 ```
 
-## Step 6 - Prove Kali Identity and Network Placement
+Meaning:
+
+- `for FILE in ...` repeats once for each file.
+- `>>` appends output.
+- `cat "$FILE"` reads the current file in the loop.
+
+## Step 14 - Create a Very Simple Bash Script
+
+Create a script:
 
 ```bash
-hostnamectl | tee "$EVIDENCE/01-baseline/hostname.txt"
-ip -br address | tee "$EVIDENCE/01-baseline/ip-address.txt"
-ip route | tee "$EVIDENCE/01-baseline/routes.txt"
-ip neigh show | tee "$EVIDENCE/01-baseline/neighbours.txt"
-resolvectl status 2>/dev/null | tee "$EVIDENCE/01-baseline/dns.txt"
+nano my-first-script.sh
 ```
 
-Write a short note explaining:
-
-- Kali's IP address.
-- Default gateway.
-- DNS server.
-- Approved target subnet.
-- Why a bridged adapter would be unsafe in this course.
-
-## Step 7 - Verify Authorised Scope
-
-Create `scope-record.md`:
-
-```bash
-nano "$EVIDENCE/scope-record.md"
-```
-
-Include:
-
-```text
-Student:
-Date:
-Source system:
-Source IP:
-Approved targets:
-Approved activity:
-Prohibited activity:
-Instructor approval:
-Start time UTC:
-Stop time UTC:
-```
-
-## Step 8 - Test Basic Connectivity
-
-```bash
-ping -c 3 "$GATEWAY_IP" | tee "$EVIDENCE/02-validation/ping-gateway.txt"
-ping -c 3 "$TARGET_IP" | tee "$EVIDENCE/02-validation/ping-ubuntu.txt"
-nc -vz -w 3 "$TARGET_IP" 22 2>&1 | tee "$EVIDENCE/02-validation/tcp-ssh.txt"
-```
-
-If ping fails but TCP succeeds, explain why ICMP filtering does not always mean the host is down.
-
-## Step 9 - Create a Reusable Bash Validation Script
-
-Create a simple script:
-
-```bash
-nano "$EVIDENCE/06-scripts/validate-target.sh"
-```
-
-Add:
+Type:
 
 ```bash
 #!/usr/bin/env bash
-set -u
-
-TARGET="${1:-}"
-
-if [ -z "$TARGET" ]; then
-  echo "Usage: $0 <target-ip>"
-  exit 1
-fi
-
-echo "Validation started at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-echo "Target: $TARGET"
-
-echo "[1] Ping test"
-ping -c 2 "$TARGET"
-
-echo "[2] TCP port checks"
-for PORT in 22 80 443; do
-  nc -vz -w 3 "$TARGET" "$PORT"
-done
-
-echo "[3] HTTP header check"
-curl -sSI --connect-timeout 5 "http://$TARGET/" || true
-
-echo "Validation finished at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+echo "FEMTECH Kali Linux Lab"
+echo "Current user: $(whoami)"
+echo "Computer name: $(hostname)"
+echo "Current folder: $(pwd)"
+echo "Current date: $(date)"
 ```
 
-Make it executable and run it:
+Save and exit:
+
+1. Press `Ctrl + O`.
+2. Press `Enter`.
+3. Press `Ctrl + X`.
+
+Make the script executable:
 
 ```bash
-chmod 750 "$EVIDENCE/06-scripts/validate-target.sh"
-"$EVIDENCE/06-scripts/validate-target.sh" "$TARGET_IP" 2>&1 \
-  | tee "$EVIDENCE/02-validation/bash-script-validation.txt"
+chmod 750 my-first-script.sh
 ```
 
-Important Bash points:
-
-- `#!/usr/bin/env bash` tells Linux to run the file with Bash.
-- `set -u` catches unset variables.
-- `$1` is the first argument passed to a script.
-- `${1:-}` prevents an unset argument error.
-- `if [ -z "$TARGET" ]` checks whether the target argument is empty.
-- `for PORT in 22 80 443` repeats a command for each port.
-- `|| true` allows the script to continue when HTTP is unavailable.
-
-## Step 10 - Run Safe Nmap Discovery
+Run it:
 
 ```bash
-cd "$EVIDENCE/03-scans"
-sudo nmap -sn -n --reason --max-retries 2 -oA discovery-servers "$TARGET_NET"
-sudo nmap -Pn -n -sT -p "$PORTS" --reason --version-light -oA service-check-ubuntu "$TARGET_IP"
+./my-first-script.sh | tee script-output.txt
 ```
 
-Explain these options:
+Meaning:
 
-- `-sn` performs host discovery without a full port scan.
-- `-n` prevents DNS lookups that could leak outside the lab.
-- `--reason` records why Nmap made a decision.
-- `-oA` saves normal, grepable, and XML output.
-- `--version-light` limits service detection intensity.
+- `nano` edits a file.
+- `chmod 750` allows the owner to run the script.
+- `./my-first-script.sh` runs the script from the current folder.
 
-Parse the grepable Nmap output:
+## Step 15 - Check Basic Linux System Information
+
+Run and save:
 
 ```bash
-grep "Ports:" service-check-ubuntu.gnmap | tee "$EVIDENCE/03-scans/open-port-summary.txt"
-awk '/Ports:/ {print $0}' service-check-ubuntu.gnmap | tee "$EVIDENCE/03-scans/awk-port-summary.txt"
+cat /etc/os-release | tee os-release.txt
+uname -a | tee kernel-info.txt
+id | tee user-id.txt
+groups | tee groups.txt
 ```
 
-## Step 11 - Capture a Small PCAP
+Meaning:
 
-Open one terminal on Kali:
+- `/etc/os-release` identifies the Linux distribution.
+- `uname -a` shows kernel information.
+- `id` shows user and group IDs.
+- `groups` shows group membership.
+
+## Step 16 - Package the Evidence
+
+List the evidence:
 
 ```bash
-sudo timeout 60 tcpdump -ni any -s 0 -w "$EVIDENCE/04-pcap/kali-validation.pcap" "host $TARGET_IP"
+ls -l ~/femtech-evidence/kali-intro-lab
 ```
 
-In another terminal:
+Create hashes:
 
 ```bash
-nc -vz -w 3 "$TARGET_IP" 22
-curl -sSI --connect-timeout 5 "http://$TARGET_IP/" | tee "$EVIDENCE/02-validation/http-head.txt"
+cd ~/femtech-evidence/kali-intro-lab
+sha256sum * > hashes.sha256
+cat hashes.sha256
 ```
 
-Hash the PCAP:
+Hashing helps prove that files were not changed after submission.
 
-```bash
-sha256sum "$EVIDENCE/04-pcap/kali-validation.pcap" \
-  | tee "$EVIDENCE/04-pcap/kali-validation.pcap.sha256"
-```
+## Student Questions
 
-## Step 12 - Interpret Linux, Bash, and Security Results
+Answer in your own words:
 
-Create `technical-notes.md`:
-
-```bash
-nano "$EVIDENCE/05-report/technical-notes.md"
-```
-
-Answer:
-
-1. What did Kali prove about routing?
-2. Which ports were reachable?
-3. Which evidence proves the scan stayed in scope?
-4. What does Nmap prove, and what does it not prove?
-5. What would you check if Nmap says a host is down but pfSense logs show allowed traffic?
-6. What Bash variables did you use, and why did they reduce mistakes?
-7. What did the `for` loop do?
-8. What is the difference between `>` and `>>`?
-9. Why is quoting `"$EVIDENCE"` safer than using `$EVIDENCE` without quotes?
-10. Why is saving command output important in cybersecurity work?
-11. What is the difference between `/etc` and `/var/log`?
-12. Why should analysts understand `sudo` before running commands from a lab guide?
-13. What do Linux file permissions protect?
-14. How are processes and services different?
-15. Why is Linux knowledge important for cybersecurity jobs?
-
-## Step 13 - Package Evidence
-
-```bash
-find "$EVIDENCE" -type f ! -name hashes.sha256 -print0 \
-  | sort -z \
-  | xargs -0 sha256sum > "$EVIDENCE/hashes.sha256"
-sha256sum --check "$EVIDENCE/hashes.sha256"
-exit
-```
+1. What is VirtualBox used for?
+2. What is Kali Linux?
+3. What is the terminal?
+4. What does `pwd` show?
+5. What does `ls` do?
+6. What is the difference between `>` and `>>`?
+7. What does `cat` do?
+8. What is a Linux path?
+9. What does `sudo` mean?
+10. Why should beginners avoid running unknown commands with `sudo`?
+11. What is a Bash variable?
+12. What does a loop help you do?
+13. What does `chmod` change?
+14. Why do cybersecurity students need to save evidence?
+15. Why are file hashes useful?
 
 ## Troubleshooting
 
-| Problem | Likely cause | Check |
-|---|---|---|
-| No IP address | Wrong adapter or DHCP unavailable | `ip -br address`, pfSense DHCP leases |
-| Cannot reach gateway | Wrong network segment | VM adapter setting, `ip route` |
-| Target port times out | Firewall block or service down | pfSense logs, Ubuntu `ss -lntup` |
-| Nmap finds unexpected hosts | Wrong scope or shared network | Stop and verify adapter mode |
-| PCAP is empty | Wrong interface or filter | Try `tcpdump -D`, then recapture |
-| Script says permission denied | Script is not executable | `chmod 750 validate-target.sh` |
-| Variable output is blank | Variable not set in current shell | `echo "$EVIDENCE"` and rerun Step 1 |
-| Loop output overwrites evidence | Used `>` instead of `>>` or `tee -a` | Use append for repeated loop output |
-| Permission denied reading a file | Normal user lacks access | Check `ls -l`; use `sudo` only when authorised |
-| Command not found | Package not installed or not in PATH | Use `which <command>` and `dpkg -l <package>` |
+| Problem | Simple fix |
+|---|---|
+| Kali does not start | Ask the instructor to check VirtualBox settings |
+| Keyboard not typing correctly | Check keyboard layout in Kali settings |
+| Command not found | Check spelling and spaces |
+| Permission denied running script | Run `chmod 750 my-first-script.sh` |
+| `nano` feels confusing | Use `Ctrl + O`, `Enter`, then `Ctrl + X` |
+| File is empty | Check whether `>` overwrote it |
+| Cannot find folder | Run `pwd`, then `ls` |
 
 ## Deliverables
 
-- Scope record.
-- Linux orientation evidence.
-- Kali IP, route, DNS, and neighbour evidence.
-- Connectivity tests.
-- Nmap outputs in all three formats.
-- PCAP and hash.
-- Bash validation script.
-- Bash variable, loop, parsing, script, and exit-code evidence.
-- Technical notes.
-- Final `hashes.sha256`.
+Submit the `~/femtech-evidence/kali-intro-lab` folder containing:
+
+- `current-user.txt`
+- `hostname.txt`
+- `date.txt`
+- `current-folder.txt`
+- `lab-title.txt`
+- `student-name.txt`
+- `lab-name.txt`
+- `completed-time.txt`
+- `evidence-review.txt`
+- `my-first-script.sh`
+- `script-output.txt`
+- `os-release.txt`
+- `kernel-info.txt`
+- `user-id.txt`
+- `groups.txt`
+- `hashes.sha256`
+- Written answers to the student questions.
 
 ## Pass Condition
 
-The student passes when they can explain basic Linux structure, prove Kali is isolated, work from the command line safely, validate authorised systems, use Bash for repeatable evidence collection, and preserve professional evidence.
+The student passes when they can open Kali in VirtualBox, use the Linux terminal, create folders and files, read file contents, explain simple permissions, use beginner Bash variables and loops, run a simple script, and save evidence.
