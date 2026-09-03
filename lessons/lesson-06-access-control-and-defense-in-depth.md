@@ -52,8 +52,6 @@ Access control and defense in depth are used daily by:
 
 ## 1. Access Control
 
-### What
-
 Access control is the process of deciding whether a subject is allowed to perform an action on an object.
 
 | Element | Meaning | Example |
@@ -66,8 +64,6 @@ Access control is the process of deciding whether a subject is allowed to perfor
 
 Access control is broader than login. A user may successfully authenticate and still be blocked from viewing payroll, changing firewall rules, deleting backups, or opening patient records.
 
-### Why
-
 Access control protects confidentiality, integrity, and availability.
 
 - Confidentiality: only authorized people and systems can view sensitive data.
@@ -75,8 +71,6 @@ Access control protects confidentiality, integrity, and availability.
 - Availability: only authorized people and systems can perform actions that affect service operation.
 
 Without access control, any user, application, or attacker who reaches a system may access data or perform actions beyond their role.
-
-### How
 
 Access control normally follows this sequence:
 
@@ -87,8 +81,6 @@ Access control normally follows this sequence:
 5. Log the access event.
 6. Review access periodically.
 7. Remove access when it is no longer needed.
-
-### Where
 
 Access control applies in:
 
@@ -109,19 +101,11 @@ Access control depends on four related ideas.
 | Authorization | What are you allowed to do? | Read HR files, approve payments, reset passwords |
 | Accounting | What did you do? | Logon logs, file access logs, audit trail |
 
-### What
-
 Identification names the subject. Authentication verifies the claim. Authorization grants or denies permission. Accounting records what happened.
-
-### Why
 
 Confusing these concepts causes security mistakes. A valid login does not mean the user should have access to every resource. A successful MFA event does not mean a transaction is safe. An administrator account does not mean every action is appropriate.
 
-### How
-
 Enterprise systems enforce these concepts using identity providers, directories, access tokens, group membership, policies, permissions, logs, and monitoring.
-
-### Where
 
 Examples include Active Directory, Microsoft Entra ID, Linux PAM, cloud IAM, VPN portals, SaaS applications, firewalls, databases, and SIEM platforms.
 
@@ -183,15 +167,9 @@ and the session is logged.
 
 ## 4. Least Privilege and Need to Know
 
-### What
-
 Least privilege means subjects receive only the access required to perform approved work. Need to know means access to information is limited to those with a legitimate business need.
 
-### Why
-
 Excessive access increases breach impact. If a phishing victim has access to payroll, backups, cloud admin panels, file shares, and email rules, one compromised account can damage many systems.
-
-### How
 
 Organizations apply least privilege through:
 
@@ -205,21 +183,13 @@ Organizations apply least privilege through:
 - Removal of dormant accounts.
 - Monitoring of privilege changes.
 
-### Where
-
 Least privilege applies to user accounts, administrator accounts, service accounts, API keys, cloud roles, database permissions, file shares, endpoints, firewalls, and security tools.
 
 ## 5. Separation of Duties
 
-### What
-
 Separation of duties divides sensitive responsibilities so one person cannot complete a high-risk process alone.
 
-### Why
-
 It reduces fraud, mistakes, and abuse of privilege.
-
-### How
 
 Examples:
 
@@ -228,13 +198,9 @@ Examples:
 - A helpdesk worker resets passwords; a security administrator reviews high-risk resets.
 - A firewall engineer proposes a rule; a change manager approves it.
 
-### Where
-
 Separation of duties is used in finance, healthcare, government, cloud administration, software development, HR, procurement, and security operations.
 
 ## 6. Privileged Access
-
-### What
 
 Privileged access is access that can administer systems, change security settings, read sensitive data at scale, disable controls, or affect many users.
 
@@ -250,11 +216,7 @@ Examples include:
 - SIEM administrator.
 - Backup administrator.
 
-### Why
-
 Privileged accounts are high-value targets. If attackers compromise them, they may disable defenses, create persistence, steal data, encrypt systems, or hide evidence.
-
-### How
 
 Privileged access is protected with:
 
@@ -268,8 +230,6 @@ Privileged access is protected with:
 - Change approval.
 - Alerting on privilege changes.
 - Regular access review.
-
-### Where
 
 Privileged access exists across Windows, Linux, Active Directory, cloud platforms, Microsoft 365, firewalls, hypervisors, databases, CI/CD tools, SIEMs, EDR consoles, and backup systems.
 
@@ -329,15 +289,9 @@ Cloud example: A small business may encrypt cloud storage but accidentally allow
 
 ## 10. Defense in Depth
 
-### What
-
 Defense in depth is a layered security strategy. It uses multiple safeguards across people, process, and technology so that one failure does not expose the whole organization.
 
-### Why
-
 No control is perfect. Users can be tricked, software can have vulnerabilities, passwords can be stolen, firewalls can be misconfigured, backups can fail, and logs can be incomplete. Defense in depth reduces dependence on a single protection.
-
-### How
 
 Defense in depth works by placing controls at different layers:
 
@@ -352,8 +306,6 @@ Defense in depth works by placing controls at different layers:
 | Monitoring | SIEM, Wazuh, Microsoft Sentinel, Splunk, alert tuning |
 | Response | Incident response playbooks, containment, recovery, lessons learned |
 | Physical | Locks, badges, cameras, guards, access control vestibules |
-
-### Where
 
 Defense in depth applies to every enterprise environment: small offices, hospitals, banks, schools, government agencies, cloud systems, hybrid networks, endpoints, servers, applications, and security operations.
 
