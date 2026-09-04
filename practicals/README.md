@@ -57,7 +57,7 @@ Every guided lab should strengthen at least one professional tool skill. The tab
 
 | Core tool | Required practical coverage | Primary evidence students must submit |
 |---|---|---|
-| Kali Linux | VirtualBox startup, Linux basics, terminal use, files/folders, evidence handling, Bash variables, loops, scripts, and hashes | Linux orientation evidence, practice files, Bash script, saved command output, hashes |
+| Kali Linux | VirtualBox startup, Linux filesystem, terminal use, files/folders, permissions, processes, services, packages, logs, local networking, evidence handling, Bash variables, loops, scripts, and hashes | Linux orientation evidence, practice files, permission evidence, process/service evidence, package/log evidence, local network evidence, Bash scripts, saved command output, hashes |
 | Ubuntu Server | Linux administration, users/groups, permissions, SSH, UFW, logs, services, hardening, remediation | Before/after service state, UFW rules, SSH configuration, authentication logs, rollback evidence |
 | pfSense | Interfaces, DHCP, NAT, aliases, firewall rules, segmentation, logs, allowed/blocked validation | Interface plan, rule matrix, config export, allowed traffic test, denied traffic test, firewall log proof |
 | Windows Server | DNS, DHCP, server roles, Event Viewer, Active Directory, groups, OUs, Group Policy, security logs | IP/DNS proof, role evidence, AD structure, group membership, GPO result, EVTX or event evidence |

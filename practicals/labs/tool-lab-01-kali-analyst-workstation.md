@@ -442,7 +442,297 @@ Meaning:
 - `id` shows user and group IDs.
 - `groups` shows group membership.
 
-## Step 16 - Package the Evidence
+## Step 16 - Understand the Linux Filesystem
+
+Linux uses one main filesystem tree. Everything starts from `/`, called the root of the filesystem.
+
+Run:
+
+```bash
+cd /
+ls
+```
+
+Review these important locations:
+
+```bash
+ls -ld / /home /etc /var /var/log /tmp /usr /usr/bin /bin /opt
+```
+
+Save the result:
+
+```bash
+ls -ld / /home /etc /var /var/log /tmp /usr /usr/bin /bin /opt | tee filesystem-directories.txt
+```
+
+Learn what each directory is commonly used for:
+
+| Directory | Basic meaning | Cybersecurity relevance |
+|---|---|---|
+| `/` | Start of the whole Linux filesystem | Helps analysts understand full paths |
+| `/home` | User folders | User files, scripts, and evidence may be stored here |
+| `/etc` | Configuration files | Many security settings are configured here |
+| `/var` | Variable data | Logs, caches, and changing application data |
+| `/var/log` | Log files | Important for investigations and troubleshooting |
+| `/tmp` | Temporary files | Useful but not trusted for permanent evidence |
+| `/usr/bin` | Many installed commands | Shows where many tools live |
+| `/bin` | Essential commands | Contains basic system commands |
+| `/opt` | Optional applications | Some third-party tools may install here |
+
+Return to your lab folder:
+
+```bash
+cd ~/femtech-evidence/kali-intro-lab
+pwd
+```
+
+## Step 17 - Practise File Management
+
+Create more files:
+
+```bash
+echo "Linux file practice" > file-practice.txt
+echo "Line 2" >> file-practice.txt
+echo "Line 3" >> file-practice.txt
+cat file-practice.txt
+```
+
+View only part of the file:
+
+```bash
+head -n 2 file-practice.txt
+tail -n 2 file-practice.txt
+```
+
+Copy and rename files:
+
+```bash
+cp file-practice.txt file-practice-copy.txt
+mv file-practice-copy.txt renamed-practice-file.txt
+ls -l
+```
+
+Create a folder and move a file into it:
+
+```bash
+mkdir file-management
+mv renamed-practice-file.txt file-management/
+ls -l file-management
+```
+
+Save the result:
+
+```bash
+find ~/femtech-evidence/kali-intro-lab -maxdepth 2 -type f | sort | tee file-list.txt
+```
+
+Meaning:
+
+- `cp` copies a file.
+- `mv` moves or renames a file.
+- `find` searches for files and folders.
+- `sort` arranges output neatly.
+
+## Step 18 - Understand Users, Groups, and Permissions
+
+Run:
+
+```bash
+whoami | tee linux-user.txt
+id | tee linux-id.txt
+groups | tee linux-groups.txt
+```
+
+Create a permissions practice file:
+
+```bash
+echo "Permission test" > permission-test.txt
+ls -l permission-test.txt | tee permission-before.txt
+```
+
+Change permission safely on your own file:
+
+```bash
+chmod 600 permission-test.txt
+ls -l permission-test.txt | tee permission-600.txt
+```
+
+Change it again:
+
+```bash
+chmod 644 permission-test.txt
+ls -l permission-test.txt | tee permission-644.txt
+```
+
+Simple permission meaning:
+
+| Number | Meaning |
+|---|---|
+| `7` | read, write, execute |
+| `6` | read and write |
+| `5` | read and execute |
+| `4` | read only |
+| `0` | no permission |
+
+For `chmod 644`:
+
+| Position | Meaning |
+|---|---|
+| First number `6` | Owner can read and write |
+| Second number `4` | Group can read |
+| Third number `4` | Others can read |
+
+Important: only practise `chmod` on files you created in your own lab folder.
+
+## Step 19 - Understand Processes and Services
+
+A process is a running program. A service is a background program managed by Linux.
+
+View running processes:
+
+```bash
+ps
+ps aux | head
+```
+
+Save process evidence:
+
+```bash
+ps aux | head -n 15 | tee process-sample.txt
+```
+
+View running services:
+
+```bash
+systemctl --type=service --state=running --no-pager | head -n 20 | tee running-services.txt
+```
+
+Check one harmless common service if it exists:
+
+```bash
+systemctl status NetworkManager --no-pager | tee networkmanager-status.txt
+```
+
+If the command says the service does not exist, write that in your notes. Different Kali builds may have different services.
+
+Do not stop, disable, or restart services in this beginner lab.
+
+## Step 20 - Understand Packages and Installed Tools
+
+A package is software installed through the operating system package manager.
+
+Check package information:
+
+```bash
+dpkg -l | head | tee package-list-sample.txt
+apt --version | tee apt-version.txt
+```
+
+Search for installed packages by name:
+
+```bash
+dpkg -l | grep bash | tee bash-package.txt
+dpkg -l | grep coreutils | tee coreutils-package.txt
+```
+
+Meaning:
+
+- `dpkg -l` lists installed packages.
+- `grep` searches text.
+- `apt` is commonly used to install and update packages on Debian-based Linux systems such as Kali and Ubuntu.
+
+Do not install or remove packages in this lab unless the instructor asks.
+
+## Step 21 - Understand Logs Safely
+
+Logs record system activity. Cybersecurity analysts use logs to understand what happened.
+
+List log files:
+
+```bash
+ls -l /var/log | head | tee var-log-sample.txt
+```
+
+Read safe log summaries:
+
+```bash
+journalctl -n 10 --no-pager | tee journal-last-10.txt
+```
+
+If permission is denied, do not force it. Write:
+
+```text
+Permission denied while reading selected logs. This means the current user does not have access to that log without administrator permission.
+```
+
+Important:
+
+- Logs can contain sensitive information.
+- Do not copy real personal data into reports.
+- In professional work, preserve logs before changing systems.
+
+## Step 22 - Understand Basic Local Networking
+
+This step does not scan or contact a target. It only checks Kali's own network settings.
+
+Run:
+
+```bash
+ip address | tee kali-ip-address.txt
+ip route | tee kali-route.txt
+```
+
+Simple meaning:
+
+- `ip address` shows network interfaces and IP addresses.
+- `ip route` shows where network traffic would go.
+- `lo` is the loopback interface used by the computer to talk to itself.
+- An interface such as `eth0`, `enp0s3`, or similar is usually a network adapter.
+
+Do not ping or scan any IP address in this lab.
+
+## Step 23 - Build a Simple Linux Review Script
+
+Create:
+
+```bash
+nano linux-review.sh
+```
+
+Type:
+
+```bash
+#!/usr/bin/env bash
+echo "Linux Review Report"
+echo "==================="
+echo "User: $(whoami)"
+echo "Hostname: $(hostname)"
+echo "Current folder: $(pwd)"
+echo "Date: $(date)"
+echo
+echo "Operating system:"
+cat /etc/os-release | head -n 5
+echo
+echo "Kernel:"
+uname -a
+echo
+echo "Groups:"
+groups
+echo
+echo "Current folder files:"
+ls -l
+```
+
+Save and exit, then run:
+
+```bash
+chmod 750 linux-review.sh
+./linux-review.sh | tee linux-review-output.txt
+```
+
+This script combines several Linux checks into one repeatable report.
+
+## Step 24 - Package the Evidence
 
 List the evidence:
 
@@ -479,6 +769,16 @@ Answer in your own words:
 13. What does `chmod` change?
 14. Why do cybersecurity students need to save evidence?
 15. Why are file hashes useful?
+16. What is the root directory `/`?
+17. What type of files are commonly stored in `/etc`?
+18. Why is `/var/log` important in cybersecurity?
+19. What is the difference between a process and a service?
+20. What does `grep` help you do?
+21. Why should beginners avoid changing files outside their home folder?
+22. What is the difference between `chmod 600` and `chmod 644`?
+23. What does `ip address` show?
+24. Why should logs be handled carefully?
+25. What did your `linux-review.sh` script collect?
 
 ## Troubleshooting
 
@@ -491,6 +791,9 @@ Answer in your own words:
 | `nano` feels confusing | Use `Ctrl + O`, `Enter`, then `Ctrl + X` |
 | File is empty | Check whether `>` overwrote it |
 | Cannot find folder | Run `pwd`, then `ls` |
+| `journalctl` shows permission error | Record the error; do not force access unless instructed |
+| `NetworkManager` service is not found | Record that your Kali build uses a different service setup |
+| `grep` shows no result | Check spelling or try a broader search word |
 
 ## Deliverables
 
@@ -511,9 +814,24 @@ Submit the `~/femtech-evidence/kali-intro-lab` folder containing:
 - `kernel-info.txt`
 - `user-id.txt`
 - `groups.txt`
+- `filesystem-directories.txt`
+- `file-list.txt`
+- `permission-before.txt`
+- `permission-600.txt`
+- `permission-644.txt`
+- `process-sample.txt`
+- `running-services.txt`
+- `package-list-sample.txt`
+- `bash-package.txt`
+- `var-log-sample.txt`
+- `journal-last-10.txt`
+- `kali-ip-address.txt`
+- `kali-route.txt`
+- `linux-review.sh`
+- `linux-review-output.txt`
 - `hashes.sha256`
 - Written answers to the student questions.
 
 ## Pass Condition
 
-The student passes when they can open Kali in VirtualBox, use the Linux terminal, create folders and files, read file contents, explain simple permissions, use beginner Bash variables and loops, run a simple script, and save evidence.
+The student passes when they can open Kali in VirtualBox, use the Linux terminal, navigate the filesystem, create and manage files, explain basic users and permissions, identify processes and services, understand packages and logs, check local network settings, use beginner Bash variables and loops, run simple scripts, and save evidence.

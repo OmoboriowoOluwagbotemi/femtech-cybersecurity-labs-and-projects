@@ -46,7 +46,7 @@ Kali is first introduced as a Linux virtual machine running in VirtualBox. Stude
 Required student skills:
 
 - Start Kali from VirtualBox and shut it down safely.
-- Navigate basic Linux directories, users, permissions, processes, services, packages, and logs.
+- Navigate Linux directories, manage files, understand users and groups, interpret permissions, identify processes and services, review packages, read safe log summaries, and check local network settings.
 - Use Bash variables, command substitution, loops, simple conditionals, functions, scripts, and output redirection for repeatable evidence collection.
 - Create and read files using `echo`, `cat`, `ls`, `cd`, `pwd`, `mkdir`, and `nano`.
 - Understand `>`, `>>`, `|`, `tee`, `chmod`, and `sha256sum`.
@@ -56,7 +56,9 @@ Required student skills:
 Minimum Tool Lab 01 evidence:
 
 - Kali username, hostname, date, and current folder evidence.
-- Practice file created and appended.
+- Practice files created, copied, moved, renamed, and reviewed.
+- Permission evidence using `ls -l`, `stat`, and safe `chmod` changes.
+- Process, service, package, log, and local network evidence.
 - Evidence file created with `tee`.
 - Bash variables evidence.
 - Simple loop evidence.
