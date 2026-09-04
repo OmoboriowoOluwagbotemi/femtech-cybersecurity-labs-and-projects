@@ -178,3 +178,131 @@ In pfSense:
 
 The student passes when approved business traffic works, unapproved lateral movement is blocked, pfSense logs prove the decision, and the student can explain rule direction and order.
 
+## Complete Lab Support
+
+### Beginner Concepts
+
+| Concept | Simple meaning | pfSense example |
+|---|---|---|
+| Interface | Network card or virtual adapter | USERS, SERVERS, DMZ, SOC |
+| Gateway | Device IP used to leave a subnet | `10.10.10.1` |
+| Subnet | Group of IP addresses in one network | `10.10.20.0/24` |
+| DHCP | Automatically gives IP addresses | USERS clients receive addresses |
+| DNS | Converts names to IP addresses | Domain clients find `dc01` |
+| NAT | Translates addresses between networks | Internal clients reach updates through WAN |
+| Alias | Reusable name for hosts, networks, or ports | `ADMIN_HOSTS` |
+| Rule | Allow or block decision | Allow admin SSH |
+| State | Memory of an allowed connection | Return traffic is permitted |
+| Log | Record of firewall decisions | Blocked DMZ traffic appears in logs |
+
+### Preflight Checklist
+
+```text
+pfSense VM name:
+Admin username:
+WAN adapter mode:
+Internal segments present:
+USERS gateway:
+SERVERS gateway:
+DMZ gateway:
+SOC gateway:
+Backup file name:
+Instructor approval:
+```
+
+Before rules are changed, export the configuration. If a rule locks out access, restore from the backup or use the pfSense console.
+
+### Exact Rule-Building Guidance
+
+For every rule, record:
+
+```text
+Interface:
+Action:
+Protocol:
+Source:
+Destination:
+Destination port:
+Description:
+Log enabled:
+Business reason:
+```
+
+Rule descriptions must be specific. Bad description: `allow`. Better description: `Allow Kali admin SSH to Ubuntu server`.
+
+### Validation Worksheet
+
+| Test ID | Source | Destination | Port | Expected result | Actual result | pfSense log seen? |
+|---|---|---|---:|---|---|---|
+| T1 | Admin host | Ubuntu server | 22 | Allow | | |
+| T2 | User network | DMZ web | 80 | Allow | | |
+| T3 | DMZ web | Server network | Any | Block | | |
+| T4 | User host | Windows server RDP | 3389 | Block unless approved | | |
+| T5 | Server agent | Wazuh server | 1514/1515 | Allow if Wazuh lab active | | |
+
+Use the correct source machine for each test. Testing from the wrong segment does not validate the intended firewall rule.
+
+### Log Interpretation Guide
+
+When reviewing **Status > System Logs > Firewall**, students must identify:
+
+- Time.
+- Interface.
+- Action: pass or block.
+- Source IP and source port.
+- Destination IP and destination port.
+- Protocol.
+- Rule description.
+
+If there is no log entry, consider:
+
+- The rule is not set to log.
+- Traffic did not reach pfSense.
+- The source used the wrong gateway.
+- A host firewall blocked before traffic reached the network.
+- The test used the wrong protocol or port.
+
+### Common pfSense Mistakes
+
+| Mistake | Why it causes problems |
+|---|---|
+| Rule on wrong interface | pfSense evaluates traffic where it enters |
+| Broad allow above block | First matching rule wins |
+| Using `any` everywhere | Policy becomes hard to audit |
+| Forgetting DNS | Systems may be reachable by IP but not name |
+| No description | Future troubleshooting becomes slow |
+| No backup | Bad rules become hard to recover from |
+
+### Report Template
+
+```text
+Title: pfSense Firewall and Segmentation Report
+
+1. Business Goal
+
+2. Network Segments
+USERS:
+SERVERS:
+DMZ:
+SOC:
+
+3. Rule Matrix
+
+4. Changes Made
+Interfaces:
+DHCP:
+Aliases:
+Rules:
+
+5. Validation Results
+Allowed traffic:
+Blocked traffic:
+Firewall logs:
+
+6. Troubleshooting Notes
+
+7. Remaining Risk
+
+8. Management Summary
+```
+

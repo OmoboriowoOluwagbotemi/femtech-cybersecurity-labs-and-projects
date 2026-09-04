@@ -197,3 +197,142 @@ Do not perform rollback unless validation fails or the instructor asks.
 
 The student passes when SSH is safer, required web access still works, unnecessary exposure is reduced, and logs prove the outcome.
 
+## Complete Lab Support
+
+### Beginner Concepts
+
+| Concept | Simple meaning | Lab example |
+|---|---|---|
+| Server | A computer that provides a service to users or other systems | Ubuntu provides SSH and a web page |
+| SSH | Secure remote command-line access | Administrator connects from Kali to Ubuntu |
+| Service | Background program managed by Linux | `ssh`, `nginx`, `fail2ban` |
+| Firewall | Control that allows or blocks traffic | UFW allows only approved ports |
+| User | Account used to log in or run work | `analyst01` |
+| Group | Collection of users used for permission management | `secops`, `webops` |
+| Permission | Rule that controls read, write, or execute access | `/srv/femtech-web` group write access |
+| Log | Record of activity | `/var/log/auth.log` |
+| Hardening | Reducing unnecessary risk | Disable root SSH and password SSH |
+| Rollback | Returning to a known working state | Restore SSH backup or VM snapshot |
+
+### Required Preflight
+
+Before changing the server, complete this checklist:
+
+```text
+Ubuntu VM name:
+Ubuntu hostname:
+Ubuntu IP address:
+Admin username:
+Kali source IP:
+Approved services:
+Snapshot name:
+Instructor approval:
+```
+
+Run:
+
+```bash
+hostname
+whoami
+ip -br address
+ip route
+sudo -v
+```
+
+Stop if the system is not the assigned Ubuntu server.
+
+### Evidence Folder Standard
+
+Use one variable to avoid typing mistakes:
+
+```bash
+LAB="$HOME/femtech-evidence/ubuntu-tool-lab"
+mkdir -p "$LAB"/{01-before,02-change,03-validation,04-rollback,05-report,06-screenshots}
+date -u +'%Y-%m-%dT%H:%M:%SZ' | tee "$LAB/session-start-utc.txt"
+```
+
+Every important command should either use `tee` or be copied into the report with date, hostname, and interpretation.
+
+### Step-by-Step Validation Matrix
+
+| Area | Command | Passing result |
+|---|---|---|
+| Host identity | `hostnamectl` | Hostname, OS, and kernel are visible |
+| Network | `ip -br address` | Server has the expected IP |
+| Routing | `ip route` | Default route is correct for the lab |
+| Services | `sudo ss -lntup` | Only expected listening services appear |
+| Failed services | `systemctl --failed` | No unexpected failed service |
+| SSH syntax | `sudo sshd -t` | No output or no syntax error |
+| SSH status | `systemctl status ssh` | Service is active |
+| Firewall | `sudo ufw status verbose` | Only required rules are allowed |
+| Fail2Ban | `sudo fail2ban-client status sshd` | SSH jail is active |
+| Logs | `sudo tail /var/log/auth.log` | SSH activity appears |
+
+### Safe SSH Hardening Notes
+
+Do not close the current SSH session until a new session works. A safe sequence is:
+
+1. Back up `/etc/ssh/sshd_config`.
+2. Edit the file.
+3. Run `sudo sshd -t`.
+4. Reload SSH, not reboot first.
+5. Open a second terminal.
+6. Test a new login.
+7. Only then close the old session.
+
+If login fails, use the still-open session to restore:
+
+```bash
+sudo cp /etc/ssh/sshd_config.pre-femtech /etc/ssh/sshd_config
+sudo sshd -t
+sudo systemctl reload ssh
+```
+
+### Report Template
+
+```text
+Title: Ubuntu Server Administration and Hardening Report
+
+1. Scope
+System:
+IP address:
+Approved services:
+Change window:
+
+2. Baseline
+Listening services before:
+Users/groups before:
+Important risks observed:
+
+3. Changes Made
+Users/groups:
+Permissions:
+SSH:
+UFW:
+Fail2Ban:
+Nginx:
+
+4. Validation
+Positive tests:
+Negative tests:
+Log evidence:
+
+5. Problems and Fixes
+Issue:
+Hypothesis:
+Test:
+Result:
+
+6. Remaining Risk
+
+7. Management Summary
+```
+
+### Student Must Explain
+
+- Why root SSH login is risky.
+- Why SSH key access is stronger than password-only access.
+- Why UFW is still useful even when pfSense exists.
+- Why a service can be installed but not listening.
+- Why logs are evidence, but still need interpretation.
+

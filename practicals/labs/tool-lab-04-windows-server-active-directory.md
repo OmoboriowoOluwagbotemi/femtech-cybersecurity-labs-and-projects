@@ -175,3 +175,153 @@ In the report, explain:
 
 The student passes when the domain works, group-based access is proven, GPO evidence exists, and security events can be found and explained.
 
+## Complete Lab Support
+
+### Beginner Concepts
+
+| Concept | Simple meaning | Lab example |
+|---|---|---|
+| Windows Server | Microsoft server operating system | Domain controller |
+| Domain | Central identity boundary | `femtech.lab` |
+| Domain controller | Server that authenticates domain users | `DC01` |
+| Active Directory | Directory of users, computers, groups, and policies | AD DS |
+| DNS | Name resolution service AD depends on | Client finds domain controller |
+| OU | Folder-like container for AD objects | `FEMTECH Users` |
+| Group | Collection used for access control | `GG_HR_Staff` |
+| GPO | Group Policy Object applying settings | Workstation baseline |
+| Event Viewer | Tool for reading Windows logs | Security log |
+| PowerShell | Command-line automation shell | AD user creation |
+
+### Preflight Checklist
+
+```text
+Windows Server VM name:
+Planned hostname:
+Static IP:
+Gateway:
+DNS server:
+Domain name:
+Local administrator account:
+Snapshot name:
+Instructor approval:
+```
+
+Do not promote the server to a domain controller until the IP address, DNS setting, and time are correct.
+
+### Evidence Folder
+
+On Windows Server, create:
+
+```powershell
+$Evidence = "C:\FEMTECH-Evidence\Tool-Lab-04"
+New-Item -ItemType Directory -Force -Path $Evidence | Out-Null
+Get-Date -AsUTC | Out-File "$Evidence\start-time-utc.txt"
+Start-Transcript -Path "$Evidence\powershell-transcript.txt" -Append
+```
+
+At the end:
+
+```powershell
+Stop-Transcript
+Get-ChildItem $Evidence -File -Recurse |
+  Get-FileHash -Algorithm SHA256 |
+  Format-Table Hash,Path -AutoSize |
+  Out-File "$Evidence\hashes.sha256.txt"
+```
+
+### Build Order
+
+Follow this order exactly:
+
+1. Rename the server.
+2. Reboot.
+3. Set static IP.
+4. Set DNS to the server's own IP.
+5. Install AD DS and DNS.
+6. Promote the server.
+7. Reboot.
+8. Confirm AD services.
+9. Create OUs.
+10. Create groups.
+11. Create users.
+12. Assign users to groups.
+13. Create file share and ACLs.
+14. Create GPO.
+15. Join client.
+16. Generate and collect logs.
+
+### Required Validation Commands
+
+Run after domain promotion:
+
+```powershell
+Get-ADDomain | Out-File "$Evidence\ad-domain.txt"
+Get-ADForest | Out-File "$Evidence\ad-forest.txt"
+Get-Service DNS,NTDS,KDC | Format-Table Name,Status,StartType | Out-File "$Evidence\ad-services.txt"
+dcdiag /v | Out-File "$Evidence\dcdiag.txt"
+Get-DnsServerZone | Out-File "$Evidence\dns-zones.txt"
+```
+
+Run after creating AD objects:
+
+```powershell
+Get-ADOrganizationalUnit -Filter * | Select-Object Name,DistinguishedName | Out-File "$Evidence\ous.txt"
+Get-ADGroup -Filter * | Select-Object Name,GroupScope,GroupCategory | Out-File "$Evidence\groups.txt"
+Get-ADUser -Filter * | Select-Object Name,SamAccountName,Enabled | Out-File "$Evidence\users.txt"
+Get-ADGroupMember GG_HR_Staff | Out-File "$Evidence\gg-hr-staff-members.txt"
+Get-ADGroupMember DL_HR_Read | Out-File "$Evidence\dl-hr-read-members.txt"
+```
+
+### Testing Access
+
+Create this test table in the report:
+
+| Test | User | Expected result | Actual result | Evidence |
+|---|---|---|---|---|
+| HR share access | `aokoro` | Allowed | | |
+| HR share access | `tbello` | Denied unless added | | |
+| Domain login | Domain user | Allowed | | |
+| Wrong password | Domain user | Failed logon event | | |
+| GPO result | Domain client | Policy visible | | |
+
+### Important Event IDs
+
+| Event ID | Meaning |
+|---:|---|
+| 4624 | Successful logon |
+| 4625 | Failed logon |
+| 4720 | User account created |
+| 4726 | User account deleted |
+| 4728 | Member added to global group |
+| 4732 | Member added to local group |
+| 4738 | User account changed |
+
+### Report Template
+
+```text
+Title: Windows Server and Active Directory Lab Report
+
+1. Scope and Purpose
+
+2. Server Configuration
+Hostname:
+IP:
+DNS:
+Domain:
+
+3. AD Structure
+OUs:
+Groups:
+Users:
+
+4. Access Control Test
+
+5. Group Policy Evidence
+
+6. Security Event Evidence
+
+7. Troubleshooting
+
+8. Management Summary
+```
+

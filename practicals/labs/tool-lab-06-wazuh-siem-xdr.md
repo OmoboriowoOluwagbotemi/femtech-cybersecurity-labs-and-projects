@@ -218,3 +218,158 @@ Review date:
 
 The student passes when they can trace an event from endpoint log to Wazuh alert, explain the alert professionally, troubleshoot telemetry failure, and recommend proportionate response.
 
+## Complete Lab Support
+
+### Beginner Concepts
+
+| Concept | Simple meaning | Wazuh example |
+|---|---|---|
+| SIEM | Platform for collecting and searching security events | Wazuh dashboard |
+| Agent | Software installed on endpoint to send telemetry | Wazuh agent on Ubuntu |
+| Manager | Server that receives and analyzes agent data | Wazuh manager |
+| Indexer | Stores searchable events | Wazuh indexer |
+| Dashboard | Web interface for search and review | Wazuh dashboard |
+| Rule | Logic that creates an alert | Failed SSH login rule |
+| Alert | Security event needing review | Authentication failure |
+| FIM | File integrity monitoring | Detects file changes |
+| Telemetry | Security data collected from systems | Logs, FIM, agent status |
+| Triage | First review of alert meaning and urgency | Confirm benign or suspicious |
+
+### Preflight Checklist
+
+```text
+Wazuh server IP:
+Ubuntu agent IP:
+Windows agent IP:
+Dashboard URL:
+Instructor-approved credentials stored safely:
+Time synchronized:
+Firewall permits agent ports:
+No production logs used:
+```
+
+### Wazuh Data Flow
+
+Students must be able to explain this chain:
+
+```text
+Endpoint event
+ -> Wazuh agent
+ -> Wazuh manager
+ -> Decoder/rule
+ -> Indexer
+ -> Dashboard search
+ -> Analyst triage
+ -> Recommendation
+```
+
+If an alert is missing, test the chain from left to right. Do not start by changing rules.
+
+### Required Health Checks
+
+On the manager:
+
+```bash
+sudo /var/ossec/bin/wazuh-control status
+sudo /var/ossec/bin/agent_control -lc
+sudo systemctl status wazuh-manager wazuh-indexer wazuh-dashboard filebeat --no-pager
+sudo journalctl -u wazuh-manager -n 50 --no-pager
+```
+
+On Linux agent:
+
+```bash
+sudo systemctl status wazuh-agent --no-pager
+sudo tail -n 80 /var/ossec/logs/ossec.log
+```
+
+On Windows agent:
+
+```powershell
+Get-Service WazuhSvc
+Get-Content "C:\Program Files (x86)\ossec-agent\ossec.log" -Tail 80
+```
+
+### Alert Evidence Standard
+
+For every alert, record:
+
+```text
+Alert name:
+Rule ID:
+Rule level:
+Agent name:
+Agent IP:
+Source event time:
+Dashboard/index time:
+User:
+Source IP:
+Raw event:
+Analyst interpretation:
+Recommended action:
+```
+
+### Linux Event Exercise
+
+Generate only benign activity:
+
+1. Failed SSH login.
+2. Successful approved SSH login.
+3. Approved file creation or modification.
+
+The student must show:
+
+- Local Ubuntu log.
+- Wazuh raw event or alert.
+- Dashboard search filter.
+- Explanation of what is confirmed.
+- Explanation of what is not confirmed.
+
+### Windows Event Exercise
+
+Generate only instructor-approved activity:
+
+1. Failed Windows logon.
+2. Successful Windows logon.
+3. Test local user or group change if allowed.
+
+The student must connect:
+
+- Windows Event Viewer evidence.
+- Wazuh evidence.
+- Rule ID or indexed fields.
+- Analyst triage decision.
+
+### Troubleshooting Matrix
+
+| Problem | First place to check | Reason |
+|---|---|---|
+| No local event | Endpoint log | Wazuh cannot collect what does not exist |
+| Agent disconnected | Agent service/log | Collection path is broken |
+| Agent connected but no alert | Rules/decoder/search | Event may be indexed but not alerted |
+| Dashboard shows wrong time | Time range/time zone | Many missed alerts are search-window problems |
+| Linux event present, Wazuh missing | Agent config and manager ports | Collection or transport issue |
+| Windows event present, Wazuh missing | Agent event channel config | Channel may not be collected |
+
+### Triage Report Template
+
+```text
+Title: Wazuh Alert Triage Report
+
+1. Alert Summary
+2. Scope
+3. Evidence
+4. Analysis
+5. Severity
+6. Recommended Response
+7. Tuning Recommendation
+8. Management Summary
+```
+
+### Student Must Explain
+
+- Why agent health matters.
+- Why time synchronization matters.
+- Why a failed login alone is not automatically an incident.
+- Why file integrity monitoring proves a change but not attacker intent.
+- Why alert tuning must not hide real risk.
