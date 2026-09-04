@@ -73,3 +73,98 @@ executive-summary.md
 ## Recruiter-Visible Portfolio Artifact
 
 Publish a sanitized fintech SOC case study showing segmentation, telemetry flow, alert triage, vulnerability validation, and management communication.
+
+## Expanded Scenario
+
+MeridianPay is a fintech startup building a synthetic payment workflow platform for training. It has developers, support users, an internal payment API, an admin jump host, a small database server, and a SOC dashboard. The company cannot afford enterprise tooling yet, but it must show investors that basic security operations are disciplined.
+
+Current state:
+
+- Developers and support users can reach too many systems.
+- Payment-like services are not clearly separated from user workstations.
+- Admin activity is not consistently logged.
+- Wazuh is installed but alert ownership is unclear.
+- Network security monitoring is optional and poorly understood.
+- Vulnerability findings are discussed but not validated.
+
+The business problem is:
+
+```text
+Can MeridianPay prove payment-service segmentation, useful telemetry, alert triage, and vulnerability visibility with no-cost tools?
+```
+
+## Required Environment
+
+| Segment | Purpose | Example systems |
+|---|---|---|
+| USERS | Support and developer workstations | Windows client, Kali only when approved |
+| PAYMENT-SERVICES | Synthetic payment API and database | Ubuntu services |
+| ADMIN | Controlled administration | Admin workstation or jump host |
+| DMZ | Optional customer-facing portal | Web frontend |
+| SOC | Monitoring | Wazuh, optional Suricata/Zeek |
+
+## Work Packages
+
+| Work package | Required student work | Evidence |
+|---|---|---|
+| WP01 - Business process | Map synthetic payment workflow and sensitive data | Data-flow diagram |
+| WP02 - Asset inventory | Identify systems, owners, services, and dependencies | Inventory |
+| WP03 - Segmentation | Design and implement pfSense rules | Rule matrix and logs |
+| WP04 - Admin control | Restrict management ports to approved admin sources | Allowed/blocked tests |
+| WP05 - Telemetry | Onboard Windows/Linux systems to Wazuh | Agent proof |
+| WP06 - Network evidence | Use Suricata, Zeek, pfSense logs, or packet evidence if available | Network evidence |
+| WP07 - Detection | Create triage cases for suspicious discovery, privileged access, failed logins, and telemetry loss | Alert pack |
+| WP08 - Vulnerability | Run scoped Nmap/OpenVAS review and validate one finding | Finding worksheet |
+| WP09 - SOC process | Build queue, severity, owner, escalation, and closure process | SOC runbook |
+| WP10 - Reporting | Present risk, control evidence, and next budget priorities | Reports |
+
+## Required Security Questions
+
+Students must answer:
+
+1. Which systems process payment-like data?
+2. Which users can reach those systems?
+3. Which ports are required for business?
+4. Which admin paths are allowed?
+5. Which logs prove access and blocked traffic?
+6. Which alerts require immediate review?
+7. Which vulnerability creates the highest business risk?
+8. What remains manual because the company has limited budget?
+
+## Required Detection and Triage Cases
+
+| Case | Required evidence |
+|---|---|
+| Suspicious discovery from user network | Nmap/pfSense/Wazuh/network evidence |
+| Privileged access outside admin path | Windows/Linux/Wazuh evidence |
+| Repeated authentication failures | Raw event and alert |
+| Telemetry loss | Agent disconnect and recovery |
+| Vulnerability finding | Scanner evidence and manual validation |
+
+## Instructor Injects
+
+| Inject | Expected response |
+|---|---|
+| Support user needs emergency database access | Evaluate request, least privilege, time limit, approval, and logging |
+| Alert flood during testing | Tune process without disabling important visibility |
+| Payment API becomes unreachable | Troubleshoot firewall, service state, DNS, and logs |
+| Investor asks whether the company is "secure" | Explain evidence, limits, and roadmap honestly |
+
+## Technical Report Template
+
+```text
+1. Executive Summary
+2. Scope and Business Workflow
+3. Asset and Data Inventory
+4. Network Segmentation Design
+5. Firewall Rule Matrix and Tests
+6. Administrative Access Control
+7. Wazuh Telemetry Architecture
+8. Alert Triage Cases
+9. Network Monitoring Evidence
+10. Vulnerability Assessment
+11. SOC Runbook
+12. Residual Risk
+13. Budget and Roadmap Recommendations
+14. Evidence Index
+```

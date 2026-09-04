@@ -74,3 +74,103 @@ executive-summary.md
 ## Recruiter-Visible Portfolio Artifact
 
 Publish a sanitized ransomware readiness case study with segmentation, backup/restore proof, detection evidence, tabletop decisions, and management recommendations.
+
+## Expanded Scenario
+
+Unity Secondary School depends on shared teaching files, exam preparation folders, finance spreadsheets, DNS, and Active Directory. A nearby school lost access to lesson plans and exam materials for two weeks after ransomware. Unity's principal wants practical proof that the school can reduce ransomware spread and restore important files.
+
+Current state:
+
+- Student devices can reach the same network as servers.
+- Teachers share files broadly because access requests are slow.
+- RDP is available from places it should not be.
+- Backups exist, but no one has restored them.
+- Alerts are not reviewed consistently.
+- There is no simple incident communication template.
+
+The business problem is:
+
+```text
+Can the school reduce ransomware blast radius, detect early warning signs, and restore priority data?
+```
+
+## Required Environment
+
+| System | Role |
+|---|---|
+| pfSense | Segment STUDENTS, STAFF, SERVERS, and SOC/ADMIN |
+| Windows Server | AD DS, DNS, groups, and file access |
+| Windows client | Staff or student workstation simulation |
+| Ubuntu Server | Backup repository or Linux service |
+| Wazuh | Security monitoring |
+| Kali | Approved validation source only |
+
+## Work Packages
+
+| Work package | Required student work | Evidence |
+|---|---|---|
+| WP01 - Crown jewels | Identify teaching files, exams, finance, identity, DNS, backups | Crown-jewel register |
+| WP02 - Attack paths | Draw three paths from student device to critical assets | Attack-path diagrams |
+| WP03 - Segmentation | Block student-to-server management and restrict admin paths | Rule matrix and logs |
+| WP04 - Identity | Review privileged groups, stale users, and share permissions | AD evidence |
+| WP05 - Backup | Build protected backup and restore workflow with synthetic data | Backup and restore proof |
+| WP06 - Detection | Configure or document detections for precursor behavior | Wazuh evidence |
+| WP07 - Tabletop | Run ransomware response discussion | Tabletop minutes |
+| WP08 - Recovery | Restore files to staging and validate with owner | RPO/RTO evidence |
+| WP09 - Management | Write principal-ready summary and next steps | Executive summary |
+
+## Required Detections
+
+At least three must be tested:
+
+| Detection | Example evidence |
+|---|---|
+| Privileged group membership change | Windows event or Wazuh alert |
+| Repeated failed login followed by success | Windows/Linux logs and Wazuh |
+| Large burst of file changes in synthetic folder | File inventory or FIM event |
+| Defender disabled or unhealthy | PowerShell evidence |
+| Backup job failure | Job log or simulated failed check |
+| Wazuh agent disconnected | Agent status timeline |
+
+Do not run ransomware, encryption malware, or destructive scripts. Use benign file-change simulations only in a synthetic folder.
+
+## Recovery Standard
+
+Students must prove:
+
+| Item | Required proof |
+|---|---|
+| Backup exists | Backup command output or job evidence |
+| Backup is protected | Access control or isolation explanation |
+| Restore works | Files restored to staging |
+| Data is usable | Owner validation or `diff` result |
+| RPO | How much data could be lost |
+| RTO | How long recovery took |
+| Monitoring after restore | Logs or agent status checked |
+
+## Instructor Injects
+
+| Inject | Expected response |
+|---|---|
+| Principal demands internet RDP | Reject unsafe request and propose secure remote support |
+| Backup check fails | Stop assumptions, troubleshoot, update risk |
+| Domain admin used from student subnet | Preserve evidence and triage privileged misuse |
+| Restore works but DNS remains down | Explain dependency recovery order |
+
+## Technical Report Template
+
+```text
+1. Executive Summary for School Leadership
+2. Scope and Safety
+3. Crown Jewels and Attack Paths
+4. Segmentation Design
+5. Identity and Privileged Access Review
+6. Backup Design
+7. Restore Test and RPO/RTO
+8. Detection Evidence
+9. Tabletop Decisions
+10. Incident Communication Template
+11. Residual Risk
+12. Recommendations
+13. Evidence Index
+```
