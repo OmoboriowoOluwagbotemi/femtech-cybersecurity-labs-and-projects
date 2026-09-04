@@ -28,17 +28,49 @@ ls -ld /srv /srv/aerotech 2>&1 | tee evidence/01-baseline/srv-before.txt
 
 ## Step 2 - Create Groups and Users
 
-```bash
-for group in engineering flightops qualityassurance research maintenance it; do
-  sudo groupadd "$group" 2>/dev/null || true
-done
+Create the groups manually. Do not use a loop for this section. The purpose is to make the student understand the relationship between Linux users, primary groups, home directories, login shells, and departmental access.
 
-for user in eng1 eng2 eng3; do sudo useradd -m -s /bin/bash -g engineering "$user" 2>/dev/null || true; done
-for user in flight1 flight2 flight3; do sudo useradd -m -s /bin/bash -g flightops "$user" 2>/dev/null || true; done
-for user in qa1 qa2 qa3; do sudo useradd -m -s /bin/bash -g qualityassurance "$user" 2>/dev/null || true; done
-for user in rd1 rd2 rd3; do sudo useradd -m -s /bin/bash -g research "$user" 2>/dev/null || true; done
-for user in maint1 maint2 maint3; do sudo useradd -m -s /bin/bash -g maintenance "$user" 2>/dev/null || true; done
-for user in it1 it2 it3; do sudo useradd -m -s /bin/bash -g it "$user" 2>/dev/null || true; done
+```bash
+sudo groupadd engineering
+sudo groupadd flightops
+sudo groupadd qualityassurance
+sudo groupadd research
+sudo groupadd maintenance
+sudo groupadd it
+```
+
+If a group already exists because the student is repeating the lab, verify it instead of creating a duplicate:
+
+```bash
+getent group engineering
+```
+
+Create the users manually:
+
+```bash
+sudo useradd -m -s /bin/bash -g engineering eng1
+sudo useradd -m -s /bin/bash -g engineering eng2
+sudo useradd -m -s /bin/bash -g engineering eng3
+
+sudo useradd -m -s /bin/bash -g flightops flight1
+sudo useradd -m -s /bin/bash -g flightops flight2
+sudo useradd -m -s /bin/bash -g flightops flight3
+
+sudo useradd -m -s /bin/bash -g qualityassurance qa1
+sudo useradd -m -s /bin/bash -g qualityassurance qa2
+sudo useradd -m -s /bin/bash -g qualityassurance qa3
+
+sudo useradd -m -s /bin/bash -g research rd1
+sudo useradd -m -s /bin/bash -g research rd2
+sudo useradd -m -s /bin/bash -g research rd3
+
+sudo useradd -m -s /bin/bash -g maintenance maint1
+sudo useradd -m -s /bin/bash -g maintenance maint2
+sudo useradd -m -s /bin/bash -g maintenance maint3
+
+sudo useradd -m -s /bin/bash -g it it1
+sudo useradd -m -s /bin/bash -g it it2
+sudo useradd -m -s /bin/bash -g it it3
 ```
 
 Set temporary passwords only if interactive login testing is required:
@@ -53,8 +85,50 @@ Validate:
 
 ```bash
 getent group engineering flightops qualityassurance research maintenance it | tee evidence/02-identity/groups.txt
-for user in eng1 eng2 eng3 flight1 flight2 flight3 qa1 qa2 qa3 rd1 rd2 rd3 maint1 maint2 maint3 it1 it2 it3; do id "$user"; done | tee evidence/02-identity/user-ids.txt
+id eng1 | tee evidence/02-identity/id-eng1.txt
+id eng2 | tee evidence/02-identity/id-eng2.txt
+id eng3 | tee evidence/02-identity/id-eng3.txt
+id flight1 | tee evidence/02-identity/id-flight1.txt
+id flight2 | tee evidence/02-identity/id-flight2.txt
+id flight3 | tee evidence/02-identity/id-flight3.txt
+id qa1 | tee evidence/02-identity/id-qa1.txt
+id qa2 | tee evidence/02-identity/id-qa2.txt
+id qa3 | tee evidence/02-identity/id-qa3.txt
+id rd1 | tee evidence/02-identity/id-rd1.txt
+id rd2 | tee evidence/02-identity/id-rd2.txt
+id rd3 | tee evidence/02-identity/id-rd3.txt
+id maint1 | tee evidence/02-identity/id-maint1.txt
+id maint2 | tee evidence/02-identity/id-maint2.txt
+id maint3 | tee evidence/02-identity/id-maint3.txt
+id it1 | tee evidence/02-identity/id-it1.txt
+id it2 | tee evidence/02-identity/id-it2.txt
+id it3 | tee evidence/02-identity/id-it3.txt
 ```
+
+Create a simple membership matrix:
+
+| Department | Group | Users |
+|---|---|---|
+| Engineering | `engineering` | `eng1`, `eng2`, `eng3` |
+| Flight Operations | `flightops` | `flight1`, `flight2`, `flight3` |
+| Quality Assurance | `qualityassurance` | `qa1`, `qa2`, `qa3` |
+| Research and Development | `research` | `rd1`, `rd2`, `rd3` |
+| Maintenance | `maintenance` | `maint1`, `maint2`, `maint3` |
+| Information Technology | `it` | `it1`, `it2`, `it3` |
+
+Command explanation:
+
+| Command or option | Meaning |
+|---|---|
+| `groupadd engineering` | Creates the local Linux group named `engineering` |
+| `useradd eng1` | Creates the local Linux user named `eng1` |
+| `-m` | Creates `/home/username` |
+| `-s /bin/bash` | Sets Bash as the login shell |
+| `-g engineering` | Makes `engineering` the user's primary group |
+| `id eng1` | Shows UID, primary group, and supplementary groups |
+| `getent group engineering` | Confirms the group exists through the system name service |
+
+Expected result: every user has a unique UID, the correct primary GID, a home directory, and no membership in unrelated department groups.
 
 ## Step 3 - Build Directory Structure
 
@@ -262,4 +336,3 @@ sha256sum --check evidence/hashes.sha256 | tee evidence/hash-check.txt
 ```
 
 The final report must explain SGID, ACLs, `umask`, SSH hardening, UFW, audit evidence, backup metadata, and remaining risk.
-

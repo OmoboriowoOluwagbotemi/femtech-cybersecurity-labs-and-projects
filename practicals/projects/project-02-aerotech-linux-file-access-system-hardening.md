@@ -168,6 +168,57 @@ Required output:
 
 Create all six department groups and all eighteen user accounts. Each user must have a unique account and correct group membership.
 
+For this project, create users and groups manually. Do not use a loop or a bulk account-creation script for the first build. The goal is for students to understand exactly what each Linux identity command does before they automate anything in later work.
+
+Required manual group commands:
+
+```bash
+sudo groupadd engineering
+sudo groupadd flightops
+sudo groupadd qualityassurance
+sudo groupadd research
+sudo groupadd maintenance
+sudo groupadd it
+```
+
+Required manual user commands:
+
+```bash
+sudo useradd -m -s /bin/bash -g engineering eng1
+sudo useradd -m -s /bin/bash -g engineering eng2
+sudo useradd -m -s /bin/bash -g engineering eng3
+
+sudo useradd -m -s /bin/bash -g flightops flight1
+sudo useradd -m -s /bin/bash -g flightops flight2
+sudo useradd -m -s /bin/bash -g flightops flight3
+
+sudo useradd -m -s /bin/bash -g qualityassurance qa1
+sudo useradd -m -s /bin/bash -g qualityassurance qa2
+sudo useradd -m -s /bin/bash -g qualityassurance qa3
+
+sudo useradd -m -s /bin/bash -g research rd1
+sudo useradd -m -s /bin/bash -g research rd2
+sudo useradd -m -s /bin/bash -g research rd3
+
+sudo useradd -m -s /bin/bash -g maintenance maint1
+sudo useradd -m -s /bin/bash -g maintenance maint2
+sudo useradd -m -s /bin/bash -g maintenance maint3
+
+sudo useradd -m -s /bin/bash -g it it1
+sudo useradd -m -s /bin/bash -g it it2
+sudo useradd -m -s /bin/bash -g it it3
+```
+
+Command meaning:
+
+| Option | Meaning |
+|---|---|
+| `useradd` | Creates a local Linux user account |
+| `-m` | Creates the user's home directory |
+| `-s /bin/bash` | Sets Bash as the user's login shell |
+| `-g groupname` | Sets the user's primary group |
+| `groupadd` | Creates a local Linux group |
+
 Validation examples:
 
 ```bash
