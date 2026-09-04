@@ -40,7 +40,7 @@ The [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) defines the mandator
 | Tool Lab 06 | Wazuh SIEM/XDR operations | 30-34 | 6-8 hours |
 | Advanced Lab 07 | Professional vulnerability assessment with Nmap and Greenbone/OpenVAS | 27-29, 36-37 | 6-8 hours |
 | Project 01 | Build a security analyst workstation and evidence workflow | 10, 11, 15 | 3-5 days |
-| Project 02 | Harden a small-business Ubuntu web server | 11-16, 21, 29 | 1 week |
+| Project 02 | AeroTech Linux file access and system hardening | 11-16, 21, 29 | 5-6 class days |
 | Project 03 | Segment a small office network with pfSense | 22-24, 27, 30 | 1 week |
 | Project 04 | Build identity and access for a growing company | 17-21, 30 | 1 week |
 | Project 05 | Run a vulnerability assessment for an internal server | 27-29, 36-37 | 1 week |

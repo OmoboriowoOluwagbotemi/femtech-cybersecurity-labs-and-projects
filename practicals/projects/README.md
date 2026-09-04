@@ -9,7 +9,7 @@ These projects are not step-by-step labs. Students receive a business problem, c
 | Project | Portfolio problem | Validates | Main tools |
 |---|---|---|---|
 | 01 | Build a security analyst workstation and evidence workflow | Tool Lab 01 | VirtualBox, Kali Linux, Bash |
-| 02 | Harden a small-business Ubuntu web server | Tool Lab 02 | Ubuntu Server, SSH, UFW, Fail2Ban, Bash |
+| 02 | AeroTech Linux file access and system hardening | Tool Lab 02 | Ubuntu Server, Linux users/groups, permissions, SGID, ACLs, SSH, UFW, auditd, backup/recovery |
 | 03 | Segment a small office network with pfSense | Tool Lab 03 | pfSense, firewall rules, aliases, logs |
 | 04 | Build identity and access for a growing company | Tool Lab 04 | Windows Server, AD DS, DNS, GPO, Event Viewer |
 | 05 | Run a vulnerability assessment for an internal server | Tool Lab 05 | Kali, Nmap, Greenbone/OpenVAS |
@@ -22,7 +22,7 @@ These projects are not step-by-step labs. Students receive a business problem, c
 ## Project Index
 
 1. [Build a Security Analyst Workstation and Evidence Workflow](project-01-analyst-workstation-evidence-workflow.md)
-2. [Harden a Small-Business Ubuntu Web Server](project-02-ubuntu-server-hardening.md)
+2. [AeroTech Linux File Access and System Hardening](project-02-aerotech-linux-file-access-system-hardening.md)
 3. [Segment a Small Office Network with pfSense](project-03-pfsense-small-office-segmentation.md)
 4. [Build Identity and Access for a Growing Company](project-04-windows-server-active-directory-identity.md)
 5. [Run a Vulnerability Assessment for an Internal Server](project-05-internal-vulnerability-assessment.md)
@@ -37,7 +37,6 @@ These projects are not step-by-step labs. Students receive a business problem, c
 The files below are optional challenge briefs and are not counted as part of the ten-project pathway:
 
 - [Fintech Payment Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md)
-- [AeroTech Aerospace Secure Department File Access](aerotech-aerospace-file-access-project.md)
 
 ## Why The Projects Exist
 
