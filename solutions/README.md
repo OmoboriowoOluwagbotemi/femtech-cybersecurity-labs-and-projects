@@ -4,6 +4,22 @@ These instructor solution guides support the ten official course projects in `pr
 
 They are written as reference implementations. Instructors may adapt IP addresses, hostnames, usernames, and available tools to match the classroom lab. Students should still be required to explain every command, screenshot, decision, failed test, and limitation in their own words.
 
+## How To Use These Solutions
+
+These solutions are not copy-and-paste scripts for students. Use them as instructor references and walkthrough guides. Each project should be taught as a sequence:
+
+1. Read the business problem.
+2. Define scope and safety limits.
+3. Record the starting state.
+4. Make one change at a time.
+5. Explain the command or GUI setting before using it.
+6. Validate the result immediately.
+7. Save evidence.
+8. Troubleshoot errors with notes.
+9. Write the technical and management reports.
+
+When a command block is provided, students must still replace lab-specific values, explain each option, and show the result. A submission should not pass if it only repeats commands without interpretation.
+
 ## Official Solution Index
 
 | Project | Solution guide |

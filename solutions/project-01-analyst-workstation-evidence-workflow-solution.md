@@ -120,7 +120,7 @@ Create `linux-review.sh`:
 nano linux-review.sh
 ```
 
-Paste:
+Type the script slowly and read each line before saving. The point of this step is to understand how a small Bash script collects repeatable evidence, not to rush through a pasted block.
 
 ```bash
 #!/usr/bin/env bash
@@ -150,7 +150,7 @@ echo "Top processes:"
 ps -eo pid,user,comm,%mem,%cpu --sort=-%mem | head
 ```
 
-Run:
+Make the script executable and run it:
 
 ```bash
 chmod 750 linux-review.sh

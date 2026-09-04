@@ -24,6 +24,10 @@ Your job is to build a repeatable analyst evidence workflow using only Kali Linu
 - Hashes prove evidence integrity.
 - The final report is safe to show in a portfolio.
 
+## Step-by-Step Completion Standard
+
+Complete this project in order. First confirm the VM is safe, then create the folder structure, then collect baseline evidence, then practice Linux commands, then write the Bash script, then validate the output, then hash the evidence, then write the report. Do not paste commands without explaining what each command proves.
+
 ## Required Work
 
 1. Verify Kali VM name, resource allocation, and network mode.

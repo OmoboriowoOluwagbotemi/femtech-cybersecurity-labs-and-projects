@@ -22,6 +22,10 @@ Northwind Legal Services has grown from five employees to forty. Users still sha
 - One workstation GPO is linked and verified.
 - Security events are generated and interpreted.
 
+## Step-by-Step Completion Standard
+
+Complete this project in order. Prepare the server first, then install AD DS and DNS, then validate the domain, then create OUs, then create groups, then create users, then apply permissions, then join a workstation, then apply GPO, then collect events. Do not create users or permissions until the identity design is written down.
+
 ## Required Work
 
 1. Prepare written scope and VM requirements.

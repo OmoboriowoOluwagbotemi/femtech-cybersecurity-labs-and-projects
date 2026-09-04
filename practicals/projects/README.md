@@ -2,7 +2,7 @@
 
 The course has exactly ten professional projects. The first seven projects validate the seven tool labs by asking students to use each tool skill to solve a realistic industry problem. Projects 08 to 10 combine the tools into larger portfolio engagements.
 
-These projects are not step-by-step labs. Students receive a business problem, constraints, required outcomes, and acceptance tests. They must plan, build, validate, troubleshoot, document evidence, and explain decisions like entry-level cybersecurity professionals.
+These projects are guided professional projects. Students receive a business problem, constraints, required outcomes, ordered work stages, and acceptance tests. They must not only paste commands. They must read each step, explain the purpose, perform the work, validate the result, troubleshoot errors, document evidence, and defend decisions like entry-level cybersecurity professionals.
 
 ## Project Pathway
 
@@ -80,6 +80,23 @@ Every project must include:
 | Troubleshoot | Error, hypothesis, test, result, fix |
 | Report | Technical report, management summary, evidence index |
 | Defend | Oral explanation of decisions and evidence |
+
+## Step-by-Step Learning Rule
+
+For every project from 01 to 10, students must follow this method:
+
+1. Read the scenario and identify the business risk.
+2. Write the scope before touching the system.
+3. Record the starting state.
+4. Complete one work package at a time.
+5. Before using any command or GUI setting, explain what it is expected to change.
+6. After every change, verify the result with evidence.
+7. Run both allowed and denied tests where access control is involved.
+8. Troubleshoot by writing the error, likely cause, test, result, and fix.
+9. Write a technical report for IT staff.
+10. Write a short management summary for non-technical stakeholders.
+
+Commands in project briefs and solution guides are examples to support learning. Students must adapt names, IP addresses, interfaces, and paths to their own lab and must be able to explain every command in an oral defense.
 
 ## Standard Submission Folder
 

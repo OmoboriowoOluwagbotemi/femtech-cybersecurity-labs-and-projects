@@ -22,6 +22,10 @@ BlueRiver Services has a Windows server, a Windows workstation, and an Ubuntu se
 - One telemetry failure is simulated with approval and recovered.
 - One tuning recommendation is written.
 
+## Step-by-Step Completion Standard
+
+Complete this project like a SOC shift. First verify Wazuh health, then confirm agents, then generate approved test events, then search alerts, then open each case, then collect supporting endpoint evidence, then decide severity, then write analyst notes, then identify tuning opportunities. Do not close an alert without evidence and explanation.
+
 ## Required Work
 
 1. Verify Wazuh services, ports, time, disk, memory, and dashboard access.

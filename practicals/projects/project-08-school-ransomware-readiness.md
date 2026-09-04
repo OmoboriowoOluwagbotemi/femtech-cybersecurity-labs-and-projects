@@ -22,6 +22,10 @@ Unity Secondary School has 300 students, 45 employees, a shared file server, an 
 - Wazuh detects key precursor events.
 - Recovery process includes communication and validation.
 
+## Step-by-Step Completion Standard
+
+Complete this project as a readiness assessment. Identify critical assets first, then design segmentation, then implement access controls, then test file permissions, then prove backup restore, then generate monitoring evidence, then write the ransomware playbook, then summarize residual risk. Do not simulate real ransomware or destructive encryption.
+
 ## Required Work
 
 1. Identify crown jewels: teaching files, exams, finance/payroll, identity, DNS, backups.

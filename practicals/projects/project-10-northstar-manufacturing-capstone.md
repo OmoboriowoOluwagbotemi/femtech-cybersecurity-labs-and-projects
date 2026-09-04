@@ -25,6 +25,10 @@ This is the final foundational capstone. Students must show they can connect fun
 - Recovery and incident procedures are tested.
 - Executive and technical reports are portfolio-ready.
 
+## Step-by-Step Completion Standard
+
+Complete the capstone as a full engagement. Start with scope, then inventory, then architecture, then identity, then network controls, then Linux and Windows hardening, then monitoring, then vulnerability management, then incident response, then recovery, then reporting. Do not work from tools first; work from the business risk and prove every control with evidence.
+
 ## Required Work
 
 1. Build or document the lab architecture.

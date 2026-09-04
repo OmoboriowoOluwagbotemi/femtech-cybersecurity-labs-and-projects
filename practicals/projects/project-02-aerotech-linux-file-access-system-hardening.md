@@ -108,6 +108,10 @@ Create these fictional records with synthetic content only:
 | SR-11 | Audit visibility | Relevant access and permission activity creates reviewable evidence |
 | SR-12 | Recovery | Backup and restore preserve content, ownership, modes, SGID, and ACLs |
 
+## Step-by-Step Completion Standard
+
+Complete the work packages in order. Do not jump directly to hardening commands. First record scope and baseline state, then manually create identity objects, then build the directory structure, then apply permissions, then test access, then harden SSH and UFW, then collect audit evidence, then test staff lifecycle changes, then prove backup and restore. Students must explain each command before using it.
+
 ## Required Evidence Structure
 
 ```text

@@ -21,6 +21,10 @@ MeridianPay processes synthetic payment workflow data in a training environment.
 - Vulnerability assessment identifies and validates risks.
 - SOC triage process creates useful decisions, not alert noise.
 
+## Step-by-Step Completion Standard
+
+Complete this project in an audit-ready order. Define payment-zone risk, design the network, configure pfSense rules, validate traffic paths, configure identity groups, enroll systems into Wazuh, run approved vulnerability checks, triage generated alerts, and write a fintech-ready report. Do not allow broad user-to-payment access as a final state.
+
 ## Required Work
 
 1. Create asset and data-flow inventory.

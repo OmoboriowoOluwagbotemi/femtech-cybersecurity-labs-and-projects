@@ -23,6 +23,10 @@ Oakbridge Accounting has staff workstations, a file server, an admin workstation
 - Firewall logs prove decisions.
 - Configuration backup and rollback plan exist.
 
+## Step-by-Step Completion Standard
+
+Complete this project in phases. Start with scope and IP planning, then back up pfSense, then configure interfaces, then configure DHCP, then create aliases, then write the rule matrix, then apply rules, then test allowed traffic, then test blocked traffic, then review logs, then export the final configuration. Do not create rules until the intended traffic flow is written down.
+
 ## Required Work
 
 1. Define USERS, SERVERS, DMZ, and ADMIN/SOC zones.
