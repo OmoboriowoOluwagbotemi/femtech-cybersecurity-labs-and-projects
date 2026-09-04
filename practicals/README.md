@@ -1,6 +1,6 @@
 # FEMTECH Cybersecurity Practical Programme
 
-## 6 Tool Labs, 1 Advanced Integration Lab, and 11 Professional Projects
+## 6 Tool Labs, 1 Advanced Integration Lab, and 10 Professional Projects
 
 This practical programme consolidates the 40-lesson Enterprise Cybersecurity Course. It is designed to move a student through four levels of performance:
 
@@ -39,17 +39,16 @@ The [Core Tool Skills Pathway](CORE_TOOL_SKILLS_PATHWAY.md) defines the mandator
 | Tool Lab 05 | Greenbone/OpenVAS vulnerability assessment on Kali | 27-29, 36-37 | 6-8 hours plus feed synchronisation |
 | Tool Lab 06 | Wazuh SIEM/XDR operations | 30-34 | 6-8 hours |
 | Advanced Lab 07 | Professional vulnerability assessment with Nmap and Greenbone/OpenVAS | 27-29, 36-37 | 6-8 hours |
-| Project 01 | Secure a community health clinic | 1-25, 36-39 | 2-3 weeks |
-| Project 02 | Make a school ransomware-ready | 1-2, 14, 19-25, 33-37 | 2 weeks |
-| Project 03 | Build a SOC for a fintech startup | 25, 30-34, 38 | 2-3 weeks |
-| Project 04 | Rescue a breached e-commerce service | 4-9, 27-35 | 2 weeks |
-| Project 05 | Secure a remote NGO workforce | 5, 20-24, 36-39 | 2 weeks |
-| Project 06 | Investigate a privileged insider | 17-21, 30-36, 38 | 2 weeks |
-| Project 07 | Protect a self-hosted cloud storage service | 4-6, 14, 21, 26, 36-37 | 2 weeks |
-| Project 08 | Conduct a threat-hunting sprint | 2, 25, 30-35, 38 | 1-2 weeks |
-| Project 09 | Perform DFIR after a Linux web compromise | 9, 13-16, 29, 33-35 | 2 weeks |
-| Project 10 | Defend Northstar Manufacturing | All 40 lessons | 3-4 weeks |
-| Project 11 | Recover the asset truth at MeridianPay | 16, 24, 26-29, 36, 38 | 5 class days or 2 weeks part-time |
+| Project 01 | Build a security analyst workstation and evidence workflow | 10, 11, 15 | 3-5 days |
+| Project 02 | Harden a small-business Ubuntu web server | 11-16, 21, 29 | 1 week |
+| Project 03 | Segment a small office network with pfSense | 22-24, 27, 30 | 1 week |
+| Project 04 | Build identity and access for a growing company | 17-21, 30 | 1 week |
+| Project 05 | Run a vulnerability assessment for an internal server | 27-29, 36-37 | 1 week |
+| Project 06 | Operate a junior SOC monitoring queue | 30-34, 38 | 1 week |
+| Project 07 | Complete a professional vulnerability remediation engagement | 27-29, 36-38 | 1-2 weeks |
+| Project 08 | Make a school ransomware-ready | 1-2, 14, 19-25, 33-37 | 2 weeks |
+| Project 09 | Build a SOC and segmentation plan for a fintech startup | 23-25, 30-34, 36, 38 | 2 weeks |
+| Project 10 | Defend Northstar Manufacturing capstone | All 40 lessons | 3-4 weeks |
 
 ## Core Tool Skill Coverage
 
@@ -336,7 +335,7 @@ Professional projects deliberately contain ambiguity. A high-scoring team docume
 
 ## Delivery Sequence
 
-Run Tool Lab 01 after Lesson 10, Tool Lab 02 after Lesson 16, Tool Lab 03 after Lesson 24, Tool Lab 04 after Lesson 20, Tool Lab 05 after Lesson 29, and Tool Lab 06 after Lesson 31. Run Advanced Lab 07 after Tool Lab 05 as the detailed vulnerability-assessment and remediation exercise. Begin Projects 01-03 as team exercises during the middle of the course. Projects 04-09 are portfolio projects. Run Project 11 after Lesson 29 as a focused asset and vulnerability-management engagement. Project 10 remains the final capstone after Lessons 39-40.
+Run Tool Lab 01 after Lesson 10, Tool Lab 02 after Lesson 16, Tool Lab 03 after Lesson 24, Tool Lab 04 after Lesson 20, Tool Lab 05 after Lesson 29, and Tool Lab 06 after Lesson 31. Run Advanced Lab 07 after Tool Lab 05 as the detailed vulnerability-assessment and remediation exercise. Use Projects 01-07 after their matching tool labs so students prove each tool skill in a real business problem. Use Projects 08-09 as combined portfolio engagements after students have completed the core tools. Project 10 remains the final capstone after Lessons 39-40.
 
 ## Practical Files
 

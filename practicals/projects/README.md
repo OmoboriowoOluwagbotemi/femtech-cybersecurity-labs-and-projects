@@ -1,120 +1,164 @@
-# Professional Project Operating Guide
+# Professional Project Portfolio Guide
 
-The eleven projects are not long labs. Students receive an outcome, incomplete information, business constraints, and scheduled injects. The team must make and defend decisions.
+The course has exactly ten professional projects. The first seven projects validate the seven tool labs by asking students to use each tool skill to solve a realistic industry problem. Projects 08 to 10 combine the tools into larger portfolio engagements.
+
+These projects are not step-by-step labs. Students receive a business problem, constraints, required outcomes, and acceptance tests. They must plan, build, validate, troubleshoot, document evidence, and explain decisions like entry-level cybersecurity professionals.
+
+## Project Pathway
+
+| Project | Portfolio problem | Validates | Main tools |
+|---|---|---|---|
+| 01 | Build a security analyst workstation and evidence workflow | Tool Lab 01 | VirtualBox, Kali Linux, Bash |
+| 02 | Harden a small-business Ubuntu web server | Tool Lab 02 | Ubuntu Server, SSH, UFW, Fail2Ban, Bash |
+| 03 | Segment a small office network with pfSense | Tool Lab 03 | pfSense, firewall rules, aliases, logs |
+| 04 | Build identity and access for a growing company | Tool Lab 04 | Windows Server, AD DS, DNS, GPO, Event Viewer |
+| 05 | Run a vulnerability assessment for an internal server | Tool Lab 05 | Kali, Nmap, Greenbone/OpenVAS |
+| 06 | Operate a junior SOC monitoring queue | Tool Lab 06 | Wazuh, Linux agent, Windows agent, alert triage |
+| 07 | Complete a professional vulnerability remediation engagement | Advanced Lab 07 | Nmap, Greenbone/OpenVAS, Ubuntu, pfSense |
+| 08 | Make a school ransomware-ready | Combined tools | pfSense, Windows Server, Ubuntu, Wazuh, backups |
+| 09 | Build a SOC and segmentation plan for a fintech startup | Combined tools | pfSense, Wazuh, Suricata/Zeek, Windows, Linux |
+| 10 | Defend Northstar Manufacturing capstone | Combined tools | All core course tools |
 
 ## Project Index
 
-1. [Secure a community health clinic](project-01-community-clinic.md)
-2. [Make a school ransomware-ready](project-02-school-ransomware-readiness.md)
-3. [Build a SOC for a fintech startup](project-03-fintech-soc.md)
-4. [Rescue a breached e-commerce service](project-04-ecommerce-breach.md)
-5. [Secure a remote NGO workforce](project-05-remote-ngo.md)
-6. [Investigate a privileged insider](project-06-privileged-insider.md)
-7. [Protect a self-hosted cloud storage service](project-07-self-hosted-cloud.md)
-8. [Conduct a threat-hunting sprint](project-08-threat-hunting-sprint.md)
-9. [Perform DFIR after a Linux web compromise](project-09-linux-dfir.md)
-10. [Defend Northstar Manufacturing](project-10-northstar-capstone.md)
-11. [Recover the asset truth at MeridianPay](project-11-asset-discovery-consulting-engagement.md)
+1. [Build a Security Analyst Workstation and Evidence Workflow](project-01-analyst-workstation-evidence-workflow.md)
+2. [Harden a Small-Business Ubuntu Web Server](project-02-ubuntu-server-hardening.md)
+3. [Segment a Small Office Network with pfSense](project-03-pfsense-small-office-segmentation.md)
+4. [Build Identity and Access for a Growing Company](project-04-windows-server-active-directory-identity.md)
+5. [Run a Vulnerability Assessment for an Internal Server](project-05-internal-vulnerability-assessment.md)
+6. [Operate a Junior SOC Monitoring Queue](project-06-junior-soc-monitoring-queue.md)
+7. [Complete a Professional Vulnerability Remediation Engagement](project-07-vulnerability-remediation-engagement.md)
+8. [Make a School Ransomware-Ready](project-08-school-ransomware-readiness.md)
+9. [Build a SOC and Segmentation Plan for a Fintech Startup](project-09-fintech-soc-segmentation.md)
+10. [Defend Northstar Manufacturing](project-10-northstar-manufacturing-capstone.md)
 
-## Additional Class Projects
+## Optional Instructor Challenge Briefs
 
-- [Fintech Payment Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md) — an outcome-based pfSense and Suricata challenge in which students protect payment operations, investigate suspected lateral movement, assess fraud and customer-data risk, and preserve service availability without receiving procedural solution steps.
-- [AeroTech Aerospace Secure Department File Access](aerotech-aerospace-file-access-project.md) - an outcome-based Ubuntu identity, permissions, SGID, ACL, audit, lifecycle, and recovery challenge for six aerospace departments.
+The files below are optional challenge briefs and are not counted as part of the ten-project pathway:
 
-## Mandatory Team Roles
+- [Fintech Payment Network Segmentation and IDS/IPS Defence](pfsense-ids-ips-student-task-brief.md)
+- [AeroTech Aerospace Secure Department File Access](aerotech-aerospace-file-access-project.md)
 
-Rotate roles between projects:
+## Why The Projects Exist
 
-- Engagement lead: scope, schedule, approvals, and stakeholder updates.
-- Security architect: data flows, trust boundaries, and control design.
-- Systems/network engineer: implementation and rollback.
-- SOC/detection engineer: telemetry, detections, and validation.
-- Incident/vulnerability analyst: evidence, triage, and risk.
-- Quality reviewer: reproducibility, secrets, screenshots, and report challenge.
+The labs teach students how to operate tools. The projects prove students can use those tools to solve business problems.
 
-One person may cover two roles in a small team, but nobody approves their own high-risk change.
+Recruiters and hiring managers should be able to review a student's sanitized portfolio and see:
+
+- Clear scope and authorization.
+- Strong fundamentals, not blind tool usage.
+- Evidence that controls worked.
+- Evidence that blocked or denied tests worked.
+- Troubleshooting notes.
+- Risk-based decisions.
+- Technical documentation.
+- Plain-language management communication.
+
+## Mandatory Project Rules
+
+1. Work only on systems explicitly listed in the project scope.
+2. Use synthetic data only.
+3. Do not scan public systems.
+4. Do not use real credentials, real patient records, real student records, real financial records, or real employer data.
+5. Do not run denial-of-service tests, real malware, credential theft, persistence, or public exploit code.
+6. Record source, target, purpose, date, time, and approval before scanning or making security changes.
+7. Capture before, change, after, and rollback evidence.
+8. Run both positive and negative validation tests.
+9. Sanitize secrets before publishing portfolio evidence.
+10. Explain limitations and residual risk honestly.
 
 ## Required Project Stages
 
-1. **Discovery:** assets, owners, business services, data, dependencies, constraints, and unknowns.
-2. **Scope:** written authorisation, targets, exclusions, test limits, and stop conditions.
-3. **Design:** topology, data flows, threat model, risk register, control choices, and rejected options.
-4. **Plan:** backlog, change tickets, acceptance tests, rollback, evidence plan, and communication cadence.
-5. **Build:** small, versioned changes with before/change/after evidence.
-6. **Validate:** functional, security-positive, security-negative, monitoring, recovery, and regression tests.
-7. **Operate:** health checks, alert triage, vulnerability cycle, access reviews, and inject response.
-8. **Report:** executive outcome, technical evidence, residual risk, roadmap, and oral defence.
+Every project must include:
 
-## Common Command Checkpoints
+| Stage | Student output |
+|---|---|
+| Scope | Written authorization, allowed targets, prohibited actions, stop conditions |
+| Discovery | Asset, identity, service, data, and dependency notes |
+| Plan | Requirements, assumptions, risks, test plan, rollback plan |
+| Build | Configuration or investigation work with evidence |
+| Validate | Positive tests, negative tests, regression checks, logs |
+| Troubleshoot | Error, hypothesis, test, result, fix |
+| Report | Technical report, management summary, evidence index |
+| Defend | Oral explanation of decisions and evidence |
 
-### Linux
+## Standard Submission Folder
 
-```bash
-date -u +'%Y-%m-%dT%H:%M:%SZ'
-hostnamectl
-ip -br address
-ip route
-sudo ss -lntup
-sudo systemctl --failed
-sudo journalctl -p warning --since '-2 hours' --no-pager
-sudo ufw status verbose
+```text
+project-name/
+  README.md
+  scope-and-authorization.md
+  design-or-plan/
+  evidence/
+    01-before/
+    02-change/
+    03-validation/
+    04-troubleshooting/
+    05-report-support/
+  reports/
+    technical-report.md
+    executive-summary.md
+  portfolio/
+    sanitized-summary.md
+    screenshots/
+  hashes.sha256
 ```
 
-### Windows and Active Directory
+## Evidence Quality Standard
 
-```powershell
-Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion,OsBuildNumber,CsName
-Get-NetIPConfiguration
-Get-NetFirewallProfile
-Get-MpComputerStatus
-Get-ADDomain
-Get-ADDomainController -Filter *
-dcdiag /test:dns
-repadmin /replsummary
-gpresult /h C:\project-gpresult.html
-```
+Strong evidence includes:
 
-### pfSense and network validation
+- Hostname and IP address proof.
+- Date and UTC time.
+- Commands or GUI path used.
+- Saved terminal output.
+- Screenshots with enough context.
+- Exported configurations or reports.
+- Log entries showing allowed, denied, failed, or changed activity.
+- Hashes for important files.
+- Student interpretation.
 
-```bash
-ip route get <TARGET_IP>
-nc -vz -w 3 <TARGET_IP> <PORT>
-curl -vk --connect-timeout 5 https://<TARGET_IP>:<PORT>/
-nmap -Pn -n -sT -p <APPROVED_PORTS> --reason <APPROVED_TARGETS>
-```
+A screenshot alone is weak evidence if it does not show what system, time, user, or test produced the result.
 
-### Evidence and integrity
+## Portfolio Safety
 
-```bash
-find evidence -type f ! -name hashes.sha256 -print0 | sort -z | xargs -0 sha256sum > evidence/hashes.sha256
-sha256sum --check evidence/hashes.sha256
-```
+Students may publish sanitized project summaries, but they must not publish:
 
-These are checkpoints, not a substitute for project-specific tests.
+- Passwords.
+- Tokens.
+- Private keys.
+- Real names of private individuals.
+- Real customer, patient, student, or employee records.
+- Public IP scan results.
+- Vulnerability reports for systems they do not own.
+- Screenshots exposing secrets or personal data.
 
-## Inject Rules
+## Project Assessment Model
 
-The instructor releases injects only after the team has captured baseline evidence. Students must:
+Each project is scored out of 100:
 
-1. Record receipt and UTC time.
-2. State impact on scope, severity, schedule, and risk.
-3. Identify what is known, unknown, and assumed.
-4. Request authority for new actions.
-5. Update plans and stakeholders.
-6. Preserve pre-response evidence.
-7. Perform and validate the approved response.
+| Category | Points | Full-credit standard |
+|---|---:|---|
+| Scope, safety, and ethics | 10 | Clear authorization, correct targets, no real data, no unsafe activity |
+| Technical fundamentals | 15 | Student explains the underlying concepts, not only tool buttons |
+| Implementation or investigation | 20 | The project work solves the stated business problem |
+| Validation | 20 | Positive, negative, log, and regression evidence prove the outcome |
+| Troubleshooting | 10 | Student documents problems clearly and fixes them logically |
+| Evidence quality | 10 | Evidence is timestamped, organized, hashed, and sanitized |
+| Reporting | 10 | Technical report and executive summary are clear and useful |
+| Oral defense | 5 | Student can explain decisions, trade-offs, and remaining risk |
 
-The team loses points for silently ignoring an inject or performing unauthorised containment, even if the technical action works.
+## First-Job Readiness Standard
 
-## Project Definition of Done
+The projects are foundational, but they must still look professional. A student who completes them well should be able to discuss real entry-level tasks such as:
 
-- The named business service works.
-- The design enforces defined trust boundaries and least privilege.
-- Critical changes have rollback and recovery evidence.
-- Logs arrive from every required source and telemetry gaps are monitored.
-- At least one custom detection has positive and negative tests.
-- The vulnerability register has owners and deadlines.
-- The incident runbook has been exercised.
-- Evidence is timestamped, hashed, sanitised, and reproducible.
-- Residual risks and limitations are explicit.
-- A nontechnical executive can understand the decision required.
+- Setting up an analyst workstation.
+- Hardening Linux services.
+- Creating firewall rules and validating segmentation.
+- Managing Windows users, groups, and GPO basics.
+- Running a safe vulnerability assessment.
+- Triage of SIEM alerts.
+- Explaining risk to a manager.
+- Writing evidence-based security reports.
+
+Completion does not guarantee employment. The goal is to produce practical proof that a student has solid fundamentals, can troubleshoot, and can use tools responsibly to solve real security problems.
