@@ -18,6 +18,39 @@ FEMTECH needs visibility into Linux and Windows activity. You will deploy or use
 | Kali | Test source | `10.10.10.60` |
 | pfSense | Firewall/log source | Segment gateways |
 
+## Required Starting Materials
+
+Before starting, confirm:
+
+| Requirement | Minimum standard |
+|---|---|
+| Wazuh server VM | Installed or instructor-prepared, reachable at `10.10.40.10` |
+| Ubuntu agent VM | Running and reachable at `10.10.20.20` |
+| Windows agent VM | Windows Server or Windows client available for agent installation |
+| Kali VM | Available for generating approved test events |
+| Time synchronization | All systems have reasonable time and timezone settings |
+| Credentials | Stored safely and not pasted into reports |
+| Network path | Agent systems can reach the Wazuh server on required ports |
+
+Recommended Wazuh server resources:
+
+| Resource | Minimum | Better classroom experience |
+|---|---:|---:|
+| CPU | 2 cores | 4 cores |
+| RAM | 4 GB | 8 GB or more |
+| Disk | 50 GB | 100 GB or more |
+
+If Wazuh is not already installed, the instructor should provide either an instructor-prepared Wazuh VM or an approved installation guide for the current Wazuh version. Students should preserve the installation evidence, but they must not publish generated passwords, certificates, tokens, or enrollment secrets.
+
+Common Wazuh ports in this lab:
+
+| Port | Protocol | Purpose |
+|---:|---|---|
+| `1514` | TCP or UDP depending on configuration | Agent event forwarding |
+| `1515` | TCP | Agent enrollment and registration |
+| `443` | TCP | Dashboard access |
+| `9200` | TCP | Indexer API, normally restricted to trusted administration |
+
 ## Step 1 - Prepare Evidence
 
 ```bash
@@ -42,7 +75,14 @@ sudo ss -lntp | grep -E ':1514|:1515|:443|:9200' \
   | tee ~/femtech-evidence/wazuh-tool-lab/01-manager/listeners.txt
 ```
 
-If Wazuh is not installed, use the current official quickstart approved by the instructor and preserve installation evidence. Do not print secrets into reports.
+Also record time status:
+
+```bash
+date -u | tee ~/femtech-evidence/wazuh-tool-lab/01-manager/manager-time-utc.txt
+timedatectl | tee ~/femtech-evidence/wazuh-tool-lab/01-manager/manager-timedatectl.txt
+```
+
+If Wazuh is not installed, stop and use the instructor-approved installation path. Do not continue with agent onboarding until the manager, indexer, dashboard, and Filebeat are healthy.
 
 ## Step 3 - Onboard Ubuntu Agent
 
@@ -63,11 +103,26 @@ WAZUH_MANAGER=10.10.40.10
 WAZUH_AGENT_NAME=lin01
 ```
 
+Beginner installation flow:
+
+1. In the Wazuh dashboard, open the agent deployment or agent enrollment page.
+2. Choose Linux DEB or RPM based on the Ubuntu system.
+3. Enter manager address `10.10.40.10`.
+4. Set agent name `lin01`.
+5. Copy only the generated installation command into the Ubuntu terminal.
+6. Run the command on Ubuntu.
+7. Start or restart the Wazuh agent.
+8. Confirm the agent appears as active in the dashboard.
+
+Do not paste generated enrollment keys or passwords into the lab report.
+
 On the manager:
 
 ```bash
 sudo /var/ossec/bin/agent_control -lc | tee ~/femtech-evidence/wazuh-tool-lab/02-agents/agent-list.txt
 ```
+
+Expected result: `lin01` appears in the agent list and shows as active after a short delay.
 
 ## Step 4 - Onboard Windows Agent
 
@@ -77,6 +132,18 @@ On Windows:
 2. Set the manager IP to `10.10.40.10`.
 3. Name the agent clearly, such as `win11-01` or `dc01`.
 4. Start the agent service.
+
+Beginner installation flow:
+
+1. In the Wazuh dashboard, open the agent deployment page.
+2. Select Windows.
+3. Enter manager address `10.10.40.10`.
+4. Set the agent name.
+5. Copy the generated PowerShell or MSI command.
+6. Run PowerShell as Administrator on Windows.
+7. Install the agent.
+8. Start the Wazuh service.
+9. Return to the Wazuh dashboard and confirm the agent is active.
 
 PowerShell evidence:
 
@@ -88,6 +155,16 @@ Test-NetConnection 10.10.40.10 -Port 1515
 ```
 
 Export screenshots or text output without exposing secrets.
+
+If the Windows agent does not appear:
+
+| Check | Expected result |
+|---|---|
+| `Get-Service WazuhSvc` | Service exists and is running |
+| `Test-NetConnection 10.10.40.10 -Port 1514` | TCP test succeeds if TCP is used |
+| `Test-NetConnection 10.10.40.10 -Port 1515` | Enrollment path succeeds |
+| Agent log | No repeated connection or enrollment errors |
+| Dashboard time range | Current time window selected |
 
 ## Step 5 - Generate Linux Authentication Events
 
@@ -104,6 +181,8 @@ In Wazuh dashboard, search:
 ```text
 agent.name: lin01 AND (sshd OR authentication)
 ```
+
+If the search returns nothing, widen the time range first. Many beginner SIEM errors are search-window errors, not tool failures.
 
 Record:
 
@@ -168,6 +247,18 @@ Recommended action:
 Severity:
 Reason for severity:
 ```
+
+Analyst decision options:
+
+| Decision | Meaning |
+|---|---|
+| Benign true positive | The activity happened, but it was authorized or expected |
+| Suspicious | The activity needs more investigation |
+| Incident | Evidence shows security impact or active compromise |
+| False positive | The alert did not represent the activity claimed |
+| Tuning candidate | The alert is valid but too noisy for its current level or condition |
+
+Students must not call an alert an incident only because it is red or high severity. They must explain evidence, impact, and recommended response.
 
 ## Step 9 - Simulate Telemetry Failure
 
@@ -373,3 +464,16 @@ Title: Wazuh Alert Triage Report
 - Why a failed login alone is not automatically an incident.
 - Why file integrity monitoring proves a change but not attacker intent.
 - Why alert tuning must not hide real risk.
+
+### Entry-Level SOC Job Readiness Check
+
+The student is ready to move forward when they can:
+
+| Skill | Student can demonstrate |
+|---|---|
+| SIEM data flow | Explain endpoint log, agent, manager, decoder, rule, indexer, dashboard, triage |
+| Agent operations | Onboard Linux and Windows agents and prove they are active |
+| Alert search | Use agent name, event text, user, source IP, and time range to find evidence |
+| Triage | Separate benign, suspicious, incident, false positive, and tuning candidate |
+| Troubleshooting | Identify whether a missing alert is caused by endpoint logging, agent health, network ports, time range, or rule logic |
+| Communication | Write a clear triage note and management summary |

@@ -1207,3 +1207,18 @@ The student passes this lab when:
 - Relevant Windows Security events are found and explained.
 - Evidence files are collected and hashed.
 - The final report explains both the technical actions and the security purpose.
+
+## Entry-Level Job Readiness Check
+
+The student is ready to continue when they can:
+
+| Skill | Student can demonstrate |
+|---|---|
+| Windows Server administration | Rename a server, set static IP addressing, and verify services |
+| Active Directory basics | Explain domains, forests, domain controllers, OUs, users, groups, and DNS dependency |
+| Identity operations | Create users and groups manually and use group-based access control |
+| Access control | Prove one authorized access test and one denied access test |
+| Group Policy | Link a basic workstation GPO and prove it applied with `gpresult` |
+| Windows logging | Find and explain important Security event IDs such as `4624`, `4625`, `4720`, and Kerberos events |
+| Troubleshooting | Diagnose DNS, time, group membership, permission, and GPO problems |
+| Professional reporting | Produce evidence and explain the business value of centralized identity |

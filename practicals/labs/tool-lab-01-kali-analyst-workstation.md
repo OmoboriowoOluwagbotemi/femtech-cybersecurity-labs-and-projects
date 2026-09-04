@@ -835,3 +835,17 @@ Submit the `~/femtech-evidence/kali-intro-lab` folder containing:
 ## Pass Condition
 
 The student passes when they can open Kali in VirtualBox, use the Linux terminal, navigate the filesystem, create and manage files, explain basic users and permissions, identify processes and services, understand packages and logs, check local network settings, use beginner Bash variables and loops, run simple scripts, and save evidence.
+
+## Entry-Level Job Readiness Check
+
+The student is ready to continue when they can:
+
+| Skill | Student can demonstrate |
+|---|---|
+| Terminal confidence | Run commands slowly, read output, and correct simple typing mistakes |
+| Linux navigation | Move through folders, identify paths, and understand where evidence is stored |
+| File handling | Create, view, copy, move, and protect files without damaging system files |
+| Permissions | Explain owner, group, other, read, write, execute, and common modes such as `600` and `644` |
+| Basic Bash | Use variables, command substitution, loops, and a simple review script |
+| Evidence habit | Save command output, create hashes, and explain what the evidence proves |
+| Troubleshooting | Use `pwd`, `ls`, `man`, `--help`, logs, and careful observation before asking for help |

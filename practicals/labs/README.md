@@ -60,3 +60,20 @@ A lab is incomplete until it contains:
 - A clear statement of remaining risk and next action.
 
 Screenshots are allowed, but they must support evidence rather than replace it. Strong submissions include saved command output, configuration exports, log files, reports, PCAPs, EVTX files, CSV/XML/JSON exports, and written interpretation.
+
+## Job-Ready Lab Quality Gate
+
+Before a student is marked complete for the tool pathway, confirm they can do more than follow commands. They must be able to explain, validate, troubleshoot, and report.
+
+| Quality area | Minimum standard |
+|---|---|
+| Technical understanding | Student can explain what the tool does, what problem it solves, and what evidence proves success |
+| Manual skill | Student can perform core GUI or CLI steps without relying only on automation |
+| Validation | Student proves both positive results and expected blocked or denied results |
+| Troubleshooting | Student can identify whether a failure is caused by IP addressing, DNS, firewall rules, service state, credentials, time, permissions, logs, or tool configuration |
+| Evidence handling | Student saves outputs, exports, screenshots, hashes, and written interpretation without exposing secrets |
+| Security judgment | Student separates exposure, vulnerability, threat, risk, control, remediation, mitigation, and residual risk |
+| Communication | Student writes a technical summary and a plain management summary |
+| Professional behavior | Student respects scope, avoids public scanning, avoids exploitation, protects credentials, and asks for approval before risky changes |
+
+Completing these labs does not guarantee employment by itself. The goal is to give students a strong practical foundation for entry-level interviews, junior SOC work, security administration, vulnerability management support, and real troubleshooting conversations.

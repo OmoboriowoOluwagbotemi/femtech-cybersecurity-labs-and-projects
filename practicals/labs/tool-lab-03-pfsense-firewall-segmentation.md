@@ -622,3 +622,17 @@ Submit:
 
 The student passes when they can explain the purpose of pfSense, identify interfaces and zones, create clear aliases, build simple allow and block rules, place rules in the correct order, prove allowed and blocked traffic with logs, export backups, and explain the business value of segmentation.
 
+## Entry-Level Job Readiness Check
+
+The student is ready to continue when they can:
+
+| Skill | Student can demonstrate |
+|---|---|
+| Network zoning | Explain USERS, SERVERS, DMZ, SOC, gateway, subnet, and traffic direction |
+| Firewall rule design | Build a rule plan before clicking and avoid broad `any to any` access |
+| Rule order | Explain why the first matching rule matters |
+| Positive testing | Prove approved traffic is allowed |
+| Negative testing | Prove unapproved traffic is blocked |
+| Log interpretation | Use firewall logs to explain source, destination, port, action, and rule |
+| Change control | Export backups before and after changes and document rollback thinking |
+| Business communication | Explain how segmentation reduces lateral movement and protects critical services |
