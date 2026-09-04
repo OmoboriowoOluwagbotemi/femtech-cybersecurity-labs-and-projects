@@ -41,6 +41,29 @@ Use Microsoft evaluation software only for training and evaluation. Do not use e
 
 Use only synthetic users and synthetic data. Do not use real staff names, real passwords, real customer data, or real organizational documents.
 
+## Required Starting Materials
+
+Before starting the lab, confirm that you have:
+
+| Requirement | Minimum recommendation | Notes |
+|---|---|---|
+| Host computer | 16 GB RAM or more | 8 GB may work slowly, but Windows Server plus a Windows client can become unstable |
+| Hypervisor | VirtualBox or VMware | Use the same hypervisor for both Windows VMs if possible |
+| Windows Server ISO | Microsoft Windows Server Evaluation | Desktop Experience is easier for beginners than Server Core |
+| Windows client ISO | Windows 10 or Windows 11 Evaluation | A client VM is required for domain join and access testing |
+| Network | Same isolated lab network for server and client | Do not expose the domain controller directly to a public network |
+| Administrator password | Classroom-approved password | Never reuse a personal password |
+| Lab notebook | Digital or paper | Record IP addresses, errors, screenshots, and fixes |
+
+Recommended VM resources:
+
+| VM | CPU | RAM | Disk |
+|---|---:|---:|---:|
+| Windows Server `DC01` | 2 cores | 4 GB to 6 GB | 60 GB |
+| Windows client | 2 cores | 4 GB | 50 GB |
+
+If the host computer has limited resources, run only the VM needed for the current step. For example, configure `DC01` first, then start the Windows client when you reach the domain-join section.
+
 Take a VM snapshot before major changes:
 
 | Snapshot point | Why it matters |
@@ -87,21 +110,24 @@ After completing this lab, students will be able to:
 
 Follow this order carefully:
 
-1. Confirm the VM network is correct.
-2. Rename the Windows Server to `DC01`.
-3. Configure a static IP address on `DC01`.
-4. Install AD DS and DNS Server.
-5. Promote `DC01` to a domain controller for `femtech.lab`.
-6. Validate domain controller health.
-7. Create OUs.
-8. Create groups.
-9. Create users.
-10. Assign users to groups.
-11. Create a shared folder and configure permissions.
-12. Join a Windows client to the domain.
-13. Create and apply a basic GPO.
-14. Generate security events.
-15. Collect evidence and complete the report.
+1. Install Windows Server with Desktop Experience if it is not already installed.
+2. Install Windows client if it is not already installed.
+3. Confirm both VMs are on the correct isolated network.
+4. Rename the Windows Server to `DC01`.
+5. Configure a static IP address on `DC01`.
+6. Check time and timezone.
+7. Install AD DS and DNS Server.
+8. Promote `DC01` to a domain controller for `femtech.lab`.
+9. Validate domain controller health.
+10. Create OUs.
+11. Create groups.
+12. Create users.
+13. Assign users to groups.
+14. Create a shared folder and configure permissions.
+15. Join a Windows client to the domain.
+16. Create and apply a basic GPO.
+17. Generate security events.
+18. Collect evidence and complete the report.
 
 ## Lab Credentials
 
@@ -152,6 +178,29 @@ True
 
 Before changing Windows Server, confirm that the VM is connected to the correct network.
 
+If Windows Server is not installed yet:
+
+1. Create a new VM.
+2. Attach the Windows Server Evaluation ISO.
+3. Start the VM.
+4. Select language, time, and keyboard options.
+5. Click Install now.
+6. Choose Windows Server with Desktop Experience.
+7. Choose Custom installation.
+8. Select the virtual disk.
+9. Allow installation to complete.
+10. Set the local Administrator password.
+11. Sign in and wait for Server Manager to open.
+
+If the Windows client is not installed yet:
+
+1. Create a second VM.
+2. Attach the Windows 10 or Windows 11 ISO.
+3. Install Windows normally.
+4. Create a local administrator account.
+5. Keep the client in a workgroup for now.
+6. Do not join the domain until Step 14.
+
 In VirtualBox:
 
 1. Shut down the Windows Server VM if it is running.
@@ -177,6 +226,16 @@ Client VM network type:
 Gateway IP:
 Instructor approval:
 ```
+
+Checkpoint before continuing:
+
+| Check | Expected result |
+|---|---|
+| Server and client can be placed on the same lab network | Yes |
+| Server has enough RAM to boot normally | Yes |
+| Windows Server opens Server Manager | Yes |
+| Windows client can reach network settings | Yes |
+| Snapshot taken before AD changes | Yes |
 
 ## Step 3 - Rename the Server Manually
 
@@ -257,6 +316,34 @@ Why should the domain controller use a static IP address?
 Why should domain clients use the domain controller as DNS?
 What can break if DNS is configured incorrectly?
 ```
+
+## Precheck - Check Time and Timezone
+
+Kerberos authentication is sensitive to time differences. In a domain, large time differences between clients and domain controllers can cause logon failures even when the username and password are correct.
+
+On `DC01`:
+
+1. Open Server Manager.
+2. Select Local Server.
+3. Check Time zone.
+4. Correct the time zone if it is wrong.
+5. Confirm the date and time are reasonable for the lab.
+
+Verify:
+
+```powershell
+Get-Date
+w32tm /query /status
+```
+
+Save evidence:
+
+```powershell
+Get-Date | Out-File C:\FEMTECH-Evidence\Tool-Lab-04\server-date-time.txt
+w32tm /query /status | Out-File C:\FEMTECH-Evidence\Tool-Lab-04\server-time-status.txt
+```
+
+Beginner note: In a real enterprise, domain time is planned carefully. Workstations usually synchronize with the domain hierarchy, and the domain controller holding the PDC Emulator role is commonly configured with a reliable time source.
 
 ## Step 5 - Install AD DS and DNS Using Server Manager
 
@@ -682,6 +769,20 @@ After restart, sign in as:
 FEMTECH\aokoro
 ```
 
+If Windows says the password must be changed before signing in:
+
+1. Enter the temporary classroom password.
+2. Create a new classroom-approved password.
+3. Confirm the new password.
+4. Do not record the password in the report.
+5. Sign in again if prompted.
+
+If the sign-in screen shows only the local computer name, choose Other user and type the full domain format:
+
+```text
+FEMTECH\aokoro
+```
+
 Verify from the client:
 
 ```powershell
@@ -797,6 +898,23 @@ Save evidence from the client:
 gpresult /r | Out-File C:\FEMTECH-Evidence\Tool-Lab-04\client-gpresult-after-gpo.txt
 ```
 
+Read the `gpresult /r` output carefully. Look under Computer Settings and confirm that `FEMTECH Workstation Security Baseline` appears in the list of applied Group Policy Objects.
+
+For a more detailed policy report, run:
+
+```powershell
+gpresult /h C:\FEMTECH-Evidence\Tool-Lab-04\client-gpresult-after-gpo.html
+```
+
+Expected result:
+
+| Check | Expected result |
+|---|---|
+| Computer is in `FEMTECH Workstations` OU | Yes |
+| `gpupdate /force` completes | Yes |
+| `gpresult /r` shows the workstation GPO | Yes |
+| HTML policy report is created | Yes |
+
 Save a GPO report from `DC01`:
 
 ```powershell
@@ -853,12 +971,23 @@ Perform these actions:
 | Access HR share as Ada | Windows client | File/share access activity if auditing is configured |
 | Attempt HR share access as Tunde | Windows client | Access denied behavior |
 
+Where to look:
+
+| Evidence source | Events commonly found there |
+|---|---|
+| Windows client Security log | Interactive logon success, interactive logon failure, local policy processing |
+| Domain controller Security log | Domain account creation, domain group membership changes, Kerberos authentication activity |
+| File server Security log | File/share access events when object access auditing is configured |
+
 Important Windows Security event IDs:
 
 | Event ID | Meaning | Why analysts care |
 |---:|---|---|
 | 4624 | Successful logon | Confirms who accessed a system |
 | 4625 | Failed logon | Helps detect password guessing or user error |
+| 4768 | Kerberos authentication ticket requested | Helps investigate domain authentication activity |
+| 4769 | Kerberos service ticket requested | Helps investigate access to domain services |
+| 4771 | Kerberos pre-authentication failed | Helps detect failed domain authentication attempts |
 | 4720 | User account created | Helps detect unauthorized account creation |
 | 4726 | User account deleted | Helps detect suspicious account removal |
 | 4728 | Member added to a global group | Helps detect privilege or access changes |
@@ -889,11 +1018,13 @@ Review logs:
 Save recent security events:
 
 ```powershell
-Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4720,4728,4732,4738,4740; StartTime=(Get-Date).AddHours(-4)} |
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4768,4769,4771,4720,4728,4732,4738,4740; StartTime=(Get-Date).AddHours(-4)} |
 Select-Object TimeCreated,Id,ProviderName,Message |
 Format-List |
 Out-File C:\FEMTECH-Evidence\Tool-Lab-04\security-events-selected.txt
 ```
+
+If a failed password attempt does not appear as `4625` on the domain controller, check the Windows client Security log and then check the domain controller for Kerberos failure events such as `4771`. This is normal because Windows logs different parts of authentication on different systems.
 
 Export the Security log:
 
@@ -918,6 +1049,7 @@ Out-File C:\FEMTECH-Evidence\Tool-Lab-04\Security-Lab04.evtx.sha256.txt
 | Tunde can access HR share | Broad permissions still exist | Check share and NTFS permissions | Remove unnecessary `Everyone` or `Domain Users` access |
 | GPO does not apply | Computer account is in wrong OU | ADUC and `gpresult /r` | Move computer to `FEMTECH Workstations` and run `gpupdate /force` |
 | Login fails after password change | User typed wrong domain or password | `whoami`, sign-in screen domain | Use `FEMTECH\username` format |
+| Correct password fails during domain logon | Time difference is too large | `Get-Date`, `w32tm /query /status` | Correct time and timezone, then retry |
 | Events are missing | Wrong system or wrong time window | Event Viewer filter | Check both client and DC, increase time range |
 | `dcdiag` shows DNS issues | DNS role or records are not healthy | DNS Manager and `dcdiag` | Restart DNS service and review zone records |
 
@@ -1008,6 +1140,8 @@ Submit:
 - `hostname.txt`
 - `ipconfig-dc01.txt`
 - `net-ip-configuration-dc01.txt`
+- `server-date-time.txt`
+- `server-time-status.txt`
 - `installed-windows-features.txt`
 - `ad-domain.txt`
 - `ad-forest.txt`
@@ -1023,6 +1157,7 @@ Submit:
 - `client-whoami.txt`
 - `client-domain-controller.txt`
 - `client-gpresult-after-gpo.txt`
+- `client-gpresult-after-gpo.html`
 - `workstation-security-baseline-gpo.html`
 - `dns-zones.txt`
 - `resolve-domain-name.txt`
