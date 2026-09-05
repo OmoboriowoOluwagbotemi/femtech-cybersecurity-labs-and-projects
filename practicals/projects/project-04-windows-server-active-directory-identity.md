@@ -38,7 +38,7 @@ Complete this project in order. Prepare the server first, then install AD DS and
 8. Create two or more synthetic users.
 9. Configure a shared folder using share and NTFS permissions.
 10. Join a Windows client to the domain.
-11. Link a basic workstation GPO and verify with `gpresult`.
+11. Link a basic workstation GPO and verify with Group Policy Management or Group Policy Results.
 12. Collect Event Viewer evidence for logon and account/group changes.
 
 ## Minimum Evidence
@@ -50,7 +50,7 @@ Complete this project in order. Prepare the server first, then install AD DS and
 04-ou-group-user-proof.txt
 05-share-and-ntfs-permissions.txt
 06-client-domain-join-proof.txt
-07-gpresult-proof.html
+07-group-policy-results-proof.png
 08-security-events-selected.txt
 09-evtx-export-hash.txt
 technical-report.md
@@ -65,7 +65,7 @@ executive-summary.md
 | Disabled user login | Denied |
 | Authorized group access | Allowed |
 | Unauthorized user access | Denied |
-| GPO application | Visible in `gpresult` |
+| GPO application | Visible in Group Policy Results |
 | Security logs | Relevant event IDs are found and explained |
 
 ## Oral Defense
@@ -119,9 +119,9 @@ The business problem is centralized identity and accountable access. Students mu
 |---|---|---|
 | WP01 - Scope | Define domain, users, data, systems, and prohibited actions | Authorization record |
 | WP02 - Server build | Configure hostname, static IP, DNS, AD DS, and domain promotion | Server and AD evidence |
-| WP03 - AD structure | Create OUs for users, groups, workstations, servers, and disabled accounts | ADUC or PowerShell output |
+| WP03 - AD structure | Create OUs for users, groups, workstations, servers, and disabled accounts | ADUC screenshots |
 | WP04 - Access control | Create groups, shared folders, share permissions, and NTFS permissions | ACL and group evidence |
-| WP05 - Workstation join | Join client to domain and verify DNS/domain controller discovery | `whoami`, `nltest`, `gpresult` |
+| WP05 - Workstation join | Join client to domain and verify DNS/domain controller discovery | System settings and domain login evidence |
 | WP06 - Policy | Apply one security GPO to workstation OU | GPO report and client proof |
 | WP07 - Logs | Generate and review security events | Event IDs and EVTX/hash |
 | WP08 - Lifecycle | Disable a user and prove access is removed | Before/after tests |
@@ -147,7 +147,7 @@ The business problem is centralized identity and accountable access. Students mu
 | Legal assistant modifies restricted case file | Denied unless approved |
 | HR user opens legal case file | Denied |
 | Former user logs in | Denied |
-| Workstation receives GPO | Visible in `gpresult` |
+| Workstation receives GPO | Visible in Group Policy Results |
 | Group membership change appears in logs | Event evidence exists |
 
 ## Instructor Injects
@@ -155,7 +155,7 @@ The business problem is centralized identity and accountable access. Students mu
 | Inject | Expected response |
 |---|---|
 | A former employee can still access a share | Check active sessions, group membership, disabled status, and cached credentials |
-| GPO does not apply | Check OU location, security filtering, DNS, time, and `gpresult` |
+| GPO does not apply | Check OU location, security filtering, DNS, time, and Group Policy Results |
 | User cannot join domain | Check DNS points to domain controller |
 | Sensitive folder allows `Domain Users` | Remove broad access and retest |
 

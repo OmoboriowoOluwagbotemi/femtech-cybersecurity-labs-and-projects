@@ -80,7 +80,9 @@ Expected result: user zone tests are blocked; admin zone tests match approved ac
 
 ## Step 4 - Apply Identity Controls
 
-Create groups:
+Use Active Directory Users and Computers, not command-line AD creation, for this section.
+
+Create these groups manually in ADUC:
 
 | Group | Purpose |
 |---|---|
@@ -93,12 +95,10 @@ Create groups:
 
 Evidence:
 
-```powershell
-Get-ADGroup -Filter * | Select-Object Name,GroupScope |
-  Out-File C:\Project09-Groups.txt
-Get-ADGroupMember GG_Payment_App_Admins |
-  Out-File C:\Project09-Payment-Admins.txt
-```
+- Screenshot of the OU containing fintech groups.
+- Screenshot of `GG_Payment_App_Admins` membership.
+- Screenshot of `GG_SOC_Analysts` membership.
+- Screenshot showing payment resource groups are separate from job-role groups.
 
 Required explanation: financial environments need separation of duties. A helpdesk user should not automatically have payment server administrator access.
 
@@ -134,11 +134,13 @@ Create controlled benign events:
 
 Windows:
 
-```powershell
-Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4728,4732} -MaxEvents 20 |
-  Select-Object TimeCreated,Id,Message |
-  Out-File C:\Project09-Windows-Events.txt
-```
+Use Event Viewer on the Windows system or domain controller:
+
+1. Open `Event Viewer`.
+2. Browse to `Windows Logs > Security`.
+3. Use `Filter Current Log`.
+4. Review event IDs `4624`, `4625`, `4728`, and `4732`.
+5. Save screenshots or export selected events through Event Viewer.
 
 Linux:
 

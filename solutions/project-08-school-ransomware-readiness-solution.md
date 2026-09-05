@@ -96,7 +96,9 @@ Expected result: authorized staff paths work, student-to-server SMB is blocked, 
 
 ## Step 4 - Configure Identity and Least Privilege
 
-In Active Directory, create groups:
+Use Active Directory Users and Computers, not command-line AD creation, for this section.
+
+In ADUC, create these groups manually:
 
 | Group | Purpose |
 |---|---|
@@ -111,26 +113,24 @@ In Active Directory, create groups:
 
 Use the model: users into global groups, global groups into resource groups, resource groups on folders.
 
-Evidence:
+Manual ADUC evidence:
 
-```powershell
-Get-ADGroup -Filter * | Select-Object Name,GroupScope |
-  Out-File C:\Project08-AD-Groups.txt
-Get-ADUser -Filter * -Properties MemberOf |
-  Select-Object Name,SamAccountName,Enabled |
-  Out-File C:\Project08-AD-Users.txt
-```
+- Screenshot of the OU containing the school groups.
+- Screenshot of each important group's `Members` tab.
+- Screenshot of one teacher user showing membership in `GG_Teachers`.
+- Screenshot of one student user showing membership in `GG_Students`.
+- Screenshot proving finance access is limited to the finance group.
 
 ## Step 5 - Harden File Permissions
 
-Example Windows share:
+Create Windows shares manually with File Explorer:
 
-```powershell
-New-Item -ItemType Directory -Force -Path C:\SchoolShares\Teaching
-New-Item -ItemType Directory -Force -Path C:\SchoolShares\Finance
-New-SmbShare -Name Teaching -Path C:\SchoolShares\Teaching
-New-SmbShare -Name Finance -Path C:\SchoolShares\Finance
-```
+1. On the Windows file server, open `Local Disk (C:)`.
+2. Create a folder named `SchoolShares`.
+3. Inside it, create `Teaching` and `Finance`.
+4. Right-click `Teaching`, open `Properties`, and use `Advanced Sharing` to share the folder.
+5. Repeat for `Finance`.
+6. Use the `Security` tab and `Advanced` permissions to assign group-based NTFS access.
 
 Set permissions so students cannot modify staff or finance files. Avoid `Everyone:Full Control` as a final state.
 

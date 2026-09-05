@@ -107,6 +107,8 @@ If password authentication is required in the classroom, document that exception
 
 ## Step 5 - Configure Windows and Active Directory
 
+Use Windows graphical administration tools for Active Directory. Do not use command-line AD creation for this capstone.
+
 Minimum AD work:
 
 1. Domain controller installed and validated.
@@ -119,15 +121,15 @@ Minimum AD work:
 
 Evidence:
 
-```powershell
-Get-ADDomain | Out-File C:\Project10-AD-Domain.txt
-Get-ADOrganizationalUnit -Filter * | Select Name,DistinguishedName | Out-File C:\Project10-OUs.txt
-Get-ADGroup -Filter * | Select Name,GroupScope | Out-File C:\Project10-Groups.txt
-gpresult /h C:\Project10-GPResult.html
-Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4624,4625,4728,4732,4738,4740} -MaxEvents 50 |
-  Select TimeCreated,Id,Message |
-  Out-File C:\Project10-Security-Events.txt
-```
+- Server Manager screenshot showing AD DS and DNS installed.
+- DNS Manager screenshot showing the domain zone.
+- ADUC screenshot showing the OU structure.
+- ADUC screenshot showing Office, Engineering, IT Admin, and SOC Analyst groups.
+- ADUC screenshot showing at least one user membership.
+- File Explorer Security tab screenshot showing group-based share or NTFS permissions.
+- Group Policy Management screenshot showing the linked GPO.
+- Group Policy Results wizard screenshot proving policy application.
+- Event Viewer screenshots for successful logon, failed logon, privileged group change, and account change events.
 
 Required explanation: AD is not only a login system. It controls authorization, policy, administrative structure, and audit evidence.
 
